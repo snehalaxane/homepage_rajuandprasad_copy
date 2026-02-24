@@ -34,6 +34,8 @@ export function HistoryPage() {
   const [timeline, setTimeline] = useState<HistoryTimeline[]>([]);
   const [mission, setMission] = useState<HistoryMission | null>(null);
   const [loading, setLoading] = useState(true);
+  const [activeTimelineIndex, setActiveTimelineIndex] = useState(0);
+  const [lineIndex, setLineIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,6 +57,26 @@ export function HistoryPage() {
     };
     fetchData();
   }, []);
+
+  // Auto-highlight effect for timeline cards
+  useEffect(() => {
+    if (timeline.length === 0) return;
+
+    const interval = setInterval(() => {
+      setLineIndex((prev) => (prev + 1) % timeline.length);
+    }, 4000); // Cycle every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [timeline.length]);
+
+  // Delay card highlight until line reaches it
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setActiveTimelineIndex(lineIndex);
+    }, 800); // Matches the line's travel duration
+
+    return () => clearTimeout(timeout);
+  }, [lineIndex]);
 
   const getStatusType = (tag: string) => {
     const t = tag?.toLowerCase() || '';
@@ -198,8 +220,21 @@ export function HistoryPage() {
 
               {/* Timeline */}
               <div className="relative">
-                {/* Connecting Line */}
-                <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#022683] via-blue-300 to-gray-200" />
+                {/* Background Path (Static Grey Line) */}
+                <div className="absolute left-8 top-4 bottom-4 w-0.5 bg-gray-100 rounded-full" />
+
+                {/* Animated Progress Line (Traveling Blue Line) */}
+                <motion.div
+                  className="absolute left-8 top-4 w-0.5 bg-gradient-to-b from-[#022683] via-blue-400 to-[#022683] z-10 origin-top rounded-full"
+                  initial={{ height: 0 }}
+                  animate={{
+                    height: `${(lineIndex / (timeline.length - 1 || 1)) * 100}%`
+                  }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                >
+                  {/* Glowing tip of the traveling line */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#022683] rounded-full shadow-[0_0_15px_rgba(2,38,131,0.8)]" />
+                </motion.div>
 
                 {/* Timeline Items */}
                 <div className="space-y-6">
@@ -217,11 +252,13 @@ export function HistoryPage() {
                         >
                           {/* Timeline Dot */}
                           <div
-                            className={`absolute left-0 top-4 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${status === 'established'
-                              ? 'bg-gradient-to-br from-[#022683] to-blue-500 shadow-lg shadow-[#022683]/30 scale-110'
-                              : status === 'active'
-                                ? 'bg-gradient-to-br from-[#022683] to-blue-400 shadow-lg shadow-[#022683]/20'
-                                : 'bg-gradient-to-br from-gray-400 to-gray-500 shadow-lg shadow-gray-400/20'
+                            className={`absolute left-0 top-4 z-20 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 ${index === activeTimelineIndex
+                              ? 'bg-gradient-to-br from-[#022683] to-blue-600 shadow-2xl shadow-[#022683]/50 scale-125 ring-4 ring-white'
+                              : status === 'established'
+                                ? 'bg-gradient-to-br from-[#022683] to-blue-500 shadow-lg shadow-[#022683]/30 scale-110'
+                                : status === 'active'
+                                  ? 'bg-gradient-to-br from-[#022683] to-blue-400 shadow-lg shadow-[#022683]/20'
+                                  : 'bg-gradient-to-br from-gray-400 to-gray-500 shadow-lg shadow-gray-400/20'
                               } group-hover:scale-125 group-hover:shadow-xl`}
                           >
                             {status === 'established' ? (
@@ -233,28 +270,36 @@ export function HistoryPage() {
 
                           {/* Content Card */}
                           <div
-                            className={`bg-white rounded-2xl p-6 shadow-lg border transition-all duration-300 ${status === 'active' || status === 'established'
-                              ? 'border-[#022683]/20 hover:border-[#022683] hover:shadow-xl hover:-translate-y-1'
-                              : 'border-gray-200 hover:shadow-xl hover:-translate-y-1'
+                            className={`rounded-2xl p-6 shadow-lg border transition-all duration-500 relative ${index === activeTimelineIndex
+                              ? 'bg-gradient-to-br from-[#022683] to-blue-900 border-[#022683] shadow-2xl shadow-[#022683]/30 -translate-y-2 scale-[1.02] text-white'
+                              : 'bg-blue-50/40 border-blue-100/50 hover:bg-white hover:border-[#022683]/20 hover:shadow-xl hover:-translate-y-1'
                               }`}
                           >
+                            {/* Active Indicator Glow */}
+                            {index === activeTimelineIndex && (
+                              <div className="absolute inset-0 bg-blue-400/20 rounded-2xl -z-10 animate-pulse blur-xl" />
+                            )}
                             <div className="flex items-start justify-between mb-3">
-                              <h4 className="text-xl font-bold text-gray-900 group-hover:text-[#022683] transition-colors">
+                              <h4 className={`text-xl font-bold transition-colors ${index === activeTimelineIndex ? 'text-white' : 'text-gray-900 group-hover:text-[#022683]'}`}>
                                 {item.title}
                               </h4>
                               <span
-                                className={`px-3 py-1 rounded-full text-xs font-semibold ${status === 'established'
-                                  ? 'bg-[#022683] text-white'
-                                  : status === 'active'
-                                    ? 'bg-green-100 text-green-700'
-                                    : 'bg-gray-100 text-gray-600'
+                                className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${index === activeTimelineIndex
+                                  ? 'bg-white/20 text-white border border-white/30'
+                                  : status === 'established'
+                                    ? 'bg-[#022683] text-white'
+                                    : status === 'active'
+                                      ? 'bg-green-100 text-green-700'
+                                      : 'bg-gray-100 text-gray-600'
                                   }`}
                               >
                                 {item.tag || (status === 'established' ? 'Founded' : status === 'active' ? 'Active' : 'Closed')}
                               </span>
                             </div>
-                            <p className="text-[#888888] text-sm mb-2">{item.subtitle}</p>
-                            <div className="flex items-center gap-2 text-[#022683] font-semibold">
+                            <p className={`text-sm mb-2 transition-colors ${index === activeTimelineIndex ? 'text-blue-100' : 'text-[#888888]'}`}>
+                              {item.subtitle}
+                            </p>
+                            <div className={`flex items-center gap-2 font-semibold transition-colors ${index === activeTimelineIndex ? 'text-white' : 'text-[#022683]'}`}>
                               <Calendar className="h-4 w-4" />
                               <span className="text-sm">{item.year}</span>
                             </div>

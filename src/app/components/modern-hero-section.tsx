@@ -1,19 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, MapPin, Building2 } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-
-// Fix for default marker icon not showing
-// @ts-ignore
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-});
 
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -234,46 +225,61 @@ export function ModernHeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            {/* Premium Card Container */}
-            <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-[#888888]/20">
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#888888]/5 to-[#022683]/10 rounded-3xl blur-2xl -z-10" />
+            {/* Premium Card Container - GLASSMORPHIC */}
+            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 overflow-hidden">
+              {/* Animated Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-[#022683]/15 rounded-3xl -z-10" />
 
               {/* Card Header */}
               <div className="mb-6 text-center">
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-[#888888] to-[#022683] bg-clip-text text-transparent mb-2">
+                <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">
                   {hero?.presenceTitle}
                 </h3>
-                <p className="text-[#888888] text-sm">
+                <p className="text-white/80 text-sm">
                   {hero?.presenceSubtitle}
                 </p>
               </div>
 
               {/* Interactive Map */}
-              <div className="h-[450px] w-full rounded-2xl overflow-hidden shadow-2xl">
+              <div className="h-[450px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                 {/* @ts-ignore */}
-                <MapContainer
-                  center={[20.5937, 78.9629]} // India center
-                  zoom={5}
-                  style={{ height: "100%", width: "100%" }}
-                  attributionControl={false}
-                  zoomControl={false}
-                >
+                <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ height: "100%", width: "100%", background: 'transparent' }} attributionControl={false} zoomControl={false}>
                   <TileLayer
                     attribution=""
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
 
                   {locations.filter(loc => loc.latitude && loc.longitude).map((loc) => {
-                    // Create a dynamic custom pin based on loc.pinColor
+                    const pinColor = loc.pinColor || '#022683';
+                    const label = loc.tooltip || loc.city || '';
+
                     const customIcon = L.divIcon({
-                      className: 'custom-div-icon',
-                      html: `<div style="background-color: ${loc.pinColor || '#022683'}; width: 24px; height: 24px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-                               <div style="width: 8px; height: 8px; background-color: white; border-radius: 50%; transform: rotate(45deg);"></div>
-                             </div>`,
-                      iconSize: [24, 24],
-                      iconAnchor: [12, 24],
-                      popupAnchor: [0, -24]
+                      className: '',
+                      html: `
+                        <div style="
+                          transform: translate(-50%, -50%);
+                          width: max-content;
+                          background: rgba(255, 255, 255, 0.15);
+                          backdrop-filter: blur(8px);
+                          -webkit-backdrop-filter: blur(8px);
+                          color: black;
+                          font-weight: 800;
+                          font-size: 11px;
+                          letter-spacing: 0.05em;
+                          white-space: nowrap;
+                          padding: 5px 14px;
+                          border-radius: 8px;
+                          border: 1px solid rgba(255, 255, 255, 0.3);
+                          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+                          font-family: 'Segoe UI', sans-serif;
+                          text-transform: uppercase;
+                          border-left: 4px solid ${pinColor};
+                        ">
+                          ${label}
+                        </div>
+                      `,
+                      iconSize: [0, 0],
+                      iconAnchor: [0, 0],
                     });
 
                     return (
@@ -283,6 +289,7 @@ export function ModernHeroSection() {
                           parseFloat(loc.latitude),
                           parseFloat(loc.longitude),
                         ]}
+                        // @ts-ignore
                         icon={customIcon}
                         eventHandlers={{
                           mouseover: (e: any) => {
@@ -293,10 +300,11 @@ export function ModernHeroSection() {
                           }
                         }}
                       >
-                        <Popup>
-                          <div className="p-1 min-w-[150px]">
-                            <strong style={{ color: loc.pinColor || '#022683' }} className="text-lg block mb-1">{loc.city}</strong>
-                            <div className="text-xs text-gray-600 leading-relaxed">{loc.address}</div>
+                        {/* @ts-ignore */}
+                        <Popup autoPan={false} closeButton={false} offset={[0, -15]}>
+                          <div className="p-2 min-w-[180px] bg-white/30 backdrop-blur-md rounded-lg border border-white/40 shadow-xl overflow-hidden">
+                            <strong style={{ color: 'black' }} className="text-sm block mb-1 font-bold uppercase drop-shadow-sm">{label}</strong>
+                            <div className="text-[12px] text-black leading-tight font-semibold">{loc.address}</div>
                           </div>
                         </Popup>
                       </Marker>

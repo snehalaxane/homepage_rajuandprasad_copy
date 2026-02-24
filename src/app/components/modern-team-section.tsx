@@ -92,64 +92,69 @@ export function ModernTeamSection() {
           </p>
         </motion.div>
 
-        {/* Team Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {teamMembers.map((member, index) => (
-            <motion.div
-              key={member._id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -12, transition: { duration: 0.3 } }}
-              className="group relative"
-            >
-              {/* Card - Soft grey background */}
-              <div className="bg-white backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border-2 border-[#888888]/20 hover:border-[#022683]/40 transition-all">
-                {/* Image Container */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#888888]/10">
-                  {/* Grey Tint Overlay - Softened for better visibility */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#888888]/40 via-transparent to-transparent z-10" />
+        {/* Team Autoscrolling Row - Robust Infinite Marquee */}
+        <div className="relative mt-12 mb-16 overflow-hidden -mx-6">
+          <motion.div
+            className="flex gap-8 w-max px-6"
+            animate={{
+              x: ["0%", "-50%"]
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            whileHover={{
+              transition: { duration: 0 } // This helps in pausing or slowing down if we wanted, but let's stick to standard first
+            }}
+          >
+            {/* We duplicate the members list once to create a seamless loop from 0 to -50% */}
+            {[...teamMembers, ...teamMembers].map((member, index) => (
+              <div
+                key={`${member._id}-${index}`}
+                className="w-[320px] flex-shrink-0 group relative"
+              >
+                {/* Premium Card Design */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-[#888888]/20 hover:border-[#022683]/40 transition-all duration-300 h-full flex flex-col">
+                  {/* Image Container with Grey Overlay */}
+                  <div className="relative aspect-[4/5] overflow-hidden bg-[#888888]/5">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#888888]/20 via-transparent to-transparent z-10" />
+                    <img
+                      src={getPhotoUrl(member.photo)}
+                      alt={member.name}
+                      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 grayscale-[20%] group-hover:grayscale-0"
+                    />
+                    <div className="absolute top-4 right-4 z-20">
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full shadow-md border border-[#888888]/10">
+                        <MapPin className="h-3.5 w-3.5 text-[#888888]" />
+                        <span className="text-xs font-bold text-[#888888]">{member.city}</span>
+                      </div>
+                    </div>
+                  </div>
 
-                  {/* Profile Image - Changed to object-contain for full visibility */}
-                  <motion.img
-                    src={getPhotoUrl(member.photo)}
-                    alt={member.name}
-                    className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-700 grayscale-[20%] group-hover:grayscale-0"
-                  />
-
-                  {/* City Tag */}
-                  <div className="absolute top-4 right-4 z-20">
-                    <div className="flex items-center gap-1 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg">
-                      <MapPin className="h-3 w-3 text-[#888888]" />
-                      <span className="text-xs font-bold text-[#888888]">{member.city}</span>
+                  {/* Member Details */}
+                  <div className="p-6 bg-[#F9FAFB] flex-grow flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-xl font-extrabold text-[#111111] mb-1 group-hover:text-[#022683] transition-colors duration-300">
+                        {member.name}
+                      </h3>
+                      <p className="text-sm text-[#888888] font-bold tracking-tight">
+                        {member.designation}
+                      </p>
+                    </div>
+                    {/* Animated Progress Bar */}
+                    <div className="mt-5 h-1.5 w-14 bg-[#888888]/20 rounded-full overflow-hidden">
+                      <div className="h-full w-0 group-hover:w-full bg-gradient-to-r from-[#888888] to-[#022683] transition-all duration-700 ease-out" />
                     </div>
                   </div>
                 </div>
-
-                {/* Info */}
-                <div className="p-6 relative bg-[#F3F4F6]">
-                  {/* Background Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  <div className="relative z-10">
-                    {/* Name - Dark text, blue underline on hover */}
-                    <h3 className="text-xl font-bold text-[#111111] mb-2 group-hover:text-[#022683] transition-colors">
-                      {member.name}
-                    </h3>
-
-                    {/* Designation - Grey (#888888) */}
-                    <p className="text-sm text-[#888888] font-semibold">
-                      {member.designation}
-                    </p>
-                  </div>
-
-                  {/* Decorative Bar - Grey to blue on hover */}
-                  <div className="mt-4 h-1 w-12 bg-[#888888] group-hover:bg-gradient-to-r group-hover:from-[#888888] group-hover:to-[#022683] rounded-full group-hover:w-full transition-all duration-500" />
-                </div>
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </motion.div>
+
+          {/* Fade edges for 'Glassy' entry/exit feel */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#F3F4F6] to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#F3F4F6] to-transparent z-20 pointer-events-none" />
         </div>
 
         {/* CTA Button - Grey outline with blue hover */}

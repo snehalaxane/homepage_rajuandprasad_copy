@@ -16,9 +16,15 @@ import {
   Building2,
   UserCheck,
   Globe,
-  Loader2
+  Loader2,
+  CheckCircle,
+  XCircle,
+  FileIcon,
+  Mail
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { Button } from '../components/ui/button';
+import { ScrollToTop } from '../components/scroll-to-top';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -49,6 +55,12 @@ export function NetworkingPage() {
     profile: null as File | null,
   });
 
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [verificationError, setVerificationError] = useState('');
+  const [verificationSuccess, setVerificationSuccess] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69,47 +81,109 @@ export function NetworkingPage() {
     fetchData();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSendOtp = async () => {
     if (!formData.fullName || !formData.email || !formData.mobile) {
-      toast.error('Please fill in all required fields');
+      toast.error('Please fill in Name, Email and Mobile');
+      return;
+    }
+
+    if (!formData.email.includes('@')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    if (formData.mobile.length !== 10) {
+      toast.error('Mobile number must be exactly 10 digits');
       return;
     }
 
     setSubmitting(true);
-    const data = new FormData();
-    data.append('fullName', formData.fullName);
-    data.append('organisation', formData.organisation);
-    data.append('email', formData.email);
-    data.append('mobile', formData.mobile);
-    if (formData.profile) {
-      data.append('profileFile', formData.profile);
-    }
-
     try {
-      await axios.post(`${API_BASE_URL}/api/networking-submissions`, data, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      toast.success('Your networking inquiry has been submitted successfully!');
-      setFormData({
-        fullName: '',
-        organisation: '',
-        email: '',
-        mobile: '',
-        profile: null,
-      });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      toast.error('Failed to submit inquiry. Please try again later.');
+      await axios.post(`${API_BASE_URL}/api/networking-submissions/send-otp`, { email: formData.email });
+      setShowOtpModal(true);
+      toast.success('Verification code sent to your email');
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || 'Failed to send verification code');
     } finally {
       setSubmitting(false);
     }
   };
 
+  const handleVerifyAndSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (otp.length !== 6) {
+      toast.error('Please enter 6-digit code');
+      return;
+    }
+
+    setIsVerifying(true);
+    setVerificationError('');
+    try {
+      // 1. Verify OTP
+      await axios.post(`${API_BASE_URL}/api/networking-submissions/verify-otp`, {
+        email: formData.email,
+        otp
+      });
+
+      // 2. Submit Inquiry
+      const data = new FormData();
+      data.append('fullName', formData.fullName);
+      data.append('organisation', formData.organisation);
+      data.append('email', formData.email);
+      data.append('mobile', formData.mobile);
+      if (formData.profile) {
+        data.append('profileFile', formData.profile);
+      }
+
+      await axios.post(`${API_BASE_URL}/api/networking-submissions`, data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+
+      setVerificationSuccess(true);
+      toast.success('Inquiry submitted successfully!');
+
+      setTimeout(() => {
+        setShowOtpModal(false);
+        setOtp('');
+        setVerificationSuccess(false);
+        setFormData({
+          fullName: '',
+          organisation: '',
+          email: '',
+          mobile: '',
+          profile: null,
+        });
+      }, 2000);
+
+    } catch (err: any) {
+      console.error('Final Submission Error:', err);
+      const msg = err.response?.data?.message || 'Verification failed. Please try again.';
+      setVerificationError(msg);
+      toast.error(msg);
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSendOtp();
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+
+      // Force formats
+      const allowedExts = ['.pdf', '.doc', '.docx'];
+      const fileName = file.name.toLowerCase();
+      const isValidExt = allowedExts.some(ext => fileName.endsWith(ext));
+
+      if (!isValidExt) {
+        toast.error('Only PDF and DOC formats are allowed');
+        return;
+      }
+
       if (file.size > 5 * 1024 * 1024) {
         toast.error('File size should be less than 5MB');
         return;
@@ -309,12 +383,13 @@ export function NetworkingPage() {
                       Mobile Number <span className="text-red-500">*</span>
                     </label>
                     <input
-                      type="tel"
+                      type="text"
                       required
                       value={formData.mobile}
-                      onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                      onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
+                      maxLength={10}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#022683] focus:ring-2 focus:ring-[#022683]/20 outline-none transition-all text-gray-800"
-                      placeholder="Enter your mobile number"
+                      placeholder="Enter 10-digit mobile number"
                     />
                   </div>
 
@@ -370,6 +445,90 @@ export function NetworkingPage() {
           </div>
         </div>
       </section>
+
+      {/* OTP Verification Modal */}
+      {showOtpModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center"
+          >
+            {verificationSuccess ? (
+              <div className="py-8 animate-in zoom-in duration-300">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="w-12 h-12 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Verified!</h3>
+                <p className="text-gray-600">Your networking inquiry has been sent.</p>
+              </div>
+            ) : (
+              <>
+                <div className="w-16 h-16 bg-[#022683]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Mail className="w-8 h-8 text-[#022683]" />
+                </div>
+                <h3 className="text-2xl font-bold text-[#022683] mb-2">Verify email</h3>
+                <p className="text-[#888888] mb-8 text-sm leading-relaxed">
+                  Enter the 6-digit code sent to<br />
+                  <span className="text-[#022683] font-semibold">{formData.email}</span>
+                </p>
+
+                <form onSubmit={handleVerifyAndSubmit} className="space-y-6">
+                  <div className="space-y-2">
+                    <div className="flex justify-center">
+                      <input
+                        type="text"
+                        maxLength={6}
+                        value={otp}
+                        onChange={(e) => {
+                          setOtp(e.target.value.replace(/\D/g, ''));
+                          if (verificationError) setVerificationError('');
+                        }}
+                        className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[#022683]'
+                          }`}
+                        placeholder="000000"
+                      />
+                    </div>
+                    {verificationError && (
+                      <p className="text-red-500 text-xs font-semibold flex items-center justify-center gap-1">
+                        <XCircle className="w-3 h-3" /> {verificationError}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-3">
+                    <Button
+                      type="submit"
+                      disabled={isVerifying || otp.length !== 6}
+                      className="w-full py-4 bg-[#022683] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                    >
+                      {isVerifying ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <CheckCircle className="w-4 h-4" />
+                      )}
+                      {isVerifying ? 'Verifying...' : 'Verify & Submit'}
+                    </Button>
+
+                    <button
+                      type="button"
+                      onClick={() => { setShowOtpModal(false); setOtp(''); setVerificationError(''); }}
+                      className="text-sm font-semibold text-[#888888] hover:text-[#022683] transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+
+                <p className="mt-8 text-xs text-[#888888]">
+                  Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[#022683] font-bold hover:underline">Resend</button>
+                </p>
+              </>
+            )}
+          </motion.div>
+        </div>
+      )}
+      <ScrollToTop />
 
     </div>
   );

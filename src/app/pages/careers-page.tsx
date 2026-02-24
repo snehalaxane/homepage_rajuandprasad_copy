@@ -1,8 +1,25 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, ChevronRight, Plus, Minus, Briefcase, MapPin, Clock, Users, Mail, Upload, X } from 'lucide-react';
+import {
+  Search,
+  ChevronRight,
+  Plus,
+  Minus,
+  Briefcase,
+  MapPin,
+  Clock,
+  Users,
+  Mail,
+  Upload,
+  X,
+  Loader2,
+  CheckCircle,
+  XCircle,
+  CheckCircle2
+} from 'lucide-react';
 import { ScrollToTop } from '../components/scroll-to-top';
 import { Button } from '../components/ui/button';
+import { toast } from 'sonner';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -57,24 +74,86 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // OTP States
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [verificationError, setVerificationError] = useState('');
+  const [verificationSuccess, setVerificationSuccess] = useState(false);
+
+  const handleSendOtp = async () => {
+    if (!formData.fullName || !formData.email || !formData.mobile) {
+      toast.error('Please fill in Name, Email and Mobile');
+      return;
+    }
+
+    if (!formData.email.includes('@')) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    if (formData.mobile.length !== 10) {
+      toast.error('Mobile number must be exactly 10 digits');
+      return;
+    }
+
     if (!file) {
-      alert('Please upload your resume');
+      toast.error('Please upload your resume');
       return;
     }
 
     setSubmitting(true);
-    setStatus('idle');
-
     try {
+      const res = await fetch(`${API_BASE_URL}/api/applications/send-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email }),
+      });
+
+      if (res.ok) {
+        setShowOtpModal(true);
+        toast.success('Verification code sent to your email');
+      } else {
+        const error = await res.json();
+        toast.error(error.message || 'Failed to send verification code');
+      }
+    } catch (err) {
+      toast.error('Failed to connect to server');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleVerifyAndSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (otp.length !== 6) {
+      toast.error('Please enter 6-digit code');
+      return;
+    }
+
+    setIsVerifying(true);
+    setVerificationError('');
+    try {
+      // 1. Verify OTP
+      const verifyRes = await fetch(`${API_BASE_URL}/api/applications/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, otp }),
+      });
+
+      if (!verifyRes.ok) {
+        const error = await verifyRes.json();
+        throw new Error(error.message || 'Verification failed');
+      }
+
+      // 2. Submit Application
       const data = new FormData();
       data.append('name', formData.fullName);
       data.append('email', formData.email);
       data.append('mobile', formData.mobile);
       data.append('role', jobTitle);
       data.append('message', formData.message);
-      data.append('resume', file);
+      data.append('resume', file!);
 
       const res = await fetch(`${API_BASE_URL}/api/applications`, {
         method: 'POST',
@@ -82,22 +161,31 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
       });
 
       if (res.ok) {
-        setStatus('success');
+        setVerificationSuccess(true);
+        toast.success('Application submitted successfully!');
+
         setTimeout(() => {
+          setShowOtpModal(false);
+          setOtp('');
+          setVerificationSuccess(false);
           onClose();
-          setStatus('idle');
           setFormData({ fullName: '', email: '', mobile: '', message: '' });
           setFile(null);
         }, 2000);
       } else {
-        setStatus('error');
+        throw new Error('Failed to submit application');
       }
-    } catch (error) {
-      console.error('Error submitting application:', error);
-      setStatus('error');
+    } catch (err: any) {
+      setVerificationError(err.message);
+      toast.error(err.message);
     } finally {
-      setSubmitting(false);
+      setIsVerifying(false);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSendOtp();
   };
 
   return (
@@ -184,12 +272,13 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                     Mobile Number *
                   </label>
                   <input
-                    type="tel"
+                    type="text"
                     required
                     value={formData.mobile}
-                    onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
+                    maxLength={10}
                     className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all"
-                    placeholder="+91 XXXXX XXXXX"
+                    placeholder="Enter 10-digit mobile number"
                   />
                 </div>
 
@@ -218,14 +307,29 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                         {file ? file.name : 'Click to upload or drag and drop'}
                       </p>
                       <p className="text-xs text-[#888888]">
-                        PDF, DOC, DOCX (Max. 5MB)
+                        PDF, WORD (Max. 5MB)
                       </p>
                     </div>
                     <input
                       type="file"
                       className="hidden"
                       accept=".pdf,.doc,.docx"
-                      onChange={(e) => setFile(e.target.files?.[0] || null)}
+                      onChange={(e) => {
+                        const selectedFile = e.target.files?.[0] || null;
+                        if (selectedFile) {
+                          const allowed = ['.pdf', '.doc', '.docx'];
+                          const name = selectedFile.name.toLowerCase();
+                          if (!allowed.some(ext => name.endsWith(ext))) {
+                            toast.error('Only PDF and Word documents are allowed');
+                            return;
+                          }
+                          if (selectedFile.size > 5 * 1024 * 1024) {
+                            toast.error('File size must be under 5MB');
+                            return;
+                          }
+                        }
+                        setFile(selectedFile);
+                      }}
                     />
                   </label>
                 </div>
@@ -260,10 +364,93 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                     disabled={submitting}
                     className="flex-1 bg-[#022683] hover:bg-[#011952] text-white h-10 rounded-xl"
                   >
-                    {submitting ? 'Submitting...' : 'Submit Application'}
+                    {submitting ? 'Sending Request...' : 'Apply Now'}
                   </Button>
                 </div>
               </form>
+
+              {/* OTP Modal Layer */}
+              {showOtpModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+                  <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center"
+                  >
+                    {verificationSuccess ? (
+                      <div className="py-8 animate-in zoom-in duration-300">
+                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                          <CheckCircle className="w-12 h-12 text-green-600" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">Verified!</h3>
+                        <p className="text-gray-600">Application submitted successfully.</p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="w-16 h-16 bg-[#022683]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                          <Mail className="w-8 h-8 text-[#022683]" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-[#022683] mb-2">Verify email</h3>
+                        <p className="text-[#888888] mb-8 text-sm leading-relaxed">
+                          Enter the 6-digit code sent to<br />
+                          <span className="text-[#022683] font-semibold">{formData.email}</span>
+                        </p>
+
+                        <form onSubmit={handleVerifyAndSubmit} className="space-y-6">
+                          <div className="space-y-2">
+                            <div className="flex justify-center">
+                              <input
+                                type="text"
+                                maxLength={6}
+                                value={otp}
+                                onChange={(e) => {
+                                  setOtp(e.target.value.replace(/\D/g, ''));
+                                  if (verificationError) setVerificationError('');
+                                }}
+                                className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[#022683]'
+                                  }`}
+                                placeholder="000000"
+                              />
+                            </div>
+                            {verificationError && (
+                              <p className="text-red-500 text-xs font-semibold flex items-center justify-center gap-1">
+                                <XCircle className="w-3 h-3" /> {verificationError}
+                              </p>
+                            )}
+                          </div>
+
+                          <div className="space-y-3">
+                            <Button
+                              type="submit"
+                              disabled={isVerifying || otp.length !== 6}
+                              className="w-full py-4 bg-[#022683] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                            >
+                              {isVerifying ? (
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                              ) : (
+                                <CheckCircle className="w-4 h-4" />
+                              )}
+                              {isVerifying ? 'Verifying...' : 'Verify & Submit'}
+                            </Button>
+
+                            <button
+                              type="button"
+                              onClick={() => { setShowOtpModal(false); setOtp(''); setVerificationError(''); }}
+                              className="text-sm font-semibold text-[#888888] hover:text-[#022683] transition-colors"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </form>
+
+                        <p className="mt-8 text-xs text-[#888888]">
+                          Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[#022683] font-bold hover:underline">Resend</button>
+                        </p>
+                      </>
+                    )}
+                  </motion.div>
+                </div>
+              )}
             </motion.div>
           </div>
         </>
@@ -303,6 +490,13 @@ export function CareersPage() {
           console.log('Job data received:', data);
           if (Array.isArray(data)) {
             setJobCategories(data);
+
+            // Auto-expand first opening
+            const firstCat = data.find((c: any) => c.enabled !== false);
+            if (firstCat && firstCat.jobs?.length > 0) {
+              const firstJob = firstCat.jobs.find((j: any) => j.enabled !== false);
+              if (firstJob) setExpandedId(firstJob._id);
+            }
           } else {
             console.error('Expected array of jobs but got:', data);
             setJobCategories([]);

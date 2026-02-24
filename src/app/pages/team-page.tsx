@@ -23,8 +23,13 @@ interface Partner {
 export function TeamPage() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
+  const [intro, setIntro] = useState({
+    title: 'The Team',
+    description: 'Meet our experienced & dedicated Chartered Accountant professionals'
+  });
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [gridOffset, setGridOffset] = useState(0);
 
   useEffect(() => {
     const fetchTeamMembers = async () => {
@@ -32,21 +37,63 @@ export function TeamPage() {
         const res = await fetch(`${API_BASE_URL}/api/team-members`);
         if (res.ok) {
           const data = await res.json();
-          // Filter only members who should be shown on the team page
           const teamMembers = data.filter((member: Partner) => member.showOnTeam);
           setPartners(teamMembers);
         }
       } catch (error) {
         console.error('Error fetching team members:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
-    fetchTeamMembers();
+    const fetchTeamIntro = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/team-intro`);
+        if (res.ok) {
+          const data = await res.json();
+          setIntro(data);
+        }
+      } catch (error) {
+        console.error('Error fetching team intro:', error);
+      }
+    };
+
+    const fetchData = async () => {
+      setLoading(true);
+      await Promise.all([fetchTeamMembers(), fetchTeamIntro()]);
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
 
+  // Auto-scroll effect for the main partner carousel
+  useEffect(() => {
+    if (partners.length <= 1) return;
+
+    const interval = setInterval(() => {
+      handleNext();
+    }, 6000); // Auto-scroll every 6 seconds
+
+    return () => clearInterval(interval);
+  }, [partners.length, currentPartnerIndex]);
+
+  // Dynamic rotation for the decorative grid images
+  useEffect(() => {
+    if (partners.length <= 4) return;
+
+    const interval = setInterval(() => {
+      setGridOffset((prev) => (prev + 1) % partners.length);
+    }, 4000); // Rotate grid images every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [partners.length]);
+
   const currentPartner = partners[currentPartnerIndex];
+
+  // Get current 4 partners for the decorative grid
+  const gridPartners = partners.length > 0
+    ? Array.from({ length: 4 }, (_, i) => partners[(gridOffset + i) % partners.length])
+    : [];
 
   const handlePrevious = () => {
     if (partners.length === 0) return;
@@ -78,7 +125,7 @@ export function TeamPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Page Header / Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-12 pb-20 border-b border-gray-100">
+      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-32 pb-20 border-b border-gray-100">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
@@ -93,25 +140,25 @@ export function TeamPage() {
               transition={{ duration: 0.6 }}
             >
               {/* Breadcrumb */}
-              {/* <div className="flex items-center gap-2 text-sm text-[#888888] mb-6">
+              <div className="flex items-center gap-2 text-sm text-[#888888] mb-6">
                 <a href="#home" className="hover:text-[#022683] transition-colors">
                   Home
                 </a>
                 <ChevronRight className="h-4 w-4" />
                 <span className="text-[#022683] font-medium">The Team</span>
-              </div> */}
+              </div>
 
-              {/* <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-                The <span className="text-[#022683]">Team</span>
-              </h1> */}
+              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+                {intro.title.split(' ').slice(0, -1).join(' ')} <span className="text-[#022683]">{intro.title.split(' ').slice(-1)}</span>
+              </h1>
 
-              {/* <p className="text-lg text-[#888888] leading-relaxed">
-                Meet our experienced & dedicated Chartered Accountant professionals
-              </p> */}
+              <p className="text-lg text-[#888888] leading-relaxed">
+                {intro.description}
+              </p>
             </motion.div>
 
             {/* Right: Decorative Illustration */}
-            {/* <motion.div
+            <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -121,25 +168,60 @@ export function TeamPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#022683]/10 to-blue-100/50 rounded-full blur-3xl" />
                 <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-200/50">
                   <div className="grid grid-cols-2 gap-4">
-                    {[1, 2, 3, 4].map((i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.4 + i * 0.1, type: 'spring' }}
-                        className="aspect-square bg-gradient-to-br from-[#022683]/20 to-blue-100 rounded-2xl"
-                      />
-                    ))}
+                    {gridPartners.length > 0 ? (
+                      <AnimatePresence mode="popLayout">
+                        {gridPartners.map((member, i) => (
+                          <motion.div
+                            key={`${member._id}-${i}`}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{
+                              duration: 0.5,
+                              delay: i * 0.1,
+                              type: 'spring',
+                              stiffness: 100
+                            }}
+                            className="aspect-square relative overflow-hidden rounded-2xl group border border-gray-100 shadow-sm"
+                          >
+                            {member.photo ? (
+                              <img
+                                src={member.photo}
+                                alt={member.name}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gradient-to-br from-[#022683]/20 to-blue-100" />
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#022683]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                              <p className="text-white text-[10px] font-bold leading-tight">{member.name}</p>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
+                    ) : (
+                      [1, 2, 3, 4].map((i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.4 + i * 0.1, type: 'spring' }}
+                          className="aspect-square bg-gradient-to-br from-[#022683]/20 to-blue-100 rounded-2xl"
+                        />
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
-            </motion.div> */}
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Intro Content Section */}
-      {/* <section className="py-16 bg-white">
+
+      {/* Intro Content Section */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -147,18 +229,34 @@ export function TeamPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="max-w-5xl mx-auto"
-          > */}
-      {/* <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden"> */}
-      {/* Accent line */}
-      {/* <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#022683] to-blue-400" />
+          >
+            <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
+
+              {/* Accent line */}
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#022683] to-blue-400" />
 
               <p className="text-lg text-[#888888] leading-relaxed pl-6">
-                The Firm has a blend of professionals with experience in the fields of <span className="text-gray-700 font-medium">Auditing</span>, <span className="text-gray-700 font-medium">Taxation</span>, <span className="text-gray-700 font-medium">Project Consultancy</span>, <span className="text-gray-700 font-medium">Management Services</span>, <span className="text-gray-700 font-medium">Enterprise Restructuring</span>, <span className="text-gray-700 font-medium">Industry</span>, <span className="text-gray-700 font-medium">Banking</span>, <span className="text-gray-700 font-medium">Securities</span>, <span className="text-gray-700 font-medium">Secretarial Services</span> and <span className="text-gray-700 font-medium">Computer Aided Auditing Techniques</span>, <span className="text-gray-700 font-medium">Systems Design</span>, <span className="text-gray-700 font-medium">Implementation</span> and <span className="text-gray-700 font-medium">Information Systems Audit</span>.
+                The Firm has a blend of professionals with experience in the fields of
+                <span className="text-gray-700 font-medium"> Auditing</span>,
+                <span className="text-gray-700 font-medium"> Taxation</span>,
+                <span className="text-gray-700 font-medium"> Project Consultancy</span>,
+                <span className="text-gray-700 font-medium"> Management Services</span>,
+                <span className="text-gray-700 font-medium"> Enterprise Restructuring</span>,
+                <span className="text-gray-700 font-medium"> Industry</span>,
+                <span className="text-gray-700 font-medium"> Banking</span>,
+                <span className="text-gray-700 font-medium"> Securities</span>,
+                <span className="text-gray-700 font-medium"> Secretarial Services</span>,
+                <span className="text-gray-700 font-medium"> Computer Aided Auditing Techniques</span>,
+                <span className="text-gray-700 font-medium"> Systems Design</span>,
+                <span className="text-gray-700 font-medium"> Implementation</span> and
+                <span className="text-gray-700 font-medium"> Information Systems Audit</span>.
               </p>
+
             </div>
           </motion.div>
         </div>
-      </section> */}
+      </section>
+
 
 
 
@@ -363,7 +461,7 @@ export function TeamPage() {
                     : 'bg-white text-gray-700 border border-gray-200 hover:border-[#022683] hover:text-[#022683]'
                     }`}
                 >
-                  {partner.name.split(' ').length > 1 ? partner.name.split(' ')[1] : partner.name}
+                  {partner.name}
                 </motion.button>
               ))}
             </div>

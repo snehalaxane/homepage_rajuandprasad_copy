@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { ChevronRight, Mail, Phone, MapPin, User, MessageSquare, Copy, Navigation, Clock, Building2, Loader2 } from 'lucide-react';
+import { ChevronRight, Mail, Phone, MapPin, User, MessageSquare, Copy, Navigation, Clock, Building2, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import { ScrollToTop } from '../components/scroll-to-top';
 import { Button } from '../components/ui/button';
 import axios from 'axios';
@@ -16,6 +16,12 @@ export function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<any>({});
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [verificationError, setVerificationError] = useState('');
+  const [verificationSuccess, setVerificationSuccess] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,33 +54,92 @@ export function ContactPage() {
     fetchData();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Helper to find email in dynamic formData
+  const getEmailValue = () => {
+    const emailKey = Object.keys(formData).find(k => k.includes('email') || k.includes('mail'));
+    return emailKey ? formData[emailKey] : '';
+  };
+
+  const getPhoneValue = () => {
+    const phoneKey = Object.keys(formData).find(k => k.includes('mobile') || k.includes('phone') || k.includes('tel') || k.includes('contact'));
+    return phoneKey ? formData[phoneKey] : '';
+  };
+
+  const handleSendOtp = async () => {
+    const email = getEmailValue();
+    if (!email) {
+      toast.error('Please enter your email address');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      // Map form data to the backend expected structure
-      // The backend expects name, email, mobile, message specifically for ContactInquiry
-      // We try to find these in our dynamic fields
-      const payload = {
-        name: formData.name || formData.full_name || Object.values(formData)[0],
-        email: formData.email || formData.email_address,
-        mobile: formData.mobile || formData.mobile_number || formData.phone,
-        message: formData.message || Object.values(formData)[Object.values(formData).length - 1]
-      };
-
-      await axios.post(`${API_BASE_URL}/api/contact-form/submit`, payload);
-      toast.success('Thank you! Your inquiry has been submitted.');
-
-      // Reset form
-      const resetForm: any = {};
-      Object.keys(formData).forEach(key => resetForm[key] = '');
-      setFormData(resetForm);
-    } catch (err) {
-      console.error('Error submitting form:', err);
-      toast.error('Failed to submit form. Please try again.');
+      await axios.post(`${API_BASE_URL}/api/contact-form/send-otp`, { email });
+      setIsOtpSent(true);
+      setShowOtpModal(true);
+      toast.success('Verification code sent to your email');
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || 'Failed to send verification code');
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleVerifyAndSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (otp.length !== 6) {
+      toast.error('Please enter a valid 6-digit code');
+      return;
+    }
+
+    setIsVerifying(true);
+    setVerificationError('');
+    try {
+      const email = getEmailValue();
+      // 1. Verify OTP
+      await axios.post(`${API_BASE_URL}/api/contact-form/verify-otp`, { email, otp });
+
+      // 2. Submit Form
+      await axios.post(`${API_BASE_URL}/api/contact-form/submit`, formData, {
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      setVerificationSuccess(true);
+      toast.success('Thank you! Your inquiry has been submitted.');
+
+      // Close modal after success animation
+      setTimeout(() => {
+        setShowOtpModal(false);
+        setOtp('');
+        setVerificationSuccess(false);
+        const resetForm: any = {};
+        Object.keys(formData).forEach(key => resetForm[key] = '');
+        setFormData(resetForm);
+        setIsOtpSent(false);
+      }, 2000);
+
+    } catch (err: any) {
+      console.error('Final Submission Error:', err);
+      const msg = err.response?.data?.message || 'Verification failed. Please try again.';
+      setVerificationError(msg);
+      toast.error(msg);
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate Phone Number (10 digits)
+    const phone = getPhoneValue();
+    if (phone && phone.length !== 10) {
+      toast.error('Mobile number must be exactly 10 digits');
+      return;
+    }
+
+    // First step: Trigger OTP
+    handleSendOtp();
   };
 
   const handleCopyAddress = (address: string) => {
@@ -206,10 +271,19 @@ export function ContactPage() {
                           <div className="relative">
                             <Icon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888]" />
                             <input
-                              type={field.fieldType}
+                              type={field.fieldType === 'tel' ? 'text' : field.fieldType}
                               required={field.required}
                               value={formData[fieldKey] || ''}
-                              onChange={(e) => setFormData({ ...formData, [fieldKey]: e.target.value })}
+                              onChange={(e) => {
+                                let val = e.target.value;
+                                if (field.fieldType === 'tel') {
+                                  val = val.replace(/\D/g, '').slice(0, 10);
+                                }
+                                setFormData({ ...formData, [fieldKey]: val });
+                              }}
+                              pattern={field.fieldType === 'tel' ? '[0-9]{10}' : undefined}
+                              inputMode={field.fieldType === 'tel' ? 'numeric' : undefined}
+                              maxLength={field.fieldType === 'tel' ? 10 : undefined}
                               className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900"
                               placeholder={field.placeholder || `Enter ${field.label}`}
                             />
@@ -281,7 +355,7 @@ export function ContactPage() {
             </motion.div>
 
             {/* Location Cards Grid */}
-            <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-4 gap-8 max-w-9xl mx-auto">
               {branches.map((branch, index) => (
                 <motion.div
                   key={branch._id}
@@ -434,6 +508,88 @@ export function ContactPage() {
           </div>
         </section>
       </main>
+
+      {/* OTP Verification Modal */}
+      {showOtpModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center"
+          >
+            {verificationSuccess ? (
+              <div className="py-8 animate-in zoom-in duration-300">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="w-12 h-12 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Verified!</h3>
+                <p className="text-gray-600">Your message has been sent successfully.</p>
+              </div>
+            ) : (
+              <>
+                <div className="w-16 h-16 bg-[#022683]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Mail className="w-8 h-8 text-[#022683]" />
+                </div>
+                <h3 className="text-2xl font-bold text-[#022683] mb-2">Verify your email</h3>
+                <p className="text-[#888888] mb-8 text-sm">
+                  We've sent a 6-digit verification code to <span className="text-[#022683] font-semibold">{getEmailValue()}</span>
+                </p>
+
+                <form onSubmit={handleVerifyAndSubmit} className="space-y-6">
+                  <div className="space-y-2">
+                    <div className="flex justify-center">
+                      <input
+                        type="text"
+                        maxLength={6}
+                        value={otp}
+                        onChange={(e) => {
+                          setOtp(e.target.value.replace(/\D/g, ''));
+                          if (verificationError) setVerificationError('');
+                        }}
+                        className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[#022683]'
+                          }`}
+                        placeholder="000000"
+                      />
+                    </div>
+                    {verificationError && (
+                      <p className="text-red-500 text-xs font-semibold flex items-center justify-center gap-1">
+                        <XCircle className="w-3 h-3" /> {verificationError}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-3">
+                    <Button
+                      type="submit"
+                      disabled={isVerifying || otp.length !== 6}
+                      className="w-full py-4 bg-[#022683] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                    >
+                      {isVerifying ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <CheckCircle className="w-4 h-4" />
+                      )}
+                      {isVerifying ? 'Verifying...' : 'Verify & Send Message'}
+                    </Button>
+
+                    <button
+                      type="button"
+                      onClick={() => { setShowOtpModal(false); setOtp(''); setVerificationError(''); }}
+                      className="text-sm font-semibold text-[#888888] hover:text-[#022683] transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+
+                <p className="mt-8 text-xs text-[#888888]">
+                  Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[#022683] font-bold hover:underline">Resend</button>
+                </p>
+              </>
+            )}
+          </motion.div>
+        </div>
+      )}
 
       <ScrollToTop />
     </>
