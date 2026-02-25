@@ -204,7 +204,7 @@ export function NetworkingPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
 
       {/* Page Header */}
-      <section className="pt-32 pb-12 bg-gradient-to-r from-[#022683]/5 to-[#022683]/10">
+      <section className="pt-25 pb-10 bg-gradient-to-r from-[#022683]/5 to-[#022683]/10">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

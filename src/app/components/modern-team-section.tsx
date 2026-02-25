@@ -93,14 +93,12 @@ export function ModernTeamSection() {
         </motion.div>
 
         {/* Team Autoscrolling Row - Robust Infinite Marquee */}
-        <div className="relative mt-12 mb-16 overflow-hidden -mx-6">
+        <div className="relative mt-12 mb-16 overflow-hidden max-w-[1440px] mx-auto">
           <motion.div
-            className="flex gap-8 w-max px-6"
-            animate={{
-              x: ["0%", "-50%"]
-            }}
+            className="flex gap-6 w-max"
+            animate={{ x: [0, -1500] }}
             transition={{
-              duration: 25,
+              duration: 80,
               repeat: Infinity,
               ease: "linear",
             }}
@@ -112,7 +110,7 @@ export function ModernTeamSection() {
             {[...teamMembers, ...teamMembers].map((member, index) => (
               <div
                 key={`${member._id}-${index}`}
-                className="w-[320px] flex-shrink-0 group relative"
+                className="w-[240px] flex-shrink-0 group relative"
               >
                 {/* Premium Card Design */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-[#888888]/20 hover:border-[#022683]/40 transition-all duration-300 h-full flex flex-col">
@@ -133,7 +131,7 @@ export function ModernTeamSection() {
                   </div>
 
                   {/* Member Details */}
-                  <div className="p-6 bg-[#F9FAFB] flex-grow flex flex-col justify-between">
+                  <div className="p-4 bg-[#F9FAFB] flex-grow flex flex-col justify-between">
                     <div>
                       <h3 className="text-xl font-extrabold text-[#111111] mb-1 group-hover:text-[#022683] transition-colors duration-300">
                         {member.name}

@@ -101,7 +101,7 @@ export function TeamSection() {
         </motion.div>
 
         {/* Team Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8">
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.name}
@@ -121,7 +121,7 @@ export function TeamSection() {
                   />
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#022683]/90 via-[#022683]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
+
                   {/* Social Links - appears on hover */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}

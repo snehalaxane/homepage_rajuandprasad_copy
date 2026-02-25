@@ -102,7 +102,7 @@ export function SelectClientsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Page Header */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-32 pb-20 border-b border-gray-100">
+      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-25 pb-10  border-b border-gray-100">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />

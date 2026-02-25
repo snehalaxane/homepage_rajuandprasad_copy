@@ -160,7 +160,7 @@ export function ContactPage() {
     <>
       <main className="min-h-screen bg-[#F7F8FA]">
         {/* Page Header */}
-        <section className="pt-32 pb-12 bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-200">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-200">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -225,7 +225,7 @@ export function ContactPage() {
                   <div>
                     <p className="text-sm font-semibold text-[#888888] mb-1">Email Us</p>
                     <p className="text-lg font-bold text-gray-900 group-hover:text-[#022683] transition-colors">
-                      {settings?.emailUs || 'info@rajuprasad.com'}
+                      {settings?.emailUs || 'support@rajuandprasad.com'}
                     </p>
                   </div>
                 </a>

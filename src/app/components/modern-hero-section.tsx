@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -252,30 +252,78 @@ export function ModernHeroSection() {
                   {locations.filter(loc => loc.latitude && loc.longitude).map((loc) => {
                     const pinColor = loc.pinColor || '#022683';
                     const label = loc.tooltip || loc.city || '';
+                    const isLeft = parseFloat(loc.longitude) < 78.9629; // Approx center of India
 
                     const customIcon = L.divIcon({
-                      className: '',
+                      className: 'map-marker-container',
                       html: `
-                        <div style="
-                          transform: translate(-50%, -50%);
-                          width: max-content;
-                          background: rgba(255, 255, 255, 0.15);
-                          backdrop-filter: blur(8px);
-                          -webkit-backdrop-filter: blur(8px);
-                          color: black;
-                          font-weight: 800;
-                          font-size: 11px;
-                          letter-spacing: 0.05em;
-                          white-space: nowrap;
-                          padding: 5px 14px;
-                          border-radius: 8px;
-                          border: 1px solid rgba(255, 255, 255, 0.3);
-                          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-                          font-family: 'Segoe UI', sans-serif;
-                          text-transform: uppercase;
-                          border-left: 4px solid ${pinColor};
-                        ">
-                          ${label}
+                        <div style="position: relative; width: 0; height: 0;">
+                          <!-- Pulsating Pin Dot -->
+                          <div style="
+                            position: absolute;
+                            width: 10px;
+                            height: 10px;
+                            background: ${pinColor};
+                            border: 2px solid white;
+                            border-radius: 50%;
+                            top: 0;
+                            left: 0;
+                            transform: translate(-50%, -50%);
+                            z-index: 2;
+                            box-shadow: 0 0 15px ${pinColor}80;
+                          ">
+                            <div style="
+                              position: absolute;
+                              inset: -4px;
+                              background: ${pinColor};
+                              opacity: 0.4;
+                              border-radius: 50%;
+                              animation: pulse 2s infinite;
+                            "></div>
+                          </div>
+
+                          <!-- Label Group with Arrow/Line -->
+                          <div style="
+                            position: absolute;
+                            top: 0;
+                            ${isLeft ? 'right: 15px;' : 'left: 15px;'}
+                            transform: translateY(-50%);
+                            display: flex;
+                            align-items: center;
+                            ${isLeft ? 'flex-direction: row;' : 'flex-direction: row-reverse;'}
+                            pointer-events: none;
+                          ">
+                            <!-- Label Pill -->
+                            <div style="
+                              background: white;
+                              color: #1a1a1a;
+                              font-weight: 800;
+                              font-size: 10px;
+                              letter-spacing: 0.05em;
+                              padding: 4px 12px;
+                              border-radius: 6px;
+                              border: 2px solid ${pinColor};
+                              box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+                              text-transform: uppercase;
+                              white-space: nowrap;
+                              pointer-events: auto;
+                            ">
+                              ${label}
+                            </div>
+                            <!-- Dotted Leader Line -->
+                            <div style="
+                              width: 25px;
+                              height: 0;
+                              border-top: 2px dotted ${pinColor};
+                              opacity: 0.6;
+                            "></div>
+                          </div>
+                          <style>
+                            @keyframes pulse {
+                              0% { transform: scale(1); opacity: 0.4; }
+                              100% { transform: scale(2.5); opacity: 0; }
+                            }
+                          </style>
                         </div>
                       `,
                       iconSize: [0, 0],
@@ -291,22 +339,21 @@ export function ModernHeroSection() {
                         ]}
                         // @ts-ignore
                         icon={customIcon}
-                        eventHandlers={{
-                          mouseover: (e: any) => {
-                            e.target.openPopup();
-                          },
-                          mouseout: (e: any) => {
-                            e.target.closePopup();
-                          }
-                        }}
                       >
                         {/* @ts-ignore */}
-                        <Popup autoPan={false} closeButton={false} offset={[0, -15]}>
-                          <div className="p-2 min-w-[180px] bg-white/30 backdrop-blur-md rounded-lg border border-white/40 shadow-xl overflow-hidden">
-                            <strong style={{ color: 'black' }} className="text-sm block mb-1 font-bold uppercase drop-shadow-sm">{label}</strong>
-                            <div className="text-[12px] text-black leading-tight font-semibold">{loc.address}</div>
+                        <Tooltip
+                          direction="top"
+                          offset={[0, -10]}
+                          opacity={1}
+                          permanent={false}
+                        >
+                          <div className="p-2 min-w-[200px] bg-white rounded-lg border border-gray-100 shadow-2xl">
+                            <strong className="text-sm block mb-1 font-bold text-gray-900 border-b pb-1" style={{ color: pinColor }}>{label}</strong>
+                            <div className="text-[12px] text-gray-600 leading-snug font-medium break-words whitespace-normal max-w-[220px]">
+                              {loc.address}
+                            </div>
                           </div>
-                        </Popup>
+                        </Tooltip>
                       </Marker>
                     );
                   })}
@@ -314,7 +361,7 @@ export function ModernHeroSection() {
               </div>
 
               {/* Legend */}
-              <div className="mt-6 flex items-center justify-center gap-2 text-sm text-[#888888]">
+              <div className="mt-6 flex items-center justify-center gap-2 text-sm text-black">
                 <MapPin className="h-4 w-4 text-[#022683]" />
                 <span>Hover over pins to view location details</span>
               </div>

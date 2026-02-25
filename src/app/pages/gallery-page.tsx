@@ -81,7 +81,7 @@ function Lightbox({ image, onClose, onNext, onPrev }: LightboxProps) {
 
             <div className="p-6 bg-gradient-to-r from-[#022683]/5 to-blue-50/20">
               <h3 className="text-2xl font-bold text-[#022683] mb-3">
-                {image.title || 'Untitled Image'}
+                {image.title}
               </h3>
               <p className="text-[#888888] mb-4">
                 Captured during our {image.category} events.
@@ -91,10 +91,10 @@ function Lightbox({ image, onClose, onNext, onPrev }: LightboxProps) {
                   <Calendar className="h-4 w-4" />
                   <span>{image.year}</span>
                 </div>
-                <div className="flex items-center gap-2 text-[#888888]">
+                {/* <div className="flex items-center gap-2 text-[#888888]">
                   <MapPin className="h-4 w-4" />
                   <span>India</span>
-                </div>
+                </div> */}
                 <div className="flex items-center gap-2">
                   <span className="px-3 py-1 bg-[#022683] text-white text-xs font-semibold rounded-full">
                     {image.category}
@@ -168,7 +168,7 @@ export function GalleryPage() {
   return (
     <>
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
-        <section className="pt-32 pb-12 bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

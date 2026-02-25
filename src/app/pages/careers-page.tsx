@@ -562,7 +562,7 @@ export function CareersPage() {
     <>
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
         {/* Page Header */}
-        <section className="pt-32 pb-12 bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

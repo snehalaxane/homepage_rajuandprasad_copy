@@ -125,7 +125,7 @@ export function TeamPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Page Header / Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-32 pb-20 border-b border-gray-100">
+      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-25 pb-10  border-b border-gray-100">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
@@ -186,7 +186,7 @@ export function TeamPage() {
                           >
                             {member.photo ? (
                               <img
-                                src={member.photo}
+                                src={member.photo.startsWith('http') || member.photo.startsWith('data:') ? member.photo : `${API_BASE_URL}${member.photo}`}
                                 alt={member.name}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                               />
@@ -310,7 +310,7 @@ export function TeamPage() {
                     <div className="lg:col-span-2 relative overflow-hidden bg-gradient-to-br from-[#022683]/5 to-blue-50">
                       <div className="aspect-[4/5] lg:aspect-auto lg:h-full relative">
                         <img
-                          src={currentPartner.photo}
+                          src={currentPartner.photo.startsWith('http') || currentPartner.photo.startsWith('data:') ? currentPartner.photo : `${API_BASE_URL}${currentPartner.photo}`}
                           alt={currentPartner.name}
                           className="w-full h-full object-cover object-top"
                         />
