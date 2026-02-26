@@ -165,11 +165,10 @@ export function ModernTeamSection() {
         >
           <Button
             onClick={() => window.location.hash = '#team'}
-            variant="outline"
-            className="px-8 py-6 text-lg border-2 border-[#888888] hover:border-[#022683] text-[#888888] hover:text-[#022683] hover:bg-[#022683]/5 rounded-xl transition-all group shadow-lg"
+            className="click-btn btn-style901 px-8 py-6 text-lg rounded-xl transition-all group shadow-xl border-none"
           >
-            View Full Team
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <span>View Full Team</span>
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </motion.div>
       </div>

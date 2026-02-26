@@ -320,14 +320,16 @@ export function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full md:w-auto px-12 py-4 bg-[#022683] hover:bg-[#011952] text-white text-lg font-semibold rounded-xl shadow-lg hover:shadow-2xl transition-all flex items-center justify-center gap-2"
+                      className="w-full md:w-auto px-5 py-6 bg-[#022683] text-white text-lg font-semibold rounded-xl btn-shimmer flex items-center justify-center gap-2 border-none"
                     >
-                      {isSubmitting ? (
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                      ) : (
-                        <Mail className="h-5 w-5" />
-                      )}
-                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                      <span className="flex items-center gap-2 relative z-10">
+                        {isSubmitting ? (
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                        ) : (
+                          <Mail className="h-5 w-5" />
+                        )}
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                      </span>
                     </Button>
                   </div>
                 </form>

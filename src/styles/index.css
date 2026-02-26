@@ -33,7 +33,83 @@ html {
 
 /* Smooth transitions */
 * {
-  transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* btn-style901 Hover Effect */
+.click-btn.btn-style901 {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #022683 !important;
+  color: #ffffff !important;
+  border: 1px solid #022683 !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+}
+
+.click-btn.btn-style901::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.click-btn.btn-style901:hover {
+  color: #022683 !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.click-btn.btn-style901:hover::before {
+  left: 0;
+}
+
+.click-btn.btn-style901 svg {
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.click-btn.btn-style901:hover svg {
+  color: #022683 !important;
+  transform: translateX(4px);
+}
+
+/* btn-shimmer Hover Effect */
+.btn-shimmer {
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all 0.4s ease !important;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: rotate(30deg);
+  transition: none;
+}
+
+.btn-shimmer:hover::after {
+  left: 150%;
+  transition: left 0.8s ease-in-out;
+}
+
+.btn-shimmer:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(2, 38, 131, 0.3) !important;
+}
+
+.btn-shimmer:active {
+  transform: translateY(-1px);
 }

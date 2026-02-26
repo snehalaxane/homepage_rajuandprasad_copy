@@ -61,7 +61,7 @@ export function ModernServicesSection() {
           axios.get(`${API_BASE_URL}/api/service-intro`)
         ]);
 
-        setServices(servicesRes.data.filter((s: any) => s.enabled).slice(0, 6) );
+        setServices(servicesRes.data.filter((s: any) => s.enabled).slice(0, 6));
         setIntroData(introRes.data);
       } catch (error) {
         console.error('Error fetching services data:', error);
@@ -194,10 +194,10 @@ export function ModernServicesSection() {
         >
           <Button
             onClick={() => window.location.hash = '#services'}
-            className="px-8 py-6 text-lg bg-[#022683] hover:bg-[#022683]/90 text-white rounded-xl shadow-2xl hover:shadow-[#022683]/30 transition-all group"
+            className="click-btn btn-style901 px-8 py-6 text-lg rounded-xl shadow-2xl group border-none"
           >
-            View All Services
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <span>View All Services</span>
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </motion.div>
       </div>
