@@ -1,7 +1,9 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { useState, useEffect, useCallback } from "react";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+const STRIPS = 5;
 
 interface StatItem {
   _id: string;
@@ -16,26 +18,53 @@ interface AboutResponse {
   stats: StatItem[];
 }
 
-// Each slide enters from a different direction — subtle distances for smooth feel
-const entryDirections = [
-  { x: "-45%", y: 0 },        // slide 0: from left
-  { x: 0, y: "45%" },         // slide 1: from bottom
-  { x: "45%", y: 0 },         // slide 2: from right
-  { x: 0, y: "-45%" },        // slide 3: from top
-];
+// Strip-by-strip reveal — each horizontal slice flies in from alternating sides
+function StripReveal({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="absolute inset-0">
+      {Array.from({ length: STRIPS }).map((_, i) => {
+        const topPct = i === 0 ? 0 : (i * 100) / STRIPS - 0.8;
+        const bottomPct = i === STRIPS - 1 ? 0 : 100 - ((i + 1) * 100) / STRIPS - 0.8;
+        const fromLeft = i % 2 === 0;
 
-// Exit gently toward the opposite corner
-const exitDirections = [
-  { x: "30%", y: "-30%" },    // slide 0 exits top-right
-  { x: "-30%", y: "-30%" },   // slide 1 exits top-left
-  { x: "-30%", y: "30%" },    // slide 2 exits bottom-left
-  { x: "30%", y: "30%" },     // slide 3 exits bottom-right
-];
+        return (
+          <motion.div
+            key={i}
+            className="absolute inset-0"
+            style={{
+              clipPath: `inset(${topPct}% 0 ${bottomPct}% 0)`,
+            }}
+            initial={{ x: fromLeft ? "-105%" : "105%", opacity: 0.6 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{
+              delay: i * 0.055,
+              duration: 0.42,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+          >
+            {/* Full image repeated per strip — clip-path reveals only its slice */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src={src}
+                alt={alt}
+                draggable={false}
+                className="max-w-[90%] max-h-[90%] w-auto h-auto object-contain select-none"
+                style={{ filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.12))" }}
+              />
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
 
 export function ModernStatsSection() {
   const [statsData, setStatsData] = useState<AboutResponse | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [prevSlide, setPrevSlide] = useState<number | null>(null);
+  const [revealKey, setRevealKey] = useState(0); // remount StripReveal on each change
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -53,26 +82,46 @@ export function ModernStatsSection() {
   const validStats = statsData?.stats.filter((s) => s.icon?.startsWith("/uploads")) ?? [];
 
   const goToSlide = useCallback((index: number) => {
-    if (isAnimating || index === activeSlide) return;
-    setIsAnimating(true);
-    setActiveSlide(index);
-    setTimeout(() => setIsAnimating(false), 900);
-  }, [isAnimating, activeSlide]);
+    setActiveSlide((prev) => {
+      setPrevSlide(prev);
+      return index;
+    });
+    setRevealKey((k) => k + 1);
+    setProgress(0);
+    // Clear prevSlide after animation
+    setTimeout(() => setPrevSlide(null), 700);
+  }, []);
 
-  // Auto-advance every 4.5s
+  // Auto-advance
   useEffect(() => {
     if (validStats.length < 2) return;
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % validStats.length);
-    }, 4500);
-    return () => clearInterval(interval);
+    const INTERVAL = 4200;
+    const TICK = 50;
+    let elapsed = 0;
+
+    const timer = setInterval(() => {
+      elapsed += TICK;
+      setProgress(Math.min((elapsed / INTERVAL) * 100, 100));
+      if (elapsed >= INTERVAL) {
+        elapsed = 0;
+        setActiveSlide((prev) => {
+          const next = (prev + 1) % validStats.length;
+          setPrevSlide(prev);
+          setRevealKey((k) => k + 1);
+          setTimeout(() => setPrevSlide(null), 700);
+          return next;
+        });
+        setProgress(0);
+      }
+    }, TICK);
+
+    return () => clearInterval(timer);
   }, [validStats.length]);
 
   if (!statsData || !statsData.enabled || validStats.length === 0) return null;
 
   const current = validStats[activeSlide];
-  const entry = entryDirections[activeSlide % entryDirections.length];
-  const exit = exitDirections[activeSlide % exitDirections.length];
+  const previous = prevSlide !== null ? validStats[prevSlide] : null;
 
   return (
     <section className="py-16 bg-gradient-to-br from-[#F0F4FF] via-[#FFFFFF] to-[#E8F0FE] relative overflow-hidden">
@@ -136,106 +185,79 @@ export function ModernStatsSection() {
           </motion.div>
         </div>
 
-        {/* Full-Width Image Viewer */}
+        {/* Image Stage */}
         <div className="w-full px-6 lg:px-16 xl:px-24">
-
-          {/* Image Stage — clipped so off-screen images stay hidden */}
           <div
-            className="relative overflow-hidden rounded-2xl"
+            className="relative overflow-hidden rounded-xl"
             style={{ height: "clamp(220px, 45vh, 480px)" }}
           >
-            {/* Direction hint labels — subtle corner arrows */}
-            <div className="absolute inset-0 pointer-events-none z-20">
+            {/* Exiting image fades out behind the strips */}
+            {previous && (
               <motion.div
-                key={`hint-${activeSlide}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute bottom-4 right-4 text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--secondary)]/30"
-              >
-                {activeSlide + 1} / {validStats.length}
-              </motion.div>
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current._id}
+                key={`exit-${prevSlide}`}
                 className="absolute inset-0 flex items-center justify-center"
-                initial={{
-                  ...entry,
-                  opacity: 0,
-                  scale: 0.94,
-                }}
-                animate={{
-                  x: 0,
-                  y: 0,
-                  opacity: 1,
-                  scale: 1,
-                }}
-                exit={{
-                  ...exit,
-                  opacity: 0,
-                  scale: 0.96,
-                }}
-                transition={{
-                  duration: 0.55,
-                  ease: [0.4, 0, 0.2, 1],
-                }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 0 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
               >
-                <motion.img
-                  src={`${API_BASE_URL}${current.icon}`}
-                  alt={`Slide ${activeSlide + 1}`}
-                  className="block max-w-[90%] max-h-[90%] w-auto h-auto object-contain select-none"
-                  style={{ filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.13))" }}
-                  // Slow Ken Burns drift while the image is displayed
-                  animate={{ scale: [1, 1.04] }}
-                  transition={{ duration: 4.5, ease: "linear" }}
-                />
-
-                {/* Ambient glow that matches the current slide */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1 }}
-                  className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)]/6 via-transparent to-[var(--primary)]/6 blur-[80px] pointer-events-none -z-10"
+                <img
+                  src={`${API_BASE_URL}${previous.icon}`}
+                  alt="Previous"
+                  draggable={false}
+                  className="max-w-[90%] max-h-[90%] w-auto h-auto object-contain select-none"
+                  style={{ filter: "drop-shadow(0 20px 60px rgba(0,0,0,0.10))" }}
                 />
               </motion.div>
-            </AnimatePresence>
+            )}
+
+            {/* Incoming image with strip reveal */}
+            <StripReveal
+              key={revealKey}
+              src={`${API_BASE_URL}${current.icon}`}
+              alt={`Slide ${activeSlide + 1}`}
+            />
+
+            {/* Slide counter */}
+            <div className="absolute bottom-3 right-4 text-[11px] font-semibold tracking-widest text-[var(--secondary)]/40 select-none z-10">
+              {String(activeSlide + 1).padStart(2, "0")} / {String(validStats.length).padStart(2, "0")}
+            </div>
           </div>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-6 mt-10">
+          <div className="flex items-center justify-center gap-6 mt-8">
 
             {/* Prev */}
             <button
               onClick={() => goToSlide((activeSlide - 1 + validStats.length) % validStats.length)}
-              disabled={isAnimating}
-              className="w-9 h-9 rounded-full border border-[var(--secondary)]/20 flex items-center justify-center text-[var(--secondary)] hover:border-[var(--secondary)] hover:bg-[var(--secondary)]/5 transition-all duration-200 disabled:opacity-30"
+              className="w-9 h-9 rounded-full border border-[var(--secondary)]/20 flex items-center justify-center text-[var(--secondary)] hover:border-[var(--secondary)] hover:bg-[var(--secondary)]/5 transition-all duration-200"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
 
-            {/* Pill dots */}
-            <div className="flex items-center gap-2">
+            {/* Progress dots */}
+            <div className="flex items-center gap-3">
               {validStats.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
                   aria-label={`Go to slide ${index + 1}`}
+                  className="relative flex items-center justify-center"
                 >
                   <motion.div
-                    animate={{
-                      width: activeSlide === index ? 32 : 8,
-                      opacity: activeSlide === index ? 1 : 0.3,
-                    }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className={`h-[6px] rounded-full ${activeSlide === index
-                      ? "bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)]"
-                      : "bg-[var(--secondary)]"
-                      }`}
-                  />
+                    animate={{ width: activeSlide === index ? 36 : 8 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    className="h-[5px] rounded-full bg-[var(--secondary)]/15 overflow-hidden relative"
+                  >
+                    {/* Animated fill bar inside the active dot */}
+                    {activeSlide === index && (
+                      <motion.div
+                        className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)]"
+                        style={{ width: `${progress}%` }}
+                      />
+                    )}
+                  </motion.div>
                 </button>
               ))}
             </div>
@@ -243,8 +265,7 @@ export function ModernStatsSection() {
             {/* Next */}
             <button
               onClick={() => goToSlide((activeSlide + 1) % validStats.length)}
-              disabled={isAnimating}
-              className="w-9 h-9 rounded-full bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] flex items-center justify-center text-white shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 disabled:opacity-30"
+              className="w-9 h-9 rounded-full bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] flex items-center justify-center text-white shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6" />

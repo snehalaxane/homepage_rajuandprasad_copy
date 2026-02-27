@@ -154,7 +154,7 @@ export function ModernHeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-5xl lg:text-6xl xl:text-2xl font-bold mb-6 leading-tight"
             >
-              <span className="text-[#F5C542] drop-shadow-2xl">{(hero?.title)}</span>
+              <span className="text-[#F5C542] text-5xl drop-shadow-2xl">{(hero?.title)}</span>
               <br />
               {/* <span className="text-black drop-shadow-2xl">
                 {(hero?.title || "").split(" ").slice(2).join(" ")}
