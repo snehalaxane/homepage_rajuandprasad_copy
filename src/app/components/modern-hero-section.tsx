@@ -136,14 +136,14 @@ export function ModernHeroSection() {
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] blur-xl opacity-50 rounded-full" />
                 <div className="relative bg-white rounded-full px-6 py-3 shadow-2xl border-2 border-[var(--primary)]/20">
-                  <span className="text-6xl font-bold bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent">
+                  <span className="text-9xl font-bold bg-[#F5C542] bg-clip-text text-transparent">
                     {hero?.highlightNumber}
                   </span>
                 </div>
               </div>
               <div className="text-left">
-                <p className="text-2xl font-bold text-white drop-shadow-lg">{(hero?.highlightText || "").split(" ")[0]}</p>
-                <p className="text-lg text-white/90 font-semibold drop-shadow-md">{(hero?.highlightText || "").split(" ").slice(1).join(" ")}</p>
+                <p className="text-6xl font-bold text-[#F5C542] drop-shadow-lg">{(hero?.highlightText || "").split(" ")[0]}</p>
+                <p className="text-6xl text-[#F5C542] font-bold drop-shadow-md">{(hero?.highlightText || "").split(" ").slice(1).join(" ")}</p>
               </div>
             </motion.div>
 
@@ -152,13 +152,13 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
+              className="text-5xl lg:text-6xl xl:text-2xl font-bold mb-6 leading-tight"
             >
-              <span className="text-white drop-shadow-2xl">{(hero?.title || "").split(" ")[0]} {(hero?.title || "").split(" ")[1]}</span>
+              <span className="text-black drop-shadow-2xl">{(hero?.title)}</span>
               <br />
-              <span className="text-white drop-shadow-2xl">
+              {/* <span className="text-black drop-shadow-2xl">
                 {(hero?.title || "").split(" ").slice(2).join(" ")}
-              </span>
+              </span> */}
             </motion.h1>
 
             {/* Subtext */}
