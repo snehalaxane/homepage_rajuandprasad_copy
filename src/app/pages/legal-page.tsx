@@ -56,8 +56,8 @@ export function LegalPage({ slug }: LegalPageProps) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
                 <div className="flex flex-col items-center gap-4">
-                    <div className="w-12 h-12 border-4 border-[#022683] border-t-transparent rounded-full animate-spin" />
-                    <p className="text-[#022683] font-semibold">Loading page content...</p>
+                    <div className="w-12 h-12 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
+                    <p className="text-[var(--primary)] font-semibold">Loading page content...</p>
                 </div>
             </div>
         );
@@ -68,11 +68,11 @@ export function LegalPage({ slug }: LegalPageProps) {
             <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-32">
                 <div className="text-center px-6">
                     <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                    <h2 className="text-2xl font-bold text-[#022683]">Page Not Found</h2>
-                    <p className="text-[#888888] mt-2">The legal page you are looking for does not exist or is not published.</p>
+                    <h2 className="text-2xl font-bold text-[var(--primary)]">Page Not Found</h2>
+                    <p className="text-[var(--secondary)] mt-2">The legal page you are looking for does not exist or is not published.</p>
                     <button
                         onClick={() => window.location.hash = '#home'}
-                        className="mt-6 px-6 py-2 bg-[#022683] text-white rounded-lg hover:bg-[#011952] transition-colors"
+                        className="mt-6 px-6 py-2 bg-[var(--primary)] text-white rounded-lg hover:bg-[#011952] transition-colors"
                     >
                         Go Back Home
                     </button>
@@ -85,7 +85,7 @@ export function LegalPage({ slug }: LegalPageProps) {
         <>
             <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
                 {/* Page Header */}
-                <section className="pt-32 pb-12 bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
+                <section className="pt-32 pb-12 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
                     <div className="container mx-auto px-6">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -94,21 +94,21 @@ export function LegalPage({ slug }: LegalPageProps) {
                             className="max-w-4xl"
                         >
                             {/* Breadcrumb */}
-                            <div className="flex items-center gap-2 text-sm text-[#888888] mb-4">
-                                <a href="#home" className="hover:text-[#022683] transition-colors">Home</a>
+                            <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
+                                <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
                                 <ChevronRight className="h-4 w-4" />
-                                <span className="text-[#022683] font-semibold">{pageData.pageTitle}</span>
+                                <span className="text-[var(--primary)] font-semibold">{pageData.pageTitle}</span>
                             </div>
 
                             {/* Title */}
-                            <h1 className="text-4xl lg:text-5xl font-bold text-[#022683] mb-6 leading-tight">
+                            <h1 className="text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-6 leading-tight">
                                 {pageData.pageTitle}
                             </h1>
 
                             {/* Meta */}
                             <div className="flex items-center gap-6">
-                                <div className="flex items-center gap-2 text-[#888888]">
-                                    <Clock className="h-5 w-5 text-[#022683]" />
+                                <div className="flex items-center gap-2 text-[var(--secondary)]">
+                                    <Clock className="h-5 w-5 text-[var(--primary)]" />
                                     <span className="font-medium text-sm">Last updated: {pageData.lastUpdated}</span>
                                 </div>
                             </div>
@@ -127,10 +127,10 @@ export function LegalPage({ slug }: LegalPageProps) {
                         >
                             <div
                                 className="prose prose-lg max-w-none text-gray-700 leading-relaxed
-                  prose-headings:text-[#022683] prose-headings:font-bold
+                  prose-headings:text-[var(--primary)] prose-headings:font-bold
                   prose-p:mb-6 prose-strong:text-gray-900
                   prose-ul:list-disc prose-ul:pl-6 prose-li:mb-2
-                  prose-a:text-[#022683] prose-a:font-semibold hover:prose-a:underline"
+                  prose-a:text-[var(--primary)] prose-a:font-semibold hover:prose-a:underline"
                                 dangerouslySetInnerHTML={{ __html: pageData.content }}
                             />
                         </motion.div>
@@ -141,3 +141,4 @@ export function LegalPage({ slug }: LegalPageProps) {
         </>
     );
 }
+

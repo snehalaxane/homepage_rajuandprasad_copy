@@ -88,14 +88,14 @@ export function TeamSection() {
             transition={{ duration: 0.5 }}
             className="inline-block mb-4"
           >
-            <span className="px-4 py-2 bg-[#022683]/10 text-[#022683] rounded-full text-sm font-semibold">
+            <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold">
               Our Leadership
             </span>
           </motion.div>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="text-[#022683]">Partners</span>
+            Our <span className="text-[var(--primary)]">Partners</span>
           </h2>
-          <p className="text-lg text-[#888888] max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--secondary)] max-w-2xl mx-auto">
             Experienced & dedicated Chartered Accountant Professionals with expertise across various sectors
           </p>
         </motion.div>
@@ -120,7 +120,7 @@ export function TeamSection() {
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                   />
                   {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#022683]/90 via-[#022683]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/90 via-[var(--primary)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   {/* Social Links - appears on hover */}
                   <motion.div
@@ -131,7 +131,7 @@ export function TeamSection() {
                     {member.linkedin && (
                       <a
                         href={member.linkedin}
-                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-[#022683] hover:text-white transition-all shadow-lg hover:scale-110"
+                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-[var(--primary)] hover:text-white transition-all shadow-lg hover:scale-110"
                         aria-label="LinkedIn"
                       >
                         <Linkedin className="h-5 w-5" />
@@ -140,7 +140,7 @@ export function TeamSection() {
                     {member.email && (
                       <a
                         href={`mailto:${member.email}`}
-                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-[#022683] hover:text-white transition-all shadow-lg hover:scale-110"
+                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-[var(--primary)] hover:text-white transition-all shadow-lg hover:scale-110"
                         aria-label="Email"
                       >
                         <Mail className="h-5 w-5" />
@@ -151,19 +151,19 @@ export function TeamSection() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-[#022683] transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-[var(--primary)] transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-sm font-semibold text-[#022683] mb-2">
+                  <p className="text-sm font-semibold text-[var(--primary)] mb-2">
                     {member.role}
                   </p>
-                  <p className="text-sm text-[#888888] leading-relaxed">
+                  <p className="text-sm text-[var(--secondary)] leading-relaxed">
                     {member.expertise}
                   </p>
                 </div>
 
                 {/* Decorative border on hover */}
-                <div className="absolute inset-0 border-2 border-[#022683] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 border-2 border-[var(--primary)] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
             </motion.div>
           ))}
@@ -177,12 +177,12 @@ export function TeamSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <p className="text-[#888888] mb-4">
+          <p className="text-[var(--secondary)] mb-4">
             Want to work with our expert team?
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[#022683] text-white rounded-lg hover:bg-[#011952] transition-all hover:scale-105 shadow-lg shadow-[#022683]/30"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--primary)] text-white rounded-lg hover:bg-[#011952] transition-all hover:scale-105 shadow-lg shadow-[var(--primary)]/30"
           >
             Schedule a Consultation
           </a>

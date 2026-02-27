@@ -8,8 +8,8 @@ export function HeroSection() {
     <section id="home" className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20 pt-32 pb-20">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
+        <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -29,7 +29,7 @@ export function HeroSection() {
               className="mb-6"
             >
               <span
-                className="text-[140px] lg:text-[200px] xl:text-[240px] font-black leading-none text-[#022683] block"
+                className="text-[140px] lg:text-[200px] xl:text-[240px] font-black leading-none text-[var(--primary)] block"
                 style={{ lineHeight: '0.85' }}
               >
                 46
@@ -43,7 +43,7 @@ export function HeroSection() {
               className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 leading-tight"
             >
               Years of Service with{' '}
-              <span className="text-[#022683]">
+              <span className="text-[var(--primary)]">
                 Commitment
               </span>
             </motion.h1>
@@ -52,7 +52,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-lg lg:text-xl text-[#888888] mb-8 leading-relaxed"
+              className="text-lg lg:text-xl text-[var(--secondary)] mb-8 leading-relaxed"
             >
               Our vision is to extend expert based services all over the country and to get ultimate recognition in providing services across the globe
             </motion.p>
@@ -65,7 +65,7 @@ export function HeroSection() {
             >
               <Button
                 size="lg"
-                className="bg-[#022683] hover:bg-[#011952] text-white shadow-lg shadow-[#022683]/30 group px-8 py-6 text-lg"
+                className="bg-[var(--primary)] hover:bg-[#011952] text-white shadow-lg shadow-[var(--primary)]/30 group px-8 py-6 text-lg"
                 asChild
               >
                 <a href="#services">
@@ -76,7 +76,7 @@ export function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-[#022683] text-[#022683] hover:bg-[#022683] hover:text-white group px-8 py-6 text-lg"
+                className="border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white group px-8 py-6 text-lg"
                 asChild
               >
                 <a href="#contact">
@@ -97,7 +97,7 @@ export function HeroSection() {
             <div className="relative">
               {/* Glow effect behind map */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-[#022683]/10 to-blue-400/10 blur-3xl scale-110 rounded-full"
+                className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/10 to-blue-400/10 blur-3xl scale-110 rounded-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -123,7 +123,7 @@ export function HeroSection() {
 
               {/* Decorative elements */}
               <motion.div
-                className="absolute -top-4 -right-4 w-24 h-24 bg-[#022683]/5 rounded-full blur-2xl"
+                className="absolute -top-4 -right-4 w-24 h-24 bg-[var(--primary)]/5 rounded-full blur-2xl"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.8 }}

@@ -151,7 +151,7 @@ export function ContactPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F7F8FA] flex items-center justify-center">
-        <Loader2 className="w-12 h-12 text-[#022683] animate-spin" />
+        <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin" />
       </div>
     );
   }
@@ -160,7 +160,7 @@ export function ContactPage() {
     <>
       <main className="min-h-screen bg-[#F7F8FA]">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-200">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-200">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -169,19 +169,19 @@ export function ContactPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-[#888888] mb-4">
-                <a href="/" className="hover:text-[#022683] transition-colors">Home</a>
+              <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
+                <a href="/" className="hover:text-[var(--primary)] transition-colors">Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[#022683] font-semibold">Contact</span>
+                <span className="text-[var(--primary)] font-semibold">Contact</span>
               </div>
 
               {/* Dynamic Title */}
-              <h1 className="text-5xl lg:text-6xl font-bold text-[#022683] mb-6">
+              <h1 className="text-5xl lg:text-6xl font-bold text-[var(--primary)] mb-6">
                 {settings?.pageTitle || 'Contact Us'}
               </h1>
 
               {/* Dynamic Subtitle */}
-              <p className="text-lg text-[#888888] leading-relaxed">
+              <p className="text-lg text-[var(--secondary)] leading-relaxed">
                 {settings?.pageSubtitle || "Send us your request and we'll get back to you at the earliest."}
               </p>
             </motion.div>
@@ -201,14 +201,14 @@ export function ContactPage() {
                 {/* Call Now */}
                 <a
                   href={`tel:${settings?.callNow}`}
-                  className="bg-white rounded-2xl border-2 border-gray-200 hover:border-[#022683] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
+                  className="bg-white rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
                 >
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#022683] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Phone className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#888888] mb-1">Call Now</p>
-                    <p className="text-lg font-bold text-gray-900 group-hover:text-[#022683] transition-colors">
+                    <p className="text-sm font-semibold text-[var(--secondary)] mb-1">Call Now</p>
+                    <p className="text-lg font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors">
                       {settings?.callNow || '+91 40 2331 6023'}
                     </p>
                   </div>
@@ -217,14 +217,14 @@ export function ContactPage() {
                 {/* Email Us */}
                 <a
                   href={`mailto:${settings?.emailUs}`}
-                  className="bg-white rounded-2xl border-2 border-gray-200 hover:border-[#022683] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
+                  className="bg-white rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
                 >
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#022683] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Mail className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#888888] mb-1">Email Us</p>
-                    <p className="text-lg font-bold text-gray-900 group-hover:text-[#022683] transition-colors">
+                    <p className="text-sm font-semibold text-[var(--secondary)] mb-1">Email Us</p>
+                    <p className="text-lg font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors">
                       {settings?.emailUs || 'support@rajuandprasad.com'}
                     </p>
                   </div>
@@ -245,7 +245,7 @@ export function ContactPage() {
             >
               <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
                 {/* Form Header */}
-                <div className="bg-gradient-to-r from-[#022683] to-[#033aa8] px-8 py-8">
+                <div className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-8 py-8">
                   <h2 className="text-3xl font-bold text-white mb-2">
                     {settings?.heading || 'Get in Touch'}
                   </h2>
@@ -269,7 +269,7 @@ export function ContactPage() {
                             {field.label} {field.required && '*'}
                           </label>
                           <div className="relative">
-                            <Icon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888]" />
+                            <Icon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
                             <input
                               type={field.fieldType === 'tel' ? 'text' : field.fieldType}
                               required={field.required}
@@ -284,7 +284,7 @@ export function ContactPage() {
                               pattern={field.fieldType === 'tel' ? '[0-9]{10}' : undefined}
                               inputMode={field.fieldType === 'tel' ? 'numeric' : undefined}
                               maxLength={field.fieldType === 'tel' ? 10 : undefined}
-                              className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900"
+                              className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
                               placeholder={field.placeholder || `Enter ${field.label}`}
                             />
                           </div>
@@ -301,13 +301,13 @@ export function ContactPage() {
                           {field.label} {field.required && '*'}
                         </label>
                         <div className="relative">
-                          <MessageSquare className="absolute left-4 top-4 h-5 w-5 text-[#888888]" />
+                          <MessageSquare className="absolute left-4 top-4 h-5 w-5 text-[var(--secondary)]" />
                           <textarea
                             required={field.required}
                             value={formData[fieldKey] || ''}
                             onChange={(e) => setFormData({ ...formData, [fieldKey]: e.target.value })}
                             rows={6}
-                            className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all resize-none text-gray-900"
+                            className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all resize-none text-gray-900"
                             placeholder={field.placeholder || `Enter your ${field.label.toLowerCase()}`}
                           />
                         </div>
@@ -320,7 +320,7 @@ export function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full md:w-auto px-5 py-6 bg-[#022683] text-white text-lg font-semibold rounded-xl btn-shimmer flex items-center justify-center gap-2 border-none"
+                      className="w-full md:w-auto px-5 py-6 bg-[var(--primary)] text-white text-lg font-semibold rounded-xl btn-shimmer flex items-center justify-center gap-2 border-none"
                     >
                       <span className="flex items-center gap-2 relative z-10">
                         {isSubmitting ? (
@@ -348,10 +348,10 @@ export function ContactPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#022683] mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[var(--primary)] mb-4">
                 Our Branch Locations
               </h2>
-              <p className="text-lg text-[#888888]">
+              <p className="text-lg text-[var(--secondary)]">
                 Find the nearest Raju & Prasad office
               </p>
             </motion.div>
@@ -368,7 +368,7 @@ export function ContactPage() {
                   className="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
                 >
                   {/* Location Header */}
-                  <div className="bg-gradient-to-r from-[#022683] to-[#033aa8] px-6 py-4">
+                  <div className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                         <Building2 className="h-5 w-5 text-white" />
@@ -394,14 +394,14 @@ export function ContactPage() {
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gray-50 border-b border-gray-100">
-                        <MapPin className="w-8 h-8 text-[#022683] mb-2 opacity-20" />
-                        <p className="text-sm text-[#888888]">Map location for {branch.cityName}</p>
+                        <MapPin className="w-8 h-8 text-[var(--primary)] mb-2 opacity-20" />
+                        <p className="text-sm text-[var(--secondary)]">Map location for {branch.cityName}</p>
                         {branch.mapEmbed && (
                           <a
                             href={branch.mapEmbed}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-2 text-xs text-[#022683] font-semibold hover:underline"
+                            className="mt-2 text-xs text-[var(--primary)] font-semibold hover:underline"
                           >
                             View on Google Maps
                           </a>
@@ -413,11 +413,11 @@ export function ContactPage() {
                   {/* Location Details */}
                   <div className="p-6 space-y-4">
                     <div className="mb-2">
-                      <p className="text-xs font-bold text-[#022683] uppercase tracking-wider mb-1">{branch.officeName}</p>
+                      <p className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-1">{branch.officeName}</p>
                     </div>
                     {/* Address */}
                     <div className="flex items-start gap-3">
-                      <MapPin className="h-5 w-5 text-[#022683] mt-0.5 flex-shrink-0" />
+                      <MapPin className="h-5 w-5 text-[var(--primary)] mt-0.5 flex-shrink-0" />
                       <div className="flex-1">
                         <p className="text-sm text-gray-900 leading-relaxed">
                           {branch.address}
@@ -431,17 +431,17 @@ export function ContactPage() {
                         {copiedAddress === branch.address ? (
                           <span className="text-xs font-semibold text-green-600">✓</span>
                         ) : (
-                          <Copy className="h-4 w-4 text-[#888888] group-hover/copy:text-[#022683] transition-colors" />
+                          <Copy className="h-4 w-4 text-[var(--secondary)] group-hover/copy:text-[var(--primary)] transition-colors" />
                         )}
                       </button>
                     </div>
 
                     {/* Phone */}
                     <div className="flex items-center gap-3">
-                      <Phone className="h-5 w-5 text-[#022683] flex-shrink-0" />
+                      <Phone className="h-5 w-5 text-[var(--primary)] flex-shrink-0" />
                       <a
                         href={`tel:${branch.phone}`}
-                        className="text-sm text-gray-900 hover:text-[#022683] font-semibold transition-colors"
+                        className="text-sm text-gray-900 hover:text-[var(--primary)] font-semibold transition-colors"
                       >
                         {branch.phone}
                       </a>
@@ -449,10 +449,10 @@ export function ContactPage() {
 
                     {/* Email */}
                     <div className="flex items-center gap-3">
-                      <Mail className="h-5 w-5 text-[#022683] flex-shrink-0" />
+                      <Mail className="h-5 w-5 text-[var(--primary)] flex-shrink-0" />
                       <a
                         href={`mailto:${branch.email}`}
-                        className="text-sm text-gray-900 hover:text-[#022683] font-semibold transition-colors"
+                        className="text-sm text-gray-900 hover:text-[var(--primary)] font-semibold transition-colors"
                       >
                         {branch.email}
                       </a>
@@ -464,7 +464,7 @@ export function ContactPage() {
                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.address)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#022683]/5 hover:bg-[#022683] text-[#022683] hover:text-white font-semibold rounded-xl transition-all group/btn"
+                        className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[var(--primary)]/5 hover:bg-[var(--primary)] text-[var(--primary)] hover:text-white font-semibold rounded-xl transition-all group/btn"
                       >
                         <Navigation className="h-4 w-4" />
                         Get Directions
@@ -478,7 +478,7 @@ export function ContactPage() {
         </section>
 
         {/* Additional Info Section */}
-        <section className="py-16 bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-t border-gray-200">
+        <section className="py-16 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-t border-gray-200">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -486,22 +486,22 @@ export function ContactPage() {
               transition={{ duration: 0.6, delay: 0.7 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <h3 className="text-2xl font-bold text-[#022683] mb-4">
+              <h3 className="text-2xl font-bold text-[var(--primary)] mb-4">
                 Have Questions?
               </h3>
-              <p className="text-lg text-[#888888] mb-8">
+              <p className="text-lg text-[var(--secondary)] mb-8">
                 Our team is here to help. Reach out to us for any queries related to our services, career opportunities, or general information about Raju & Prasad.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button
                   onClick={() => window.location.href = '/#services'}
-                  className="px-6 py-3 bg-white text-[#022683] border-2 border-[#022683] hover:bg-[#022683] hover:text-white font-semibold rounded-xl transition-all"
+                  className="px-6 py-3 bg-white text-[var(--primary)] border-2 border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white font-semibold rounded-xl transition-all"
                 >
                   Our Services
                 </Button>
                 <Button
                   onClick={() => window.location.href = '/#careers'}
-                  className="px-6 py-3 bg-[#022683] text-white hover:bg-[#011952] font-semibold rounded-xl transition-all"
+                  className="px-6 py-3 bg-[var(--primary)] text-white hover:bg-[#011952] font-semibold rounded-xl transition-all"
                 >
                   View Careers
                 </Button>
@@ -529,12 +529,12 @@ export function ContactPage() {
               </div>
             ) : (
               <>
-                <div className="w-16 h-16 bg-[#022683]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Mail className="w-8 h-8 text-[#022683]" />
+                <div className="w-16 h-16 bg-[var(--primary)]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Mail className="w-8 h-8 text-[var(--primary)]" />
                 </div>
-                <h3 className="text-2xl font-bold text-[#022683] mb-2">Verify your email</h3>
-                <p className="text-[#888888] mb-8 text-sm">
-                  We've sent a 6-digit verification code to <span className="text-[#022683] font-semibold">{getEmailValue()}</span>
+                <h3 className="text-2xl font-bold text-[var(--primary)] mb-2">Verify your email</h3>
+                <p className="text-[var(--secondary)] mb-8 text-sm">
+                  We've sent a 6-digit verification code to <span className="text-[var(--primary)] font-semibold">{getEmailValue()}</span>
                 </p>
 
                 <form onSubmit={handleVerifyAndSubmit} className="space-y-6">
@@ -548,7 +548,7 @@ export function ContactPage() {
                           setOtp(e.target.value.replace(/\D/g, ''));
                           if (verificationError) setVerificationError('');
                         }}
-                        className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[#022683]'
+                        className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[var(--primary)]'
                           }`}
                         placeholder="000000"
                       />
@@ -564,7 +564,7 @@ export function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isVerifying || otp.length !== 6}
-                      className="w-full py-4 bg-[#022683] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                      className="w-full py-4 bg-[var(--primary)] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                     >
                       {isVerifying ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -577,15 +577,15 @@ export function ContactPage() {
                     <button
                       type="button"
                       onClick={() => { setShowOtpModal(false); setOtp(''); setVerificationError(''); }}
-                      className="text-sm font-semibold text-[#888888] hover:text-[#022683] transition-colors"
+                      className="text-sm font-semibold text-[var(--secondary)] hover:text-[var(--primary)] transition-colors"
                     >
                       Cancel
                     </button>
                   </div>
                 </form>
 
-                <p className="mt-8 text-xs text-[#888888]">
-                  Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[#022683] font-bold hover:underline">Resend</button>
+                <p className="mt-8 text-xs text-[var(--secondary)]">
+                  Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[var(--primary)] font-bold hover:underline">Resend</button>
                 </p>
               </>
             )}
@@ -597,3 +597,4 @@ export function ContactPage() {
     </>
   );
 }
+

@@ -153,12 +153,12 @@ export function Navbar({ activePage = 'home' }: NavbarProps) {
                       onMouseLeave={() => setOpenDropdown(null)}
                     >
                       <button
-                        className={`relative text-sm font-semibold tracking-wide transition-all duration-300 px-3 py-2 group whitespace-nowrap flex items-center gap-1 ${isActive ? 'text-[#022683]' : 'text-[#888888] hover:text-[#022683]'
+                        className={`relative text-sm font-semibold tracking-wide transition-all duration-300 px-3 py-2 group whitespace-nowrap flex items-center gap-1 ${isActive ? 'text-[var(--primary)]' : 'text-[var(--secondary)] hover:text-[var(--primary)]'
                           }`}
                       >
                         {item.label}
                         <ChevronDown className={`h-4 w-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
-                        <span className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#022683] transition-all duration-300 rounded-full ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'
+                        <span className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--primary)] transition-all duration-300 rounded-full ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'
                           }`}></span>
                       </button>
 
@@ -190,8 +190,8 @@ export function Navbar({ activePage = 'home' }: NavbarProps) {
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ duration: 0.2, delay: index * 0.05 }}
                                   className={`block px-4 py-3 text-sm font-semibold transition-all ${isDropdownActive
-                                      ? 'bg-[#022683]/10 text-[#022683]'
-                                      : 'text-[#888888] hover:bg-[#022683]/5 hover:text-[#022683]'
+                                      ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
+                                      : 'text-[var(--secondary)] hover:bg-[var(--primary)]/5 hover:text-[var(--primary)]'
                                     }`}
                                 >
                                   {dropdownItem.label}
@@ -213,11 +213,11 @@ export function Navbar({ activePage = 'home' }: NavbarProps) {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className={`relative text-sm font-semibold tracking-wide transition-all duration-300 px-3 py-2 group whitespace-nowrap ${isActive ? 'text-[#022683]' : 'text-[#888888] hover:text-[#022683]'
+                    className={`relative text-sm font-semibold tracking-wide transition-all duration-300 px-3 py-2 group whitespace-nowrap ${isActive ? 'text-[var(--primary)]' : 'text-[var(--secondary)] hover:text-[var(--primary)]'
                       }`}
                   >
                     {item.label}
-                    <span className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[#022683] transition-all duration-300 rounded-full ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'
+                    <span className={`absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--primary)] transition-all duration-300 rounded-full ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'
                       }`}></span>
                   </a>
                 );
@@ -272,8 +272,8 @@ export function Navbar({ activePage = 'home' }: NavbarProps) {
                         <button
                           onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                           className={`w-full py-3 px-4 rounded-lg transition-all font-semibold flex items-center justify-between ${isActive
-                              ? 'text-[#022683] bg-[#022683]/5'
-                              : 'text-[#888888] hover:text-[#022683] hover:bg-gray-50'
+                              ? 'text-[var(--primary)] bg-[var(--primary)]/5'
+                              : 'text-[var(--secondary)] hover:text-[var(--primary)] hover:bg-gray-50'
                             }`}
                         >
                           {item.label}
@@ -304,8 +304,8 @@ export function Navbar({ activePage = 'home' }: NavbarProps) {
                                       handleNavClick(dropdownItem.href);
                                     }}
                                     className={`block py-2 px-4 rounded-lg transition-all font-semibold text-sm ${isDropdownActive
-                                        ? 'text-[#022683] bg-[#022683]/5'
-                                        : 'text-[#888888] hover:text-[#022683] hover:bg-gray-50'
+                                        ? 'text-[var(--primary)] bg-[var(--primary)]/5'
+                                        : 'text-[var(--secondary)] hover:text-[var(--primary)] hover:bg-gray-50'
                                       }`}
                                   >
                                     {dropdownItem.label}
@@ -328,8 +328,8 @@ export function Navbar({ activePage = 'home' }: NavbarProps) {
                         handleNavClick(item.href);
                       }}
                       className={`py-3 px-4 rounded-lg transition-all font-semibold ${isActive
-                          ? 'text-[#022683] bg-[#022683]/5'
-                          : 'text-[#888888] hover:text-[#022683] hover:bg-gray-50'
+                          ? 'text-[var(--primary)] bg-[var(--primary)]/5'
+                          : 'text-[var(--secondary)] hover:text-[var(--primary)] hover:bg-gray-50'
                         }`}
                     >
                       {item.label}

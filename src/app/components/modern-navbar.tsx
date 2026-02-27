@@ -147,7 +147,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
 
   if (loading) {
     return (
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#022683] h-20 flex items-center justify-center">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--primary)] h-20 flex items-center justify-center">
         <Loader2 className="w-6 h-6 text-white animate-spin" />
       </nav>
     );
@@ -159,8 +159,8 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'bg-[#022683] shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-b border-white/20'
-        : 'bg-[#022683] shadow-[0_8px_30px_rgba(0,0,0,0.25)] border-b border-white/12'
+        ? 'bg-[var(--primary)] shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-b border-white/20'
+        : 'bg-[var(--primary)] shadow-[0_8px_30px_rgba(0,0,0,0.25)] border-b border-white/12'
         }`}
     >
       <div className="container mx-auto px-6 relative z-10">
@@ -235,7 +235,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-2 w-48 bg-[#022683] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50"
+                            className="absolute top-full left-0 mt-2 w-48 bg-[var(--primary)] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50"
                           >
                             {item.dropdown.map((dropdownItem, index) => {
                               const isDropdownActive =
@@ -317,7 +317,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden bg-[#022683] border-t border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
+            className="xl:hidden bg-[var(--primary)] border-t border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
           >
             <div className="container mx-auto px-6 py-6 max-h-[70vh] overflow-y-auto">
               <div className="flex flex-col gap-2">

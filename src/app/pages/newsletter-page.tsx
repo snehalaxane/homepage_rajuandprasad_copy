@@ -81,7 +81,7 @@ export function NewsletterPage() {
 
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -90,19 +90,19 @@ export function NewsletterPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-[#888888] mb-4">
-                <a href="#home" className="hover:text-[#022683] transition-colors">Home</a>
+              <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
+                <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[#022683] font-semibold">Newsletter</span>
+                <span className="text-[var(--primary)] font-semibold">Newsletter</span>
               </div>
 
               {/* Title */}
-              <h1 className="text-5xl lg:text-6xl font-bold text-[#022683] mb-6">
+              <h1 className="text-5xl lg:text-6xl font-bold text-[var(--primary)] mb-6">
                 {intro?.title || 'Newsletter'}
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg lg:text-xl text-[#888888] leading-relaxed">
+              <p className="text-lg lg:text-xl text-[var(--secondary)] leading-relaxed">
                 {intro?.subtitle || 'Subscribe to our Newsletter to get latest news and important updates on tax and regulatory laws in India on your email.'}
               </p>
             </motion.div>
@@ -123,7 +123,7 @@ export function NewsletterPage() {
                 <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                   {/* Search Bar */}
                   <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888]" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
                     <input
                       type="text"
                       placeholder="Search month / content..."
@@ -132,7 +132,7 @@ export function NewsletterPage() {
                         setSearchQuery(e.target.value);
                         setCurrentPage(1);
                       }}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
                     />
                   </div>
 
@@ -144,13 +144,13 @@ export function NewsletterPage() {
                         setSelectedYear(e.target.value);
                         setCurrentPage(1);
                       }}
-                      className="appearance-none px-6 py-3 pr-12 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                      className="appearance-none px-6 py-3 pr-12 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
                     >
                       {availableYears.map(year => (
                         <option key={year} value={year}>{year}</option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888] pointer-events-none" />
+                    <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)] pointer-events-none" />
                   </div>
                 </div>
               </div>
@@ -158,7 +158,7 @@ export function NewsletterPage() {
               {/* Table */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gradient-to-r from-[#022683] to-[#033aa8] text-white sticky top-0">
+                  <thead className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] text-white sticky top-0">
                     <tr>
                       <th className="px-6 py-4 text-left font-bold text-sm uppercase tracking-wider">
                         Month
@@ -184,10 +184,10 @@ export function NewsletterPage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.05 }}
-                        className={`border-b border-gray-100 hover:bg-gradient-to-r hover:from-[#022683]/5 hover:to-blue-50/30 transition-all ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
+                        className={`border-b border-gray-100 hover:bg-gradient-to-r hover:from-[var(--primary)]/5 hover:to-blue-50/30 transition-all ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
                           }`}
                       >
-                        <td className="px-6 py-5 font-semibold text-[#022683]">
+                        <td className="px-6 py-5 font-semibold text-[var(--primary)]">
                           {item.month} {item.year}
                         </td>
                         <td className="px-6 py-5 text-gray-900">
@@ -196,7 +196,7 @@ export function NewsletterPage() {
                         <td className="px-6 py-5 text-gray-900">
                           {item.industryReview}
                         </td>
-                        <td className="px-6 py-5 text-[#888888] text-sm">
+                        <td className="px-6 py-5 text-[var(--secondary)] text-sm">
                           {item.otherContents}
                         </td>
                         <td className="px-6 py-5 text-center">
@@ -204,7 +204,7 @@ export function NewsletterPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="border-2 border-[#022683] text-[#022683] hover:bg-[#022683] hover:text-white group transition-all"
+                              className="border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white group transition-all"
                               asChild
                             >
                               <a href={`${API_BASE_URL}/${item.pdfFile}`} target="_blank" rel="noopener noreferrer">
@@ -213,7 +213,7 @@ export function NewsletterPage() {
                               </a>
                             </Button>
                           ) : (
-                            <span className="text-[#888888] italic text-sm">No PDF</span>
+                            <span className="text-[var(--secondary)] italic text-sm">No PDF</span>
                           )}
                         </td>
                       </motion.tr>
@@ -226,7 +226,7 @@ export function NewsletterPage() {
               {totalPages > 1 && (
                 <div className="p-6 border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white">
                   <div className="flex items-center justify-between">
-                    <p className="text-sm text-[#888888]">
+                    <p className="text-sm text-[var(--secondary)]">
                       Showing {startIndex + 1} to {Math.min(endIndex, filteredData.length)} of {filteredData.length} entries
                     </p>
 
@@ -236,7 +236,7 @@ export function NewsletterPage() {
                         size="sm"
                         onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                         disabled={currentPage === 1}
-                        className="border-2 border-gray-200 hover:border-[#022683] hover:bg-[#022683] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <ChevronLeft className="h-4 w-4" />
                       </Button>
@@ -249,8 +249,8 @@ export function NewsletterPage() {
                           onClick={() => setCurrentPage(i + 1)}
                           className={
                             currentPage === i + 1
-                              ? 'bg-[#022683] hover:bg-[#011952] text-white'
-                              : 'border-2 border-gray-200 hover:border-[#022683] hover:bg-[#022683] hover:text-white'
+                              ? 'bg-[var(--primary)] hover:bg-[#011952] text-white'
+                              : 'border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white'
                           }
                         >
                           {i + 1}
@@ -262,7 +262,7 @@ export function NewsletterPage() {
                         size="sm"
                         onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                         disabled={currentPage === totalPages}
-                        className="border-2 border-gray-200 hover:border-[#022683] hover:bg-[#022683] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <ChevronRight className="h-4 w-4" />
                       </Button>
@@ -279,3 +279,4 @@ export function NewsletterPage() {
     </>
   );
 }
+

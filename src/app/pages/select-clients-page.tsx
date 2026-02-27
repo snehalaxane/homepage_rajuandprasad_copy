@@ -92,8 +92,8 @@ export function SelectClientsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-[#022683] border-t-transparent rounded-full animate-spin" />
-          <p className="text-[#022683] font-semibold">Loading clients portfolio...</p>
+          <div className="w-12 h-12 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
+          <p className="text-[var(--primary)] font-semibold">Loading clients portfolio...</p>
         </div>
       </div>
     );
@@ -104,8 +104,8 @@ export function SelectClientsPage() {
       {/* Page Header */}
       <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-25 pb-10  border-b border-gray-100">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
-          <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
+          <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
+          <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
@@ -116,23 +116,23 @@ export function SelectClientsPage() {
             className="max-w-4xl mx-auto text-center"
           >
             {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-sm text-[#888888] mb-6">
-              <a href="#home" className="hover:text-[#022683] transition-colors">
+            <div className="flex items-center justify-center gap-2 text-sm text-[var(--secondary)] mb-6">
+              <a href="#home" className="hover:text-[var(--primary)] transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-[#022683] font-medium">Select Clients</span>
+              <span className="text-[var(--primary)] font-medium">Select Clients</span>
             </div>
 
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
               {intro?.title.split(' ').map((word, i) => (
-                <span key={i} className={i === 1 ? "text-[#022683]" : ""}>{word} </span>
+                <span key={i} className={i === 1 ? "text-[var(--primary)]" : ""}>{word} </span>
               )) || (
-                  <>Select <span className="text-[#022683]">Clients</span></>
+                  <>Select <span className="text-[var(--primary)]">Clients</span></>
                 )}
             </h1>
 
-            <p className="text-xl text-[#888888] leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-[var(--secondary)] leading-relaxed max-w-2xl mx-auto">
               {intro?.subtitle || 'Serving clients across diverse industries with trust and commitment.'}
             </p>
           </motion.div>
@@ -152,13 +152,13 @@ export function SelectClientsPage() {
             >
               <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
                 {/* Accent line */}
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#022683] to-blue-400" />
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
 
                 <div className="pl-6">
-                  <p className="text-lg text-[#888888] leading-relaxed mb-4">
+                  <p className="text-lg text-[var(--secondary)] leading-relaxed mb-4">
                     {intro?.introDescription1 || "The Firm represents a diversified portfolio of clients across various sectors including Industrial, Service, Public Sector Undertakings, Banking & Insurance, Social Sector, High Net-worth Individuals (HNI), and Non-Resident Indians (NRI)."}
                   </p>
-                  <p className="text-lg text-[#888888] leading-relaxed">
+                  <p className="text-lg text-[var(--secondary)] leading-relaxed">
                     {intro?.introDescription2 || "Our expertise spans multiple industries and we take pride in delivering customized solutions to meet the unique needs of each client segment."}
                   </p>
                 </div>
@@ -179,13 +179,13 @@ export function SelectClientsPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <span className="px-4 py-2 bg-[#022683]/10 text-[#022683] rounded-full text-sm font-semibold inline-block mb-4">
+            <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-4">
               {intro?.introTitle || 'Our Portfolio'}
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Client <span className="text-[#022683]">Categories</span>
+              Client <span className="text-[var(--primary)]">Categories</span>
             </h2>
-            <p className="text-lg text-[#888888] max-w-2xl mx-auto">
+            <p className="text-lg text-[var(--secondary)] max-w-2xl mx-auto">
               Explore our diverse client base across specialized sectors
             </p>
           </motion.div>
@@ -216,8 +216,8 @@ export function SelectClientsPage() {
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setActiveCategoryId(category._id)}
                       className={`flex items-center gap-3 px-6 py-3 rounded-full font-semibold transition-all ${isActive
-                        ? 'bg-[#022683] text-white shadow-lg shadow-[#022683]/30'
-                        : 'bg-white text-gray-700 border border-gray-200 hover:border-[#022683] hover:text-[#022683] shadow-md'
+                        ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/30'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-[var(--primary)] hover:text-[var(--primary)] shadow-md'
                         }`}
                     >
                       <Icon className="h-5 w-5" />
@@ -270,12 +270,12 @@ export function SelectClientsPage() {
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.3, delay: index * 0.03 }}
-                              className="group flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-white hover:from-[#022683]/5 hover:to-blue-50 transition-all hover:shadow-md border border-transparent hover:border-[#022683]/20"
+                              className="group flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-white hover:from-[var(--primary)]/5 hover:to-blue-50 transition-all hover:shadow-md border border-transparent hover:border-[var(--primary)]/20"
                             >
-                              <div className="mt-1 w-5 h-5 rounded-full bg-[#022683]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#022683] transition-colors">
-                                <Check className="h-3 w-3 text-[#022683] group-hover:text-white transition-colors" />
+                              <div className="mt-1 w-5 h-5 rounded-full bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--primary)] transition-colors">
+                                <Check className="h-3 w-3 text-[var(--primary)] group-hover:text-white transition-colors" />
                               </div>
-                              <span className="text-gray-700 font-medium group-hover:text-[#022683] transition-colors leading-snug">
+                              <span className="text-gray-700 font-medium group-hover:text-[var(--primary)] transition-colors leading-snug">
                                 {item.name}
                               </span>
                             </motion.div>
@@ -301,23 +301,23 @@ export function SelectClientsPage() {
               <div className="grid md:grid-cols-3 gap-6">
                 {(intro?.stats || []).filter(s => s.enabled).map((stat, idx) => (
                   <div key={idx} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                    <p className="text-5xl font-bold text-[#022683] mb-2">{stat.value}</p>
-                    <p className="text-[#888888] font-medium">{stat.label}</p>
+                    <p className="text-5xl font-bold text-[var(--primary)] mb-2">{stat.value}</p>
+                    <p className="text-[var(--secondary)] font-medium">{stat.label}</p>
                   </div>
                 ))}
                 {!intro && (
                   <>
                     <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                      <p className="text-5xl font-bold text-[#022683] mb-2">7</p>
-                      <p className="text-[#888888] font-medium">Industry Sectors</p>
+                      <p className="text-5xl font-bold text-[var(--primary)] mb-2">7</p>
+                      <p className="text-[var(--secondary)] font-medium">Industry Sectors</p>
                     </div>
                     <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                      <p className="text-5xl font-bold text-[#022683] mb-2">76+</p>
-                      <p className="text-[#888888] font-medium">Service Categories</p>
+                      <p className="text-5xl font-bold text-[var(--primary)] mb-2">76+</p>
+                      <p className="text-[var(--secondary)] font-medium">Service Categories</p>
                     </div>
                     <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                      <p className="text-5xl font-bold text-[#022683] mb-2">46+</p>
-                      <p className="text-[#888888] font-medium">Years of Trust</p>
+                      <p className="text-5xl font-bold text-[var(--primary)] mb-2">46+</p>
+                      <p className="text-[var(--secondary)] font-medium">Years of Trust</p>
                     </div>
                   </>
                 )}
@@ -337,7 +337,7 @@ export function SelectClientsPage() {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto"
           >
-            <div className="relative bg-gradient-to-br from-[#022683] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[#022683]/20 overflow-hidden text-center">
+            <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden text-center">
               {/* Decorative Background */}
               <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
@@ -357,7 +357,7 @@ export function SelectClientsPage() {
                     href="#contact"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#022683] rounded-full hover:bg-gray-100 transition-all shadow-lg font-semibold"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[var(--primary)] rounded-full hover:bg-gray-100 transition-all shadow-lg font-semibold"
                   >
                     Get Started Today
                     <ChevronRight className="h-5 w-5" />
@@ -382,3 +382,4 @@ export function SelectClientsPage() {
     </div>
   );
 }
+

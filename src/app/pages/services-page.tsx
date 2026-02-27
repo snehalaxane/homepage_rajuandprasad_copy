@@ -111,7 +111,7 @@ export function ServicesPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <Loader2 className="w-12 h-12 text-[#022683] animate-spin" />
+        <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin" />
       </div>
     );
   }
@@ -135,8 +135,8 @@ export function ServicesPage() {
       {/* Page Header */}
       <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-25 pb-10 border-b border-gray-100">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
-          <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[#022683]/5 rounded-full blur-3xl" />
+          <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
+          <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
@@ -147,19 +147,19 @@ export function ServicesPage() {
             className="max-w-4xl mx-auto text-center"
           >
             {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-sm text-[#888888] mb-6">
-              <a href="/" className="hover:text-[#022683] transition-colors">
+            <div className="flex items-center justify-center gap-2 text-sm text-[var(--secondary)] mb-6">
+              <a href="/" className="hover:text-[var(--primary)] transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-[#022683] font-medium">Services</span>
+              <span className="text-[var(--primary)] font-medium">Services</span>
             </div>
 
             <h1 className="text-5xl lg:text-6xl font-black text-gray-900 mb-6 tracking-tight">
-              <span className="text-[#022683]">{introData?.title || 'Services'}</span>
+              <span className="text-[var(--primary)]">{introData?.title || 'Services'}</span>
             </h1>
 
-            <p className="text-xl text-[#888888] leading-relaxed max-w-2xl mx-auto border-t border-[#022683]/10 pt-6">
+            <p className="text-xl text-[var(--secondary)] leading-relaxed max-w-2xl mx-auto border-t border-[var(--primary)]/10 pt-6">
               {introData?.subtitle || 'We deliver professional services with commitment, competence and clarity.'}
             </p>
           </motion.div>
@@ -178,9 +178,9 @@ export function ServicesPage() {
               className="max-w-5xl mx-auto"
             >
               <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#022683] to-blue-400" />
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
                 <div className="pl-6">
-                  <p className="text-lg text-[#888888] leading-relaxed">
+                  <p className="text-lg text-[var(--secondary)] leading-relaxed">
                     {introData?.introDescription || 'Loading description...'}
                   </p>
                 </div>
@@ -204,7 +204,7 @@ export function ServicesPage() {
                 className="lg:col-span-4"
               >
                 <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden sticky top-32">
-                  <div className="p-6 bg-gradient-to-br from-[#022683] to-blue-600 text-white">
+                  <div className="p-6 bg-gradient-to-br from-[var(--primary)] to-blue-600 text-white">
                     <h3 className="text-2xl font-bold">Service Categories</h3>
                     <p className="text-white/80 text-sm mt-2">
                       Select a category to view details
@@ -225,7 +225,7 @@ export function ServicesPage() {
                           transition={{ duration: 0.4, delay: index * 0.1 }}
                           onClick={() => setActiveService(service._id)}
                           className={`w-full text-left p-4 rounded-2xl mb-3 transition-all duration-300 group relative overflow-hidden ${isActive
-                            ? 'bg-[#022683] text-white shadow-lg shadow-[#022683]/30'
+                            ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/30'
                             : 'bg-gray-50 text-gray-700 hover:bg-gray-100 hover:shadow-md'
                             }`}
                         >
@@ -241,7 +241,7 @@ export function ServicesPage() {
                             <div
                               className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors overflow-hidden ${isActive
                                 ? 'bg-white/20 text-white'
-                                : 'bg-white text-[#022683] group-hover:bg-[#022683] group-hover:text-white'
+                                : 'bg-white text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white'
                                 }`}
                             >
                               {service.icon?.startsWith('data:') ? (
@@ -283,7 +283,7 @@ export function ServicesPage() {
                       className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
                     >
                       {/* Service Header */}
-                      <div className="bg-gradient-to-br from-[#022683] to-blue-600 p-8 text-white">
+                      <div className="bg-gradient-to-br from-[var(--primary)] to-blue-600 p-8 text-white">
                         <div className="flex items-center gap-4 mb-3">
                           <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden">
                             {currentService.icon?.startsWith('data:') ? (
@@ -314,21 +314,21 @@ export function ServicesPage() {
                             >
                               {/* Section Heading */}
                               <div className="flex items-start gap-3 mb-4">
-                                <div className="w-10 h-10 rounded-xl bg-[#022683]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#022683] group-hover:scale-110 transition-all overflow-hidden">
+                                <div className="w-10 h-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--primary)] group-hover:scale-110 transition-all overflow-hidden">
                                   {section.icon?.startsWith('data:') ? (
-                                    <img src={section.icon} alt="icon" className="w-full h-full object-contain p-2 text-[#022683] group-hover:invert transition-all" />
+                                    <img src={section.icon} alt="icon" className="w-full h-full object-contain p-2 text-[var(--primary)] group-hover:invert transition-all" />
                                   ) : (
-                                    <SectionIcon className="h-5 w-5 text-[#022683] group-hover:text-white transition-colors" />
+                                    <SectionIcon className="h-5 w-5 text-[var(--primary)] group-hover:text-white transition-colors" />
                                   )}
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#022683] transition-colors pt-1">
+                                <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors pt-1">
                                   {section.heading}
                                 </h3>
                               </div>
 
                               {/* Section Content */}
                               <div className="pl-13">
-                                <p className="text-[#888888] leading-relaxed whitespace-pre-line">
+                                <p className="text-[var(--secondary)] leading-relaxed whitespace-pre-line">
                                   {section.content}
                                 </p>
                               </div>
@@ -366,7 +366,7 @@ export function ServicesPage() {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto"
             >
-              <div className="relative bg-gradient-to-br from-[#022683] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[#022683]/20 overflow-hidden text-center">
+              <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden text-center">
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
                   <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
@@ -385,7 +385,7 @@ export function ServicesPage() {
                       href="/#contact"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#022683] rounded-full hover:bg-gray-100 transition-all shadow-lg font-semibold"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[var(--primary)] rounded-full hover:bg-gray-100 transition-all shadow-lg font-semibold"
                     >
                       Get in Touch
                       <ChevronRight className="h-5 w-5" />
@@ -410,3 +410,4 @@ export function ServicesPage() {
     </div>
   );
 }
+

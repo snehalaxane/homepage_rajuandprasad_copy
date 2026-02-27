@@ -210,7 +210,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
               className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             >
               {/* Header */}
-              <div className="sticky top-0 bg-gradient-to-r from-[#022683] to-[#033aa8] px-8 py-6 flex items-center justify-between z-10">
+              <div className="sticky top-0 bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-8 py-6 flex items-center justify-between z-10">
                 <div>
                   <h2 className="text-2xl font-bold text-white mb-1">Apply for Position</h2>
                   <p className="text-white/80 text-sm">{jobTitle}</p>
@@ -246,7 +246,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                     required
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -261,7 +261,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -277,7 +277,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                     value={formData.mobile}
                     onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
                     maxLength={10}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all"
                     placeholder="Enter 10-digit mobile number"
                   />
                 </div>
@@ -301,12 +301,12 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                     Upload Resume *
                   </label>
                   <label className="block">
-                    <div className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${file ? 'border-green-500 bg-green-50/30' : 'border-gray-300 hover:border-[#022683]'}`}>
-                      <Upload className={`h-10 w-10 mx-auto mb-3 ${file ? 'text-green-500' : 'text-[#888888]'}`} />
+                    <div className={`border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer ${file ? 'border-green-500 bg-green-50/30' : 'border-gray-300 hover:border-[var(--primary)]'}`}>
+                      <Upload className={`h-10 w-10 mx-auto mb-3 ${file ? 'text-green-500' : 'text-[var(--secondary)]'}`} />
                       <p className="text-sm text-gray-900 font-semibold mb-1">
                         {file ? file.name : 'Click to upload or drag and drop'}
                       </p>
-                      <p className="text-xs text-[#888888]">
+                      <p className="text-xs text-[var(--secondary)]">
                         PDF, WORD (Max. 5MB)
                       </p>
                     </div>
@@ -343,7 +343,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all resize-none"
                     placeholder="Tell us why you're interested in this position..."
                   />
                 </div>
@@ -362,7 +362,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 bg-[#022683] hover:bg-[#011952] text-white h-10 rounded-xl"
+                    className="flex-1 bg-[var(--primary)] hover:bg-[#011952] text-white h-10 rounded-xl"
                   >
                     {submitting ? 'Sending Request...' : 'Apply Now'}
                   </Button>
@@ -387,13 +387,13 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                       </div>
                     ) : (
                       <>
-                        <div className="w-16 h-16 bg-[#022683]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                          <Mail className="w-8 h-8 text-[#022683]" />
+                        <div className="w-16 h-16 bg-[var(--primary)]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                          <Mail className="w-8 h-8 text-[var(--primary)]" />
                         </div>
-                        <h3 className="text-2xl font-bold text-[#022683] mb-2">Verify email</h3>
-                        <p className="text-[#888888] mb-8 text-sm leading-relaxed">
+                        <h3 className="text-2xl font-bold text-[var(--primary)] mb-2">Verify email</h3>
+                        <p className="text-[var(--secondary)] mb-8 text-sm leading-relaxed">
                           Enter the 6-digit code sent to<br />
-                          <span className="text-[#022683] font-semibold">{formData.email}</span>
+                          <span className="text-[var(--primary)] font-semibold">{formData.email}</span>
                         </p>
 
                         <form onSubmit={handleVerifyAndSubmit} className="space-y-6">
@@ -407,7 +407,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                                   setOtp(e.target.value.replace(/\D/g, ''));
                                   if (verificationError) setVerificationError('');
                                 }}
-                                className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[#022683]'
+                                className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[var(--primary)]'
                                   }`}
                                 placeholder="000000"
                               />
@@ -423,7 +423,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                             <Button
                               type="submit"
                               disabled={isVerifying || otp.length !== 6}
-                              className="w-full py-4 bg-[#022683] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                              className="w-full py-4 bg-[var(--primary)] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                             >
                               {isVerifying ? (
                                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -436,15 +436,15 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                             <button
                               type="button"
                               onClick={() => { setShowOtpModal(false); setOtp(''); setVerificationError(''); }}
-                              className="text-sm font-semibold text-[#888888] hover:text-[#022683] transition-colors"
+                              className="text-sm font-semibold text-[var(--secondary)] hover:text-[var(--primary)] transition-colors"
                             >
                               Cancel
                             </button>
                           </div>
                         </form>
 
-                        <p className="mt-8 text-xs text-[#888888]">
-                          Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[#022683] font-bold hover:underline">Resend</button>
+                        <p className="mt-8 text-xs text-[var(--secondary)]">
+                          Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[var(--primary)] font-bold hover:underline">Resend</button>
                         </p>
                       </>
                     )}
@@ -553,7 +553,7 @@ export function CareersPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#022683]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--primary)]"></div>
       </div>
     );
   }
@@ -562,7 +562,7 @@ export function CareersPage() {
     <>
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -571,19 +571,19 @@ export function CareersPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-[#888888] mb-4">
-                <a href="#home" className="hover:text-[#022683] transition-colors">Home</a>
+              <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
+                <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[#022683] font-semibold">Careers</span>
+                <span className="text-[var(--primary)] font-semibold">Careers</span>
               </div>
 
               {/* Title */}
-              <h1 className="text-5xl lg:text-6xl font-bold text-[#022683] mb-6">
+              <h1 className="text-5xl lg:text-6xl font-bold text-[var(--primary)] mb-6">
                 {careerIntro?.title || 'Careers'}
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg lg:text-xl text-[#888888] leading-relaxed">
+              <p className="text-lg lg:text-xl text-[var(--secondary)] leading-relaxed">
                 {careerIntro?.subtitle || 'Join a team built on professionalism, growth, and integrity.'}
               </p>
             </motion.div>
@@ -600,11 +600,11 @@ export function CareersPage() {
               className="max-w-4xl mx-auto"
             >
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 lg:p-12">
-                <div className="border-l-4 border-[#022683] pl-6">
+                <div className="border-l-4 border-[var(--primary)] pl-6">
                   <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
                     Build Your Career with Raju & Prasad
                   </h2>
-                  <div className="space-y-4 text-base lg:text-lg text-[#888888] leading-relaxed">
+                  <div className="space-y-4 text-base lg:text-lg text-[var(--secondary)] leading-relaxed">
                     {careerIntro?.description ? (
                       careerIntro.description.split('\n').map((para, idx) => (
                         para.trim() && <p key={idx}>{para}</p>
@@ -633,10 +633,10 @@ export function CareersPage() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="text-center mb-12"
               >
-                <h2 className="text-3xl lg:text-4xl font-bold text-[#022683] mb-4">
+                <h2 className="text-3xl lg:text-4xl font-bold text-[var(--primary)] mb-4">
                   Current Openings
                 </h2>
-                <p className="text-lg text-[#888888]">
+                <p className="text-lg text-[var(--secondary)]">
                   Explore opportunities to join our growing team
                 </p>
               </motion.div>
@@ -651,13 +651,13 @@ export function CareersPage() {
                 <div className="flex flex-col md:flex-row gap-4 items-center mb-6">
                   {/* Search */}
                   <div className="relative flex-1 w-full">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888]" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
                     <input
                       type="text"
                       placeholder="Search openings..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
                     />
                   </div>
                 </div>
@@ -669,8 +669,8 @@ export function CareersPage() {
                       key={category}
                       onClick={() => setSelectedCategory(category)}
                       className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${selectedCategory === category
-                        ? 'bg-[#022683] text-white shadow-lg'
-                        : 'bg-gray-100 text-[#888888] hover:bg-gray-200'
+                        ? 'bg-[var(--primary)] text-white shadow-lg'
+                        : 'bg-gray-100 text-[var(--secondary)] hover:bg-gray-200'
                         }`}
                     >
                       {category}
@@ -688,8 +688,8 @@ export function CareersPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                     className={`bg-white rounded-2xl shadow-lg border-2 transition-all overflow-hidden ${expandedId === opening._id
-                      ? 'border-[#022683] shadow-2xl'
-                      : 'border-gray-100 hover:border-[#022683]/30'
+                      ? 'border-[var(--primary)] shadow-2xl'
+                      : 'border-gray-100 hover:border-[var(--primary)]/30'
                       }`}
                   >
                     {/* Accordion Header */}
@@ -698,7 +698,7 @@ export function CareersPage() {
                       className="w-full px-8 py-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"
                     >
                       <div className="flex items-center gap-4 flex-1 text-left">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#022683] to-[#033aa8] flex items-center justify-center flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0">
                           <Briefcase className="h-6 w-6 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -706,20 +706,20 @@ export function CareersPage() {
                             {opening.role}
                           </h3>
                           {opening.shortDescription && (
-                            <p className="text-sm text-[#888888] mb-1">
+                            <p className="text-sm text-[var(--secondary)] mb-1">
                               {opening.shortDescription}
                             </p>
                           )}
                           <div className="flex flex-wrap gap-3 mt-3">
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#022683]">
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)]">
                               <MapPin className="h-3 w-3" />
                               {opening.location}
                             </span>
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#022683]">
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)]">
                               <Clock className="h-3 w-3" />
                               {opening.experience}
                             </span>
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#022683]">
+                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)]">
                               <Users className="h-3 w-3" />
                               {opening.employmentType}
                             </span>
@@ -727,13 +727,13 @@ export function CareersPage() {
                         </div>
                       </div>
                       <div className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${expandedId === opening._id
-                        ? 'bg-[#022683] border-[#022683]'
-                        : 'border-gray-300 hover:border-[#022683]'
+                        ? 'bg-[var(--primary)] border-[var(--primary)]'
+                        : 'border-gray-300 hover:border-[var(--primary)]'
                         }`}>
                         {expandedId === opening._id ? (
                           <Minus className="h-5 w-5 text-white" />
                         ) : (
-                          <Plus className="h-5 w-5 text-[#888888]" />
+                          <Plus className="h-5 w-5 text-[var(--secondary)]" />
                         )}
                       </div>
                     </button>
@@ -756,7 +756,7 @@ export function CareersPage() {
                                 <h4 className="text-lg font-bold text-gray-900 mb-3">
                                   About the Role
                                 </h4>
-                                <p className="text-[#888888] leading-relaxed">
+                                <p className="text-[var(--secondary)] leading-relaxed">
                                   {opening.description}
                                 </p>
                               </div>
@@ -770,8 +770,8 @@ export function CareersPage() {
                                   <ul className="space-y-2">
                                     {opening.requirements.split('\n').map((req, idx) => (
                                       req.trim() && (
-                                        <li key={idx} className="flex items-start gap-2 text-[#888888]">
-                                          <span className="w-1.5 h-1.5 rounded-full bg-[#022683] mt-2 flex-shrink-0" />
+                                        <li key={idx} className="flex items-start gap-2 text-[var(--secondary)]">
+                                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mt-2 flex-shrink-0" />
                                           <span>{req}</span>
                                         </li>
                                       )
@@ -789,8 +789,8 @@ export function CareersPage() {
                                   <ul className="space-y-2">
                                     {opening.responsibilities.split('\n').map((resp, idx) => (
                                       resp.trim() && (
-                                        <li key={idx} className="flex items-start gap-2 text-[#888888]">
-                                          <span className="w-1.5 h-1.5 rounded-full bg-[#022683] mt-2 flex-shrink-0" />
+                                        <li key={idx} className="flex items-start gap-2 text-[var(--secondary)]">
+                                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--primary)] mt-2 flex-shrink-0" />
                                           <span>{resp}</span>
                                         </li>
                                       )
@@ -802,29 +802,29 @@ export function CareersPage() {
 
                             {/* Right Side - Sticky CTA Card */}
                             <div className="lg:col-span-1">
-                              <div className="sticky top-24 bg-gradient-to-br from-[#022683]/5 to-blue-50/30 rounded-2xl border-2 border-[#022683]/20 p-6 space-y-4">
+                              <div className="sticky top-24 bg-gradient-to-br from-[var(--primary)]/5 to-blue-50/30 rounded-2xl border-2 border-[var(--primary)]/20 p-6 space-y-4">
                                 <h4 className="text-lg font-bold text-gray-900">
                                   Ready to Apply?
                                 </h4>
-                                <p className="text-sm text-[#888888]">
+                                <p className="text-sm text-[var(--secondary)]">
                                   Join our team and be part of our legacy of excellence.
                                 </p>
 
                                 <Button
                                   onClick={() => handleApply(opening.role)}
-                                  className="w-full bg-[#022683] hover:bg-[#011952] text-white shadow-lg hover:shadow-xl transition-all h-10 rounded-xl"
+                                  className="w-full bg-[var(--primary)] hover:bg-[#011952] text-white shadow-lg hover:shadow-xl transition-all h-10 rounded-xl"
                                 >
                                   <Briefcase className="mr-2 h-4 w-4" />
                                   Apply for Job
                                 </Button>
 
                                 <div className="pt-4 border-t border-gray-200">
-                                  <p className="text-xs text-[#888888] mb-2 font-semibold">
+                                  <p className="text-xs text-[var(--secondary)] mb-2 font-semibold">
                                     Or send your resume to:
                                   </p>
                                   <a
                                     href="mailto:careers@rajuprasad.com"
-                                    className="flex items-center gap-2 text-sm font-semibold text-[#022683] hover:text-[#011952] transition-colors"
+                                    className="flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:text-[#011952] transition-colors"
                                   >
                                     <Mail className="h-4 w-4" />
                                     careers@rajuprasad.com
@@ -848,12 +848,12 @@ export function CareersPage() {
                   className="text-center py-16"
                 >
                   <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
-                    <Search className="h-12 w-12 text-[#888888]" />
+                    <Search className="h-12 w-12 text-[var(--secondary)]" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-3">
                     No openings found
                   </h3>
-                  <p className="text-[#888888] mb-6">
+                  <p className="text-[var(--secondary)] mb-6">
                     Try adjusting your search criteria
                   </p>
                   <button
@@ -861,7 +861,7 @@ export function CareersPage() {
                       setSearchQuery('');
                       setSelectedCategory('All');
                     }}
-                    className="px-6 py-3 bg-[#022683] text-white rounded-xl font-semibold hover:bg-[#011952] transition-all"
+                    className="px-6 py-3 bg-[var(--primary)] text-white rounded-xl font-semibold hover:bg-[#011952] transition-all"
                   >
                     Clear Filters
                   </button>
@@ -881,3 +881,4 @@ export function CareersPage() {
     </>
   );
 }
+

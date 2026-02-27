@@ -6,7 +6,7 @@ const slides = [
   {
     title: 'Proactive and Timely Advice',
     description: 'Expert guidance on accounting, taxation, auditing and business matters',
-    gradient: '#022683',
+    gradient: 'var(--primary)',
   },
   {
     title: 'Building Strong Relationships',

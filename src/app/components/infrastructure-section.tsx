@@ -28,7 +28,7 @@ export function InfrastructureSection() {
   return (
     <section id="infrastructure" className="relative py-24 overflow-hidden">
       {/* Dark background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#022683] via-[#033099] to-[#022683]">
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)] via-[#033099] to-[var(--primary)]">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjwvc3ZnPg==')] opacity-30" />
       </div>
 
@@ -134,7 +134,7 @@ export function InfrastructureSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 1.2 }}
-                className="absolute -top-4 -right-4 bg-white text-[#022683] px-6 py-3 rounded-2xl shadow-xl"
+                className="absolute -top-4 -right-4 bg-white text-[var(--primary)] px-6 py-3 rounded-2xl shadow-xl"
               >
                 <div className="text-2xl font-bold">7+</div>
                 <div className="text-sm">Office Locations</div>

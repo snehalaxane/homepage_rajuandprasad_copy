@@ -23,8 +23,8 @@ export function IndiaMap() {
   return (
     <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-gray-200/50 hover:shadow-2xl transition-shadow">
       <div className="mb-6">
-        <h3 className="text-2xl font-bold text-[#022683] mb-2">Our Presence in India</h3>
-        <p className="text-[#888888]">Serving clients across major cities</p>
+        <h3 className="text-2xl font-bold text-[var(--primary)] mb-2">Our Presence in India</h3>
+        <p className="text-[var(--secondary)]">Serving clients across major cities</p>
       </div>
 
       <div className="relative max-w-md mx-auto">
@@ -61,7 +61,7 @@ export function IndiaMap() {
               <div 
                 className={`w-4 h-4 rounded-full transition-all duration-300 ${
                   hoveredCity === city.name 
-                    ? 'bg-[#022683] shadow-lg shadow-[#022683]/50' 
+                    ? 'bg-[var(--primary)] shadow-lg shadow-[var(--primary)]/50' 
                     : 'bg-[#0445c5] shadow-md'
                 }`}
               />
@@ -73,10 +73,10 @@ export function IndiaMap() {
                   opacity: hoveredCity === city.name ? 1 : 0,
                   y: hoveredCity === city.name ? 0 : 10,
                 }}
-                className="absolute left-1/2 -translate-x-1/2 -top-10 bg-[#022683] text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap pointer-events-none shadow-xl z-10"
+                className="absolute left-1/2 -translate-x-1/2 -top-10 bg-[var(--primary)] text-white px-3 py-1.5 rounded-lg text-sm whitespace-nowrap pointer-events-none shadow-xl z-10"
               >
                 {city.name}
-                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-[#022683]" />
+                <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-[var(--primary)]" />
               </motion.div>
 
               {/* Glow effect on hover */}
@@ -85,7 +85,7 @@ export function IndiaMap() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 2.5, opacity: 0 }}
                   transition={{ duration: 0.6, repeat: Infinity }}
-                  className="absolute inset-0 rounded-full bg-[#022683]"
+                  className="absolute inset-0 rounded-full bg-[var(--primary)]"
                 />
               )}
             </motion.div>
@@ -105,8 +105,8 @@ export function IndiaMap() {
             onMouseLeave={() => setHoveredCity(null)}
             className={`px-3 py-1.5 rounded-full text-sm cursor-pointer transition-all ${
               hoveredCity === city.name
-                ? 'bg-[#022683] text-white shadow-lg shadow-[#022683]/30'
-                : 'bg-blue-50 text-[#022683] hover:bg-blue-100'
+                ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/30'
+                : 'bg-blue-50 text-[var(--primary)] hover:bg-blue-100'
             }`}
           >
             {city.name}

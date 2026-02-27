@@ -82,8 +82,8 @@ export function AlumniPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-[#022683] border-t-transparent rounded-full animate-spin" />
-          <p className="text-[#022683] font-semibold">Loading alumni profiles...</p>
+          <div className="w-12 h-12 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
+          <p className="text-[var(--primary)] font-semibold">Loading alumni profiles...</p>
         </div>
       </div>
     );
@@ -93,7 +93,7 @@ export function AlumniPage() {
     <>
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -102,22 +102,22 @@ export function AlumniPage() {
               className="max-w-5xl mx-auto text-center"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center justify-center gap-2 text-sm text-[#888888] mb-6">
-                <a href="#home" className="hover:text-[#022683] transition-colors">Home</a>
+              <div className="flex items-center justify-center gap-2 text-sm text-[var(--secondary)] mb-6">
+                <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="hover:text-[#022683] transition-colors cursor-pointer">Think Tank</span>
+                <span className="hover:text-[var(--primary)] transition-colors cursor-pointer">Think Tank</span>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[#022683] font-semibold">Alumni</span>
+                <span className="text-[var(--primary)] font-semibold">Alumni</span>
               </div>
 
               {/* Title & Subtitle - Respecting the enabled flag */}
               {intro?.enabled !== false && (
                 <>
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[#022683] mb-8 leading-tight">
+                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[var(--primary)] mb-8 leading-tight">
                     {intro?.title || 'Our Alumni Students are spread across Industry Segments.'}
                   </h1>
 
-                  <div className="space-y-4 text-lg text-[#888888] leading-relaxed max-w-4xl mx-auto whitespace-pre-wrap">
+                  <div className="space-y-4 text-lg text-[var(--secondary)] leading-relaxed max-w-4xl mx-auto whitespace-pre-wrap">
                     {intro?.subtitle ? (
                       <p>{intro.subtitle}</p>
                     ) : (
@@ -150,23 +150,23 @@ export function AlumniPage() {
               <div className="flex flex-col lg:flex-row gap-4 items-center">
                 {/* Search */}
                 <div className="relative flex-1 w-full">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888]" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
                   <input
                     type="text"
                     placeholder="Search name / company..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
                   />
                 </div>
 
                 {/* Industry Filter */}
                 <div className="relative w-full lg:w-auto min-w-[200px]">
-                  <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888] pointer-events-none" />
+                  <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)] pointer-events-none" />
                   <select
                     value={selectedIndustry}
                     onChange={(e) => setSelectedIndustry(e.target.value)}
-                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
                   >
                     {industries.map(industry => (
                       industry && (
@@ -181,11 +181,11 @@ export function AlumniPage() {
 
                 {/* Sort Order */}
                 <div className="relative w-full lg:w-auto min-w-[180px]">
-                  <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888] pointer-events-none" />
+                  <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)] pointer-events-none" />
                   <select
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
-                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
                   >
                     <option value="A-Z">A - Z</option>
                     <option value="Z-A">Z - A</option>
@@ -196,7 +196,7 @@ export function AlumniPage() {
 
               {/* Results Count */}
               <div className="mt-4 pt-4 border-t border-gray-100">
-                <p className="text-sm text-[#888888] font-semibold">
+                <p className="text-sm text-[var(--secondary)] font-semibold">
                   Showing {filteredAlumni.length} of {alumniData.length} alumni
                 </p>
               </div>
@@ -211,20 +211,20 @@ export function AlumniPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 border-l-4 border-l-[#022683] overflow-hidden transition-all group"
+                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 border-l-4 border-l-[var(--primary)] overflow-hidden transition-all group"
                 >
                   <div className="p-6">
                     {/* Header Icon */}
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#022683] to-[#033aa8] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                       <User className="h-7 w-7 text-white" />
                     </div>
 
                     {/* Name */}
                     <div className="mb-4">
-                      <p className="text-xs font-semibold text-[#888888] uppercase tracking-wider mb-1">
+                      <p className="text-xs font-semibold text-[var(--secondary)] uppercase tracking-wider mb-1">
                         Name
                       </p>
-                      <h3 className="text-xl font-bold text-[#022683] group-hover:text-[#011952] transition-colors">
+                      <h3 className="text-xl font-bold text-[var(--primary)] group-hover:text-[#011952] transition-colors">
                         {alumni.name}
                       </h3>
                     </div>
@@ -232,9 +232,9 @@ export function AlumniPage() {
                     {/* Company */}
                     <div className="mb-4">
                       <div className="flex items-start gap-2">
-                        <Building2 className="h-4 w-4 text-[#888888] mt-1 flex-shrink-0" />
+                        <Building2 className="h-4 w-4 text-[var(--secondary)] mt-1 flex-shrink-0" />
                         <div className="flex-1">
-                          <p className="text-xs font-semibold text-[#888888] uppercase tracking-wider mb-1">
+                          <p className="text-xs font-semibold text-[var(--secondary)] uppercase tracking-wider mb-1">
                             Company
                           </p>
                           <p className="text-base font-semibold text-gray-900">
@@ -247,9 +247,9 @@ export function AlumniPage() {
                     {/* Designation */}
                     <div className="mb-4">
                       <div className="flex items-start gap-2">
-                        <Briefcase className="h-4 w-4 text-[#888888] mt-1 flex-shrink-0" />
+                        <Briefcase className="h-4 w-4 text-[var(--secondary)] mt-1 flex-shrink-0" />
                         <div className="flex-1">
-                          <p className="text-xs font-semibold text-[#888888] uppercase tracking-wider mb-1">
+                          <p className="text-xs font-semibold text-[var(--secondary)] uppercase tracking-wider mb-1">
                             Designation
                           </p>
                           <p className="text-base font-semibold text-gray-900">
@@ -262,7 +262,7 @@ export function AlumniPage() {
                     {/* Industry Tag */}
                     {alumni.industry && (
                       <div className="pt-4 border-t border-gray-100">
-                        <span className="inline-flex items-center px-3 py-1 bg-[#022683]/5 text-[#022683] text-xs font-semibold rounded-full">
+                        <span className="inline-flex items-center px-3 py-1 bg-[var(--primary)]/5 text-[var(--primary)] text-xs font-semibold rounded-full">
                           {alumni.industry}
                         </span>
                       </div>
@@ -281,12 +281,12 @@ export function AlumniPage() {
                 className="text-center py-20"
               >
                 <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
-                  <Search className="h-12 w-12 text-[#888888]" />
+                  <Search className="h-12 w-12 text-[var(--secondary)]" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">
                   No alumni found
                 </h3>
-                <p className="text-[#888888] mb-6">
+                <p className="text-[var(--secondary)] mb-6">
                   Try adjusting your search or filter criteria
                 </p>
                 <button
@@ -294,7 +294,7 @@ export function AlumniPage() {
                     setSearchQuery('');
                     setSelectedIndustry('All');
                   }}
-                  className="px-6 py-3 bg-[#022683] text-white rounded-xl font-semibold hover:bg-[#011952] transition-all"
+                  className="px-6 py-3 bg-[var(--primary)] text-white rounded-xl font-semibold hover:bg-[#011952] transition-all"
                 >
                   Clear Filters
                 </button>
@@ -308,3 +308,4 @@ export function AlumniPage() {
     </>
   );
 }
+

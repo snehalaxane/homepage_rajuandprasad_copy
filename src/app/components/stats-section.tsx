@@ -116,3 +116,4 @@ export function StatsSection() {
     </section>
   );
 }
+

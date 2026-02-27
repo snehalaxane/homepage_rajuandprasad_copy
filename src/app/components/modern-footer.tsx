@@ -67,7 +67,7 @@ export function ModernFooter() {
   if (loading) {
     return (
       <footer className="bg-[#1A1C20] py-12 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-[#022683] animate-spin" />
+        <Loader2 className="w-8 h-8 text-[var(--primary)] animate-spin" />
       </footer>
     );
   }
@@ -106,7 +106,7 @@ export function ModernFooter() {
                   className="h-12 w-auto brightness-0 invert object-contain"
                 />
               </div>
-              <p className="text-[#888888] leading-relaxed mb-6">
+              <p className="text-[var(--secondary)] leading-relaxed mb-6">
                 {footerContent?.description || 'Raju and Prasad is one of the firms of Chartered Accountants in Hyderabad with experienced & dedicated Chartered Accountant Professionals.'}
               </p>
               {/* Social Links */}
@@ -120,10 +120,10 @@ export function ModernFooter() {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-[#888888]/20 hover:bg-[#022683] flex items-center justify-center transition-all hover:scale-110"
+                      className="w-10 h-10 rounded-full bg-[var(--secondary)]/20 hover:bg-[var(--primary)] flex items-center justify-center transition-all hover:scale-110"
                       aria-label={key}
                     >
-                      <Icon className="h-5 w-5 text-[#888888] hover:text-white transition-colors" />
+                      <Icon className="h-5 w-5 text-[var(--secondary)] hover:text-white transition-colors" />
                     </a>
                   );
                 })}
@@ -143,9 +143,9 @@ export function ModernFooter() {
                   <li key={link._id}>
                     <a
                       href={link.url}
-                      className="text-[#888888] hover:text-[#022683] transition-colors inline-flex items-center group"
+                      className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors inline-flex items-center group"
                     >
-                      <span className="w-0 group-hover:w-2 h-0.5 bg-[#022683] mr-0 group-hover:mr-2 transition-all duration-300" />
+                      <span className="w-0 group-hover:w-2 h-0.5 bg-[var(--primary)] mr-0 group-hover:mr-2 transition-all duration-300" />
                       {link.title}
                     </a>
                   </li>
@@ -168,9 +168,9 @@ export function ModernFooter() {
                     <li key={lIdx}>
                       <a
                         href={link.href}
-                        className="text-[#888888] hover:text-[#022683] transition-colors inline-flex items-center group"
+                        className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors inline-flex items-center group"
                       >
-                        <span className="w-0 group-hover:w-2 h-0.5 bg-[#022683] mr-0 group-hover:mr-2 transition-all duration-300" />
+                        <span className="w-0 group-hover:w-2 h-0.5 bg-[var(--primary)] mr-0 group-hover:mr-2 transition-all duration-300" />
                         {link.label}
                       </a>
                     </li>
@@ -189,23 +189,23 @@ export function ModernFooter() {
               <h3 className="text-xl font-bold mb-6 text-white text-uppercase tracking-wider">{footerContact?.sectionTitle || 'Contact Us'}</h3>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-[#888888] mt-0.5 flex-shrink-0" />
-                  <span className="text-[#888888] text-sm whitespace-pre-line">
+                  <MapPin className="h-5 w-5 text-[var(--secondary)] mt-0.5 flex-shrink-0" />
+                  <span className="text-[var(--secondary)] text-sm whitespace-pre-line">
                     {footerContact?.address || 'Hyderabad, India'}
                   </span>
                 </li>
                 {footerContact?.phone && (
                   <li className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-[#888888] flex-shrink-0" />
-                    <a href={`tel:${footerContact.phone.replace(/\s/g, '')}`} className="text-[#888888] hover:text-[#022683] transition-colors text-sm">
+                    <Phone className="h-5 w-5 text-[var(--secondary)] flex-shrink-0" />
+                    <a href={`tel:${footerContact.phone.replace(/\s/g, '')}`} className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors text-sm">
                       {footerContact.phone}
                     </a>
                   </li>
                 )}
                 {footerContact?.email && (
                   <li className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-[#888888] flex-shrink-0" />
-                    <a href={`mailto:${footerContact.email}`} className="text-[#888888] hover:text-[#022683] transition-colors text-sm">
+                    <Mail className="h-5 w-5 text-[var(--secondary)] flex-shrink-0" />
+                    <a href={`mailto:${footerContact.email}`} className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors text-sm">
                       {footerContact.email}
                     </a>
                   </li>
@@ -216,10 +216,10 @@ export function ModernFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-[#888888]/20">
+        <div className="border-t border-[var(--secondary)]/20">
           <div className="container mx-auto px-6 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-[#888888] text-sm text-center md:text-left">
+              <p className="text-[var(--secondary)] text-sm text-center md:text-left">
                 {footerContent?.copyright || 'Raju & Prasad'}.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
@@ -227,7 +227,7 @@ export function ModernFooter() {
                   <a
                     key={page._id}
                     href={`#${page.pageSlug.startsWith('/') ? page.pageSlug.slice(1) : page.pageSlug}`}
-                    className="text-[#888888] hover:text-[#022683] text-sm transition-colors"
+                    className="text-[var(--secondary)] hover:text-[var(--primary)] text-sm transition-colors"
                   >
                     {page.pageTitle}
                   </a>

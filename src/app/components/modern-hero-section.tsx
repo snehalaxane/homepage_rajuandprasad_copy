@@ -45,8 +45,8 @@ export function ModernHeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background with Gradient and Pattern - #888888 DOMINANT & ATTRACTIVE */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#888888] via-[#888888]/95 to-[#888888]/90">
+      {/* Background with Gradient and Pattern - var(--secondary) DOMINANT & ATTRACTIVE */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)] via-[var(--secondary)]/95 to-[var(--secondary)]/90">
         {/* Subtle Grid Pattern */}
         <div
           className="absolute inset-0 opacity-[0.06]"
@@ -71,7 +71,7 @@ export function ModernHeroSection() {
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-gradient-to-br from-[#aaaaaa]/30 to-[#888888]/20 blur-3xl"
+            className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-gradient-to-br from-[#aaaaaa]/30 to-[var(--secondary)]/20 blur-3xl"
           />
           <motion.div
             animate={{
@@ -83,7 +83,7 @@ export function ModernHeroSection() {
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-gradient-to-tr from-[#666666]/30 to-[#888888]/20 blur-3xl"
+            className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-gradient-to-tr from-[#666666]/30 to-[var(--secondary)]/20 blur-3xl"
           />
 
           {/* Additional decorative circles for visual interest */}
@@ -114,7 +114,7 @@ export function ModernHeroSection() {
         </div>
 
         {/* Overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#888888]/80 via-transparent to-[#888888]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--secondary)]/80 via-transparent to-[var(--secondary)]/80" />
       </div>
 
       {/* Content */}
@@ -134,9 +134,9 @@ export function ModernHeroSection() {
               className="inline-flex items-center gap-3 mb-8"
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#888888] to-[#022683] blur-xl opacity-50 rounded-full" />
-                <div className="relative bg-white rounded-full px-6 py-3 shadow-2xl border-2 border-[#022683]/20">
-                  <span className="text-6xl font-bold bg-gradient-to-br from-[#888888] to-[#022683] bg-clip-text text-transparent">
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] blur-xl opacity-50 rounded-full" />
+                <div className="relative bg-white rounded-full px-6 py-3 shadow-2xl border-2 border-[var(--primary)]/20">
+                  <span className="text-6xl font-bold bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent">
                     {hero?.highlightNumber}
                   </span>
                 </div>
@@ -180,7 +180,7 @@ export function ModernHeroSection() {
             >
               <Button
                 onClick={() => window.location.href = hero?.ctas?.[0]?.link}
-                className="px-8 py-6 text-lg bg-[#022683] hover:bg-[#022683]/90 text-white rounded-xl shadow-2xl hover:shadow-[#022683]/30 transition-all group"
+                className="px-8 py-6 text-lg bg-[var(--primary)] hover:bg-[var(--primary)]/90 text-white rounded-xl shadow-2xl hover:shadow-[var(--primary)]/30 transition-all group"
               >
                 {hero?.ctas?.[0]?.text}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -188,7 +188,7 @@ export function ModernHeroSection() {
               <Button
                 onClick={() => window.location.href = hero?.ctas?.[1]?.link}
                 variant="outline"
-                className="px-8 py-6 text-lg bg-white border-2 border-white text-[#888888] hover:bg-white/90 hover:text-[#022683] rounded-xl transition-all shadow-xl"
+                className="px-8 py-6 text-lg bg-white border-2 border-white text-[var(--secondary)] hover:bg-white/90 hover:text-[var(--primary)] rounded-xl transition-all shadow-xl"
               >
                 {hero?.ctas?.[1]?.text}
               </Button>
@@ -228,7 +228,7 @@ export function ModernHeroSection() {
             {/* Premium Card Container - GLASSMORPHIC */}
             <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 overflow-hidden">
               {/* Animated Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-[#022683]/15 rounded-3xl -z-10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-[var(--primary)]/15 rounded-3xl -z-10" />
 
               {/* Card Header */}
               <div className="mb-6 text-center">
@@ -250,7 +250,7 @@ export function ModernHeroSection() {
                   />
 
                   {locations.filter(loc => loc.latitude && loc.longitude).map((loc) => {
-                    const pinColor = loc.pinColor || '#022683';
+                    const pinColor = loc.pinColor || 'var(--primary)';
                     const label = loc.tooltip || loc.city || '';
                     const isLeft = parseFloat(loc.longitude) < 78.9629; // Approx center of India
 
@@ -362,7 +362,7 @@ export function ModernHeroSection() {
 
               {/* Legend */}
               <div className="mt-6 flex items-center justify-center gap-2 text-sm text-black">
-                <MapPin className="h-4 w-4 text-[#022683]" />
+                <MapPin className="h-4 w-4 text-[var(--primary)]" />
                 <span>Hover over pins to view location details</span>
               </div>
             </div>
@@ -372,4 +372,5 @@ export function ModernHeroSection() {
     </section>
   );
 }
+
 

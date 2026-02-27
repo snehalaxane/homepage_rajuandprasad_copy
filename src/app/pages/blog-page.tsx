@@ -112,8 +112,8 @@ export function BlogPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-[#022683] border-t-transparent rounded-full animate-spin" />
-          <p className="text-[#022683] font-semibold">Loading insights...</p>
+          <div className="w-12 h-12 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
+          <p className="text-[var(--primary)] font-semibold">Loading insights...</p>
         </div>
       </div>
     );
@@ -124,7 +124,7 @@ export function BlogPage() {
 
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[#022683]/5 to-blue-50/20 border-b border-gray-100">
+        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -133,32 +133,32 @@ export function BlogPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-[#888888] mb-4">
-                <a href="#home" className="hover:text-[#022683] transition-colors">Home</a>
+              <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
+                <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="hover:text-[#022683] transition-colors cursor-pointer">Think Tank</span>
+                <span className="hover:text-[var(--primary)] transition-colors cursor-pointer">Think Tank</span>
                 <ChevronRight className="h-4 w-4" />
                 {selectedPost ? (
                   <>
-                    <a href="#blog" className="hover:text-[#022683] transition-colors">Our Blog</a>
+                    <a href="#blog" className="hover:text-[var(--primary)] transition-colors">Our Blog</a>
                     <ChevronRight className="h-4 w-4" />
-                    <span className="text-[#022683] font-semibold line-clamp-1">{selectedPost.title}</span>
+                    <span className="text-[var(--primary)] font-semibold line-clamp-1">{selectedPost.title}</span>
                   </>
                 ) : (
-                  <span className="text-[#022683] font-semibold">Our Blog</span>
+                  <span className="text-[var(--primary)] font-semibold">Our Blog</span>
                 )}
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl lg:text-6xl font-bold text-[#022683] mb-6 leading-tight">
+              <h1 className="text-4xl lg:text-6xl font-bold text-[var(--primary)] mb-6 leading-tight">
                 {selectedPost ? selectedPost.title : (intro?.title || 'Our Blog')}
               </h1>
 
               {/* Subtitle / Meta */}
               {selectedPost ? (
                 <div className="flex flex-wrap items-center gap-6">
-                  <div className="flex items-center gap-2 text-[#888888]">
-                    <Calendar className="h-5 w-5 text-[#022683]" />
+                  <div className="flex items-center gap-2 text-[var(--secondary)]">
+                    <Calendar className="h-5 w-5 text-[var(--primary)]" />
                     <span className="font-medium">
                       {new Date(selectedPost.publishDate).toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -168,19 +168,19 @@ export function BlogPage() {
                     </span>
                   </div>
                   {selectedPost.author && (
-                    <div className="flex items-center gap-2 text-[#888888]">
-                      <div className="w-8 h-8 rounded-full bg-[#022683] flex items-center justify-center text-white text-xs font-bold uppercase">
+                    <div className="flex items-center gap-2 text-[var(--secondary)]">
+                      <div className="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-xs font-bold uppercase">
                         {selectedPost.author.charAt(0)}
                       </div>
                       <span className="font-medium"> {selectedPost.author}</span>
                     </div>
                   )}
-                  <span className="px-4 py-1.5 bg-[#022683] text-white text-sm font-semibold rounded-full shadow-lg shadow-[#022683]/20">
+                  <span className="px-4 py-1.5 bg-[var(--primary)] text-white text-sm font-semibold rounded-full shadow-lg shadow-[var(--primary)]/20">
                     {selectedPost.category}
                   </span>
                 </div>
               ) : (
-                <p className="text-lg lg:text-xl text-[#888888] leading-relaxed max-w-2xl">
+                <p className="text-lg lg:text-xl text-[var(--secondary)] leading-relaxed max-w-2xl">
                   {intro?.subtitle || 'Insights, updates and articles on tax, audit and regulatory changes.'}
                 </p>
               )}
@@ -208,7 +208,7 @@ export function BlogPage() {
                       {/* Back Button */}
                       <button
                         onClick={() => window.location.hash = '#blog'}
-                        className="flex items-center gap-2 text-[#022683] font-bold hover:gap-3 transition-all group mb-4"
+                        className="flex items-center gap-2 text-[var(--primary)] font-bold hover:gap-3 transition-all group mb-4"
                       >
                         <ArrowLeft className="h-5 w-5" />
                         Back to All Blogs
@@ -229,7 +229,7 @@ export function BlogPage() {
                       <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-12">
                         <div
                           className="prose prose-lg max-w-none text-gray-700 leading-relaxed
-                            prose-headings:text-[#022683] prose-headings:font-bold
+                            prose-headings:text-[var(--primary)] prose-headings:font-bold
                             prose-p:mb-6 prose-strong:text-gray-900
                             prose-ul:list-disc prose-ul:pl-6 prose-li:mb-2"
                           dangerouslySetInnerHTML={{ __html: selectedPost.content }}
@@ -243,7 +243,7 @@ export function BlogPage() {
                               {selectedPost.tags.map((tag, idx) => (
                                 <span
                                   key={idx}
-                                  className="inline-flex items-center gap-1 px-4 py-2 bg-gray-50 text-[#888888] text-sm font-semibold rounded-xl border border-gray-100 hover:bg-[#022683]/5 hover:text-[#022683] transition-all cursor-default"
+                                  className="inline-flex items-center gap-1 px-4 py-2 bg-gray-50 text-[var(--secondary)] text-sm font-semibold rounded-xl border border-gray-100 hover:bg-[var(--primary)]/5 hover:text-[var(--primary)] transition-all cursor-default"
                                 >
                                   <Tag className="h-4 w-4" />
                                   {tag}
@@ -272,7 +272,7 @@ export function BlogPage() {
                         <div className="flex flex-col md:flex-row gap-4">
                           {/* Search */}
                           <div className="relative flex-1">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#888888]" />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
                             <input
                               type="text"
                               placeholder="Search articles..."
@@ -281,7 +281,7 @@ export function BlogPage() {
                                 setSearchQuery(e.target.value);
                                 setCurrentPage(1);
                               }}
-                              className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900"
+                              className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
                             />
                           </div>
 
@@ -292,7 +292,7 @@ export function BlogPage() {
                               setSelectedCategory(e.target.value);
                               setCurrentPage(1);
                             }}
-                            className="px-6 py-3 rounded-xl border-2 border-gray-200 focus:border-[#022683] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                            className="px-6 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
                           >
                             {categories.map(category => (
                               <option key={category} value={category}>{category}</option>
@@ -322,9 +322,9 @@ export function BlogPage() {
                           <div className="p-8">
                             {/* Date Pill */}
                             <div className="flex items-center gap-2 mb-4">
-                              <div className="flex items-center gap-2 px-4 py-2 bg-[#022683]/5 rounded-full">
-                                <Calendar className="h-4 w-4 text-[#022683]" />
-                                <span className="text-sm font-semibold text-[#022683]">
+                              <div className="flex items-center gap-2 px-4 py-2 bg-[var(--primary)]/5 rounded-full">
+                                <Calendar className="h-4 w-4 text-[var(--primary)]" />
+                                <span className="text-sm font-semibold text-[var(--primary)]">
                                   {new Date(post.publishDate).toLocaleDateString('en-US', {
                                     year: 'numeric',
                                     month: 'long',
@@ -333,17 +333,17 @@ export function BlogPage() {
                                 </span>
                               </div>
                               {post.author && (
-                                <span className="text-sm text-[#888888]">By {post.author}</span>
+                                <span className="text-sm text-[var(--secondary)]">By {post.author}</span>
                               )}
                             </div>
 
                             {/* Title */}
-                            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 group-hover:text-[#022683] transition-colors">
+                            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 group-hover:text-[var(--primary)] transition-colors">
                               {post.title}
                             </h2>
 
                             {/* Excerpt */}
-                            <p className="text-[#888888] leading-relaxed mb-6 line-clamp-2">
+                            <p className="text-[var(--secondary)] leading-relaxed mb-6 line-clamp-2">
                               {post.shortDescription}
                             </p>
 
@@ -354,7 +354,7 @@ export function BlogPage() {
                                 {post.tags.map((tag, tagIndex) => (
                                   <span
                                     key={tagIndex}
-                                    className="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-[#888888] text-xs font-semibold rounded-full hover:bg-[#022683]/10 hover:text-[#022683] transition-all"
+                                    className="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-[var(--secondary)] text-xs font-semibold rounded-full hover:bg-[var(--primary)]/10 hover:text-[var(--primary)] transition-all"
                                   >
                                     <Tag className="h-3 w-3" />
                                     {tag}
@@ -365,7 +365,7 @@ export function BlogPage() {
                               {/* Read More Button */}
                               <Button
                                 variant="outline"
-                                className="border-2 border-[#022683] text-[#022683] hover:bg-[#022683] hover:text-white group/btn transition-all"
+                                className="border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white group/btn transition-all"
                                 asChild
                               >
                                 <a href={`#blog/${post._id}`}>
@@ -391,7 +391,7 @@ export function BlogPage() {
                             size="sm"
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1}
-                            className="border-2 border-gray-200 hover:border-[#022683] hover:bg-[#022683] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2"
+                            className="border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2"
                           >
                             <ChevronLeft className="h-4 w-4 mr-1" />
                             Previous
@@ -405,8 +405,8 @@ export function BlogPage() {
                               onClick={() => setCurrentPage(i + 1)}
                               className={
                                 currentPage === i + 1
-                                  ? 'bg-[#022683] hover:bg-[#011952] text-white px-4 py-2'
-                                  : 'border-2 border-gray-200 hover:border-[#022683] hover:bg-[#022683] hover:text-white px-4 py-2'
+                                  ? 'bg-[var(--primary)] hover:bg-[#011952] text-white px-4 py-2'
+                                  : 'border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white px-4 py-2'
                               }
                             >
                               {i + 1}
@@ -418,7 +418,7 @@ export function BlogPage() {
                             size="sm"
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages}
-                            className="border-2 border-gray-200 hover:border-[#022683] hover:bg-[#022683] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2"
+                            className="border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2"
                           >
                             Next
                             <ChevronRight className="h-4 w-4 ml-1" />
@@ -440,7 +440,7 @@ export function BlogPage() {
                 >
                   <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                     {/* Sidebar Header */}
-                    <div className="bg-gradient-to-r from-[#022683] to-[#033aa8] px-6 py-6">
+                    <div className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-6 py-6">
                       <h3 className="text-xl font-bold text-white">Think Tank Links</h3>
                     </div>
 
@@ -460,8 +460,8 @@ export function BlogPage() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
                             className={`flex items-center gap-3 px-4 py-4 rounded-xl mb-2 transition-all group ${isActive
-                              ? 'bg-[#022683] text-white shadow-lg'
-                              : 'hover:bg-[#022683]/5 text-gray-900 hover:text-[#022683]'
+                              ? 'bg-[var(--primary)] text-white shadow-lg'
+                              : 'hover:bg-[var(--primary)]/5 text-gray-900 hover:text-[var(--primary)]'
                               }`}
                           >
                             <span className="text-2xl">{link.icon}</span>
@@ -475,12 +475,12 @@ export function BlogPage() {
 
                     {/* Additional Info */}
                     <div className="px-6 py-6 bg-gradient-to-br from-gray-50 to-blue-50/20 border-t border-gray-100">
-                      <p className="text-sm text-[#888888] leading-relaxed">
+                      <p className="text-sm text-[var(--secondary)] leading-relaxed">
                         Stay updated with our latest insights on tax, audit, and regulatory changes. Subscribe to our newsletter for regular updates.
                       </p>
                       <Button
                         size="sm"
-                        className="mt-4 w-full bg-[#022683] hover:bg-[#011952] text-white"
+                        className="mt-4 w-full bg-[var(--primary)] hover:bg-[#011952] text-white"
                         asChild
                       >
                         <a href="#newsletter">
@@ -502,3 +502,4 @@ export function BlogPage() {
     </>
   );
 }
+

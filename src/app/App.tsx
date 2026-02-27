@@ -57,6 +57,24 @@ export default function App() {
     fetchLegalSlugs();
   }, []);
 
+  useEffect(() => {
+    const fetchTheme = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/settings/theme`);
+        const { primaryColor, secondaryColor } = response.data;
+        if (primaryColor) {
+          document.documentElement.style.setProperty('--primary', primaryColor);
+        }
+        if (secondaryColor) {
+          document.documentElement.style.setProperty('--secondary', secondaryColor);
+        }
+      } catch (err) {
+        console.error('Error fetching theme settings:', err);
+      }
+    };
+    fetchTheme();
+  }, []);
+
   const isLegalPage = legalSlugs.includes(currentPage);
   const isMainPage = mainPages.some(p => currentPage.startsWith(p));
 

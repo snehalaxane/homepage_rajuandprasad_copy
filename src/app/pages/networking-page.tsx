@@ -195,7 +195,7 @@ export function NetworkingPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <Loader2 className="w-12 h-12 text-[#022683] animate-spin" />
+        <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin" />
       </div>
     );
   }
@@ -204,7 +204,7 @@ export function NetworkingPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
 
       {/* Page Header */}
-      <section className="pt-25 pb-10 bg-gradient-to-r from-[#022683]/5 to-[#022683]/10">
+      <section className="pt-25 pb-10 bg-gradient-to-r from-[var(--primary)]/5 to-[var(--primary)]/10">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -213,18 +213,18 @@ export function NetworkingPage() {
           >
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-sm mb-6">
-              <a href="/" className="text-[#888888] hover:text-[#022683] transition-colors">
+              <a href="/" className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors">
                 <Home className="h-4 w-4" />
               </a>
-              <ChevronRight className="h-4 w-4 text-[#888888]" />
-              <span className="text-[#022683] font-semibold">Networking</span>
+              <ChevronRight className="h-4 w-4 text-[var(--secondary)]" />
+              <span className="text-[var(--primary)] font-semibold">Networking</span>
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold text-[#022683] mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-[var(--primary)] mb-4">
               {domesticContent?.pageTitle || 'Networking'}
             </h1>
-            <p className="text-lg text-[#888888] max-w-2xl">
+            <p className="text-lg text-[var(--secondary)] max-w-2xl">
               {domesticContent?.pageSubtitle || 'Connect with us to expand professional collaboration across India.'}
             </p>
           </motion.div>
@@ -247,17 +247,17 @@ export function NetworkingPage() {
                   className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
                 >
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="p-3 bg-[#022683]/10 rounded-xl">
+                    <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
                       {(() => {
                         const Icon = iconMap[domesticContent?.icon] || Network;
-                        return <Icon className="h-6 w-6 text-[#022683]" />;
+                        return <Icon className="h-6 w-6 text-[var(--primary)]" />;
                       })()}
                     </div>
-                    <h2 className="text-2xl font-bold text-[#022683]">
+                    <h2 className="text-2xl font-bold text-[var(--primary)]">
                       {domesticContent?.title || 'Domestic Networking'}
                     </h2>
                   </div>
-                  <p className="text-[#888888] leading-relaxed text-base whitespace-pre-line">
+                  <p className="text-[var(--secondary)] leading-relaxed text-base whitespace-pre-line">
                     {domesticContent?.description || 'Connect with us to expand professional collaboration across India.'}
                   </p>
                 </motion.div>
@@ -272,10 +272,10 @@ export function NetworkingPage() {
                 className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-[#022683]/10 rounded-xl">
-                    <Users className="h-6 w-6 text-[#022683]" />
+                  <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
+                    <Users className="h-6 w-6 text-[var(--primary)]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#022683]">
+                  <h2 className="text-2xl font-bold text-[var(--primary)]">
                     Other Associates
                   </h2>
                 </div>
@@ -290,19 +290,19 @@ export function NetworkingPage() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
-                        className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 hover:bg-[#022683]/5 transition-all duration-300 group border border-transparent hover:border-[#022683]/20"
+                        className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 hover:bg-[var(--primary)]/5 transition-all duration-300 group border border-transparent hover:border-[var(--primary)]/20"
                       >
                         <div className="p-2 bg-white rounded-lg shadow-sm group-hover:shadow-md transition-all">
-                          <Icon className="h-5 w-5 text-[#022683]" />
+                          <Icon className="h-5 w-5 text-[var(--primary)]" />
                         </div>
-                        <span className="text-[#888888] font-medium group-hover:text-[#022683] transition-colors">
+                        <span className="text-[var(--secondary)] font-medium group-hover:text-[var(--primary)] transition-colors">
                           {associate.name}
                         </span>
                       </motion.div>
                     );
                   })}
                   {associates.length === 0 && (
-                    <div className="text-center py-8 text-[#888888] opacity-50 italic">
+                    <div className="text-center py-8 text-[var(--secondary)] opacity-50 italic">
                       No associates listed yet.
                     </div>
                   )}
@@ -320,10 +320,10 @@ export function NetworkingPage() {
             >
               <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="p-3 bg-[#022683]/10 rounded-xl">
-                    <FileText className="h-6 w-6 text-[#022683]" />
+                  <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
+                    <FileText className="h-6 w-6 text-[var(--primary)]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#022683]">
+                  <h2 className="text-2xl font-bold text-[var(--primary)]">
                     Contact for Networking
                   </h2>
                 </div>
@@ -335,7 +335,7 @@ export function NetworkingPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {/* Full Name */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#022683] mb-2">
+                    <label className="block text-sm font-semibold text-[var(--primary)] mb-2">
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -343,28 +343,28 @@ export function NetworkingPage() {
                       required
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#022683] focus:ring-2 focus:ring-[#022683]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter your full name"
                     />
                   </div>
 
                   {/* Organisation */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#022683] mb-2">
+                    <label className="block text-sm font-semibold text-[var(--primary)] mb-2">
                       Organisation
                     </label>
                     <input
                       type="text"
                       value={formData.organisation}
                       onChange={(e) => setFormData({ ...formData, organisation: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#022683] focus:ring-2 focus:ring-[#022683]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter your organisation"
                     />
                   </div>
 
                   {/* Email Address */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#022683] mb-2">
+                    <label className="block text-sm font-semibold text-[var(--primary)] mb-2">
                       Email Address <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -372,14 +372,14 @@ export function NetworkingPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#022683] focus:ring-2 focus:ring-[#022683]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter your email address"
                     />
                   </div>
 
                   {/* Mobile Number */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#022683] mb-2">
+                    <label className="block text-sm font-semibold text-[var(--primary)] mb-2">
                       Mobile Number <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -388,14 +388,14 @@ export function NetworkingPage() {
                       value={formData.mobile}
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
                       maxLength={10}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#022683] focus:ring-2 focus:ring-[#022683]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter 10-digit mobile number"
                     />
                   </div>
 
                   {/* Profile of the Firm */}
                   <div>
-                    <label className="block text-sm font-semibold text-[#022683] mb-2">
+                    <label className="block text-sm font-semibold text-[var(--primary)] mb-2">
                       Profile of the Firm
                     </label>
                     <div className="relative">
@@ -408,15 +408,15 @@ export function NetworkingPage() {
                       />
                       <label
                         htmlFor="profile-upload"
-                        className="flex items-center justify-center gap-3 w-full px-4 py-4 rounded-xl border-2 border-dashed border-gray-300 hover:border-[#022683] cursor-pointer transition-all bg-gray-50 hover:bg-[#022683]/5 group"
+                        className="flex items-center justify-center gap-3 w-full px-4 py-4 rounded-xl border-2 border-dashed border-gray-300 hover:border-[var(--primary)] cursor-pointer transition-all bg-gray-50 hover:bg-[var(--primary)]/5 group"
                       >
-                        <Upload className="h-5 w-5 text-[#888888] group-hover:text-[#022683] transition-colors" />
-                        <span className="text-sm text-[#888888] group-hover:text-[#022683] transition-colors">
+                        <Upload className="h-5 w-5 text-[var(--secondary)] group-hover:text-[var(--primary)] transition-colors" />
+                        <span className="text-sm text-[var(--secondary)] group-hover:text-[var(--primary)] transition-colors">
                           {formData.profile ? formData.profile.name : 'Upload PDF/DOC (max 5MB)'}
                         </span>
                       </label>
                     </div>
-                    <p className="text-xs text-[#888888] mt-2">
+                    <p className="text-xs text-[var(--secondary)] mt-2">
                       Supported formats: PDF, DOC, DOCX
                     </p>
                   </div>
@@ -425,7 +425,7 @@ export function NetworkingPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-[#022683] hover:bg-[#011952] text-white font-bold py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[#022683]/30 flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[var(--primary)] hover:bg-[#011952] text-white font-bold py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[var(--primary)]/30 flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {submitting ? (
                       <>
@@ -464,13 +464,13 @@ export function NetworkingPage() {
               </div>
             ) : (
               <>
-                <div className="w-16 h-16 bg-[#022683]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Mail className="w-8 h-8 text-[#022683]" />
+                <div className="w-16 h-16 bg-[var(--primary)]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Mail className="w-8 h-8 text-[var(--primary)]" />
                 </div>
-                <h3 className="text-2xl font-bold text-[#022683] mb-2">Verify email</h3>
-                <p className="text-[#888888] mb-8 text-sm leading-relaxed">
+                <h3 className="text-2xl font-bold text-[var(--primary)] mb-2">Verify email</h3>
+                <p className="text-[var(--secondary)] mb-8 text-sm leading-relaxed">
                   Enter the 6-digit code sent to<br />
-                  <span className="text-[#022683] font-semibold">{formData.email}</span>
+                  <span className="text-[var(--primary)] font-semibold">{formData.email}</span>
                 </p>
 
                 <form onSubmit={handleVerifyAndSubmit} className="space-y-6">
@@ -484,7 +484,7 @@ export function NetworkingPage() {
                           setOtp(e.target.value.replace(/\D/g, ''));
                           if (verificationError) setVerificationError('');
                         }}
-                        className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[#022683]'
+                        className={`w-full text-center text-4xl font-bold tracking-[0.5em] py-4 border-2 rounded-2xl focus:outline-none transition-all placeholder:text-gray-200 ${verificationError ? 'border-red-500 bg-red-50' : 'border-gray-100 focus:border-[var(--primary)]'
                           }`}
                         placeholder="000000"
                       />
@@ -500,7 +500,7 @@ export function NetworkingPage() {
                     <Button
                       type="submit"
                       disabled={isVerifying || otp.length !== 6}
-                      className="w-full py-4 bg-[#022683] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                      className="w-full py-4 bg-[var(--primary)] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                     >
                       {isVerifying ? (
                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -513,15 +513,15 @@ export function NetworkingPage() {
                     <button
                       type="button"
                       onClick={() => { setShowOtpModal(false); setOtp(''); setVerificationError(''); }}
-                      className="text-sm font-semibold text-[#888888] hover:text-[#022683] transition-colors"
+                      className="text-sm font-semibold text-[var(--secondary)] hover:text-[var(--primary)] transition-colors"
                     >
                       Cancel
                     </button>
                   </div>
                 </form>
 
-                <p className="mt-8 text-xs text-[#888888]">
-                  Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[#022683] font-bold hover:underline">Resend</button>
+                <p className="mt-8 text-xs text-[var(--secondary)]">
+                  Didn't receive the code? <button type="button" onClick={handleSendOtp} className="text-[var(--primary)] font-bold hover:underline">Resend</button>
                 </p>
               </>
             )}
@@ -533,3 +533,4 @@ export function NetworkingPage() {
     </div>
   );
 }
+

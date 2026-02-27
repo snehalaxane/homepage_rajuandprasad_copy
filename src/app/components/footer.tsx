@@ -124,7 +124,7 @@ export function Footer() {
                     href={social.href}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-[#022683] hover:border-[#022683] transition-all group"
+                    className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-[var(--primary)] hover:border-[var(--primary)] transition-all group"
                     aria-label={social.label}
                   >
                     <Icon className="h-5 w-5 text-gray-400 group-hover:text-white transition-colors" />

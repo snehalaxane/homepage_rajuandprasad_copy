@@ -17,8 +17,8 @@ export function ContactNewsletterSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-gray-200/50">
-              <h2 className="text-3xl font-bold text-[#022683] mb-2">Contact Us</h2>
-              <p className="text-[#888888] mb-8">Get in touch with our team</p>
+              <h2 className="text-3xl font-bold text-[var(--primary)] mb-2">Contact Us</h2>
+              <p className="text-[var(--secondary)] mb-8">Get in touch with our team</p>
 
               <div className="space-y-6">
                 {/* Head Office */}
@@ -30,7 +30,7 @@ export function ContactNewsletterSection() {
                   className="bg-gradient-to-br from-blue-50 to-blue-50/50 rounded-2xl p-6 border border-blue-100"
                 >
                   <div className="flex items-start gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-[#022683] flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-[var(--primary)] flex items-center justify-center flex-shrink-0">
                       <MapPin className="h-5 w-5 text-white" />
                     </div>
                     <div>
@@ -54,10 +54,10 @@ export function ContactNewsletterSection() {
                   className="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors group cursor-pointer"
                 >
                   <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                    <Phone className="h-6 w-6 text-[#022683]" />
+                    <Phone className="h-6 w-6 text-[var(--primary)]" />
                   </div>
                   <div>
-                    <div className="text-sm text-[#888888] mb-1">Phone</div>
+                    <div className="text-sm text-[var(--secondary)] mb-1">Phone</div>
                     <div className="font-semibold text-gray-900">+91 40 2331 4657</div>
                   </div>
                 </motion.div>
@@ -71,10 +71,10 @@ export function ContactNewsletterSection() {
                   className="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors group cursor-pointer"
                 >
                   <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                    <Mail className="h-6 w-6 text-[#022683]" />
+                    <Mail className="h-6 w-6 text-[var(--primary)]" />
                   </div>
                   <div>
-                    <div className="text-sm text-[#888888] mb-1">Email</div>
+                    <div className="text-sm text-[var(--secondary)] mb-1">Email</div>
                     <div className="font-semibold text-gray-900">info@rajuprasad.com</div>
                   </div>
                 </motion.div>
@@ -89,7 +89,7 @@ export function ContactNewsletterSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-gradient-to-br from-[#022683] to-[#033099] rounded-3xl p-8 lg:p-10 shadow-xl text-white h-full">
+            <div className="bg-gradient-to-br from-[var(--primary)] to-[#033099] rounded-3xl p-8 lg:p-10 shadow-xl text-white h-full">
               <h2 className="text-3xl font-bold mb-2">Stay Updated</h2>
               <p className="text-blue-100 mb-8">
                 Subscribe to receive updates on tax laws, regulations, and business insights
@@ -146,7 +146,7 @@ export function ContactNewsletterSection() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-white text-[#022683] hover:bg-gray-100 shadow-lg h-12 rounded-xl font-semibold group"
+                    className="w-full bg-white text-[var(--primary)] hover:bg-gray-100 shadow-lg h-12 rounded-xl font-semibold group"
                   >
                     Subscribe Now
                     <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

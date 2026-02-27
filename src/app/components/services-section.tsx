@@ -51,10 +51,10 @@ export function ServicesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#022683] mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-4">
             Our Services
           </h2>
-          <p className="text-lg text-[#888888] max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--secondary)] max-w-2xl mx-auto">
             Comprehensive solutions tailored to meet all your accounting, taxation, and business needs
           </p>
         </motion.div>
@@ -73,32 +73,32 @@ export function ServicesSection() {
                 className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden"
               >
                 {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#022683]/5 to-[#022683]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-[var(--primary)]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 {/* Glow effect */}
-                <div className="absolute -inset-1 bg-[#022683] rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity" />
+                <div className="absolute -inset-1 bg-[var(--primary)] rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity" />
 
                 <div className="relative">
                   {/* Icon */}
                   <motion.div
                     whileHover={{ rotate: 5, scale: 1.1 }}
-                    className="w-14 h-14 rounded-xl bg-[#022683] flex items-center justify-center mb-6 shadow-lg shadow-[#022683]/30 group-hover:shadow-xl group-hover:shadow-[#022683]/40 transition-all"
+                    className="w-14 h-14 rounded-xl bg-[var(--primary)] flex items-center justify-center mb-6 shadow-lg shadow-[var(--primary)]/30 group-hover:shadow-xl group-hover:shadow-[var(--primary)]/40 transition-all"
                   >
                     <Icon className="h-7 w-7 text-white" />
                   </motion.div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#022683] transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[var(--primary)] transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-[#888888] leading-relaxed mb-6">
+                  <p className="text-[var(--secondary)] leading-relaxed mb-6">
                     {service.description}
                   </p>
 
                   {/* Link */}
                   <motion.a
                     href="#"
-                    className="inline-flex items-center text-[#022683] font-semibold group/link hover:text-[#011952] transition-colors"
+                    className="inline-flex items-center text-[var(--primary)] font-semibold group/link hover:text-[#011952] transition-colors"
                     whileHover={{ x: 5 }}
                   >
                     View Details

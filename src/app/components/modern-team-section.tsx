@@ -43,7 +43,7 @@ export function ModernTeamSection() {
   if (loading) {
     return (
       <section className="py-20 flex items-center justify-center bg-[#F3F4F6]">
-        <Loader2 className="w-8 h-8 text-[#022683] animate-spin" />
+        <Loader2 className="w-8 h-8 text-[var(--primary)] animate-spin" />
       </section>
     );
   }
@@ -58,8 +58,8 @@ export function ModernTeamSection() {
           className="absolute inset-0"
           style={{
             backgroundImage: `
-              radial-gradient(circle at 20% 50%, #888888 1px, transparent 1px),
-              radial-gradient(circle at 80% 80%, #888888 1px, transparent 1px)
+              radial-gradient(circle at 20% 50%, var(--secondary) 1px, transparent 1px),
+              radial-gradient(circle at 80% 80%, var(--secondary) 1px, transparent 1px)
             `,
             backgroundSize: '50px 50px'
           }}
@@ -76,18 +76,18 @@ export function ModernTeamSection() {
           className="text-center mb-16"
         >
           <div className="inline-block mb-4">
-            <span className="px-4 py-2 bg-[#888888]/10 text-[#888888] font-semibold rounded-full text-sm border border-[#888888]/20">
+            <span className="px-4 py-2 bg-[var(--secondary)]/10 text-[var(--secondary)] font-semibold rounded-full text-sm border border-[var(--secondary)]/20">
               Our Leadership
             </span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[#888888] to-[#022683] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent">
               Meet Our
             </span>
             <br />
             <span className="text-[#111111]">Expert Team</span>
           </h2>
-          <p className="text-xl text-[#888888] max-w-3xl mx-auto">
+          <p className="text-xl text-[var(--secondary)] max-w-3xl mx-auto">
             Led by seasoned professionals with decades of experience in accounting, audit, and advisory services
           </p>
         </motion.div>
@@ -113,19 +113,19 @@ export function ModernTeamSection() {
                 className="w-[240px] flex-shrink-0 group relative"
               >
                 {/* Premium Card Design */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-[#888888]/20 hover:border-[#022683]/40 transition-all duration-300 h-full flex flex-col">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-[var(--secondary)]/20 hover:border-[var(--primary)]/40 transition-all duration-300 h-full flex flex-col">
                   {/* Image Container with Grey Overlay */}
-                  <div className="relative aspect-[4/5] overflow-hidden bg-[#888888]/5">
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#888888]/20 via-transparent to-transparent z-10" />
+                  <div className="relative aspect-[4/5] overflow-hidden bg-[var(--secondary)]/5">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[var(--secondary)]/20 via-transparent to-transparent z-10" />
                     <img
                       src={getPhotoUrl(member.photo)}
                       alt={member.name}
                       className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 grayscale-[20%] group-hover:grayscale-0"
                     />
                     <div className="absolute top-4 right-4 z-20">
-                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full shadow-md border border-[#888888]/10">
-                        <MapPin className="h-3.5 w-3.5 text-[#888888]" />
-                        <span className="text-xs font-bold text-[#888888]">{member.city}</span>
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full shadow-md border border-[var(--secondary)]/10">
+                        <MapPin className="h-3.5 w-3.5 text-[var(--secondary)]" />
+                        <span className="text-xs font-bold text-[var(--secondary)]">{member.city}</span>
                       </div>
                     </div>
                   </div>
@@ -133,16 +133,16 @@ export function ModernTeamSection() {
                   {/* Member Details */}
                   <div className="p-4 bg-[#F9FAFB] flex-grow flex flex-col justify-between">
                     <div>
-                      <h3 className="text-xl font-extrabold text-[#111111] mb-1 group-hover:text-[#022683] transition-colors duration-300">
+                      <h3 className="text-xl font-extrabold text-[#111111] mb-1 group-hover:text-[var(--primary)] transition-colors duration-300">
                         {member.name}
                       </h3>
-                      <p className="text-sm text-[#888888] font-bold tracking-tight">
+                      <p className="text-sm text-[var(--secondary)] font-bold tracking-tight">
                         {member.designation}
                       </p>
                     </div>
                     {/* Animated Progress Bar */}
-                    <div className="mt-5 h-1.5 w-14 bg-[#888888]/20 rounded-full overflow-hidden">
-                      <div className="h-full w-0 group-hover:w-full bg-gradient-to-r from-[#888888] to-[#022683] transition-all duration-700 ease-out" />
+                    <div className="mt-5 h-1.5 w-14 bg-[var(--secondary)]/20 rounded-full overflow-hidden">
+                      <div className="h-full w-0 group-hover:w-full bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] transition-all duration-700 ease-out" />
                     </div>
                   </div>
                 </div>
