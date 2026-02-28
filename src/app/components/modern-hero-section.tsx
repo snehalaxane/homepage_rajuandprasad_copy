@@ -191,10 +191,10 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-6 mb-8"
+              className="inline-flex items-center gap-6 mb-2"
             >
               <div className="relative">
-                <div className="relative px-0 py-3 min-w-[240px] h-[240px] flex justify-center items-center">
+                <div className="relative px-0 py-1 min-w-[240px] h-[240px] flex justify-center items-center">
                   <AnimatePresence mode="popLayout">
                     <motion.span
                       key={displayNumber}
@@ -238,7 +238,7 @@ export function ModernHeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-5xl lg:text-6xl xl:text-2xl font-bold mb-6 leading-tight"
             >
-              <span className="text-[#F5C542] text-5xl drop-shadow-2xl">{(hero?.title)}</span>
+              <span className="text-[#F5C542] text-5xl ">{(hero?.title)}</span>
               <br />
               {/* <span className="text-black drop-shadow-2xl">
                 {(hero?.title || "").split(" ").slice(2).join(" ")}

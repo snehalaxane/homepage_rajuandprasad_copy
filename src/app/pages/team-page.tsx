@@ -158,15 +158,16 @@ export function TeamPage() {
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="flex justify-center items-center">
             {/* Left: Page Title */}
             <motion.div
+              className="text-center max-w-2xl"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-white mb-6">
+              <div className="flex items-center justify-center gap-2 text-sm text-white mb-6">
                 <a href="#home" className="hover:text-white transition-colors">
                   Home
                 </a>
@@ -190,7 +191,7 @@ export function TeamPage() {
             </motion.div>
 
             {/* Right: Decorative Illustration */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -245,7 +246,7 @@ export function TeamPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </section>
