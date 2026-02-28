@@ -323,8 +323,8 @@ export function ModernStatsSection() {
     fetchStats();
   }, []);
 
-  const validStats = Array.isArray(statsData?.stats) ? statsData.stats.filter((s: any) => s.image || s.icon) : [];
-  const total = validStats.length;
+  const validStats = Array.isArray(statsData?.stats) ? statsData.stats : [];
+  const total = Math.max(validStats.length, 1);
 
   const goToSlide = useCallback((index: number) => {
     setActiveSlide(index);
@@ -382,11 +382,14 @@ export function ModernStatsSection() {
             Our Statistics
           </motion.span>
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[#111111]">
-            {statsData.title.split(' ').map((word, i) => (
-              <span key={i} className={/\d/.test(word) ? "bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent" : ""}>
-                {word}{' '}
-              </span>
-            ))}
+            {statsData.title.split(' ').map((word, i) => {
+              const isNumberWord = /\d/.test(word);
+              return (
+                <span key={i} className={isNumberWord ? "bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent" : "text-[#111111]"}>
+                  {word}{' '}
+                </span>
+              );
+            })}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
             {statsData.description}
@@ -431,12 +434,18 @@ export function ModernStatsSection() {
                     <div className="relative w-full h-full group">
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                      <img
-                        src={stat.image}
-                        alt="Stats Graphic"
-                        className="w-full h-full object-cover rounded-[2rem] border border-white/10 shadow-2xl relative z-10"
-                        draggable={false}
-                      />
+                      {stat.image ? (
+                        <img
+                          src={stat.image}
+                          alt="Stats Graphic"
+                          className="w-full h-full object-contain rounded-[2rem] border border-white/10 shadow-2xl relative z-10"
+                          draggable={false}
+                        />
+                      ) : (
+                        <div className="w-full h-full rounded-[2rem] bg-gradient-to-br from-[#16181D] to-[#2B2F36] border border-white/10 shadow-2xl relative z-10 flex items-center justify-center">
+                          <span className="text-gray-500 italic">No Graphics</span>
+                        </div>
+                      )}
                       {/* Premium Letter-by-Letter Animated Caption */}
                       {stat.text && (
                         <motion.div
