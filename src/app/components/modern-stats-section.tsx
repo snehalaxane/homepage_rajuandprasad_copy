@@ -323,7 +323,7 @@ export function ModernStatsSection() {
     fetchStats();
   }, []);
 
-  const validStats = Array.isArray(statsData?.stats) ? statsData.stats.filter((s) => s.image) : [];
+  const validStats = Array.isArray(statsData?.stats) ? statsData.stats.filter((s: any) => s.image || s.icon) : [];
   const total = validStats.length;
 
   const goToSlide = useCallback((index: number) => {
@@ -351,7 +351,7 @@ export function ModernStatsSection() {
     return () => clearInterval(timer);
   }, [total, activeSlide]);
 
-  if (!statsData || total === 0) return null;
+  if (!statsData) return null;
 
   return (
     <section className="py-24 bg-[#ffff] text-white overflow-hidden relative min-h-[800px]">
