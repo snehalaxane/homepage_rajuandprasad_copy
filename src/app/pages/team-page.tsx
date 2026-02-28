@@ -32,7 +32,8 @@ export function TeamPage() {
   const [loading, setLoading] = useState(true);
   const [intro, setIntro] = useState({
     title: 'The Team',
-    description: 'Meet our experienced & dedicated Chartered Accountant professionals'
+    description: 'Meet our experienced & dedicated Chartered Accountant professionals',
+    backgroundImage: ''
   });
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -57,7 +58,11 @@ export function TeamPage() {
         const res = await fetch(`${API_BASE_URL}/api/team-intro`);
         if (res.ok) {
           const data = await res.json();
-          setIntro(data);
+          setIntro({
+            title: data.title || 'The Team',
+            description: data.description || 'Meet our experienced & dedicated Chartered Accountant professionals',
+            backgroundImage: data.backgroundImage || ''
+          });
         }
       } catch (error) {
         console.error('Error fetching team intro:', error);
@@ -132,7 +137,21 @@ export function TeamPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Page Header / Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-25 pb-10  border-b border-gray-100">
+      <section
+        className="relative overflow-hidden w-full aspect-[1920/395] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+          backgroundImage: intro.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
+          backgroundColor: !intro.backgroundImage ? 'transparent' : 'inherit'
+        }}
+      >
+        {!intro.backgroundImage && (
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20" />
+        )}
+
+        {/* Overlay if there is a background image to ensure text readability */}
+        {intro.backgroundImage && (
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        )}
+
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
@@ -147,19 +166,25 @@ export function TeamPage() {
               transition={{ duration: 0.6 }}
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-6">
-                <a href="#home" className="hover:text-[var(--primary)] transition-colors">
+              <div className="flex items-center gap-2 text-sm text-white mb-6">
+                <a href="#home" className="hover:text-white transition-colors">
                   Home
                 </a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[var(--primary)] font-medium">The Team</span>
+                <span className="text-white font-medium">The Team</span>
               </div>
 
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-                {intro.title.split(' ').slice(0, -1).join(' ')} <span className="text-[var(--primary)]">{intro.title.split(' ').slice(-1)}</span>
+              <h1 className={`text-5xl lg:text-6xl font-bold mb-4 ${intro.backgroundImage ? 'text-white' : 'text-gray-900'}`}>
+                {intro.title.split(' ').length > 1 ? (
+                  <>
+                    {intro.title.split(' ').slice(0, -1).join(' ')} <span className="text-white">{intro.title.split(' ').slice(-1)}</span>
+                  </>
+                ) : (
+                  <span className="text-white">{intro.title}</span>
+                )}
               </h1>
 
-              <p className="text-lg text-[var(--secondary)] leading-relaxed">
+              <p className={`text-lg leading-relaxed ${intro.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {intro.description}
               </p>
             </motion.div>

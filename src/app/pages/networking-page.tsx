@@ -26,6 +26,13 @@ import { toast } from 'sonner';
 import { Button } from '../components/ui/button';
 import { ScrollToTop } from '../components/scroll-to-top';
 
+// Helper to resolve image URLs reliably
+const resolveImageUrl = (url: string | undefined) => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:')) return url;
+  return `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
+};
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const iconMap: Record<string, any> = {
@@ -204,27 +211,41 @@ export function NetworkingPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
 
       {/* Page Header */}
-      <section className="pt-25 pb-10 bg-gradient-to-r from-[var(--primary)]/5 to-[var(--primary)]/10">
-        <div className="container mx-auto px-6">
+      <section
+        className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+          backgroundImage: domesticContent?.backgroundImage ? `url(${resolveImageUrl(domesticContent.backgroundImage)})` : 'none',
+          backgroundColor: !domesticContent?.backgroundImage ? 'transparent' : 'inherit'
+        }}
+      >
+        {!domesticContent?.backgroundImage && (
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/5 to-[var(--primary)]/10" />
+        )}
+
+        {/* Overlay if there is a background image to ensure text readability */}
+        {domesticContent?.backgroundImage && (
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        )}
+
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-sm mb-6">
-              <a href="/" className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors">
-                <Home className="h-4 w-4" />
+            <div className={`flex items-center gap-2 text-sm mb-6 ${domesticContent?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              <a href="#home" className="hover:text-white transition-colors">
+                Home
               </a>
-              <ChevronRight className="h-4 w-4 text-[var(--secondary)]" />
-              <span className="text-[var(--primary)] font-semibold">Networking</span>
+              <ChevronRight className="h-4 w-4" />
+              <span className={domesticContent?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Networking</span>
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold text-[var(--primary)] mb-4">
+            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${domesticContent?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
               {domesticContent?.pageTitle || 'Networking'}
             </h1>
-            <p className="text-lg text-[var(--secondary)] max-w-2xl">
+            <p className={`text-lg max-w-2xl ${domesticContent?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
               {domesticContent?.pageSubtitle || 'Connect with us to expand professional collaboration across India.'}
             </p>
           </motion.div>

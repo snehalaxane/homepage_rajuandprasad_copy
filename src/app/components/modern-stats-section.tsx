@@ -106,7 +106,7 @@ export function ModernStatsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             className="inline-block px-1 py-0  rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold tracking-widest uppercase mb-4"
           >
-            Our Statistics
+            Our Expertise
           </motion.span>
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[#111111]">
             {statsData.title.split(' ').map((word, i) => {
@@ -183,7 +183,7 @@ export function ModernStatsSection() {
                         }}
                         className="absolute inset-0 z-50 flex items-center justify-center px-6 pointer-events-none"
                       >
-                        <p className="text-white text-xl md:text-4xl font-bold tracking-tight text-center uppercase drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] whitespace-nowrap">
+                        <p className="text-white text-xxl md:text-5xl font-bold tracking-tight text-center uppercase drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] whitespace-nowrap">
                           {stat.text}
                         </p>
                       </motion.div>

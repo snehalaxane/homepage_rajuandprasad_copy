@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
@@ -14,6 +14,49 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export function ModernHeroSection() {
   const [hero, setHero] = useState<any>(null);
   const [locations, setLocations] = useState<any[]>([]);
+  const [displayNumber, setDisplayNumber] = useState(0);
+  const [generalSettings, setGeneralSettings] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/settings/general`);
+        const data = await res.json();
+        setGeneralSettings(data);
+      } catch (err) {
+        console.error("Failed to fetch settings");
+      }
+    };
+    fetchSettings();
+  }, []);
+
+  useEffect(() => {
+    if (!hero?.highlightNumber) return; // Wait until hero data is loaded
+
+    const target = parseInt(hero.highlightNumber) || 0;
+    let count = 0;
+    let timer: any;
+
+    // Reset display
+    setDisplayNumber(0);
+
+    // Delay start to prevent skipping during page mount/heavy loading
+    const startDelay = setTimeout(() => {
+      timer = setInterval(() => {
+        if (count < target) {
+          count++;
+          setDisplayNumber(count);
+        } else {
+          clearInterval(timer);
+        }
+      }, 150); // Balanced for speed and visibility
+    }, 500);
+
+    return () => {
+      clearTimeout(startDelay);
+      if (timer) clearInterval(timer);
+    };
+  }, [hero?.highlightNumber]); // Re-run when highlightNumber from backend changes
 
   useEffect(() => {
     const fetchHero = async () => {
@@ -44,7 +87,24 @@ export function ModernHeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Top Left Logo Logo */}
+      <div className="absolute top-8 left-8 z-50">
+        <motion.a
+          href="#home"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex items-center"
+        >
+          <img
+            src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
+            alt={generalSettings?.siteTitle || "Raju & Prasad"}
+            className="h-16 w-auto brightness-0 invert object-contain hover:scale-105 transition-transform duration-300"
+          />
+        </motion.a>
+      </div>
+
       {/* Background with Gradient and Pattern - var(--secondary) DOMINANT & ATTRACTIVE */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)] via-[var(--secondary)]/95 to-[var(--secondary)]/90">
         {/* Subtle Grid Pattern */}
@@ -131,19 +191,43 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-3 mb-8"
+              className="inline-flex items-center gap-6 mb-8"
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)] to-[var(--primary)] blur-xl opacity-50 rounded-full" />
-                <div className="relative bg-white rounded-full px-6 py-3 shadow-2xl border-2 border-[var(--primary)]/20">
-                  <span className="text-9xl font-bold bg-[#F5C542] bg-clip-text text-transparent">
-                    {hero?.highlightNumber}
-                  </span>
+                <div className="relative px-0 py-3 min-w-[240px] h-[240px] flex justify-center items-center">
+                  <AnimatePresence mode="popLayout">
+                    <motion.span
+                      key={displayNumber}
+                      initial={{ opacity: 0, scale: 0.5, y: 30 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.8, y: -30 }}
+                      transition={{ duration: 0.1, ease: "easeInOut" }}
+                      className="text-[200px] font-extrabold bg-gradient-to-b from-[#F5C542] via-[#FFD700] to-[#B8860B] bg-clip-text text-transparent inline-block drop-shadow-[0_20px_50px_rgba(245,197,66,0.5)] select-none relative z-20 leading-none"
+                    >
+                      {displayNumber}
+                    </motion.span>
+                  </AnimatePresence>
                 </div>
               </div>
-              <div className="text-left">
-                <p className="text-6xl font-bold text-[#F5C542] drop-shadow-lg">{(hero?.highlightText || "").split(" ")[0]}</p>
-                <p className="text-6xl text-[#F5C542] font-bold drop-shadow-md">{(hero?.highlightText || "").split(" ").slice(1).join(" ")}</p>
+              <div className="flex flex-col justify-center">
+                {hero?.highlightText ? (
+                  hero.highlightText
+                    .split(" ")
+                    .reduce((acc: string[], word: string, i: number) => {
+                      if (i % 2 === 0) {
+                        acc.push(word + " " + (hero.highlightText.split(" ")[i + 1] || ""));
+                      }
+                      return acc;
+                    }, [])
+                    .map((line: string, i: number) => (
+                      <p
+                        key={i}
+                        className="text-5xl font-bold text-[#F5C542] drop-shadow-xl leading-[0.9]"
+                      >
+                        {line}
+                      </p>
+                    ))
+                ) : null}
               </div>
             </motion.div>
 

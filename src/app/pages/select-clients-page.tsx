@@ -16,6 +16,13 @@ import { ScrollToTop } from '../components/scroll-to-top';
 // API Base URL
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
+// Helper to resolve image URLs reliably
+const resolveImageUrl = (url: string | undefined) => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:')) return url;
+  return `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
+};
+
 // Icon mapping
 const iconMap: Record<string, any> = {
   Factory,
@@ -52,6 +59,7 @@ interface PageIntro {
   introEnabled: boolean;
   statsEnabled: boolean;
   enabled: boolean;
+  backgroundImage: string;
 }
 
 export function SelectClientsPage() {
@@ -102,7 +110,21 @@ export function SelectClientsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Page Header */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-25 pb-10  border-b border-gray-100">
+      <section
+        className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+          backgroundImage: intro?.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
+          backgroundColor: !intro?.backgroundImage ? 'transparent' : 'inherit'
+        }}
+      >
+        {!intro?.backgroundImage && (
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20" />
+        )}
+
+        {/* Overlay if there is a background image to ensure text readability */}
+        {intro?.backgroundImage && (
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        )}
+
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
@@ -116,23 +138,25 @@ export function SelectClientsPage() {
             className="max-w-4xl mx-auto text-center"
           >
             {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-sm text-[var(--secondary)] mb-6">
-              <a href="#home" className="hover:text-[var(--primary)] transition-colors">
+            <div className="flex items-center justify-center gap-2 text-sm text-white mb-6">
+              <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-[var(--primary)] font-medium">Select Clients</span>
+              <span className="text-white font-medium">Select Clients</span>
             </div>
 
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              {intro?.title.split(' ').map((word, i) => (
-                <span key={i} className={i === 1 ? "text-[var(--primary)]" : ""}>{word} </span>
-              )) || (
-                  <>Select <span className="text-[var(--primary)]">Clients</span></>
-                )}
+            <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-gray-900'}`}>
+              {intro?.title ? (
+                intro.title.split(' ').map((word, i, arr) => (
+                  <span key={i} className={i === Math.floor(arr.length / 2) ? "text-white" : ""}>{word} </span>
+                ))
+              ) : (
+                <>Select <span className="text-[var(--primary)]">Clients</span></>
+              )}
             </h1>
 
-            <p className="text-xl text-[var(--secondary)] leading-relaxed max-w-2xl mx-auto">
+            <p className={`text-xl leading-relaxed max-w-2xl mx-auto ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
               {intro?.subtitle || 'Serving clients across diverse industries with trust and commitment.'}
             </p>
           </motion.div>

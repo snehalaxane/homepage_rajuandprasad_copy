@@ -158,51 +158,43 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
         ? 'bg-[var(--primary)] shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-b border-white/20'
         : 'bg-[var(--primary)] shadow-[0_8px_30px_rgba(0,0,0,0.25)] border-b border-white/12'
         }`}
     >
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <motion.a
-            href="#home"
-            className="flex items-center flex-shrink-0 relative z-10"
-            whileHover={{ scale: 1.05 }}
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.hash = 'home';
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            style={{
-              filter: 'drop-shadow(0 2px 6px rgba(255,255,255,0.25))'
-            }}
-          >
-            <img
-              src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
-              alt={generalSettings?.siteTitle || "Raju & Prasad"}
-              className="h-14 w-auto brightness-0 invert object-contain"
-            />
-          </motion.a>
+          {/* Logo - Hidden on home page since it's moved to Hero */}
+          {activePage !== 'home' && (
+            <motion.a
+              href="#home"
+              className="flex items-center flex-shrink-0 relative z-10"
+              whileHover={{ scale: 1.05 }}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.hash = 'home';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              style={{
+                filter: 'drop-shadow(0 2px 6px rgba(255,255,255,0.25))'
+              }}
+            >
+              <img
+                src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
+                alt={generalSettings?.siteTitle || "Raju & Prasad"}
+                className="h-14 w-auto brightness-0 invert object-contain"
+              />
+            </motion.a>
+          )}
 
           {/* Desktop Navigation */}
-          <div className="hidden xl:flex items-center justify-center flex-1 px-12">
+          <div className={`hidden xl:flex items-center justify-center ${activePage !== 'home' ? 'flex-1 px-12' : 'flex-1'}`}>
             <div className="flex items-center gap-1">
               {navItems.map((item) => {
-                const isActive =
-                  (activePage === 'team' && item.href === '#team') ||
-                  (activePage === 'history' && item.href === '#history') ||
-                  (activePage === 'clients' && item.href === '#clients') ||
-                  (activePage === 'services' && item.href === '#services') ||
-                  (activePage === 'networking' && item.href === '#networking') ||
-                  (activePage === 'newsletter' && item.href === '#think-tank') ||
-                  (activePage === 'blog' && item.href === '#think-tank') ||
-                  (activePage === 'alumni' && item.href === '#think-tank') ||
-                  (activePage === 'careers' && item.href === '#careers') ||
-                  (activePage === 'gallery' && item.href === '#gallery') ||
-                  (activePage === 'contact' && item.href === '#contact') ||
-                  (activePage === 'home' && item.href === '#home');
+                // Dynamic isActive check
+                const cleanHref = (item.href || '').replace(/^#/, '');
+                const isActive = activePage === cleanHref || (activePage === 'home' && (cleanHref === 'home' || cleanHref === ''));
 
                 if (item.dropdown) {
                   return (
@@ -213,7 +205,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                       onMouseLeave={() => setOpenDropdown(null)}
                     >
                       <button
-                        className={`relative text-sm font-semibold tracking-wide transition-all duration-200 px-4 py-2 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
+                        className={`relative text-[16px] font-bold tracking-wide transition-all duration-200 px-5 py-2.5 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
                           ? 'bg-white/10'
                           : 'hover:bg-white/5'
                           }`}
@@ -254,7 +246,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                                   initial={{ opacity: 0, x: -10 }}
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ duration: 0.2, delay: index * 0.05 }}
-                                  className={`block px-4 py-3 text-sm font-semibold text-white transition-all ${isDropdownActive
+                                  className={`block px-5 py-3.5 text-[15px] font-bold text-white transition-all ${isDropdownActive
                                     ? 'bg-white/20 border-l-2 border-white'
                                     : 'hover:bg-white/10'
                                     }`}
@@ -278,7 +270,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className={`relative text-sm font-semibold tracking-wide transition-all duration-200 px-4 py-2 rounded-lg group whitespace-nowrap text-white ${isActive
+                    className={`relative text-[16px] font-bold tracking-wide transition-all duration-200 px-5 py-2.5 rounded-lg group whitespace-nowrap text-white ${isActive
                       ? 'bg-white/10'
                       : 'hover:bg-white/5'
                       }`}
@@ -322,19 +314,9 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
             <div className="container mx-auto px-6 py-6 max-h-[70vh] overflow-y-auto">
               <div className="flex flex-col gap-2">
                 {navItems.map((item) => {
-                  const isActive =
-                    (activePage === 'team' && item.href === '#team') ||
-                    (activePage === 'history' && item.href === '#history') ||
-                    (activePage === 'clients' && item.href === '#clients') ||
-                    (activePage === 'services' && item.href === '#services') ||
-                    (activePage === 'networking' && item.href === '#networking') ||
-                    (activePage === 'newsletter' && item.href === '#think-tank') ||
-                    (activePage === 'blog' && item.href === '#think-tank') ||
-                    (activePage === 'alumni' && item.href === '#think-tank') ||
-                    (activePage === 'careers' && item.href === '#careers') ||
-                    (activePage === 'gallery' && item.href === '#gallery') ||
-                    (activePage === 'contact' && item.href === '#contact') ||
-                    (activePage === 'home' && item.href === '#home');
+                  // Dynamic isActive check for mobile
+                  const cleanHref = (item.href || '').replace(/^#/, '');
+                  const isActive = activePage === cleanHref || (activePage === 'home' && (cleanHref === 'home' || cleanHref === ''));
 
                   if (item.dropdown) {
                     return (
@@ -396,7 +378,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                         e.preventDefault();
                         handleNavClick(item.href);
                       }}
-                      className={`py-3 px-4 rounded-lg transition-all font-semibold text-white ${isActive
+                      className={`py-3.5 px-5 rounded-lg transition-all font-bold text-[17px] text-white ${isActive
                         ? 'bg-white/20 border-l-2 border-white'
                         : 'hover:bg-white/10'
                         }`}

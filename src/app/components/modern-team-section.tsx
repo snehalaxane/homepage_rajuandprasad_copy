@@ -8,23 +8,26 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000
 
 export function ModernTeamSection() {
   const [teamMembers, setTeamMembers] = useState<any[]>([]);
+  const [introData, setIntroData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/team-members`);
-        if (!response.ok) throw new Error('Failed to fetch');
-        const data = await response.json();
+        const [membersRes, introRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/api/team-members`).then(res => res.json()),
+          fetch(`${API_BASE_URL}/api/team-intro`).then(res => res.json())
+        ]);
 
         // Filter members who are specifically marked to show on home
-        const homeMembers = data
+        const homeMembers = membersRes
           .filter((member: any) => member.showOnHome)
           .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
 
         setTeamMembers(homeMembers);
+        setIntroData(introRes);
       } catch (error) {
-        console.error('Error fetching team members:', error);
+        console.error('Error fetching team data:', error);
       } finally {
         setLoading(false);
       }
@@ -48,10 +51,10 @@ export function ModernTeamSection() {
     );
   }
 
-  // No early return for empty members list to keep section header visible
+  if (!introData?.enabled) return null;
 
   return (
-    <section id="team" className="py-20 bg-gradient-to-br from-[#F3F4F6] via-[#F3F4F6] to-white relative overflow-hidden">
+    <section id="team" className="py-10 bg-gradient-to-br from-[#F3F4F6] via-[#F3F4F6] to-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div
@@ -75,20 +78,25 @@ export function ModernTeamSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 bg-[var(--secondary)]/10 text-[var(--secondary)] font-semibold rounded-full text-sm border border-[var(--secondary)]/20">
-              Our Leadership
-            </span>
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent">
-              Meet Our
-            </span>
-            <br />
-            <span className="text-[#111111]">Expert Team</span>
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-block px-1 py-0  rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold tracking-widest uppercase mb-4"
+          >
+            Our Leadership
+          </motion.span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[#111111]">
+            {(introData?.title || "Meet Our Expert Team").split(' ').map((word: string, i: number, arr: string[]) => {
+              const isHighlighted = /\d/.test(word) || i >= arr.length - 2;
+              return (
+                <span key={i} className={isHighlighted ? "bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent" : "text-[#111111]"}>
+                  {word}{' '}
+                </span>
+              );
+            })}
           </h2>
-          <p className="text-xl text-[var(--secondary)] max-w-3xl mx-auto">
-            Led by seasoned professionals with decades of experience in accounting, audit, and advisory services
+          <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+            {introData?.description || 'Led by seasoned professionals with decades of experience in accounting, audit, and advisory services'}
           </p>
         </motion.div>
 

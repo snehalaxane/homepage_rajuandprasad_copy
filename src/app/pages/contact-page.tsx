@@ -8,6 +8,13 @@ import { toast } from 'sonner';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
+// Helper to resolve image URLs reliably
+const resolveImageUrl = (url: string | undefined) => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:')) return url;
+  return `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
+};
+
 export function ContactPage() {
   const [settings, setSettings] = useState<any>(null);
   const [fields, setFields] = useState<any[]>([]);
@@ -160,8 +167,22 @@ export function ContactPage() {
     <>
       <main className="min-h-screen bg-[#F7F8FA]">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-200">
-          <div className="container mx-auto px-6">
+        <section
+          className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+            backgroundImage: settings?.backgroundImage ? `url(${resolveImageUrl(settings.backgroundImage)})` : 'none',
+            backgroundColor: !settings?.backgroundImage ? 'transparent' : 'inherit'
+          }}
+        >
+          {!settings?.backgroundImage && (
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20" />
+          )}
+
+          {/* Overlay if there is a background image to ensure text readability */}
+          {settings?.backgroundImage && (
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+          )}
+
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -169,19 +190,19 @@ export function ContactPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
-                <a href="/" className="hover:text-[var(--primary)] transition-colors">Home</a>
+              <div className={`flex items-center gap-2 text-sm mb-4 ${settings?.backgroundImage ? 'text-gray-300' : 'text-white'}`}>
+                <a href="/" className={`transition-colors ${settings?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[var(--primary)] font-semibold">Contact</span>
+                <span className={settings?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Contact</span>
               </div>
 
               {/* Dynamic Title */}
-              <h1 className="text-5xl lg:text-6xl font-bold text-[var(--primary)] mb-6">
+              <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${settings?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {settings?.pageTitle || 'Contact Us'}
               </h1>
 
               {/* Dynamic Subtitle */}
-              <p className="text-lg text-[var(--secondary)] leading-relaxed">
+              <p className={`text-lg leading-relaxed ${settings?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {settings?.pageSubtitle || "Send us your request and we'll get back to you at the earliest."}
               </p>
             </motion.div>

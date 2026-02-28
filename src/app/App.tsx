@@ -78,14 +78,17 @@ export default function App() {
   const isLegalPage = legalSlugs.includes(currentPage);
   const isMainPage = mainPages.some(p => currentPage.startsWith(p));
 
+  const isHomePage = currentPage === 'home' || (!isMainPage && !isLegalPage);
+
   return (
     <div className="min-h-screen bg-white">
-      <ModernNavbar activePage={currentPage} />
+      {/* Conditionally render navbar globally ONLY if not on home page */}
+      {!isHomePage && <ModernNavbar activePage={currentPage} />}
 
       <main>
-        {/* Render HomePage for 'home' OR if the hash doesn't match any known page */}
-        {(currentPage === 'home' || (!isMainPage && !isLegalPage)) &&
-          <HomePage />
+        {/* Render HomePage with activePage prop */}
+        {isHomePage &&
+          <HomePage activePage={currentPage} />
         }
         {currentPage === 'team' && <TeamPage />}
         {currentPage === 'history' && <HistoryPage />}

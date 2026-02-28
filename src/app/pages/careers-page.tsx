@@ -29,7 +29,15 @@ interface CareerIntro {
   description: string;
   ctaText: string;
   enabled: boolean;
+  backgroundImage: string;
 }
+
+// Helper to resolve image URLs reliably
+const resolveImageUrl = (url: string | undefined) => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:')) return url;
+  return `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
+};
 
 interface Job {
   _id: string;
@@ -562,8 +570,22 @@ export function CareersPage() {
     <>
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
-          <div className="container mx-auto px-6">
+        <section
+          className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+            backgroundImage: careerIntro?.backgroundImage ? `url(${resolveImageUrl(careerIntro.backgroundImage)})` : 'none',
+            backgroundColor: !careerIntro?.backgroundImage ? 'transparent' : 'inherit'
+          }}
+        >
+          {!careerIntro?.backgroundImage && (
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20" />
+          )}
+
+          {/* Overlay if there is a background image to ensure text readability */}
+          {careerIntro?.backgroundImage && (
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+          )}
+
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -571,19 +593,19 @@ export function CareersPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
-                <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
+              <div className={`flex items-center gap-2 text-sm mb-4 ${careerIntro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+                <a href="#home" className={`transition-colors ${careerIntro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[var(--primary)] font-semibold">Careers</span>
+                <span className={careerIntro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Careers</span>
               </div>
 
               {/* Title */}
-              <h1 className="text-5xl lg:text-6xl font-bold text-[var(--primary)] mb-6">
+              <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${careerIntro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {careerIntro?.title || 'Careers'}
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg lg:text-xl text-[var(--secondary)] leading-relaxed">
+              <p className={`text-lg lg:text-xl leading-relaxed ${careerIntro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {careerIntro?.subtitle || 'Join a team built on professionalism, growth, and integrity.'}
               </p>
             </motion.div>

@@ -6,6 +6,13 @@ import { ScrollToTop } from '../components/scroll-to-top';
 // API Base URL
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
+// Helper to resolve image URLs reliably
+const resolveImageUrl = (url: string | undefined) => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:')) return url;
+  return `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
+};
+
 interface HistoryJourney {
   sinceYear: string;
   title: string;
@@ -29,10 +36,18 @@ interface HistoryMission {
   enabled: boolean;
 }
 
+interface HistoryIntro {
+  title: string;
+  description: string;
+  backgroundImage: string;
+  enabled: boolean;
+}
+
 export function HistoryPage() {
   const [journey, setJourney] = useState<HistoryJourney | null>(null);
   const [timeline, setTimeline] = useState<HistoryTimeline[]>([]);
   const [mission, setMission] = useState<HistoryMission | null>(null);
+  const [introData, setIntroData] = useState<HistoryIntro | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
@@ -40,15 +55,17 @@ export function HistoryPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [journeyRes, timelineRes, missionRes] = await Promise.all([
+        const [journeyRes, timelineRes, missionRes, introRes] = await Promise.all([
           fetch(`${API_BASE_URL}/api/history-journey`),
           fetch(`${API_BASE_URL}/api/history-timeline`),
-          fetch(`${API_BASE_URL}/api/history-mission`)
+          fetch(`${API_BASE_URL}/api/history-mission`),
+          fetch(`${API_BASE_URL}/api/history-intro`)
         ]);
 
         if (journeyRes.ok) setJourney(await journeyRes.json());
         if (timelineRes.ok) setTimeline(await timelineRes.json());
         if (missionRes.ok) setMission(await missionRes.json());
+        if (introRes.ok) setIntroData(await introRes.json());
       } catch (error) {
         console.error("Error fetching history data:", error);
       } finally {
@@ -106,10 +123,35 @@ export function HistoryPage() {
     );
   }
 
+  if (introData && introData.enabled === false) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center p-6 text-center">
+        <div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Page Unavailable</h1>
+          <p className="text-gray-600">This page is currently being updated. Please check back later.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Page Header */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20 pt-25 pb-10  border-b border-gray-100">
+      <section
+        className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+          backgroundImage: introData?.backgroundImage ? `url(${resolveImageUrl(introData.backgroundImage)})` : 'none',
+          backgroundColor: !introData?.backgroundImage ? 'transparent' : 'inherit'
+        }}
+      >
+        {!introData?.backgroundImage && (
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20" />
+        )}
+
+        {/* Overlay if there is a background image to ensure text readability */}
+        {introData?.backgroundImage && (
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        )}
+
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
@@ -123,20 +165,20 @@ export function HistoryPage() {
             className="max-w-4xl mx-auto text-center"
           >
             {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-sm text-[var(--secondary)] mb-6">
-              <a href="#home" className="hover:text-[var(--primary)] transition-colors">
+            <div className={`flex items-center justify-center gap-2 text-sm mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-[var(--primary)] font-medium">History</span>
+              <span className="text-white font-medium">History</span>
             </div>
 
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              <span className="text-[var(--primary)]">History</span>
+            <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${introData?.backgroundImage ? 'text-white' : 'text-gray-900'}`}>
+              <span className="text-white">{introData?.title || 'History'}</span>
             </h1>
 
-            <p className="text-xl text-[var(--secondary)] leading-relaxed max-w-2xl mx-auto">
-              A legacy built on trust, growth and professional excellence.
+            <p className={`text-xl leading-relaxed max-w-2xl mx-auto ${introData?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+              {introData?.description || 'A legacy built on trust, growth and professional excellence.'}
             </p>
           </motion.div>
         </div>

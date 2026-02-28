@@ -10,7 +10,15 @@ interface AlumniIntro {
   title: string;
   subtitle: string;
   enabled: boolean;
+  backgroundImage: string;
 }
+
+// Helper to resolve image URLs reliably
+const resolveImageUrl = (url: string | undefined) => {
+  if (!url) return '';
+  if (url.startsWith('http') || url.startsWith('data:')) return url;
+  return `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
+};
 
 interface Alumni {
   _id: string;
@@ -93,8 +101,22 @@ export function AlumniPage() {
     <>
       <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
         {/* Page Header */}
-        <section className="pt-25 pb-10  bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
-          <div className="container mx-auto px-6">
+        <section
+          className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+            backgroundImage: intro?.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
+            backgroundColor: !intro?.backgroundImage ? 'transparent' : 'inherit'
+          }}
+        >
+          {!intro?.backgroundImage && (
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20" />
+          )}
+
+          {/* Overlay if there is a background image to ensure text readability */}
+          {intro?.backgroundImage && (
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+          )}
+
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -102,22 +124,22 @@ export function AlumniPage() {
               className="max-w-5xl mx-auto text-center"
             >
               {/* Breadcrumb */}
-              <div className="flex items-center justify-center gap-2 text-sm text-[var(--secondary)] mb-6">
-                <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
+              <div className={`flex items-center justify-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+                <a href="#home" className={`transition-colors ${intro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className="hover:text-[var(--primary)] transition-colors cursor-pointer">Think Tank</span>
+                <span className={`transition-colors cursor-pointer ${intro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
                 <ChevronRight className="h-4 w-4" />
-                <span className="text-[var(--primary)] font-semibold">Alumni</span>
+                <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Alumni</span>
               </div>
 
               {/* Title & Subtitle - Respecting the enabled flag */}
               {intro?.enabled !== false && (
                 <>
-                  <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-[var(--primary)] mb-8 leading-tight">
+                  <h1 className={`text-4xl lg:text-5xl xl:text-6xl font-bold mb-8 leading-tight ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                     {intro?.title || 'Our Alumni Students are spread across Industry Segments.'}
                   </h1>
 
-                  <div className="space-y-4 text-lg text-[var(--secondary)] leading-relaxed max-w-4xl mx-auto whitespace-pre-wrap">
+                  <div className={`space-y-4 text-lg leading-relaxed max-w-4xl mx-auto whitespace-pre-wrap ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                     {intro?.subtitle ? (
                       <p>{intro.subtitle}</p>
                     ) : (

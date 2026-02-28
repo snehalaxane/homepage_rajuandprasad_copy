@@ -82,7 +82,7 @@ export function ModernServicesSection() {
   }
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-white via-[#F3F4F6] to-white relative overflow-hidden">
+    <section id="services" className="py-10 bg-gradient-to-br from-white via-[#F3F4F6] to-white relative overflow-hidden">
       {/* Decorative Background Elements - Grey tones */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[var(--secondary)]/8 to-[var(--primary)]/5 rounded-full blur-3xl -z-0" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[var(--secondary)]/8 to-[var(--primary)]/5 rounded-full blur-3xl -z-0" />
@@ -96,31 +96,24 @@ export function ModernServicesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 bg-[var(--secondary)]/10 text-[var(--secondary)] font-semibold rounded-full text-sm border border-[var(--secondary)]/20">
-              Our Services
-            </span>
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            {introData?.title ? (
-              <>
-                <span className="text-[#111111]">{introData.title.split(' ').slice(0, -1).join(' ')}</span>
-                <br />
-                <span className="bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent">
-                  {introData.title.split(' ').slice(-1)}
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-block px-1 py-0  rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold tracking-widest uppercase mb-4"
+          >
+            Our Services
+          </motion.span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[#111111]">
+            {(introData?.title || "Comprehensive Professional Services").split(' ').map((word: string, i: number) => {
+              const isHighlighted = /\d/.test(word) || i >= (introData?.title || "Comprehensive Professional Services").split(' ').length - 2;
+              return (
+                <span key={i} className={isHighlighted ? "bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent" : "text-[#111111]"}>
+                  {word}{' '}
                 </span>
-              </>
-            ) : (
-              <>
-                <span className="text-[#111111]">Comprehensive</span>
-                <br />
-                <span className="bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent">
-                  Professional Services
-                </span>
-              </>
-            )}
+              );
+            })}
           </h2>
-          <p className="text-xl text-[var(--secondary)] max-w-3xl mx-auto">
+          <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
             {introData?.subtitle || 'Delivering expert solutions across audit, taxation, and advisory to help your business thrive'}
           </p>
         </motion.div>
