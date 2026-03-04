@@ -1,148 +1,203 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Server, Wifi, Shield, Users } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, Printer } from 'lucide-react';
+import { Button } from './ui/button';
+import { toast } from 'sonner';
 
-const highlights = [
-  {
-    icon: Server,
-    title: 'Modern Infrastructure',
-    description: 'State-of-the-art facilities',
-  },
-  {
-    icon: Wifi,
-    title: 'Digital Solutions',
-    description: 'Advanced technology systems',
-  },
-  {
-    icon: Shield,
-    title: 'Data Security',
-    description: 'Secure & compliant',
-  },
-  {
-    icon: Users,
-    title: 'Expert Team',
-    description: 'Skilled professionals',
-  },
-];
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export function InfrastructureSection() {
+export default function InfrastructureSection() {
+  const [infra, setInfra] = useState<any>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchInfra = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/infrastructure`);
+        const data = await res.json();
+        setInfra(data);
+      } catch (err) {
+        console.error("Failed to fetch infrastructure data");
+      }
+    };
+    fetchInfra();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.email) {
+      toast.error("Please enter your email");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/newsletter-subscriptions/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (res.ok) {
+        toast.success("Subscribed successfully!");
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        toast.error("Failed to subscribe. Please try again.");
+      }
+    } catch (err) {
+      toast.error("An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!infra || !infra.enabled) return null;
+
   return (
-    <section id="infrastructure" className="relative py-24 overflow-hidden">
-      {/* Dark background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)] via-[#033099] to-[var(--primary)]">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjwvc3ZnPg==')] opacity-30" />
-      </div>
-
-      {/* Decorative blurs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6 border border-white/20"
-            >
-              <span className="text-blue-200 text-sm font-medium">World-Class Facilities</span>
-            </motion.div>
-
+    <>
+      {/* Infrastructure Header Section - Black BG */}
+      <section className="pt-24 pb-12 bg-[#0D0F12] relative overflow-hidden">
+        <div className="container mx-auto px-4 max-w-7xl relative z-10">
+          <div className="text-center text-white">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl lg:text-5xl font-bold text-white mb-6"
+              className="text-4xl md:text-5xl font-extrabold mb-6"
             >
-              Infrastructure
+              {infra.title}
             </motion.h2>
-
+            <div className="w-16 h-1 bg-[#00AEEF] mx-auto mb-8 rounded-full"></div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg text-gray-200 leading-relaxed mb-8"
+              transition={{ delay: 0.1 }}
+              className="text-lg max-w-4xl mx-auto opacity-90 leading-relaxed font-medium"
             >
-              Our firm is equipped with modern infrastructure and technology to provide efficient
-              and effective services to our clients. We maintain well-equipped offices across
-              multiple locations with advanced computing facilities, secure data management systems,
-              and a professional work environment. Our investment in technology and infrastructure
-              ensures seamless service delivery and maintains the highest standards of professional
-              excellence.
+              {infra.description}
             </motion.p>
-
-            <div className="grid grid-cols-2 gap-4">
-              {highlights.map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                    className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 hover:bg-white/20 transition-all group cursor-pointer"
-                  >
-                    <Icon className="h-8 w-8 text-blue-300 mb-2 group-hover:scale-110 transition-transform" />
-                    <h4 className="font-semibold text-white mb-1">{item.title}</h4>
-                    <p className="text-sm text-gray-300">{item.description}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-
-          {/* Right - Visual representation */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="relative"
-          >
-            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
-              {/* Decorative grid */}
-              <div className="grid grid-cols-3 gap-4">
-                {[...Array(9)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.6 + i * 0.05 }}
-                    className="aspect-square bg-gradient-to-br from-white/10 to-white/5 rounded-xl border border-white/10 backdrop-blur-sm hover:from-white/20 hover:to-white/10 transition-all cursor-pointer"
-                  >
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-8 h-8 bg-white/20 rounded-lg" />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Floating badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                className="absolute -top-4 -right-4 bg-white text-[var(--primary)] px-6 py-3 rounded-2xl shadow-xl"
-              >
-                <div className="text-2xl font-bold">7+</div>
-                <div className="text-sm">Office Locations</div>
-              </motion.div>
-            </div>
-          </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Contact & Newsletter Section - Grey BG */}
+      <section className="pt-12 pb-24 bg-[#9CA3AF] relative overflow-hidden">
+        <div className="container mx-auto px-4 max-w-7xl relative z-10">
+          <div className="flex flex-col lg:flex-row shadow-2xl rounded-[40px] overflow-hidden animate-fade-in border border-white/5 bg-[#D1D5DB]">
+            {/* Left Side - Contact */}
+            <div className="lg:w-[45%] bg-[#002855] p-10 md:p-14 text-white relative">
+              <div className="relative z-10">
+                <div className="flex gap-1 mb-6">
+                  <div className="w-4 h-1 bg-[#F5C542]"></div>
+                  <div className="w-4 h-1 bg-[#F5C542]"></div>
+                  <div className="w-4 h-1 bg-[#F5C542]"></div>
+                </div>
+                <h3 className="text-3xl font-bold mb-4">{infra.contactTitle}</h3>
+                <h4 className="text-lg font-semibold text-white/80 mb-10">{infra.officeName}</h4>
+
+                <div className="space-y-8">
+                  {infra.address && (
+                    <div className="flex gap-4 items-start">
+                      <MapPin className="w-6 h-6 text-[#F5C542] shrink-0 mt-1" />
+                      <p className="text-lg leading-relaxed text-white/90">{infra.address}</p>
+                    </div>
+                  )}
+
+                  {(infra.phone1 || infra.phone2) && (
+                    <div className="flex gap-4 items-start">
+                      <Phone className="w-6 h-6 text-[#F5C542] shrink-0 mt-1" />
+                      <div className="space-y-1 text-lg">
+                        <p>{infra.phone1}</p>
+                        <p>{infra.phone2}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {infra.email && (
+                    <div className="flex gap-4 items-start">
+                      <Mail className="w-6 h-6 text-[#F5C542] shrink-0 mt-1" />
+                      <p className="text-lg">{infra.email}</p>
+                    </div>
+                  )}
+
+                  {infra.website && (
+                    <div className="flex gap-4 items-start">
+                      <Globe className="w-6 h-6 text-[#F5C542] shrink-0 mt-1" />
+                      <p className="text-lg">{infra.website}</p>
+                    </div>
+                  )}
+
+                  {infra.fax && (
+                    <div className="flex gap-4 items-start">
+                      <Printer className="w-6 h-6 text-[#F5C542] shrink-0 mt-1" />
+                      <p className="text-lg">{infra.fax}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Newsletter */}
+            <div className="lg:w-[55%] p-10 md:p-14 flex flex-col justify-center bg-white">
+              <div className="max-w-md mx-auto w-full">
+                <div className="flex gap-1 mb-6">
+                  <div className="w-4 h-1 bg-[#F5C542]"></div>
+                  <div className="w-4 h-1 bg-[#F5C542]"></div>
+                  <div className="w-4 h-1 bg-[#F5C542]"></div>
+                </div>
+                <h3 className="text-3xl font-bold text-[#002855] mb-4">{infra.newsletterTitle}</h3>
+                <p className="text-lg text-gray-700 mb-10">{infra.newsletterSubtitle}</p>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Enter Name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-6 py-4 rounded-2xl bg-white border-none shadow-lg outline-none focus:ring-2 focus:ring-[#002855]/20 text-[#002855] placeholder:text-gray-400"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Your Mail"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-6 py-4 rounded-2xl bg-white border-none shadow-lg outline-none focus:ring-2 focus:ring-[#002855]/20 text-[#002855] placeholder:text-gray-400"
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      placeholder="Your Message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-6 py-4 rounded-2xl bg-white border-none shadow-lg outline-none focus:ring-2 focus:ring-[#002855]/20 text-[#002855] placeholder:text-gray-400 resize-none"
+                    />
+                  </div>
+
+                  <div className="pt-4">
+                    <Button
+                      disabled={loading}
+                      className="w-full h-14 bg-white text-[#00AEEF] hover:bg-white hover:scale-105 transition-all rounded-full font-bold uppercase tracking-wider shadow-xl border-none"
+                    >
+                      {loading ? 'Subscribing...' : 'SUBSCRIBE NOW'}
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

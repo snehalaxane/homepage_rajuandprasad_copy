@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ChevronRight, Mail, Phone, MapPin, User, MessageSquare, Copy, Navigation, Clock, Building2, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import { ScrollToTop } from '../components/scroll-to-top';
 import { Button } from '../components/ui/button';
+import InfrastructureSection from '../components/infrastructure-section';
 import axios from 'axios';
 import { toast } from 'sonner';
 
@@ -358,6 +359,8 @@ export function ContactPage() {
             </motion.div>
           </div>
         </section>
+
+        <InfrastructureSection />
 
         {/* Branch Locations Section */}
         <section className="py-16 bg-white border-t border-gray-200">

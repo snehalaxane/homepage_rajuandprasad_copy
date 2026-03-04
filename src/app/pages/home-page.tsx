@@ -3,6 +3,7 @@ import { ModernNavbar } from '../components/modern-navbar';
 import { ModernStatsSection } from '../components/modern-stats-section';
 import { ModernServicesSection } from '../components/modern-services-section';
 import { ModernTeamSection } from '../components/modern-team-section';
+import InfrastructureSection from '../components/infrastructure-section';
 import { ScrollToTop } from '../components/scroll-to-top';
 
 interface HomePageProps {
@@ -18,7 +19,8 @@ export function HomePage({ activePage }: HomePageProps) {
       </div>
       <ModernStatsSection />
       <ModernServicesSection />
-      <ModernTeamSection />
+      <InfrastructureSection />
+      {/* <ModernTeamSection /> */}
       <ScrollToTop />
     </>
   );
