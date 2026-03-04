@@ -87,7 +87,7 @@ export function ModernHeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative flex items-center overflow-hidden">
       {/* Top Left Logo Logo */}
       <div className="absolute top-8 left-8 z-50">
         <motion.a
@@ -178,8 +178,8 @@ export function ModernHeroSection() {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-6 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto px-6 py-14 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* Left Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -187,7 +187,8 @@ export function ModernHeroSection() {
             transition={{ duration: 0.8 }}
           >
             {/* Years Badge */}
-            <motion.div
+            {/* Years Badge - Commented out as requested */}
+            {/* <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -229,10 +230,12 @@ export function ModernHeroSection() {
                     ))
                 ) : null}
               </div>
-            </motion.div>
+            </motion.div> */}
+
 
             {/* Main Heading */}
-            <motion.h1
+            {/* Main Heading - Commented out as requested */}
+            {/* <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -240,17 +243,35 @@ export function ModernHeroSection() {
             >
               <span className="text-[#F5C542] text-5xl ">{(hero?.title)}</span>
               <br />
-              {/* <span className="text-black drop-shadow-2xl">
-                {(hero?.title || "").split(" ").slice(2).join(" ")}
-              </span> */}
-            </motion.h1>
+            </motion.h1> */}
+
+            {/* Hero Image Replacement */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-wrap gap-6 mb-6 -ml-10"
+            >
+              {[
+                { url: hero?.imageUrl, alt: "Primary" }
+              ].map((img, idx) => img.url && (
+                <div key={idx} className="relative group max-w-[550px]">
+                  <img
+                    src={img.url.startsWith('http') ? img.url : `${API_BASE_URL}/${img.url}`}
+                    alt={img.alt}
+                    className="w-full h-auto object-contain transform transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              ))}
+            </motion.div>
+
 
             {/* Subtext */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-white/90 leading-relaxed mb-10 max-w-xl drop-shadow-lg"
+              className="text-xl text-white/90 leading-relaxed mb-6 max-w-xl drop-shadow-lg"
             >
               {hero?.description}
             </motion.p>
@@ -283,7 +304,7 @@ export function ModernHeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-12 pt-8 border-t border-white/30"
+              className="mt-8 pt-6 border-t border-white/30"
             >
               <div className="flex flex-wrap gap-8">
                 <div>
@@ -302,154 +323,24 @@ export function ModernHeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Interactive India Map */}
+          {/* Right Column - India Map Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative"
+            className="flex justify-center items-center"
           >
-            {/* Premium Card Container - GLASSMORPHIC */}
-            <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 overflow-hidden">
-              {/* Animated Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-[var(--primary)]/15 rounded-3xl -z-10" />
-
-              {/* Card Header */}
-              <div className="mb-6 text-center">
-                <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">
-                  {hero?.presenceTitle}
-                </h3>
-                <p className="text-white/80 text-sm">
-                  {hero?.presenceSubtitle}
-                </p>
+            {hero?.mapImageUrl ? (
+              <img
+                src={hero.mapImageUrl.startsWith('http') ? hero.mapImageUrl : `${API_BASE_URL}/${hero.mapImageUrl}`}
+                alt="Map Presence"
+                className="w-full h-auto object-contain max-h-[700px]"
+              />
+            ) : (
+              <div className="h-[400px] flex items-center justify-center text-white/40 italic">
+                Map Image not set
               </div>
-
-              {/* Interactive Map */}
-              <div className="h-[450px] w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                {/* @ts-ignore */}
-                <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ height: "100%", width: "100%", background: 'transparent' }} attributionControl={false} zoomControl={false}>
-                  <TileLayer
-                    attribution=""
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-
-                  {locations.filter(loc => loc.latitude && loc.longitude).map((loc) => {
-                    const pinColor = loc.pinColor || 'var(--primary)';
-                    const label = loc.tooltip || loc.city || '';
-                    const isLeft = parseFloat(loc.longitude) < 78.9629; // Approx center of India
-
-                    const customIcon = L.divIcon({
-                      className: 'map-marker-container',
-                      html: `
-                        <div style="position: relative; width: 0; height: 0;">
-                          <!-- Pulsating Pin Dot -->
-                          <div style="
-                            position: absolute;
-                            width: 10px;
-                            height: 10px;
-                            background: ${pinColor};
-                            border: 2px solid white;
-                            border-radius: 50%;
-                            top: 0;
-                            left: 0;
-                            transform: translate(-50%, -50%);
-                            z-index: 2;
-                            box-shadow: 0 0 15px ${pinColor}80;
-                          ">
-                            <div style="
-                              position: absolute;
-                              inset: -4px;
-                              background: ${pinColor};
-                              opacity: 0.4;
-                              border-radius: 50%;
-                              animation: pulse 2s infinite;
-                            "></div>
-                          </div>
-
-                          <!-- Label Group with Arrow/Line -->
-                          <div style="
-                            position: absolute;
-                            top: 0;
-                            ${isLeft ? 'right: 15px;' : 'left: 15px;'}
-                            transform: translateY(-50%);
-                            display: flex;
-                            align-items: center;
-                            ${isLeft ? 'flex-direction: row;' : 'flex-direction: row-reverse;'}
-                            pointer-events: none;
-                          ">
-                            <!-- Label Pill -->
-                            <div style="
-                              background: white;
-                              color: #1a1a1a;
-                              font-weight: 800;
-                              font-size: 10px;
-                              letter-spacing: 0.05em;
-                              padding: 4px 12px;
-                              border-radius: 6px;
-                              border: 2px solid ${pinColor};
-                              box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-                              text-transform: uppercase;
-                              white-space: nowrap;
-                              pointer-events: auto;
-                            ">
-                              ${label}
-                            </div>
-                            <!-- Dotted Leader Line -->
-                            <div style="
-                              width: 25px;
-                              height: 0;
-                              border-top: 2px dotted ${pinColor};
-                              opacity: 0.6;
-                            "></div>
-                          </div>
-                          <style>
-                            @keyframes pulse {
-                              0% { transform: scale(1); opacity: 0.4; }
-                              100% { transform: scale(2.5); opacity: 0; }
-                            }
-                          </style>
-                        </div>
-                      `,
-                      iconSize: [0, 0],
-                      iconAnchor: [0, 0],
-                    });
-
-                    return (
-                      <Marker
-                        key={loc._id}
-                        position={[
-                          parseFloat(loc.latitude),
-                          parseFloat(loc.longitude),
-                        ]}
-                        // @ts-ignore
-                        icon={customIcon}
-                      >
-                        {/* @ts-ignore */}
-                        <Tooltip
-                          direction="top"
-                          offset={[0, -10]}
-                          opacity={1}
-                          permanent={false}
-                        >
-                          <div className="p-2 min-w-[200px] bg-white rounded-lg border border-gray-100 shadow-2xl">
-                            <strong className="text-sm block mb-1 font-bold text-gray-900 border-b pb-1" style={{ color: pinColor }}>{label}</strong>
-                            <div className="text-[12px] text-gray-600 leading-snug font-medium break-words whitespace-normal max-w-[220px]">
-                              {loc.address}
-                            </div>
-                          </div>
-                        </Tooltip>
-                      </Marker>
-                    );
-                  })}
-                </MapContainer>
-              </div>
-
-              {/* Legend */}
-              <div className="mt-6 flex items-center justify-center gap-2 text-sm text-black">
-                <MapPin className="h-4 w-4 text-[var(--primary)]" />
-                <span>Hover over pins to view location details</span>
-              </div>
-            </div>
+            )}
           </motion.div>
         </div>
       </div>
