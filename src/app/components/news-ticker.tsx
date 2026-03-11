@@ -1,7 +1,39 @@
 import { motion } from 'motion/react';
+import { useState, useEffect } from "react";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export function NewsTicker() {
-    const newsText = "Our vision is to extend expert based services all over the country and to get ultimate recognition in providing services across the globe. Our vision is to extend expert based services all over the country and to get ultimate recognition in providing services across the globe.";
+    const [newsItems, setNewsItems] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/news-ticker`);
+                if (!res.ok) throw new Error("Fetch failed");
+                const data = await res.json();
+                setNewsItems(data.filter((i: any) => i.enabled));
+            } catch (error) {
+                console.error("Failed to fetch news ticker", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchNews();
+    }, []);
+
+    const newsText = newsItems.length > 0
+        ? newsItems.map(i => i.content).join(' \u00A0\u00A0\u00A0 • \u00A0\u00A0\u00A0 ')
+        : "Welcome to Raju and Prasad Chartered Accountants. Stay tuned for expert financial insights and updates.";
+
+    if (isLoading && newsItems.length === 0) return (
+        <div className="bg-white border-b-2 border-blue-900 h-10 flex items-center px-4">
+            <div className="animate-pulse flex space-x-4 w-full">
+                <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+            </div>
+        </div>
+    );
 
     return (
         <div className="bg-white border-b-2 border-blue-900 overflow-hidden flex h-10 items-center shadow-sm relative z-40">
@@ -18,7 +50,7 @@ export function NewsTicker() {
                 <motion.div
                     animate={{ x: ['100%', '-100%'] }}
                     transition={{
-                        duration: 40,
+                        duration: newsText.length / 5, // Dynamic duration based on length
                         repeat: Infinity,
                         ease: "linear"
                     }}

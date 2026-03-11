@@ -81,7 +81,7 @@ export function ModernStatsSection() {
   if (!statsData || statsData.enabled === false) return null;
 
   return (
-    <section className="bg-[#D1D5DB] text-[#111111] overflow-hidden relative h-screen flex items-center">
+    <section className="bg-[#D1D5DB] text-[#111111] overflow-hidden relative min-h-screen py-15 flex items-center">
 
       {/* Decorative Background Elements - Matching Our Services */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/15 rounded-full blur-[120px] -z-0" />
@@ -90,11 +90,12 @@ export function ModernStatsSection() {
       <div className="relative z-10 container mx-auto px-6">
 
         {/* Header Section */}
-        <div className="text-center mb-5">
+        <div className="text-center mb-2">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="inline-block px-1 py-0  rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold tracking-widest uppercase mb-4"
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold tracking-widest uppercase mb-4"
           >
             Our Expertise
           </motion.span>
