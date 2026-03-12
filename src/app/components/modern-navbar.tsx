@@ -167,15 +167,15 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
   }
 
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500`}
-    >
-      {/* Top Header Row - White/Grey background - Hidden on Home Page since it has Hero section */}
+    <>
+      {/* Top Header Row - Scrolls with page */}
       {activePage !== 'home' && (
-        <div className="bg-[#888888] border-b hidden xl:block">
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="relative left-0 right-0 z-[101] bg-[#888888] border-b hidden xl:block transition-all duration-500"
+        >
           <div className="container mx-auto px-6 h-24 flex items-center justify-between">
             {/* Left - Logo */}
             <div className="flex-shrink-0">
@@ -222,11 +222,17 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
 
-      {/* Navigation Row - Primary color background */}
-      <div className={`transition-all duration-500 ${isScrolled ? 'shadow-[0_8px_30px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgba(0,0,0,0.2)]'}`} style={{ backgroundColor: 'var(--primary)' }}>
+      {/* Navigation Row - Sticky Top */}
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={`sticky top-0 left-0 right-0 z-[100] transition-all duration-500 ${isScrolled ? 'shadow-[0_8px_30px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgba(0,0,0,0.2)]'}`}
+        style={{ backgroundColor: 'var(--primary)' }}
+      >
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex items-center justify-between xl:justify-center h-16">
             {/* Mobile Logo Only */}
@@ -352,99 +358,99 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden border-t border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
-            style={{ backgroundColor: 'var(--primary)' }}
-          >
-            <div className="container mx-auto px-6 py-6 max-h-[70vh] overflow-y-auto">
-              <div className="flex flex-col gap-2">
-                {navItems.map((item) => {
-                  // Dynamic isActive check for mobile
-                  const cleanHref = (item.href || '').replace(/^#/, '');
-                  const isActive = activePage === cleanHref || (activePage === 'home' && (cleanHref === 'home' || cleanHref === ''));
+        {/* Mobile Menu - Moved inside sticky container */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="xl:hidden border-t border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
+              style={{ backgroundColor: 'var(--primary)' }}
+            >
+              <div className="container mx-auto px-6 py-6 max-h-[70vh] overflow-y-auto">
+                <div className="flex flex-col gap-2">
+                  {navItems.map((item) => {
+                    // Dynamic isActive check for mobile
+                    const cleanHref = (item.href || '').replace(/^#/, '');
+                    const isActive = activePage === cleanHref || (activePage === 'home' && (cleanHref === 'home' || cleanHref === ''));
 
-                  if (item.dropdown) {
+                    if (item.dropdown) {
+                      return (
+                        <div key={item.label}>
+                          <button
+                            onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
+                            className={`w-full py-3 px-4 rounded-lg transition-all font-semibold flex items-center justify-between text-white ${isActive
+                              ? 'bg-white/20 border-l-2 border-white'
+                              : 'hover:bg-white/10'
+                              }`}
+                          >
+                            {item.label}
+                            <ChevronDown className={`h-4 w-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
+                          </button>
+
+                          <AnimatePresence>
+                            {openDropdown === item.label && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="ml-4 mt-2 space-y-2"
+                              >
+                                {item.dropdown.map((dropdownItem) => {
+                                  const isDropdownActive =
+                                    (activePage === 'newsletter' && dropdownItem.href === '#newsletter') ||
+                                    (activePage === 'blog' && dropdownItem.href === '#blog') ||
+                                    (activePage === 'alumni' && dropdownItem.href === '#alumni');
+
+                                  return (
+                                    <a
+                                      key={dropdownItem.label}
+                                      href={dropdownItem.href}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        handleNavClick(dropdownItem.href);
+                                      }}
+                                      className={`block py-2 px-4 rounded-lg transition-all font-semibold text-sm text-white ${isDropdownActive
+                                        ? 'bg-white/20 border-l-2 border-white'
+                                        : 'hover:bg-white/10'
+                                        }`}
+                                    >
+                                      {dropdownItem.label}
+                                    </a>
+                                  );
+                                })}
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    }
+
                     return (
-                      <div key={item.label}>
-                        <button
-                          onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                          className={`w-full py-3 px-4 rounded-lg transition-all font-semibold flex items-center justify-between text-white ${isActive
-                            ? 'bg-white/20 border-l-2 border-white'
-                            : 'hover:bg-white/10'
-                            }`}
-                        >
-                          {item.label}
-                          <ChevronDown className={`h-4 w-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
-                        </button>
-
-                        <AnimatePresence>
-                          {openDropdown === item.label && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="ml-4 mt-2 space-y-2"
-                            >
-                              {item.dropdown.map((dropdownItem) => {
-                                const isDropdownActive =
-                                  (activePage === 'newsletter' && dropdownItem.href === '#newsletter') ||
-                                  (activePage === 'blog' && dropdownItem.href === '#blog') ||
-                                  (activePage === 'alumni' && dropdownItem.href === '#alumni');
-
-                                return (
-                                  <a
-                                    key={dropdownItem.label}
-                                    href={dropdownItem.href}
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      handleNavClick(dropdownItem.href);
-                                    }}
-                                    className={`block py-2 px-4 rounded-lg transition-all font-semibold text-sm text-white ${isDropdownActive
-                                      ? 'bg-white/20 border-l-2 border-white'
-                                      : 'hover:bg-white/10'
-                                      }`}
-                                  >
-                                    {dropdownItem.label}
-                                  </a>
-                                );
-                              })}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(item.href);
+                        }}
+                        className={`py-3.5 px-5 rounded-lg transition-all font-bold text-[17px] text-white ${isActive
+                          ? 'bg-white/20 border-l-2 border-white'
+                          : 'hover:bg-white/10'
+                          }`}
+                      >
+                        {item.label}
+                      </a>
                     );
-                  }
-
-                  return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.href);
-                      }}
-                      className={`py-3.5 px-5 rounded-lg transition-all font-bold text-[17px] text-white ${isActive
-                        ? 'bg-white/20 border-l-2 border-white'
-                        : 'hover:bg-white/10'
-                        }`}
-                    >
-                      {item.label}
-                    </a>
-                  );
-                })}
+                  })}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+    </>
   );
 }
