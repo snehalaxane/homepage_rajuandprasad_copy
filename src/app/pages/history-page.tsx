@@ -51,6 +51,7 @@ export function HistoryPage() {
   const [loading, setLoading] = useState(true);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [highlightedId, setHighlightedId] = useState<string | null>(null);
+  const [hoverId, setHoverId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -314,6 +315,8 @@ export function HistoryPage() {
                             x: { duration: 0.5 }
                           }}
                           className="relative pl-20 group"
+                          onMouseEnter={() => setHoverId(item._id)}
+                          onMouseLeave={() => setHoverId(null)}
                         >
                           {/* Timeline Dot */}
                           <div
