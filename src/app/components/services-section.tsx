@@ -98,7 +98,7 @@ export function ServicesSection() {
                   {/* Link */}
                   <motion.a
                     href="#"
-                    className="inline-flex items-center text-[var(--primary)] font-semibold group/link hover:text-[#011952] transition-colors"
+                    className="inline-flex items-center text-[var(--primary)] font-semibold group/link hover:text-[#002855] transition-colors"
                     whileHover={{ x: 5 }}
                   >
                     View Details

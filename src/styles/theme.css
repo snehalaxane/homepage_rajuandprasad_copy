@@ -2,7 +2,7 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
+  --background: #D1D5DB;
   --foreground: oklch(0.145 0 0);
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
@@ -10,8 +10,10 @@
   --popover-foreground: oklch(0.145 0 0);
 
   /* Primary and Secondary Colors - Dynamic from Admin Panel */
-  --primary: var(--primary);
-  --secondary: var(--secondary);
+  --primary: #002855;
+  --primary-rgb: 0, 40, 85;
+  --secondary: #F5C542;
+  --secondary-rgb: 245, 197, 66;
 
   --primary-foreground: #ffffff;
   --secondary-foreground: var(--primary);

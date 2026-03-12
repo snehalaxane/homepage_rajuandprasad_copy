@@ -16,7 +16,7 @@ const slides = [
   {
     title: 'Comprehensive Financial Solutions',
     description: 'End-to-end support for all your financial and regulatory needs',
-    gradient: '#011952',
+    gradient: '#002855',
   },
 ];
 

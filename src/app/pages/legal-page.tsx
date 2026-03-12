@@ -72,7 +72,7 @@ export function LegalPage({ slug }: LegalPageProps) {
                     <p className="text-[var(--secondary)] mt-2">The legal page you are looking for does not exist or is not published.</p>
                     <button
                         onClick={() => window.location.hash = '#home'}
-                        className="mt-6 px-6 py-2 bg-[var(--primary)] text-white rounded-lg hover:bg-[#011952] transition-colors"
+                        className="mt-6 px-6 py-2 bg-[var(--primary)] text-white rounded-lg hover:bg-[#002855] transition-colors"
                     >
                         Go Back Home
                     </button>

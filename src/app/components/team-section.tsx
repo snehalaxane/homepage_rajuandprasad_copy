@@ -182,7 +182,7 @@ export function TeamSection() {
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--primary)] text-white rounded-lg hover:bg-[#011952] transition-all hover:scale-105 shadow-lg shadow-[var(--primary)]/30"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--primary)] text-white rounded-lg hover:bg-[#002855] transition-all hover:scale-105 shadow-lg shadow-[var(--primary)]/30"
           >
             Schedule a Consultation
           </a>

@@ -147,7 +147,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
 
   if (loading) {
     return (
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--primary)] h-20 flex items-center justify-center">
+      <nav className="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-center" style={{ backgroundColor: 'var(--primary)' }}>
         <Loader2 className="w-6 h-6 text-white animate-spin" />
       </nav>
     );
@@ -159,12 +159,13 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'bg-[var(--primary)] shadow-[0_8px_30px_rgba(0,0,0,0.4)] border-b border-white/20'
-        : 'bg-[var(--primary)] shadow-[0_8px_30px_rgba(0,0,0,0.25)] border-b border-white/12'
+        ? 'shadow-[0_8px_30px_rgba(0,0,0,0.3)] border-b border-white/15'
+        : 'shadow-[0_8px_30px_rgba(0,0,0,0.2)] border-b border-white/10'
         }`}
+      style={{ backgroundColor: 'var(--primary)' }}
     >
-      <div className="container mx-auto px-10 relative z-10">
-        <div className="flex items-center justify-between h-10">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex items-center justify-between h-16">
           {/* Logo - Hidden on home page since it's moved to Hero */}
           {activePage !== 'home' && (
             <motion.a
@@ -189,7 +190,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
           )}
 
           {/* Desktop Navigation */}
-          <div className={`hidden xl:flex items-center justify-center ${activePage !== 'home' ? 'flex-1 px-12' : 'flex-1'}`}>
+          <div className={`hidden xl:flex items-center ${activePage !== 'home' ? 'flex-1 justify-end' : 'flex-1 justify-center'}`}>
             <div className="flex items-center gap-1">
               {navItems.map((item) => {
                 // Dynamic isActive check
@@ -205,7 +206,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                       onMouseLeave={() => setOpenDropdown(null)}
                     >
                       <button
-                        className={`relative text-[16px] font-normal tracking-wide transition-all duration-200 px-5 py-2.5 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
+                        className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
                           ? 'bg-white/10'
                           : 'hover:bg-white/5'
                           }`}
@@ -227,7 +228,8 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-2 w-48 bg-[var(--primary)] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50"
+                            className="absolute top-full right-0 mt-2 w-48 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50"
+                            style={{ backgroundColor: 'var(--primary)' }}
                           >
                             {item.dropdown.map((dropdownItem, index) => {
                               const isDropdownActive =
@@ -270,7 +272,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className={`relative text-[16px] font-normal tracking-wide transition-all duration-200 px-5 py-2.5 rounded-lg group whitespace-nowrap text-white ${isActive
+                    className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap text-white ${isActive
                       ? 'bg-white/10'
                       : 'hover:bg-white/5'
                       }`}
@@ -309,7 +311,8 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden bg-[var(--primary)] border-t border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
+            className="xl:hidden border-t border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.25)]"
+            style={{ backgroundColor: 'var(--primary)' }}
           >
             <div className="container mx-auto px-6 py-6 max-h-[70vh] overflow-y-auto">
               <div className="flex flex-col gap-2">

@@ -246,7 +246,7 @@ export function AlumniPage() {
                       <p className="text-xs font-semibold text-[var(--secondary)] uppercase tracking-wider mb-1">
                         Name
                       </p>
-                      <h3 className="text-xl font-bold text-[var(--primary)] group-hover:text-[#011952] transition-colors">
+                      <h3 className="text-xl font-bold text-[var(--primary)] group-hover:text-[#002855] transition-colors">
                         {alumni.name}
                       </h3>
                     </div>
@@ -316,7 +316,7 @@ export function AlumniPage() {
                     setSearchQuery('');
                     setSelectedIndustry('All');
                   }}
-                  className="px-6 py-3 bg-[var(--primary)] text-white rounded-xl font-semibold hover:bg-[#011952] transition-all"
+                  className="px-6 py-3 bg-[var(--primary)] text-white rounded-xl font-semibold hover:bg-[#002855] transition-all"
                 >
                   Clear Filters
                 </button>

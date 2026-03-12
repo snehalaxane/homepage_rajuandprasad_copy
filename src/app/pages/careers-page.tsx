@@ -370,7 +370,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 bg-[var(--primary)] hover:bg-[#011952] text-white h-10 rounded-xl"
+                    className="flex-1 bg-[var(--primary)] hover:bg-[#002855] text-white h-10 rounded-xl"
                   >
                     {submitting ? 'Sending Request...' : 'Apply Now'}
                   </Button>
@@ -431,7 +431,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: ApplyModalProps) {
                             <Button
                               type="submit"
                               disabled={isVerifying || otp.length !== 6}
-                              className="w-full py-4 bg-[var(--primary)] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                              className="w-full py-4 bg-[var(--primary)] hover:bg-[#002855] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                             >
                               {isVerifying ? (
                                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -834,7 +834,7 @@ export function CareersPage() {
 
                                 <Button
                                   onClick={() => handleApply(opening.role)}
-                                  className="w-full bg-[var(--primary)] hover:bg-[#011952] text-white shadow-lg hover:shadow-xl transition-all h-10 rounded-xl"
+                                  className="w-full bg-[var(--primary)] hover:bg-[#002855] text-white shadow-lg hover:shadow-xl transition-all h-10 rounded-xl"
                                 >
                                   <Briefcase className="mr-2 h-4 w-4" />
                                   Apply for Job
@@ -846,7 +846,7 @@ export function CareersPage() {
                                   </p>
                                   <a
                                     href="mailto:careers@rajuprasad.com"
-                                    className="flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:text-[#011952] transition-colors"
+                                    className="flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:text-[#002855] transition-colors"
                                   >
                                     <Mail className="h-4 w-4" />
                                     careers@rajuprasad.com
@@ -883,7 +883,7 @@ export function CareersPage() {
                       setSearchQuery('');
                       setSelectedCategory('All');
                     }}
-                    className="px-6 py-3 bg-[var(--primary)] text-white rounded-xl font-semibold hover:bg-[#011952] transition-all"
+                    className="px-6 py-3 bg-[var(--primary)] text-white rounded-xl font-semibold hover:bg-[#002855] transition-all"
                   >
                     Clear Filters
                   </button>

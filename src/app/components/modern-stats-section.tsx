@@ -81,7 +81,7 @@ export function ModernStatsSection() {
   if (!statsData || statsData.enabled === false) return null;
 
   return (
-    <section className="bg-[#D1D5DB] text-[#111111] overflow-hidden relative min-h-screen py-15 flex items-center">
+    <section className="bg-background text-[#111111] overflow-hidden relative min-h-screen py-15 flex items-center">
 
       {/* Decorative Background Elements - Matching Our Services */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/15 rounded-full blur-[120px] -z-0" />
@@ -95,7 +95,8 @@ export function ModernStatsSection() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold tracking-widest uppercase mb-4"
+            className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4"
+            style={{ backgroundColor: 'rgba(var(--primary-rgb, 0, 40, 85), 0.1)', color: 'var(--primary)', border: '1px solid var(--primary)' }}
           >
             Our Expertise
           </motion.span>
@@ -207,7 +208,7 @@ export function ModernStatsSection() {
                   }}
                 />
               </div>
-              <span className={`text-[11px] mt-2 font-bold transition-colors ${activeSlide === index ? 'text-[#002855]' : 'text-gray-500'}`}>
+              <span className={`text-[11px] mt-2 font-bold transition-colors`} style={{ color: activeSlide === index ? 'var(--primary)' : 'gray' }}>
                 0{index + 1}
               </span>
             </button>

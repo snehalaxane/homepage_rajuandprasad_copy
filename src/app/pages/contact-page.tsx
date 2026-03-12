@@ -158,7 +158,7 @@ export function ContactPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F7F8FA] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin" />
       </div>
     );
@@ -166,7 +166,7 @@ export function ContactPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-[#F7F8FA]">
+      <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
           className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
@@ -175,7 +175,7 @@ export function ContactPage() {
           }}
         >
           {!settings?.backgroundImage && (
-            <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20" />
+            <div className="absolute inset-0 bg-background" />
           )}
 
           {/* Overlay if there is a background image to ensure text readability */}
@@ -363,7 +363,7 @@ export function ContactPage() {
         <InfrastructureSection />
 
         {/* Branch Locations Section */}
-        <section className="py-16 bg-white border-t border-gray-200">
+        <section className="py-16 bg-background border-t border-gray-200">
           <div className="container mx-auto px-6">
             {/* Section Header */}
             <motion.div
@@ -502,7 +502,7 @@ export function ContactPage() {
         </section>
 
         {/* Additional Info Section */}
-        <section className="py-16 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-t border-gray-200">
+        <section className="py-16 bg-background border-t border-gray-200">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -525,7 +525,7 @@ export function ContactPage() {
                 </Button>
                 <Button
                   onClick={() => window.location.href = '/#careers'}
-                  className="px-6 py-3 bg-[var(--primary)] text-white hover:bg-[#011952] font-semibold rounded-xl transition-all"
+                  className="px-6 py-3 bg-[var(--primary)] text-white hover:bg-[#002855] font-semibold rounded-xl transition-all"
                 >
                   View Careers
                 </Button>
@@ -537,7 +537,7 @@ export function ContactPage() {
 
       {/* OTP Verification Modal */}
       {showOtpModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/60 backdrop-blur-sm animate-in fade-in duration-300">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -588,7 +588,7 @@ export function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isVerifying || otp.length !== 6}
-                      className="w-full py-4 bg-[var(--primary)] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                      className="w-full py-4 bg-[var(--primary)] hover:bg-[#002855] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                     >
                       {isVerifying ? (
                         <Loader2 className="w-4 h-4 animate-spin" />

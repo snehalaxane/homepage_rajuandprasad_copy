@@ -273,7 +273,7 @@ export function NewsletterPage() {
                           onClick={() => setCurrentPage(i + 1)}
                           className={
                             currentPage === i + 1
-                              ? 'bg-[var(--primary)] hover:bg-[#011952] text-white'
+                              ? 'bg-[var(--primary)] hover:bg-[#002855] text-white'
                               : 'border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white'
                           }
                         >

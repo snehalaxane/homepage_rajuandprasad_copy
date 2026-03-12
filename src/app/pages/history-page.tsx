@@ -114,7 +114,7 @@ export function HistoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
           <p className="text-[var(--primary)] font-semibold">Loading history...</p>
@@ -125,7 +125,7 @@ export function HistoryPage() {
 
   if (introData && introData.enabled === false) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-background flex items-center justify-center p-6 text-center">
         <div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Page Unavailable</h1>
           <p className="text-gray-600">This page is currently being updated. Please check back later.</p>
@@ -135,7 +135,7 @@ export function HistoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Page Header */}
       <section
         className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
@@ -144,7 +144,7 @@ export function HistoryPage() {
         }}
       >
         {!introData?.backgroundImage && (
-          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-[rgba(var(--primary-rgb),0.05)] to-gray-50/20" />
         )}
 
         {/* Overlay if there is a background image to ensure text readability */}
@@ -185,7 +185,7 @@ export function HistoryPage() {
       </section>
 
       {/* History + Timeline Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-start max-w-7xl mx-auto">
             {/* Left Side: History Content */}
@@ -205,9 +205,9 @@ export function HistoryPage() {
                 </h2>
               </div>
 
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 shadow-lg border border-gray-100">
+              <div className="bg-background rounded-3xl p-8 shadow-lg border border-gray-100">
                 <div className="relative">
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--primary)] to-blue-400 rounded-full" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)]/60 rounded-full" />
                   <div className="pl-6 space-y-4">
                     {journey?.description ? (
                       journey.description.split('\n').map((para, index) => (
@@ -318,11 +318,11 @@ export function HistoryPage() {
                           {/* Timeline Dot */}
                           <div
                             className={`absolute left-0 top-4 z-20 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500 ${item._id === highlightedId
-                              ? 'bg-gradient-to-br from-[var(--primary)] to-blue-600 shadow-2xl shadow-[var(--primary)]/50 scale-125 ring-4 ring-white'
-                              : status === 'established'
-                                ? 'bg-gradient-to-br from-[var(--primary)] to-blue-500 shadow-lg shadow-[var(--primary)]/30 scale-110'
-                                : status === 'active'
-                                  ? 'bg-gradient-to-br from-[var(--primary)] to-blue-400 shadow-lg shadow-[var(--primary)]/20'
+                              ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--primary)] shadow-2xl shadow-[var(--primary)]/50 scale-125 ring-4 ring-white'
+                              : item._id === hoverId
+                                ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--primary)] shadow-lg shadow-[var(--primary)]/30 scale-110'
+                                : item.status === 'past'
+                                  ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--primary)]/80 shadow-lg shadow-[var(--primary)]/20'
                                   : 'bg-gradient-to-br from-gray-400 to-gray-500 shadow-lg shadow-gray-400/20'
                               } group-hover:scale-125 group-hover:shadow-xl`}
                           >
@@ -336,13 +336,13 @@ export function HistoryPage() {
                           {/* Content Card */}
                           <div
                             className={`rounded-2xl p-6 shadow-lg border transition-all duration-500 relative ${item._id === highlightedId
-                              ? 'bg-gradient-to-br from-[var(--primary)] to-blue-900 border-[var(--primary)] shadow-2xl shadow-[var(--primary)]/30 -translate-y-2 scale-[1.02] text-white'
-                              : 'bg-blue-50/40 border-blue-100/50 hover:bg-white hover:border-[var(--primary)]/20 hover:shadow-xl hover:-translate-y-1'
+                              ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--primary)] border-[var(--primary)] shadow-2xl shadow-[var(--primary)]/30 -translate-y-2 scale-[1.02] text-white'
+                              : 'bg-background border-gray-100 hover:bg-white hover:border-[var(--primary)]/20 hover:shadow-xl hover:-translate-y-1'
                               }`}
                           >
                             {/* Active Indicator Glow */}
                             {item._id === highlightedId && (
-                              <div className="absolute inset-0 bg-blue-400/20 rounded-2xl -z-10 animate-pulse blur-xl" />
+                              <div className="absolute inset-0 bg-[var(--primary)]/5 rounded-2xl -z-10 animate-pulse blur-xl" />
                             )}
                             <div className="flex items-start justify-between mb-3">
                               <h4 className={`text-xl font-bold transition-colors ${item._id === highlightedId ? 'text-white' : 'text-gray-900 group-hover:text-[var(--primary)]'}`}>
@@ -391,7 +391,7 @@ export function HistoryPage() {
 
       {/* Our Mission Section */}
       {mission?.enabled !== false && (
-        <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50/20">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -400,7 +400,7 @@ export function HistoryPage() {
               transition={{ duration: 0.6 }}
               className="max-w-5xl mx-auto"
             >
-              <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden">
+              <div className="relative bg-gradient-to-br from-[var(--primary)] to-[var(--primary)] rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden">
                 {/* Decorative Background */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
@@ -436,7 +436,7 @@ export function HistoryPage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -457,7 +457,7 @@ export function HistoryPage() {
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] text-white rounded-full hover:bg-[#011952] transition-all shadow-lg shadow-[var(--primary)]/30 hover:shadow-xl font-semibold"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] text-white rounded-full hover:bg-[#002855] transition-all shadow-lg shadow-[var(--primary)]/30 hover:shadow-xl font-semibold"
               >
                 Contact Us
                 <ArrowRight className="h-5 w-5" />

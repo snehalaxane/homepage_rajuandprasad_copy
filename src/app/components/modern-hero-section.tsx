@@ -108,8 +108,8 @@ export function ModernHeroSection() {
         </motion.a>
       </div>
 
-      {/* Background with Gradient and Pattern - var(--secondary) DOMINANT & ATTRACTIVE */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--secondary)] via-[var(--secondary)]/95 to-[var(--secondary)]/90">
+      {/* Background decoration - Fixed color #7A7876 */}
+      <div className="absolute inset-0" style={{ backgroundColor: '#7A7876' }}>
         {/* Subtle Grid Pattern */}
         <div
           className="absolute inset-0 opacity-[0.06]"
@@ -134,7 +134,7 @@ export function ModernHeroSection() {
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-gradient-to-br from-[#aaaaaa]/30 to-[var(--secondary)]/20 blur-3xl"
+            className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-white/5 blur-3xl"
           />
           <motion.div
             animate={{
@@ -146,7 +146,7 @@ export function ModernHeroSection() {
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-gradient-to-tr from-[#666666]/30 to-[var(--secondary)]/20 blur-3xl"
+            className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-white/5 blur-3xl"
           />
 
           {/* Additional decorative circles for visual interest */}
@@ -176,8 +176,7 @@ export function ModernHeroSection() {
           />
         </div>
 
-        {/* Overlay for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--secondary)]/80 via-transparent to-[var(--secondary)]/80" />
+
       </div>
 
       {/* Content */}

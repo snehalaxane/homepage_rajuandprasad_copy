@@ -135,16 +135,16 @@ export function TeamPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Page Header / Hero Banner */}
       <section
-        className="relative overflow-hidden w-full aspect-[1920/395] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+        className="relative overflow-hidden w-full aspect-[1920/300] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
           backgroundImage: intro.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
           backgroundColor: !intro.backgroundImage ? 'transparent' : 'inherit'
         }}
       >
         {!intro.backgroundImage && (
-          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-[rgba(var(--primary-rgb),0.05)] to-gray-50/20" />
         )}
 
         {/* Overlay if there is a background image to ensure text readability */}
@@ -198,7 +198,7 @@ export function TeamPage() {
               className="hidden lg:flex justify-center items-center"
             >
               <div className="relative w-full max-w-md aspect-square">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/10 to-blue-100/50 rounded-full blur-3xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/10 to-[rgba(var(--primary-rgb),0.05)] rounded-full blur-3xl" />
                 <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-200/50">
                   <div className="grid grid-cols-2 gap-4">
                     {gridPartners.length > 0 ? (
@@ -254,7 +254,7 @@ export function TeamPage() {
       {/* Intro Content Section */}
 
       {/* Intro Content Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -263,10 +263,10 @@ export function TeamPage() {
             transition={{ duration: 0.6 }}
             className="max-w-5xl mx-auto"
           >
-            <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
+            <div className="relative bg-background rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
 
               {/* Accent line */}
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)]/60" />
 
               <p className="text-lg text-[var(--secondary)] leading-relaxed pl-6">
                 The Firm has a blend of professionals with experience in the fields of
@@ -294,8 +294,8 @@ export function TeamPage() {
 
 
       {/* Our Partners Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50/20">
-        <div className="container mx-auto px-6">
+      <section className="py-8 bg-background">
+        <div className="container mx-auto px-4">
           {/* Section Title */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -340,40 +340,39 @@ export function TeamPage() {
                 >
                   <div className="grid lg:grid-cols-5 gap-0">
                     {/* Left: Profile Photo */}
-                    <div className="lg:col-span-2 relative overflow-hidden bg-gradient-to-br from-[var(--primary)]/5 to-blue-50">
-                      <div className="aspect-[4/5] lg:aspect-auto lg:h-full relative">
+                    <div className="lg:col-span-2 relative overflow-hidden bg-gray-50/50 flex items-center justify-center">
+                      <div className="h-full w-full max-h-[380px] relative p-4">
                         <img
                           src={resolveImageUrl(currentPartner.photo)}
                           alt={currentPartner.name}
-                          className="w-full h-full object-cover object-top"
+                          className="w-full h-full object-contain"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/20 to-transparent" />
                       </div>
                     </div>
 
                     {/* Right: Partner Info */}
-                    <div className="lg:col-span-3 p-10 lg:p-12 flex flex-col justify-center">
+                    <div className="lg:col-span-3 p-6 lg:p-8 flex flex-col justify-center">
                       {/* Location Tag */}
-                      <div className="flex items-center gap-2 mb-4">
-                        <div className="px-4 py-1.5 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold flex items-center gap-2">
-                          <MapPin className="h-4 w-4" />
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="px-3 py-1 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-xs font-semibold flex items-center gap-2">
+                          <MapPin className="h-3.5 w-3.5" />
                           {currentPartner.city}
                         </div>
                       </div>
 
                       {/* Name */}
-                      <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1">
                         {currentPartner.name}
                       </h3>
-                      <p className="text-xl font-semibold text-[var(--primary)] mb-6">{currentPartner.designation}</p>
+                      <p className="text-lg font-semibold text-[var(--primary)] mb-4">{currentPartner.designation}</p>
 
                       {/* Description */}
-                      <p className="text-lg text-[var(--secondary)] leading-relaxed mb-8">
+                      <p className="text-base text-[var(--secondary)] leading-relaxed mb-4 line-clamp-4">
                         {currentPartner.bio}
                       </p>
 
                       {/* Contact Info */}
-                      <div className="space-y-3 mb-8">
+                      <div className="space-y-2 mb-4">
                         {currentPartner.email && (
                           <a
                             href={`mailto:${currentPartner.email}`}
@@ -471,7 +470,7 @@ export function TeamPage() {
                 whileHover={{ scale: 1.05, x: 5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleNext}
-                className="flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white rounded-full hover:bg-[#011952] transition-all shadow-lg shadow-[var(--primary)]/30 hover:shadow-xl"
+                className="flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white rounded-full hover:bg-[#002855] transition-all shadow-lg shadow-[var(--primary)]/30 hover:shadow-xl"
               >
                 <span className="font-semibold">Next Partner</span>
                 <ChevronRight className="h-5 w-5" />

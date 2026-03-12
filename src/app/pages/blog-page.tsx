@@ -420,7 +420,7 @@ export function BlogPage() {
                               onClick={() => setCurrentPage(i + 1)}
                               className={
                                 currentPage === i + 1
-                                  ? 'bg-[var(--primary)] hover:bg-[#011952] text-white px-4 py-2'
+                                  ? 'bg-[var(--primary)] hover:bg-[#002855] text-white px-4 py-2'
                                   : 'border-2 border-gray-200 hover:border-[var(--primary)] hover:bg-[var(--primary)] hover:text-white px-4 py-2'
                               }
                             >
@@ -495,7 +495,7 @@ export function BlogPage() {
                       </p>
                       <Button
                         size="sm"
-                        className="mt-4 w-full bg-[var(--primary)] hover:bg-[#011952] text-white"
+                        className="mt-4 w-full bg-[var(--primary)] hover:bg-[#002855] text-white"
                         asChild
                       >
                         <a href="#newsletter">

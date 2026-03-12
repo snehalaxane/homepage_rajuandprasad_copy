@@ -117,7 +117,7 @@ export function ServicesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin" />
       </div>
     );
@@ -127,7 +127,7 @@ export function ServicesPage() {
   // but for now we'll just check if it's enabled.
   if (introData && introData.enabled === false) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-background flex items-center justify-center p-6 text-center">
         <div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Page Unavailable</h1>
           <p className="text-gray-600">This page is currently being updated. Please check back later.</p>
@@ -137,7 +137,7 @@ export function ServicesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
 
       {/* Page Header */}
       <section
@@ -148,7 +148,7 @@ export function ServicesPage() {
         }}
       >
         {!introData?.backgroundImage && (
-          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20" />
+          <div className="absolute inset-0 bg-background" />
         )}
 
         {/* Overlay if there is a background image to ensure text readability */}
@@ -190,7 +190,7 @@ export function ServicesPage() {
 
       {/* Intro Text Block */}
       {introData?.introEnabled !== false && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -199,7 +199,7 @@ export function ServicesPage() {
               transition={{ duration: 0.6 }}
               className="max-w-5xl mx-auto"
             >
-              <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
+              <div className="relative bg-background rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
                 <div className="pl-6">
                   <p className="text-lg text-[var(--secondary)] leading-relaxed">
@@ -213,7 +213,7 @@ export function ServicesPage() {
       )}
 
       {/* Services Split Panel Layout */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50/20">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-12 gap-8">
@@ -379,7 +379,7 @@ export function ServicesPage() {
 
       {/* CTA Section */}
       {introData?.ctaEnabled !== false && (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}

@@ -58,18 +58,35 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const hexToRgb = (hex: string) => {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : null;
+    };
+
     const fetchTheme = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/api/settings/theme`);
-        const { primaryColor, secondaryColor } = response.data;
+        const { primaryColor, secondaryColor, backgroundColor } = response.data;
         if (primaryColor) {
           document.documentElement.style.setProperty('--primary', primaryColor);
+          const rgb = hexToRgb(primaryColor);
+          if (rgb) document.documentElement.style.setProperty('--primary-rgb', rgb);
         }
         if (secondaryColor) {
           document.documentElement.style.setProperty('--secondary', secondaryColor);
+          const rgb = hexToRgb(secondaryColor);
+          if (rgb) document.documentElement.style.setProperty('--secondary-rgb', rgb);
+        }
+        if (backgroundColor) {
+          document.documentElement.style.setProperty('--background', backgroundColor);
+        } else {
+          // Default background
+          document.documentElement.style.setProperty('--background', '#D1D5DB');
         }
       } catch (err) {
         console.error('Error fetching theme settings:', err);
+        // Fallback default
+        document.documentElement.style.setProperty('--background', '#D1D5DB');
       }
     };
     fetchTheme();
@@ -81,7 +98,7 @@ export default function App() {
   const isHomePage = currentPage === 'home' || (!isMainPage && !isLegalPage);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Conditionally render navbar globally ONLY if not on home page */}
       {!isHomePage && <ModernNavbar activePage={currentPage} />}
 

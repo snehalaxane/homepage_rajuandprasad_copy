@@ -17,12 +17,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--primary), var(--primary-light, #0445c5));
+  background: linear-gradient(to bottom, var(--primary), var(--primary-light, #002855));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, var(--primary-dark, #011952), var(--primary));
+  background: linear-gradient(to bottom, var(--primary-dark, #002855), var(--primary));
 }
 
 /* Selection color */
@@ -107,7 +107,7 @@ html {
 
 .btn-shimmer:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(2, 38, 131, 0.3) !important;
+  box-shadow: 0 15px 30px rgba(0, 40, 85, 0.3) !important;
 }
 
 .btn-shimmer:active {

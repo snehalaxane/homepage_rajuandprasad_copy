@@ -91,30 +91,30 @@ export function ModernServicesSection() {
   */
 
   return (
-    <section id="services" className="py-24 bg-[#D1D5DB] relative overflow-hidden">
+    <section id="services" className="py-16 bg-background relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px] -z-0" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px] -z-0" />
 
-      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
+      <div className="container mx-auto px-6 md:px-12 relative z-10 max-w-7xl">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-24"
+          className="text-center mb-16"
         >
           <div className="inline-block relative">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-[#002855] mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight" style={{ color: 'var(--primary)' }}>
               Our Services
             </h2>
-            <div className="w-12 h-1 bg-[#00AEEF] mx-auto rounded-full"></div>
+            <div className="w-12 h-1 mx-auto rounded-full" style={{ backgroundColor: 'var(--primary)' }}></div>
           </div>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-24 px-4 md:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 gap-y-24">
           {services.map((service, index) => {
             const Icon = iconMap[service.icon] || FileCheck;
             return (
@@ -127,27 +127,27 @@ export function ModernServicesSection() {
                 className="group relative flex items-center h-full"
               >
                 {/* Circular Contact/Image */}
-                <div className="absolute -left-10 md:-left-12 w-32 h-32 md:w-36 md:h-36 rounded-full border-[6px] border-[#D1D5DB] bg-white shadow-xl overflow-hidden z-20 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 flex-shrink-0">
+                <div className="absolute -left-10 md:-left-12 w-32 h-32 md:w-36 md:h-36 rounded-full border-[6px] border-background bg-white shadow-xl overflow-hidden z-20 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 flex-shrink-0 flex items-center justify-center p-3">
                   {service.icon?.startsWith('data:') || (service.icon && service.icon.includes('/')) ? (
                     <img
                       src={service.icon.startsWith('/') && !service.icon.startsWith('data:') ? `${API_BASE_URL}${service.icon}` : service.icon}
                       alt={service.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-50 bg-gradient-to-br from-white to-gray-100">
-                      <Icon className="w-12 h-12 text-[#002855]" />
+                    <div className="w-full h-full flex items-center justify-center bg-gray-50 bg-gradient-to-br from-white to-gray-100 p-4">
+                      <Icon className="w-full h-full" style={{ color: 'var(--primary)' }} />
                     </div>
                   )}
                 </div>
 
                 {/* Content Box */}
-                <div className="bg-[#E5E7EB] rounded-2xl p-6 pl-24 md:pl-28 ml-6 w-full min-h-[140px] md:min-h-[150px] flex flex-col justify-center shadow-lg transition-all duration-300 group-hover:bg-white group-hover:shadow-2xl border border-transparent group-hover:border-[#00AEEF]/20 relative overflow-hidden">
+                <div className="bg-[#E5E7EB] rounded-2xl p-6 pl-24 md:pl-28 ml-6 w-full min-h-[140px] md:min-h-[150px] flex flex-col justify-center shadow-lg transition-all duration-300 group-hover:bg-white group-hover:shadow-2xl border border-transparent group-hover:border-[var(--primary)]/20 relative overflow-hidden">
                   {/* Subtle Decorative Gradient on hover */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#00AEEF]/5 rounded-full blur-3xl -z-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-100 transition-opacity rounded-full blur-3xl -z-0" style={{ backgroundColor: 'var(--primary)', opacity: 0.05 }} />
 
                   <div className="relative z-10">
-                    <h3 className="text-xl md:text-lg font-bold text-[#002855] mb-2 leading-tight md:leading-snug transition-colors duration-300 group-hover:text-[#00AEEF]">
+                    <h3 className="text-xl md:text-lg font-bold mb-2 leading-tight md:leading-snug transition-colors duration-300 group-hover:text-[var(--primary)]" style={{ color: 'var(--primary)' }}>
                       {service.name}
                     </h3>
                     <p className="text-gray-700 text-sm leading-relaxed line-clamp-3">
@@ -171,7 +171,8 @@ export function ModernServicesSection() {
           >
             <Button
               onClick={() => window.location.hash = '#services'}
-              className="click-btn bg-[#002855] hover:bg-[#003d80] text-white px-10 py-4 text-lg rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+              className="click-btn text-white px-10 py-4 text-lg rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+              style={{ backgroundColor: 'var(--primary)' }}
             >
               <span>Explore All Solutions</span>
               <ArrowRight className="ml-2 h-5 w-5" />

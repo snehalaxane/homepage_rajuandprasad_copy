@@ -201,14 +201,14 @@ export function NetworkingPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <div className="min-h-screen bg-background">
 
       {/* Page Header */}
       <section
@@ -218,7 +218,7 @@ export function NetworkingPage() {
         }}
       >
         {!domesticContent?.backgroundImage && (
-          <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/5 to-[var(--primary)]/10" />
+          <div className="absolute inset-0 bg-background" />
         )}
 
         {/* Overlay if there is a background image to ensure text readability */}
@@ -253,7 +253,7 @@ export function NetworkingPage() {
       </section>
 
       {/* Main Content Section */}
-      <section className="py-16">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Left Column - Content Cards */}
@@ -446,7 +446,7 @@ export function NetworkingPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-[var(--primary)] hover:bg-[#011952] text-white font-bold py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[var(--primary)]/30 flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[var(--primary)] hover:bg-[#002855] text-white font-bold py-4 rounded-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-[var(--primary)]/30 flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {submitting ? (
                       <>
@@ -469,7 +469,7 @@ export function NetworkingPage() {
 
       {/* OTP Verification Modal */}
       {showOtpModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-background/60 backdrop-blur-sm animate-in fade-in duration-300">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -521,7 +521,7 @@ export function NetworkingPage() {
                     <Button
                       type="submit"
                       disabled={isVerifying || otp.length !== 6}
-                      className="w-full py-4 bg-[var(--primary)] hover:bg-[#011952] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
+                      className="w-full py-4 bg-[var(--primary)] hover:bg-[#002855] text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2"
                     >
                       {isVerifying ? (
                         <Loader2 className="w-4 h-4 animate-spin" />

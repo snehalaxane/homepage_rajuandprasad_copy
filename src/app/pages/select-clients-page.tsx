@@ -98,7 +98,7 @@ export function SelectClientsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin" />
           <p className="text-[var(--primary)] font-semibold">Loading clients portfolio...</p>
@@ -108,7 +108,7 @@ export function SelectClientsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Page Header */}
       <section
         className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
@@ -117,7 +117,7 @@ export function SelectClientsPage() {
         }}
       >
         {!intro?.backgroundImage && (
-          <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/30 to-gray-50/20" />
+          <div className="absolute inset-0 bg-background" />
         )}
 
         {/* Overlay if there is a background image to ensure text readability */}
@@ -165,7 +165,7 @@ export function SelectClientsPage() {
 
       {/* Intro Content */}
       {intro?.introEnabled !== false && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -174,7 +174,7 @@ export function SelectClientsPage() {
               transition={{ duration: 0.6 }}
               className="max-w-5xl mx-auto"
             >
-              <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
+              <div className="relative bg-background rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
                 {/* Accent line */}
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
 
@@ -193,7 +193,7 @@ export function SelectClientsPage() {
       )}
 
       {/* Client Categories Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50/20">
+      <section className="py-5 bg-background">
         <div className="container mx-auto px-6">
           {/* Section Title */}
           <motion.div
@@ -239,15 +239,22 @@ export function SelectClientsPage() {
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setActiveCategoryId(category._id)}
-                      className={`flex items-center gap-3 px-6 py-3 rounded-full font-semibold transition-all ${isActive
-                        ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/30'
-                        : 'bg-white text-gray-700 border border-gray-200 hover:border-[var(--primary)] hover:text-[var(--primary)] shadow-md'
+                      className={`flex items-center gap-3 px-6 py-3 rounded-full font-semibold transition-all border-2 ${isActive
+                        ? 'text-black shadow-lg'
+                        : 'bg-white text-gray-700 border-gray-100 hover:border-gray-300 shadow-md'
                         }`}
+                      style={{
+                        backgroundColor: isActive ? `${category.color}1A` : 'white',
+                        borderColor: isActive ? (category.color || 'var(--primary)') : undefined,
+                      }}
                     >
-                      <Icon className="h-5 w-5" />
+                      <div
+                        className="w-2 h-2 rounded-full transition-transform duration-300"
+                        style={{ backgroundColor: category.color || 'var(--primary)', transform: isActive ? 'scale(1.5)' : 'scale(1)' }}
+                      />
                       <span className="hidden sm:inline">{category.name}</span>
                       <span className="inline sm:hidden">{category.name.split(' ')[0]}</span>
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${isActive ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-600'
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${isActive ? 'bg-black/10 text-black' : 'bg-gray-100 text-gray-600'
                         }`}>
                         {activeItemsCount}
                       </span>
@@ -268,7 +275,10 @@ export function SelectClientsPage() {
                   >
                     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                       {/* Category Header */}
-                      <div className={`bg-gradient-to-r ${currentCategory.color || 'from-blue-500 to-indigo-600'} p-8 text-white`}>
+                      <div
+                        className="p-8 text-white transition-colors duration-500"
+                        style={{ backgroundColor: currentCategory.color || 'var(--primary)' }}
+                      >
                         <div className="flex items-center gap-4 mb-3">
                           <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
                             {(() => {
@@ -294,12 +304,27 @@ export function SelectClientsPage() {
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.3, delay: index * 0.03 }}
-                              className="group flex items-start gap-3 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-white hover:from-[var(--primary)]/5 hover:to-blue-50 transition-all hover:shadow-md border border-transparent hover:border-[var(--primary)]/20"
+                              className="group flex items-start gap-4 p-4 rounded-xl bg-gray-50/50 hover:bg-white transition-all hover:shadow-md border border-transparent hover:border-gray-100"
+                              onMouseEnter={(e) => {
+                                const checkCircle = e.currentTarget.querySelector('.check-circle') as HTMLElement;
+                                if (checkCircle) {
+                                  checkCircle.style.backgroundColor = currentCategory.color;
+                                  checkCircle.style.transform = 'scale(1.1)';
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                const checkCircle = e.currentTarget.querySelector('.check-circle') as HTMLElement;
+                                if (checkCircle) {
+                                  checkCircle.style.backgroundColor = `${currentCategory.color}22`;
+                                  checkCircle.style.transform = 'scale(1)';
+                                }
+                              }}
                             >
-                              <div className="mt-1 w-5 h-5 rounded-full bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--primary)] transition-colors">
-                                <Check className="h-3 w-3 text-[var(--primary)] group-hover:text-white transition-colors" />
-                              </div>
-                              <span className="text-gray-700 font-medium group-hover:text-[var(--primary)] transition-colors leading-snug">
+                              <div
+                                className="check-circle mt-1.5 w-2 h-2 rounded-full flex-shrink-0 transition-all duration-300"
+                                style={{ backgroundColor: `${currentCategory.color}22` }}
+                              />
+                              <span className="text-gray-900 font-medium leading-snug">
                                 {item.name}
                               </span>
                             </motion.div>
@@ -352,7 +377,7 @@ export function SelectClientsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

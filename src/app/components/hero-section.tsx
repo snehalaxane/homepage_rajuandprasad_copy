@@ -5,7 +5,7 @@ import indiaMapImage from 'figma:asset/c89e66fc01b498f8ab5b6159390e31a1b9b48b13.
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20 pt-32 pb-20">
+    <section id="home" className="relative overflow-hidden pt-32 pb-20" style={{ backgroundColor: '#7A7876' }}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
@@ -79,7 +79,7 @@ export function HeroSection() {
             >
               <Button
                 size="lg"
-                className="bg-[var(--primary)] hover:bg-[#011952] text-white shadow-lg shadow-[var(--primary)]/30 group px-8 py-6 text-lg"
+                className="bg-[var(--primary)] hover:bg-[#002855] text-white shadow-lg shadow-[var(--primary)]/30 group px-8 py-6 text-lg"
                 asChild
               >
                 <a href="#services">
