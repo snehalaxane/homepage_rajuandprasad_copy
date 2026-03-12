@@ -273,11 +273,11 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                         <AnimatePresence>
                           {openDropdown === item.label && (
                             <motion.div
-                              initial={{ opacity: 0, y: -10 }}
+                              initial={{ opacity: 0, y: activePage === 'home' ? 10 : -10 }}
                               animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
+                              exit={{ opacity: 0, y: activePage === 'home' ? 10 : -10 }}
                               transition={{ duration: 0.2 }}
-                              className="absolute top-full right-0 mt-2 w-48 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50"
+                              className={`absolute ${activePage === 'home' ? 'bottom-full mb-2' : 'top-full mt-2'} right-0 w-40 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50`}
                               style={{ backgroundColor: 'var(--primary)' }}
                             >
                               {item.dropdown.map((dropdownItem, index) => {

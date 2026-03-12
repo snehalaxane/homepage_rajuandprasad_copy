@@ -151,7 +151,7 @@ export function HistoryPage() {
 
         {/* Overlay if there is a background image to ensure text readability */}
         {introData?.backgroundImage && (
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
         )}
 
         <div className="absolute inset-0 overflow-hidden">
