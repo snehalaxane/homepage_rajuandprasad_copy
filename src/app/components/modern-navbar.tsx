@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ChevronDown, Loader2 } from 'lucide-react';
+import { Menu, X, ChevronDown, Loader2, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
+const iconMap: any = {
+  facebook: Facebook,
+  twitter: X,
+  instagram: Instagram,
+  linkedin: Linkedin
+};
 
 interface NavbarProps {
   activePage?: string;
@@ -28,14 +35,18 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [navItems, setNavItems] = useState<NavItem[]>([]);
   const [generalSettings, setGeneralSettings] = useState<any>(null);
+  const [hero, setHero] = useState<any>(null);
+  const [footerContent, setFooterContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [navRes, settingsRes] = await Promise.all([
+        const [navRes, settingsRes, heroRes, footerRes] = await Promise.all([
           axios.get(`${API_BASE_URL}/api/navbar`),
-          axios.get(`${API_BASE_URL}/api/settings/general`)
+          axios.get(`${API_BASE_URL}/api/settings/general`),
+          axios.get(`${API_BASE_URL}/api/hero`),
+          axios.get(`${API_BASE_URL}/api/footer-content`)
         ]);
 
         const allItems = navRes.data;
@@ -64,6 +75,8 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
 
         setNavItems(transformed);
         setGeneralSettings(settingsRes.data);
+        setHero(heroRes.data);
+        setFooterContent(footerRes.data);
       } catch (err) {
         console.error('Error fetching navbar data:', err);
       } finally {
@@ -155,152 +168,189 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? 'shadow-[0_8px_30px_rgba(0,0,0,0.3)] border-b border-white/15'
-        : 'shadow-[0_8px_30px_rgba(0,0,0,0.2)] border-b border-white/10'
-        }`}
-      style={{ backgroundColor: 'var(--primary)' }}
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500`}
     >
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo - Hidden on home page since it's moved to Hero */}
-          {activePage !== 'home' && (
-            <motion.a
-              href="#home"
-              className="flex items-center flex-shrink-0 relative z-10"
-              whileHover={{ scale: 1.05 }}
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.hash = 'home';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              style={{
-                filter: 'drop-shadow(0 2px 6px rgba(255,255,255,0.25))'
-              }}
-            >
+      {/* Top Header Row - White/Grey background - Hidden on Home Page since it has Hero section */}
+      {activePage !== 'home' && (
+        <div className="bg-[#888888] border-b hidden xl:block">
+          <div className="container mx-auto px-6 h-24 flex items-center justify-between">
+            {/* Left - Logo */}
+            <div className="flex-shrink-0">
+              <a href="#home" className="block transform transition-transform hover:scale-105">
+                <img
+                  src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
+                  alt={generalSettings?.siteTitle || "Raju & Prasad"}
+                  className="h-16 w-auto object-contain"
+                />
+              </a>
+            </div>
+
+            {/* Center - Hero Badge Image */}
+            <div className="flex justify-center items-center h-full">
+              {hero?.imageUrl && (
+                <img
+                  src={hero.imageUrl.startsWith('http') ? hero.imageUrl : `${API_BASE_URL}/${hero.imageUrl}`}
+                  alt="Highlight"
+                  className="h-23 w-auto object-contain"
+                />
+              )}
+            </div>
+
+            {/* Right - Important Links & Socials */}
+            <div className="flex items-center gap-6">
+              <span className="text-[#002855] font-bold text-lg">Important Links :</span>
+              <div className="flex gap-4">
+                {footerContent?.socialMedia && Object.entries(footerContent.socialMedia).map(([key, url]: [string, any]) => {
+                  if (!url) return null;
+                  const Icon = iconMap[key.toLowerCase()] || Facebook;
+                  return (
+                    <a
+                      key={key}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-[#002855] flex items-center justify-center text-white transition-all hover:scale-110 hover:bg-[#F5C542]"
+                      aria-label={key}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Navigation Row - Primary color background */}
+      <div className={`transition-all duration-500 ${isScrolled ? 'shadow-[0_8px_30px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgba(0,0,0,0.2)]'}`} style={{ backgroundColor: 'var(--primary)' }}>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex items-center justify-between xl:justify-center h-16">
+            {/* Mobile Logo Only */}
+            <div className="xl:hidden flex items-center">
               <img
                 src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
                 alt={generalSettings?.siteTitle || "Raju & Prasad"}
-                className="h-14 w-auto brightness-0 invert object-contain"
+                className="h-10 w-auto brightness-0 invert object-contain"
               />
-            </motion.a>
-          )}
-
-          {/* Desktop Navigation */}
-          <div className={`hidden xl:flex items-center ${activePage !== 'home' ? 'flex-1 justify-end' : 'flex-1 justify-center'}`}>
-            <div className="flex items-center gap-1">
-              {navItems.map((item) => {
-                // Dynamic isActive check
-                const cleanHref = (item.href || '').replace(/^#/, '');
-                const isActive = activePage === cleanHref || (activePage === 'home' && (cleanHref === 'home' || cleanHref === ''));
-
-                if (item.dropdown) {
-                  return (
-                    <div
-                      key={item.label}
-                      className="relative"
-                      onMouseEnter={() => setOpenDropdown(item.label)}
-                      onMouseLeave={() => setOpenDropdown(null)}
-                    >
-                      <button
-                        className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
-                          ? 'bg-white/10'
-                          : 'hover:bg-white/5'
-                          }`}
-                      >
-                        {item.label}
-                        <ChevronDown className={`h-4 w-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
-                        {/* Underline Animation - White accent */}
-                        <motion.span
-                          className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white rounded-full ${isActive ? 'w-[60%]' : 'w-0'}`}
-                          whileHover={{ width: '60%' }}
-                          transition={{ duration: 0.2 }}
-                        />
-                      </button>
-
-                      <AnimatePresence>
-                        {openDropdown === item.label && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute top-full right-0 mt-2 w-48 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50"
-                            style={{ backgroundColor: 'var(--primary)' }}
-                          >
-                            {item.dropdown.map((dropdownItem, index) => {
-                              const isDropdownActive =
-                                (activePage === 'newsletter' && dropdownItem.href === '#newsletter') ||
-                                (activePage === 'blog' && dropdownItem.href === '#blog') ||
-                                (activePage === 'alumni' && dropdownItem.href === '#alumni');
-
-                              return (
-                                <motion.a
-                                  key={dropdownItem.label}
-                                  href={dropdownItem.href}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleNavClick(dropdownItem.href);
-                                  }}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ duration: 0.2, delay: index * 0.05 }}
-                                  className={`block px-5 py-3.5 text-[15px] font-normal text-white transition-all ${isDropdownActive
-                                    ? 'bg-white/20 border-l-2 border-white'
-                                    : 'hover:bg-white/10'
-                                    }`}
-                                >
-                                  {dropdownItem.label}
-                                </motion.a>
-                              );
-                            })}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.href);
-                    }}
-                    className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap text-white ${isActive
-                      ? 'bg-white/10'
-                      : 'hover:bg-white/5'
-                      }`}
-                  >
-                    {item.label}
-                    {/* Underline Animation - White accent */}
-                    <motion.span
-                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white rounded-full ${isActive ? 'w-[60%]' : 'w-0'}`}
-                      whileHover={{ width: '60%' }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </a>
-                );
-              })}
             </div>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="xl:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-white" />
-            ) : (
-              <Menu className="h-6 w-6 text-white" />
-            )}
-          </button>
+            {/* Desktop Navigation */}
+            <div className="hidden xl:flex items-center justify-center flex-1">
+              <div className="flex items-center gap-1">
+                {navItems.map((item) => {
+                  // Dynamic isActive check
+                  const cleanHref = (item.href || '').replace(/^#/, '');
+                  const isActive = activePage === cleanHref || (activePage === 'home' && (cleanHref === 'home' || cleanHref === ''));
+
+                  if (item.dropdown) {
+                    return (
+                      <div
+                        key={item.label}
+                        className="relative"
+                        onMouseEnter={() => setOpenDropdown(item.label)}
+                        onMouseLeave={() => setOpenDropdown(null)}
+                      >
+                        <button
+                          className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
+                            ? 'bg-white/10'
+                            : 'hover:bg-white/5'
+                            }`}
+                        >
+                          {item.label}
+                          <ChevronDown className={`h-4 w-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
+                          {/* Underline Animation - White accent */}
+                          <motion.span
+                            className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white rounded-full ${isActive ? 'w-[60%]' : 'w-0'}`}
+                            whileHover={{ width: '60%' }}
+                            transition={{ duration: 0.2 }}
+                          />
+                        </button>
+
+                        <AnimatePresence>
+                          {openDropdown === item.label && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2 }}
+                              className="absolute top-full right-0 mt-2 w-48 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50"
+                              style={{ backgroundColor: 'var(--primary)' }}
+                            >
+                              {item.dropdown.map((dropdownItem, index) => {
+                                const isDropdownActive =
+                                  (activePage === 'newsletter' && dropdownItem.href === '#newsletter') ||
+                                  (activePage === 'blog' && dropdownItem.href === '#blog') ||
+                                  (activePage === 'alumni' && dropdownItem.href === '#alumni');
+
+                                return (
+                                  <motion.a
+                                    key={dropdownItem.label}
+                                    href={dropdownItem.href}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      handleNavClick(dropdownItem.href);
+                                    }}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.2, delay: index * 0.05 }}
+                                    className={`block px-5 py-3.5 text-[15px] font-normal text-white transition-all ${isDropdownActive
+                                      ? 'bg-white/20 border-l-2 border-white'
+                                      : 'hover:bg-white/10'
+                                      }`}
+                                  >
+                                    {dropdownItem.label}
+                                  </motion.a>
+                                );
+                              })}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(item.href);
+                      }}
+                      className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap text-white ${isActive
+                        ? 'bg-white/10'
+                        : 'hover:bg-white/5'
+                        }`}
+                    >
+                      {item.label}
+                      {/* Underline Animation - White accent */}
+                      <motion.span
+                        className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white rounded-full ${isActive ? 'w-[60%]' : 'w-0'}`}
+                        whileHover={{ width: '60%' }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="xl:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6 text-white" />
+              ) : (
+                <Menu className="h-6 w-6 text-white" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 

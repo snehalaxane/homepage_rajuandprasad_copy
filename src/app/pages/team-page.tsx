@@ -138,7 +138,7 @@ export function TeamPage() {
     <div className="min-h-screen bg-background">
       {/* Page Header / Hero Banner */}
       <section
-        className="relative overflow-hidden w-full aspect-[1920/300] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+        className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
           backgroundImage: intro.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
           backgroundColor: !intro.backgroundImage ? 'transparent' : 'inherit'
         }}
@@ -254,7 +254,7 @@ export function TeamPage() {
       {/* Intro Content Section */}
 
       {/* Intro Content Section */}
-      <section className="py-16 bg-background">
+      <section className="py-6 bg-background">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -294,7 +294,7 @@ export function TeamPage() {
 
 
       {/* Our Partners Section */}
-      <section className="py-8 bg-background">
+      <section className="py-5 bg-background">
         <div className="container mx-auto px-4">
           {/* Section Title */}
           <motion.div
@@ -304,7 +304,7 @@ export function TeamPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-4">
+            <span className="px-1 py-1 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-1">
               Leadership
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
@@ -313,7 +313,7 @@ export function TeamPage() {
           </motion.div>
 
           {/* Partner Card */}
-          <div className="max-w-6xl mx-auto mb-12">
+          <div className="max-w-6xl mx-auto mb-9">
             {loading ? (
               <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-gray-100 shadow-xl">
                 <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin mb-4" />
@@ -445,7 +445,7 @@ export function TeamPage() {
 
           {/* Navigation Controls */}
           <div className="max-w-6xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-2">
               {/* Previous Button */}
               <motion.button
                 whileHover={{ scale: 1.05, x: -5 }}

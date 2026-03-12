@@ -157,7 +157,7 @@ export function ModernStatsSection() {
                         <img
                           src={stat.image}
                           alt="Stats Graphic"
-                          className="w-full h-full object-cover rounded-[2rem] border border-white/10 shadow-2xl relative z-10"
+                          className="w-full h-full object-cover rounded-[2rem] relative z-10"
                           draggable={false}
                         />
                       ) : (

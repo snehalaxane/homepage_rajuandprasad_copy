@@ -28,6 +28,7 @@ interface HistoryTimeline {
   year: string;
   tag: string;
   order: number;
+  status?: string;
 }
 
 interface HistoryMission {

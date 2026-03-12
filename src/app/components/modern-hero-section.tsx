@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, MapPin } from 'lucide-react';
+import { ArrowRight, MapPin, Facebook, Twitter, Linkedin, Instagram, Github, X } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -11,11 +11,19 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 
+const iconMap: any = {
+  facebook: Facebook,
+  twitter: X,
+  instagram: Instagram,
+  linkedin: Linkedin
+};
+
 export function ModernHeroSection() {
   const [hero, setHero] = useState<any>(null);
   const [locations, setLocations] = useState<any[]>([]);
   const [displayNumber, setDisplayNumber] = useState(0);
   const [generalSettings, setGeneralSettings] = useState<any>(null);
+  const [footerContent, setFooterContent] = useState<any>(null);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -28,6 +36,19 @@ export function ModernHeroSection() {
       }
     };
     fetchSettings();
+  }, []);
+
+  useEffect(() => {
+    const fetchFooterContent = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/footer-content`);
+        const data = await res.json();
+        setFooterContent(data);
+      } catch (err) {
+        console.error("Failed to fetch footer content");
+      }
+    };
+    fetchFooterContent();
   }, []);
 
   useEffect(() => {
@@ -90,9 +111,9 @@ export function ModernHeroSection() {
   if (hero && hero.enabled === false) return null;
 
   return (
-    <section className="relative flex items-center overflow-hidden h-[calc(100vh-80px)] min-h-[500px]">
-      {/* Top Left Logo - Restored and adjusted */}
-      <div className="absolute top-6 left-6 z-50">
+    <section className="relative flex items-center overflow-hidden h-[calc(97vh-80px)] min-h-[300px]">
+      {/* Top Left Logo */}
+      <div className="absolute top-2 left-6 z-50">
         <motion.a
           href="#home"
           initial={{ opacity: 0, x: -20 }}
@@ -103,10 +124,11 @@ export function ModernHeroSection() {
           <img
             src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
             alt={generalSettings?.siteTitle || "Raju & Prasad"}
-            className="h-12 w-auto brightness-0 invert object-contain hover:scale-105 transition-transform duration-300"
+            className="h-14 w-auto brightness-0 invert object-contain hover:scale-105 transition-transform duration-300"
           />
         </motion.a>
       </div>
+
 
       {/* Background decoration - Fixed color #7A7876 */}
       <div className="absolute inset-0" style={{ backgroundColor: '#7A7876' }}>
@@ -179,16 +201,33 @@ export function ModernHeroSection() {
 
       </div>
 
-      {/* Content */}
+      {/* Vertical Social Links - Right Side */}
+      <div className="absolute right-4 top-8 z-50 hidden md:flex flex-col gap-4 items-center">
+        {footerContent?.socialMedia && Object.entries(footerContent.socialMedia).map(([key, url]: [string, any]) => {
+          if (!url) return null;
+          const Icon = iconMap[key.toLowerCase()] || Facebook;
+          return (
+            <motion.a
+              key={key}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.1, backgroundColor: 'rgba(0, 40, 85, 1)', color: '#ffffff' }}
+              className="w-11 h-11 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center text-[#002855] border border-white/10 transition-all shadow-sm"
+              aria-label={key}
+            >
+              <Icon className="w-5 h-5" />
+            </motion.a>
+          );
+        })}
+      </div>      {/* Content */}
       <div className="container mx-auto px-4 mt-5 py-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* Left Column - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="-ml-4"
-          >
+          <div className="-ml-4 relative z-10">
             {/* Years Badge */}
             {/* Years Badge - Commented out as requested */}
             {/* <motion.div
@@ -233,7 +272,7 @@ export function ModernHeroSection() {
                     ))
                 ) : null}
               </div>
-            </motion.div> */}
+            </div>
 
 
             {/* Main Heading */}
@@ -250,11 +289,10 @@ export function ModernHeroSection() {
 
             {/* Hero Image Replacement */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex flex-wrap gap-6 mb-3"
-
             >
               {[
                 { url: hero?.imageUrl, alt: "Primary" }
@@ -275,9 +313,8 @@ export function ModernHeroSection() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
               className="text-xl text-white/90 leading-relaxed mb-6 max-w-xl drop-shadow-lg"
-
             >
               <motion.span
                 animate={{
@@ -299,7 +336,7 @@ export function ModernHeroSection() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
               className="flex flex-wrap gap-4"
             >
               <Button
@@ -322,7 +359,7 @@ export function ModernHeroSection() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
               className="mt-2 pt-2 border-t border-white/30"
             >
               <div className="flex flex-wrap gap-8">
@@ -340,20 +377,23 @@ export function ModernHeroSection() {
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right Column - India Map Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, x: 50 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ 
+              duration: 0.8, 
+              ease: "easeOut",
+              delay: 0.3
+            }}
             className="flex justify-center items-center -mr-16 xl:-mr-32"
           >
             {hero?.mapImageUrl ? (
               <img
                 src={hero.mapImageUrl.startsWith('http') ? hero.mapImageUrl : `${API_BASE_URL}/${hero.mapImageUrl}`}
                 alt="Map Presence"
-                className="w-full h-auto object-contain max-h-[420px]"
+                className="w-full h-auto object-contain max-h-[480px] will-change-transform"
               />
             ) : (
               <div className="h-[400px] flex items-center justify-center text-white/40 italic">
