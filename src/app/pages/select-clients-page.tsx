@@ -315,14 +315,14 @@ export function SelectClientsPage() {
                               onMouseLeave={(e) => {
                                 const checkCircle = e.currentTarget.querySelector('.check-circle') as HTMLElement;
                                 if (checkCircle) {
-                                  checkCircle.style.backgroundColor = `${currentCategory.color}22`;
+                                  checkCircle.style.backgroundColor = `${currentCategory.color}66`;
                                   checkCircle.style.transform = 'scale(1)';
                                 }
                               }}
                             >
                               <div
                                 className="check-circle mt-1.5 w-2 h-2 rounded-full flex-shrink-0 transition-all duration-300"
-                                style={{ backgroundColor: `${currentCategory.color}22` }}
+                                style={{ backgroundColor: `${currentCategory.color}66` }}
                               />
                               <span className="text-gray-900 font-medium leading-snug">
                                 {item.name}
