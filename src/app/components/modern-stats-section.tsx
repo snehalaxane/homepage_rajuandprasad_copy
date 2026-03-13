@@ -85,8 +85,8 @@ export function ModernStatsSection() {
     <section className="bg-background text-[#111111] overflow-hidden relative min-h-screen py-15 flex items-center">
 
       {/* Decorative Background Elements - Matching Our Services */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/15 rounded-full blur-[120px] -z-0" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/15 rounded-full blur-[120px] -z-0" />
+      {/* <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/15 rounded-full blur-[120px] -z-0" /> */}
+      {/* <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/15 rounded-full blur-[120px] -z-0" /> */}
 
       <div className="relative z-10 container mx-auto px-6">
 
@@ -101,15 +101,8 @@ export function ModernStatsSection() {
           >
             Our Expertise
           </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[#111111]">
-            {statsData.title.split(' ').map((word, i) => {
-              const isNumberWord = /\d/.test(word);
-              return (
-                <span key={i} className={isNumberWord ? "bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent" : "text-[#111111]"}>
-                  {word}{' '}
-                </span>
-              );
-            })}
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[var(--primary)]">
+            {statsData.title}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
             {statsData.description}
