@@ -61,8 +61,8 @@ export default function InfrastructureSection() {
   return (
     <>
       {/* Infrastructure Header Section - Black BG */}
-      <section className="pt-3 pb-3 bg-[#000000] relative overflow-hidden">
-        <div className="container mx-auto px-2 max-w-6xl relative z-10">
+      <section className="pt-6 pb-6 bg-[#000000] relative overflow-hidden">
+        <div className="container mx-auto px-4 max-w-6xl relative z-10">
           <div className="text-center text-white">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -91,7 +91,7 @@ export default function InfrastructureSection() {
         <div className="container mx-auto px-4 max-w-5xl relative z-10">
           <div className="flex flex-col lg:flex-row shadow-xl rounded-[40px] overflow-hidden animate-fade-in border border-white/10 bg-background/95">
             {/* Left Side - Contact */}
-            <div className="lg:w-[45%] p-10 md:p-14 text-white relative" style={{ backgroundColor: 'var(--primary)' }}>
+            <div className="lg:w-[45%] p-6 md:p-14 text-white relative" style={{ backgroundColor: 'var(--primary)' }}>
               <div className="relative z-10">
                 <div className="flex gap-1 mb-6">
                   <div className="w-4 h-1 bg-[#F5C542]"></div>
@@ -144,7 +144,7 @@ export default function InfrastructureSection() {
             </div>
 
             {/* Right Side - Newsletter */}
-            <div className="lg:w-[55%] p-10 md:p-14 flex flex-col justify-center bg-white/10">
+            <div className="lg:w-[55%] p-6 md:p-14 flex flex-col justify-center bg-white/10">
               <div className="max-w-md mx-auto w-full">
                 <div className="flex gap-1 mb-6">
                   <div className="w-4 h-1 bg-[#F5C542]"></div>

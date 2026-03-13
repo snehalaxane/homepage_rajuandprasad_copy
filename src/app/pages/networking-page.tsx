@@ -265,7 +265,7 @@ export function NetworkingPage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                  className=" rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
@@ -278,7 +278,7 @@ export function NetworkingPage() {
                       {domesticContent?.title || 'Domestic Networking'}
                     </h2>
                   </div>
-                  <p className="text-[var(--secondary)] leading-relaxed text-base whitespace-pre-line">
+                  <p className="text-white leading-relaxed text-base whitespace-pre-line">
                     {domesticContent?.description || 'Connect with us to expand professional collaboration across India.'}
                   </p>
                 </motion.div>
@@ -290,7 +290,7 @@ export function NetworkingPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className=" rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
@@ -311,12 +311,12 @@ export function NetworkingPage() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
-                        className="flex items-center gap-3 p-4 rounded-xl bg-gray-50 hover:bg-[var(--primary)]/5 transition-all duration-300 group border border-transparent hover:border-[var(--primary)]/20"
+                        className="flex items-center gap-2 p-4 rounded-xl  hover:bg-[var(--primary)]/5 transition-all duration-300 group border border-transparent hover:border-[var(--primary)]/20"
                       >
-                        <div className="p-2 bg-white rounded-lg shadow-sm group-hover:shadow-md transition-all">
+                        <div className="p-1 rounded-lg shadow-sm group-hover:shadow-md transition-all">
                           <Icon className="h-5 w-5 text-[var(--primary)]" />
                         </div>
-                        <span className="text-[var(--secondary)] font-medium group-hover:text-[var(--primary)] transition-colors">
+                        <span className="text-white font-medium group-hover:text-[var(--primary)] transition-colors">
                           {associate.name}
                         </span>
                       </motion.div>

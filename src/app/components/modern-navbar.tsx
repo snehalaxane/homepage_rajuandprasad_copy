@@ -237,11 +237,13 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
           <div className="flex items-center justify-between xl:justify-center h-16">
             {/* Mobile Logo Only */}
             <div className="xl:hidden flex items-center">
-              <img
-                src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
-                alt={generalSettings?.siteTitle || "Raju & Prasad"}
-                className="h-10 w-auto brightness-0 invert object-contain"
-              />
+              <a href="#home" className="block transform transition-transform hover:scale-105">
+                <img
+                  src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
+                  alt={generalSettings?.siteTitle || "Raju & Prasad"}
+                  className="h-10 w-auto brightness-0 invert object-contain"
+                />
+              </a>
             </div>
 
             {/* Desktop Navigation */}

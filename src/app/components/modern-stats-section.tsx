@@ -4,8 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Layout constants for the "Depth" effect
-const CARD_W = 1024;
-const CARD_H = 375;
+// Layout constants for the "Depth" effect (will be responsive in render)
+const DEFAULT_CARD_W = 1024;
+const DEFAULT_CARD_H = 375;
 const GAP = 180; // Increased gap for better stacked visibility
 
 interface StatItem {
@@ -130,12 +131,18 @@ export function ModernStatsSection() {
                 const isActive = offset === 0;
                 const isVisible = Math.abs(offset) <= 1;
 
+                // Responsive sizing
+                const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+                const cardW = isMobile ? window.innerWidth * 0.75 : DEFAULT_CARD_W;
+                const cardH = isMobile ? 220 : DEFAULT_CARD_H;
+                const gap = isMobile ? window.innerWidth * 0.2 : GAP;
+
                 return (
                   <motion.div
                     key={stat._id}
                     initial={false}
                     animate={{
-                      x: offset * GAP,
+                      x: offset * gap,
                       scale: isActive ? 1 : 0.8,
                       zIndex: isActive ? 40 : 30 - Math.abs(offset),
                       opacity: isVisible ? (isActive ? 1 : 0.4) : 0,
@@ -147,7 +154,7 @@ export function ModernStatsSection() {
                       damping: 26
                     }}
                     className="absolute cursor-pointer select-none"
-                    style={{ width: CARD_W, height: CARD_H }}
+                    style={{ width: cardW, height: cardH }}
                     onClick={() => setActiveSlide(i)}
                   >
                     <div className="relative w-full h-full group">
@@ -192,14 +199,14 @@ export function ModernStatsSection() {
         </div>
 
         {/* Custom Pagination */}
-        <div className="flex justify-center items-center gap-4 mt-16">
+        <div className="flex flex-wrap justify-center items-center gap-4 mt-6 md:mt-16">
           {validStats.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className="group flex flex-col items-center"
             >
-              <div className="h-1.5 w-16 rounded-full bg-black/10 overflow-hidden relative">
+              <div className="h-1.5 w-10 md:w-16 rounded-full bg-black/10 overflow-hidden relative">
                 <motion.div
                   className="absolute inset-y-0 left-0 bg-[var(--primary)]"
                   initial={{ width: 0 }}

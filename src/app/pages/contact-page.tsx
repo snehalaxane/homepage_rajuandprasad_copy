@@ -247,7 +247,7 @@ export function ContactPage() {
                   <div>
                     <p className="text-sm font-semibold text-[var(--secondary)] mb-1">Email Us</p>
                     <p className="text-lg font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors">
-                      {settings?.emailUs || 'support@rajuandprasad.com'}
+                      {settings?.emailUs || 'info@rajuandprasad.com'}
                     </p>
                   </div>
                 </a>
@@ -265,15 +265,35 @@ export function ContactPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="max-w-4xl mx-auto"
             >
-              <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+              <div className="bg-background rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
                 {/* Form Header */}
-                <div className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-8 py-8">
-                  <h2 className="text-3xl font-bold text-white mb-2">
-                    {settings?.heading || 'Get in Touch'}
-                  </h2>
-                  <p className="text-white/80">
-                    {settings?.subheading || 'Please share your query. Our team will respond soon.'}
-                  </p>
+                {/* Form Header */}
+                <div className="relative bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-8 py-8 overflow-hidden">
+
+                  {/* GRID PATTERN BACKGROUND */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      backgroundImage: `
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
+      `,
+                      backgroundSize: '40px 40px, 40px 40px, 10px 10px',
+                      maskImage: 'linear-gradient(to bottom, black, transparent)'
+                    }}
+                  />
+
+                  {/* HEADER CONTENT */}
+                  <div className="relative z-10">
+                    <h2 className="text-3xl font-bold text-white mb-2">
+                      {settings?.heading || 'Get in Touch'}
+                    </h2>
+                    <p className="text-white/80">
+                      {settings?.subheading || 'Please share your query. Our team will respond soon.'}
+                    </p>
+                  </div>
+
                 </div>
 
                 {/* Form */}
@@ -306,7 +326,7 @@ export function ContactPage() {
                               pattern={field.fieldType === 'tel' ? '[0-9]{10}' : undefined}
                               inputMode={field.fieldType === 'tel' ? 'numeric' : undefined}
                               maxLength={field.fieldType === 'tel' ? 10 : undefined}
-                              className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
+                              className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 bg-background"
                               placeholder={field.placeholder || `Enter ${field.label}`}
                             />
                           </div>
@@ -329,7 +349,7 @@ export function ContactPage() {
                             value={formData[fieldKey] || ''}
                             onChange={(e) => setFormData({ ...formData, [fieldKey]: e.target.value })}
                             rows={6}
-                            className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all resize-none text-gray-900"
+                            className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all resize-none text-gray-900 bg-background"
                             placeholder={field.placeholder || `Enter your ${field.label.toLowerCase()}`}
                           />
                         </div>
@@ -360,7 +380,7 @@ export function ContactPage() {
           </div>
         </section>
 
-        <InfrastructureSection />
+        {/* <InfrastructureSection /> */}
 
         {/* Branch Locations Section */}
         <section className="py-16 bg-background border-t border-gray-200">
@@ -389,7 +409,7 @@ export function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                   whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
+                  className="bg-background rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
                 >
                   {/* Location Header */}
                   <div className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-6 py-4">

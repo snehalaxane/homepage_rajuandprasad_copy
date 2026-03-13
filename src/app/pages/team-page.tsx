@@ -33,7 +33,8 @@ export function TeamPage() {
   const [intro, setIntro] = useState({
     title: 'The Team',
     description: 'Meet our experienced & dedicated Chartered Accountant professionals',
-    backgroundImage: ''
+    backgroundImage: '',
+    accentText: ''
   });
   const [currentPartnerIndex, setCurrentPartnerIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -61,7 +62,8 @@ export function TeamPage() {
           setIntro({
             title: data.title || 'The Team',
             description: data.description || 'Meet our experienced & dedicated Chartered Accountant professionals',
-            backgroundImage: data.backgroundImage || ''
+            backgroundImage: data.backgroundImage || '',
+            accentText: data.accentText || ''
           });
         }
       } catch (error) {
@@ -268,21 +270,25 @@ export function TeamPage() {
               {/* Accent line */}
               <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)]/60" />
 
-              <p className="text-lg text-[var(--secondary)] leading-relaxed pl-6">
-                The Firm has a blend of professionals with experience in the fields of
-                <span className="text-gray-700 font-medium"> Auditing</span>,
-                <span className="text-gray-700 font-medium"> Taxation</span>,
-                <span className="text-gray-700 font-medium"> Project Consultancy</span>,
-                <span className="text-gray-700 font-medium"> Management Services</span>,
-                <span className="text-gray-700 font-medium"> Enterprise Restructuring</span>,
-                <span className="text-gray-700 font-medium"> Industry</span>,
-                <span className="text-gray-700 font-medium"> Banking</span>,
-                <span className="text-gray-700 font-medium"> Securities</span>,
-                <span className="text-gray-700 font-medium"> Secretarial Services</span>,
-                <span className="text-gray-700 font-medium"> Computer Aided Auditing Techniques</span>,
-                <span className="text-gray-700 font-medium"> Systems Design</span>,
-                <span className="text-gray-700 font-medium"> Implementation</span> and
-                <span className="text-gray-700 font-medium"> Information Systems Audit</span>.
+              <p className="text-lg text-white leading-relaxed pl-6">
+                {intro.accentText || (
+                  <>
+                    The Firm has a blend of professionals with experience in the fields of
+                    <span className="text-gray-700 font-medium"> Auditing</span>,
+                    <span className="text-gray-700 font-medium"> Taxation</span>,
+                    <span className="text-gray-700 font-medium"> Project Consultancy</span>,
+                    <span className="text-gray-700 font-medium"> Management Services</span>,
+                    <span className="text-gray-700 font-medium"> Enterprise Restructuring</span>,
+                    <span className="text-gray-700 font-medium"> Industry</span>,
+                    <span className="text-gray-700 font-medium"> Banking</span>,
+                    <span className="text-gray-700 font-medium"> Securities</span>,
+                    <span className="text-gray-700 font-medium"> Secretarial Services</span>,
+                    <span className="text-gray-700 font-medium"> Computer Aided Auditing Techniques</span>,
+                    <span className="text-gray-700 font-medium"> Systems Design</span>,
+                    <span className="text-gray-700 font-medium"> Implementation</span> and
+                    <span className="text-gray-700 font-medium"> Information Systems Audit</span>.
+                  </>
+                )}
               </p>
 
             </div>

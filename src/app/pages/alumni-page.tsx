@@ -26,6 +26,7 @@ interface Alumni {
   designation: string;
   company: string;
   industry: string;
+  image?: string;
   enabled: boolean;
   createdAt: string;
   updatedAt: string;
@@ -99,7 +100,7 @@ export function AlumniPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
+      <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
           className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
@@ -167,7 +168,7 @@ export function AlumniPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-12"
+              className="bg-background rounded-2xl shadow-xl p-6 mb-12"
             >
               <div className="flex flex-col lg:flex-row gap-4 items-center">
                 {/* Search */}
@@ -178,7 +179,7 @@ export function AlumniPage() {
                     placeholder="Search name / company..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 bg-white"
                   />
                 </div>
 
@@ -188,7 +189,7 @@ export function AlumniPage() {
                   <select
                     value={selectedIndustry}
                     onChange={(e) => setSelectedIndustry(e.target.value)}
-                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
                   >
                     {industries.map(industry => (
                       industry && (
@@ -207,7 +208,7 @@ export function AlumniPage() {
                   <select
                     value={sortOrder}
                     onChange={(e) => setSortOrder(e.target.value)}
-                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                    className="w-full appearance-none pl-10 pr-10 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
                   >
                     <option value="A-Z">A - Z</option>
                     <option value="Z-A">Z - A</option>
@@ -217,7 +218,7 @@ export function AlumniPage() {
               </div>
 
               {/* Results Count */}
-              <div className="mt-4 pt-4 border-t border-gray-100">
+              <div className="mt-4 pt-4">
                 <p className="text-sm text-[var(--secondary)] font-semibold">
                   Showing {filteredAlumni.length} of {alumniData.length} alumni
                 </p>
@@ -233,12 +234,20 @@ export function AlumniPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 border-l-4 border-l-[var(--primary)] overflow-hidden transition-all group"
+                  className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100 border-l-4 border-l-[var(--primary)] overflow-hidden transition-all group"
                 >
                   <div className="p-6">
                     {/* Header Icon */}
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <User className="h-7 w-7 text-white" />
+                    <div className="w-14 h-14 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      {alumni.image ? (
+                        <img
+                          src={resolveImageUrl(alumni.image)}
+                          alt={alumni.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <User className="h-7 w-7 text-gray-400" />
+                      )}
                     </div>
 
                     {/* Name */}

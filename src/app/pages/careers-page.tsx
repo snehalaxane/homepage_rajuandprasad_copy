@@ -568,7 +568,7 @@ export function CareersPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
+      <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
           className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
@@ -658,7 +658,7 @@ export function CareersPage() {
                 <h2 className="text-3xl lg:text-4xl font-bold text-[var(--primary)] mb-4">
                   Current Openings
                 </h2>
-                <p className="text-lg text-[var(--secondary)]">
+                <p className="text-lg text-white">
                   Explore opportunities to join our growing team
                 </p>
               </motion.div>
@@ -668,9 +668,9 @@ export function CareersPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8"
+                className="bg-white rounded-2xl shadow-xl p-6 mb-8"
               >
-                <div className="flex flex-col md:flex-row gap-4 items-center mb-6">
+                <div className="flex flex-col md:flex-row gap-6 items-center">
                   {/* Search */}
                   <div className="relative flex-1 w-full">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
@@ -679,13 +679,13 @@ export function CareersPage() {
                       placeholder="Search openings..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 bg-white"
                     />
                   </div>
                 </div>
 
                 {/* Filter Chips */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-4">
                   {categories.map(category => (
                     <button
                       key={category}
@@ -709,53 +709,53 @@ export function CareersPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                    className={`bg-white rounded-2xl shadow-lg border-2 transition-all overflow-hidden ${expandedId === opening._id
-                      ? 'border-[var(--primary)] shadow-2xl'
-                      : 'border-gray-100 hover:border-[var(--primary)]/30'
+                    className={`bg-white rounded-3xl shadow-md overflow-hidden relative border transition-all duration-300 ${expandedId === opening._id
+                      ? 'border-[var(--primary)] shadow-2xl ring-1 ring-[var(--primary)]/20'
+                      : 'border-gray-100 hover:border-[var(--primary)]/30 hover:shadow-xl'
                       }`}
                   >
                     {/* Accordion Header */}
                     <button
                       onClick={() => setExpandedId(expandedId === opening._id ? null : opening._id)}
-                      className="w-full px-8 py-6 flex items-center justify-between gap-4 hover:bg-gray-50/50 transition-colors"
+                      className="w-full px-8 py-10 flex items-center justify-between gap-6 hover:bg-gray-50/50 transition-colors group"
                     >
-                      <div className="flex items-center gap-4 flex-1 text-left">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0">
+                      <div className="flex items-center gap-6 flex-1 text-left">
+                        <div className={`w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${expandedId === opening._id ? 'bg-[var(--primary)] scale-110' : 'bg-[#002855] group-hover:scale-105'}`}>
                           <Briefcase className="h-6 w-6 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-1">
+                          <h3 className={`text-2xl lg:text-2xl font-bold mb-2 transition-colors ${expandedId === opening._id ? 'text-[var(--primary)]' : 'text-gray-900'}`}>
                             {opening.role}
                           </h3>
                           {opening.shortDescription && (
-                            <p className="text-sm text-[var(--secondary)] mb-1">
+                            <p className="text-base text-[var(--secondary)] mb-2 font-medium">
                               {opening.shortDescription}
                             </p>
                           )}
-                          <div className="flex flex-wrap gap-3 mt-3">
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)]">
-                              <MapPin className="h-3 w-3" />
+                          <div className="flex flex-wrap gap-4 mt-4">
+                            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
+                              <MapPin className="h-4 w-4" />
                               {opening.location}
                             </span>
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)]">
-                              <Clock className="h-3 w-3" />
+                            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
+                              <Clock className="h-4 w-4" />
                               {opening.experience}
                             </span>
-                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--primary)]">
-                              <Users className="h-3 w-3" />
+                            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
+                              <Users className="h-4 w-4" />
                               {opening.employmentType}
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${expandedId === opening._id
-                        ? 'bg-[var(--primary)] border-[var(--primary)]'
-                        : 'border-gray-300 hover:border-[var(--primary)]'
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all flex-shrink-0 ${expandedId === opening._id
+                        ? 'bg-[var(--primary)] shadow-lg shadow-[var(--primary)]/30'
+                        : 'bg-gray-100 group-hover:bg-gray-200'
                         }`}>
                         {expandedId === opening._id ? (
-                          <Minus className="h-5 w-5 text-white" />
+                          <Minus className="h-6 w-6 text-white" />
                         ) : (
-                          <Plus className="h-5 w-5 text-[var(--secondary)]" />
+                          <Plus className="h-6 w-6 text-[var(--primary)]" />
                         )}
                       </div>
                     </button>
@@ -824,11 +824,11 @@ export function CareersPage() {
 
                             {/* Right Side - Sticky CTA Card */}
                             <div className="lg:col-span-1">
-                              <div className="sticky top-24 bg-gradient-to-br from-[var(--primary)]/5 to-blue-50/30 rounded-2xl border-2 border-[var(--primary)]/20 p-6 space-y-4">
-                                <h4 className="text-lg font-bold text-gray-900">
+                              <div className="sticky top-24 bg-gray-50/50 rounded-2xl border border-blue-200 p-6 space-y-3">
+                                <h4 className="text-xl font-bold text-gray-900">
                                   Ready to Apply?
                                 </h4>
-                                <p className="text-sm text-[var(--secondary)]">
+                                <p className="text-base text-[var(--secondary)] leading-relaxed">
                                   Join our team and be part of our legacy of excellence.
                                 </p>
 
@@ -845,11 +845,11 @@ export function CareersPage() {
                                     Or send your resume to:
                                   </p>
                                   <a
-                                    href="mailto:careers@rajuprasad.com"
+                                    href="mailto:info@rajuprasad.com"
                                     className="flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:text-[#002855] transition-colors"
                                   >
                                     <Mail className="h-4 w-4" />
-                                    careers@rajuprasad.com
+                                    info@rajuprasad.com
                                   </a>
                                 </div>
                               </div>

@@ -111,9 +111,9 @@ export function ModernHeroSection() {
   if (hero && hero.enabled === false) return null;
 
   return (
-    <section className="relative flex items-center overflow-hidden h-[calc(97vh-80px)] min-h-[300px]">
+    <section className="relative flex flex-col items-center justify-center overflow-hidden min-h-[85vh] lg:h-auto pt-4 pb-0 lg:pt-6 lg:pb-0">
       {/* Top Left Logo */}
-      <div className="absolute top-2 left-6 z-50">
+      <div className="absolute top-4 left-4 md:left-8 z-50 lg:block">
         <motion.a
           href="#home"
           initial={{ opacity: 0, x: -20 }}
@@ -133,7 +133,7 @@ export function ModernHeroSection() {
       {/* Background decoration - Fixed color #7A7876 */}
       <div className="absolute inset-0" style={{ backgroundColor: '#7A7876' }}>
         {/* Subtle Grid Pattern */}
-        <div
+        {/* <div
           className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage: `
@@ -142,7 +142,7 @@ export function ModernHeroSection() {
             `,
             backgroundSize: '60px 60px'
           }}
-        />
+        /> */}
 
         {/* Abstract Wave Shapes - Lighter grey tones for depth */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
@@ -215,8 +215,8 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              whileHover={{ scale: 1.1, backgroundColor: 'rgba(0, 40, 85, 1)', color: '#ffffff' }}
-              className="w-11 h-11 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center text-[#002855] border border-white/10 transition-all shadow-sm"
+              whileHover={{ scale: 1.1, backgroundColor: '#F5C542', color: '#002855' }}
+              className="w-11 h-11 rounded-full bg-[#002855] flex items-center justify-center text-white transition-all shadow-sm"
               aria-label={key}
             >
               <Icon className="w-5 h-5" />
@@ -224,10 +224,10 @@ export function ModernHeroSection() {
           );
         })}
       </div>      {/* Content */}
-      <div className="container mx-auto px-4 mt-5 py-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
+      <div className="container mx-auto px-4 mt-2 pt-2 pb-0 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 items-end">
           {/* Left Column - Content */}
-          <div className="-ml-4 relative z-10">
+          <div className="relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left mt-10 lg:mt-0">
             {/* Years Badge */}
             {/* Years Badge - Commented out as requested */}
             {/* <motion.div
@@ -292,17 +292,16 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="flex flex-wrap gap-6 mb-3"
+              className="flex flex-wrap gap-6 mb-1"
             >
               {[
                 { url: hero?.imageUrl, alt: "Primary" }
               ].map((img, idx) => img.url && (
-                <div key={idx} className="relative group max-w-[350px]">
-
+                <div key={idx} className="relative group max-w-[240px] md:max-w-[350px] mx-auto lg:mx-0 mb-2">
                   <img
                     src={img.url.startsWith('http') ? img.url : `${API_BASE_URL}/${img.url}`}
                     alt={img.alt}
-                    className="w-full h-auto object-contain transform transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-auto object-contain transform transition-transform duration-500 group-hover:scale-105 drop-shadow-2xl"
                   />
                 </div>
               ))}
@@ -314,7 +313,7 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-xl text-white/90 leading-relaxed mb-6 max-w-xl drop-shadow-lg"
+              className="text-base md:text-xl text-white/90 leading-relaxed mb-4 max-w-xl drop-shadow-lg text-center lg:text-left mx-auto lg:mx-0"
             >
               <motion.span
                 animate={{
@@ -337,7 +336,7 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 mb-2 w-full px-4 sm:px-0"
             >
               <Button
                 onClick={() => window.location.href = hero?.ctas?.[0]?.link}
@@ -362,32 +361,32 @@ export function ModernHeroSection() {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
               className="mt-2 pt-2 border-t border-white/30"
             >
-              <div className="flex flex-wrap gap-8">
+              <div className="grid grid-cols-3 gap-2 sm:gap-8 text-center lg:text-left w-full mx-auto lg:mx-0">
                 <div>
-                  <p className="text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat1 || "").split(" ")[0]}</p>
-                  <p className="text-sm text-white/90 font-semibold">{(hero?.stat1 || "").split(" ").slice(1).join(" ")}</p>
+                  <p className="text-xl md:text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat1 || "").split(" ")[0]}</p>
+                  <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat1 || "").split(" ").slice(1).join(" ")}</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat2 || "").split(" ")[0]}</p>
-                  <p className="text-sm text-white/90 font-semibold">{(hero?.stat2 || "").split(" ").slice(1).join(" ")}</p>
+                  <p className="text-xl md:text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat2 || "").split(" ")[0]}</p>
+                  <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat2 || "").split(" ").slice(1).join(" ")}</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat3 || "").split(" ")[0]}</p>
-                  <p className="text-sm text-white/90 font-semibold">{(hero?.stat3 || "").split(" ").slice(1).join(" ")}</p>
+                  <p className="text-xl md:text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat3 || "").split(" ")[0]}</p>
+                  <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat3 || "").split(" ").slice(1).join(" ")}</p>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ 
-              duration: 0.8, 
+            transition={{
+              duration: 0.8,
               ease: "easeOut",
               delay: 0.3
             }}
-            className="flex justify-center items-center -mr-16 xl:-mr-32"
+            className="flex justify-center items-center -mr-4 md:-mr-16 xl:-mr-32"
           >
             {hero?.mapImageUrl ? (
               <img

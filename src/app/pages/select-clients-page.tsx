@@ -117,7 +117,7 @@ export function SelectClientsPage() {
         }}
       >
         {!intro?.backgroundImage && (
-          <div className="absolute inset-0 bg-background" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-[rgba(var(--primary-rgb),0.05)] to-gray-50/20" />
         )}
 
         {/* Overlay if there is a background image to ensure text readability */}
@@ -179,10 +179,10 @@ export function SelectClientsPage() {
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
 
                 <div className="pl-6">
-                  <p className="text-lg text-[var(--secondary)] leading-relaxed mb-4">
+                  <p className="text-lg text-white leading-relaxed mb-4">
                     {intro?.introDescription1 || "The Firm represents a diversified portfolio of clients across various sectors including Industrial, Service, Public Sector Undertakings, Banking & Insurance, Social Sector, High Net-worth Individuals (HNI), and Non-Resident Indians (NRI)."}
                   </p>
-                  <p className="text-lg text-[var(--secondary)] leading-relaxed">
+                  <p className="text-lg text-white leading-relaxed">
                     {intro?.introDescription2 || "Our expertise spans multiple industries and we take pride in delivering customized solutions to meet the unique needs of each client segment."}
                   </p>
                 </div>
@@ -241,7 +241,7 @@ export function SelectClientsPage() {
                       onClick={() => setActiveCategoryId(category._id)}
                       className={`flex items-center gap-3 px-6 py-3 rounded-full font-semibold transition-all border-2 ${isActive
                         ? 'text-black shadow-lg'
-                        : 'bg-white text-gray-700 border-gray-100 hover:border-gray-300 shadow-md'
+                        : 'bg-background text-gray-700 border-gray-100 hover:border-gray-300 shadow-md'
                         }`}
                       style={{
                         backgroundColor: isActive ? `${category.color}1A` : 'white',
@@ -273,14 +273,28 @@ export function SelectClientsPage() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                    <div className="bg-background rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                       {/* Category Header */}
                       <div
-                        className="p-8 text-white transition-colors duration-500"
+                        className="relative p-8 text-white transition-colors duration-500 overflow-hidden"
                         style={{ backgroundColor: currentCategory.color || 'var(--primary)' }}
                       >
-                        <div className="flex items-center gap-4 mb-3">
-                          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                        {/* Grid & Pattern Effect */}
+                        <div 
+                          className="absolute inset-0 pointer-events-none" 
+                          style={{ 
+                            backgroundImage: `
+                              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                              linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
+                            `,
+                            backgroundSize: '40px 40px, 40px 40px, 10px 10px',
+                            maskImage: 'linear-gradient(to bottom, black, transparent)'
+                          }} 
+                        />
+                        
+                        <div className="relative z-10 flex items-center gap-4 mb-3">
+                          <div className="w-16 h-16 bg-background/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
                             {(() => {
                               const Icon = iconMap[currentCategory.icon] || Factory;
                               return <Icon className="h-8 w-8" />;
@@ -304,7 +318,7 @@ export function SelectClientsPage() {
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.3, delay: index * 0.03 }}
-                              className="group flex items-start gap-4 p-4 rounded-xl bg-gray-50/50 hover:bg-white transition-all hover:shadow-md border border-transparent hover:border-gray-100"
+                              className="group flex items-start gap-4 p-4 rounded-xl bg-gray-50/50 hover:bg-background transition-all hover:shadow-md border border-transparent hover:border-gray-100"
                               onMouseEnter={(e) => {
                                 const checkCircle = e.currentTarget.querySelector('.check-circle') as HTMLElement;
                                 if (checkCircle) {

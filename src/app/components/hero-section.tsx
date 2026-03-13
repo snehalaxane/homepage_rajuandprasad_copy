@@ -5,7 +5,7 @@ import indiaMapImage from 'figma:asset/c89e66fc01b498f8ab5b6159390e31a1b9b48b13.
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative overflow-hidden pt-32 pb-20" style={{ backgroundColor: '#7A7876' }}>
+    <section id="home" className="relative overflow-hidden pt-32 pb-5" style={{ backgroundColor: '#7A7876' }}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />

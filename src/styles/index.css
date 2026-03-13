@@ -3,8 +3,9 @@
 @import './theme.css';
 
 /* Smooth scrolling */
-html {
+html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */

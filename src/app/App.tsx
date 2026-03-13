@@ -98,7 +98,7 @@ export default function App() {
   const isHomePage = currentPage === 'home' || (!isMainPage && !isLegalPage);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Conditionally render navbar globally ONLY if not on home page */}
       {!isHomePage && <ModernNavbar activePage={currentPage} />}
 

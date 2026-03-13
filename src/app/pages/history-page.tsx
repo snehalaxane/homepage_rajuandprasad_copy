@@ -214,7 +214,7 @@ export function HistoryPage() {
                     {journey?.description ? (
                       journey.description.split('\n').map((para, index) => (
                         para.trim() && (
-                          <p key={index} className="text-lg text-[var(--secondary)] leading-relaxed">
+                          <p key={index} className="text-lg text-white leading-relaxed">
                             {para}
                           </p>
                         )
@@ -365,7 +365,7 @@ export function HistoryPage() {
                                 {item.tag || (status === 'established' ? 'Founded' : status === 'active' ? 'Active' : 'Closed')}
                               </span>
                             </div>
-                            <p className={`text-sm mb-2 transition-colors ${item._id === highlightedId ? 'text-blue-100' : 'text-[var(--secondary)]'}`}>
+                            <p className={`text-sm mb-2 transition-colors ${item._id === highlightedId ? 'text-blue-100' : 'text-black'}`}>
                               {item.subtitle}
                             </p>
                             <div className={`flex items-center gap-2 font-semibold transition-colors ${item._id === highlightedId ? 'text-white' : 'text-[var(--primary)]'}`}>

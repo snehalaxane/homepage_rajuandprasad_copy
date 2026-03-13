@@ -123,7 +123,7 @@ export function BlogPage() {
   return (
     <>
 
-      <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
+      <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
           className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
@@ -241,7 +241,7 @@ export function BlogPage() {
                       )}
 
                       {/* Post Content */}
-                      <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-12">
+                      <div className="bg-background rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-12">
                         <div
                           className="prose prose-lg max-w-none text-gray-700 leading-relaxed
                             prose-headings:text-[var(--primary)] prose-headings:font-bold
@@ -282,7 +282,7 @@ export function BlogPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-8"
+                        className="bg-background rounded-2xl shadow-lg border border-gray-100 p-6 mb-8"
                       >
                         <div className="flex flex-col md:flex-row gap-4">
                           {/* Search */}
@@ -307,7 +307,7 @@ export function BlogPage() {
                               setSelectedCategory(e.target.value);
                               setCurrentPage(1);
                             }}
-                            className="px-6 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                            className="px-6 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-background cursor-pointer"
                           >
                             {categories.map(category => (
                               <option key={category} value={category}>{category}</option>
@@ -323,7 +323,7 @@ export function BlogPage() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                           whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                          className="bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
+                          className="bg-background rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
                         >
                           {post.featuredImage && (
                             <div className="relative h-64 overflow-hidden bg-[#f5f6fa] flex items-center justify-center">
@@ -453,7 +453,7 @@ export function BlogPage() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="sticky top-24"
                 >
-                  <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                  <div className="bg-background rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                     {/* Sidebar Header */}
                     <div className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-6 py-6">
                       <h3 className="text-xl font-bold text-white">Think Tank Links</h3>

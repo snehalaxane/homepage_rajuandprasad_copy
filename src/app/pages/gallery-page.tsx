@@ -175,7 +175,7 @@ export function GalleryPage() {
 
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
+      <main className="min-h-screen bg-background">
         <section
           className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
             backgroundImage: intro?.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
@@ -255,7 +255,7 @@ export function GalleryPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.05 }}
                     onClick={() => setSelectedImage(image)}
-                    className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+                    className="group relative bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer"
                   >
                     <div className="relative aspect-square overflow-hidden">
                       <img
@@ -313,7 +313,7 @@ export function GalleryPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-16 bg-white rounded-2xl shadow-lg border border-gray-100 p-8"
+              className="mt-16 bg-background rounded-2xl shadow-lg border border-gray-100 p-8"
             >
               <div className="grid sm:grid-cols-2 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
                 <div className="text-center py-4 sm:py-0">

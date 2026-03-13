@@ -87,7 +87,7 @@ export function NewsletterPage() {
   return (
     <>
 
-      <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
+      <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
           className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
@@ -140,10 +140,10 @@ export function NewsletterPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden"
+              className="bg-background rounded-3xl shadow-2xl  overflow-hidden"
             >
               {/* Table Header Controls */}
-              <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+              <div className="p-6 border-b border-gray-100 bg-background">
                 <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                   {/* Search Bar */}
                   <div className="relative flex-1 max-w-md">
@@ -156,7 +156,7 @@ export function NewsletterPage() {
                         setSearchQuery(e.target.value);
                         setCurrentPage(1);
                       }}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border-1 border-gray-100 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
                     />
                   </div>
 
@@ -168,7 +168,7 @@ export function NewsletterPage() {
                         setSelectedYear(e.target.value);
                         setCurrentPage(1);
                       }}
-                      className="appearance-none px-6 py-3 pr-12 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
+                      className="appearance-none px-6 py-3 pr-12 rounded-xl border-1 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-background cursor-pointer"
                     >
                       {availableYears.map(year => (
                         <option key={year} value={year}>{year}</option>
@@ -208,7 +208,7 @@ export function NewsletterPage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.05 }}
-                        className={`border-b border-gray-100 hover:bg-gradient-to-r hover:from-[var(--primary)]/5 hover:to-blue-50/30 transition-all ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'
+                        className={`border-b border-gray-100 hover:bg-gradient-to-r hover:from-[var(--primary)]/5 hover:to-blue-50/30 transition-all ${index % 2 === 0 ? 'bg-background' : 'bg-background/50'
                           }`}
                       >
                         <td className="px-6 py-5 font-semibold text-[var(--primary)]">
@@ -220,7 +220,7 @@ export function NewsletterPage() {
                         <td className="px-6 py-5 text-gray-900">
                           {item.industryReview}
                         </td>
-                        <td className="px-6 py-5 text-[var(--secondary)] text-sm">
+                        <td className="px-6 py-5 text-gray-900 text-sm">
                           {item.otherContents}
                         </td>
                         <td className="px-6 py-5 text-center">
@@ -248,7 +248,7 @@ export function NewsletterPage() {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="p-6 border-t border-gray-100 bg-gradient-to-r from-gray-50 to-white">
+                <div className="p-6 border-t border-gray-100 bg-background">
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-[var(--secondary)]">
                       Showing {startIndex + 1} to {Math.min(endIndex, filteredData.length)} of {filteredData.length} entries

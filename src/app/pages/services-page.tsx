@@ -148,7 +148,7 @@ export function ServicesPage() {
         }}
       >
         {!introData?.backgroundImage && (
-          <div className="absolute inset-0 bg-background" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-[rgba(var(--primary-rgb),0.05)] to-gray-50/20" />
         )}
 
         {/* Overlay if there is a background image to ensure text readability */}
@@ -202,7 +202,7 @@ export function ServicesPage() {
               <div className="relative bg-background rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
                 <div className="pl-6">
-                  <p className="text-lg text-[var(--secondary)] leading-relaxed">
+                  <p className="text-lg text-white leading-relaxed">
                     {introData?.introDescription || 'Loading description...'}
                   </p>
                 </div>
@@ -305,8 +305,22 @@ export function ServicesPage() {
                       className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
                     >
                       {/* Service Header */}
-                      <div className="bg-gradient-to-br from-[var(--primary)] to-blue-600 p-8 text-white">
-                        <div className="flex items-center gap-4 mb-3">
+                      <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 p-8 text-white overflow-hidden">
+                        {/* Grid & Pattern Effect */}
+                        <div 
+                          className="absolute inset-0 pointer-events-none" 
+                          style={{ 
+                            backgroundImage: `
+                              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                              linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
+                            `,
+                            backgroundSize: '40px 40px, 40px 40px, 10px 10px',
+                            maskImage: 'linear-gradient(to bottom, black, transparent)'
+                          }} 
+                        />
+                        
+                        <div className="relative z-10 flex items-center gap-4 mb-3">
                           <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden">
                             {currentService.icon?.startsWith('data:') ? (
                               <img src={currentService.icon} alt="icon" className="w-full h-full object-contain p-3 invert" />
