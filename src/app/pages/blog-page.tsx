@@ -282,7 +282,7 @@ export function BlogPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="bg-background rounded-2xl shadow-lg border border-gray-100 p-6 mb-8"
+                        className="bg-background rounded-2xl shadow-lg  p-6 mb-8"
                       >
                         <div className="flex flex-col md:flex-row gap-4">
                           {/* Search */}
@@ -358,7 +358,7 @@ export function BlogPage() {
                             </h2>
 
                             {/* Excerpt */}
-                            <p className="text-[var(--secondary)] leading-relaxed mb-6 line-clamp-2">
+                            <p className="text-white leading-relaxed mb-6 line-clamp-2">
                               {post.shortDescription}
                             </p>
 
