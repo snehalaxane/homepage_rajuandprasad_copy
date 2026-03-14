@@ -104,7 +104,7 @@ export function ModernStatsSection() {
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[var(--primary)]">
             {statsData.title}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-white max-w-2xl mx-auto text-lg leading-relaxed">
             {statsData.description}
           </p>
         </div>

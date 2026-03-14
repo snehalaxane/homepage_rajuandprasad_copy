@@ -348,7 +348,7 @@ export function BlogPage() {
                                 </span>
                               </div>
                               {post.author && (
-                                <span className="text-sm text-[var(--secondary)]">By {post.author}</span>
+                                <span className="text-sm text-white">By {post.author}</span>
                               )}
                             </div>
 

@@ -395,7 +395,7 @@ export function ContactPage() {
               <h2 className="text-3xl lg:text-4xl font-bold text-[var(--primary)] mb-4">
                 Our Branch Locations
               </h2>
-              <p className="text-lg text-[var(--secondary)]">
+              <p className="text-lg text-white">
                 Find the nearest Raju & Prasad office
               </p>
             </motion.div>
@@ -463,7 +463,7 @@ export function ContactPage() {
                     <div className="flex items-start gap-3">
                       <MapPin className="h-5 w-5 text-[var(--primary)] mt-0.5 flex-shrink-0" />
                       <div className="flex-1">
-                        <p className="text-sm text-gray-900 leading-relaxed">
+                        <p className="text-sm text-white leading-relaxed">
                           {branch.address}
                         </p>
                       </div>
@@ -475,7 +475,7 @@ export function ContactPage() {
                         {copiedAddress === branch.address ? (
                           <span className="text-xs font-semibold text-green-600">✓</span>
                         ) : (
-                          <Copy className="h-4 w-4 text-[var(--secondary)] group-hover/copy:text-[var(--primary)] transition-colors" />
+                          <Copy className="h-4 w-4 text-white group-hover/copy:text-[var(--primary)] transition-colors" />
                         )}
                       </button>
                     </div>
@@ -485,7 +485,7 @@ export function ContactPage() {
                       <Phone className="h-5 w-5 text-[var(--primary)] flex-shrink-0" />
                       <a
                         href={`tel:${branch.phone}`}
-                        className="text-sm text-gray-900 hover:text-[var(--primary)] font-semibold transition-colors"
+                        className="text-sm text-white hover:text-[var(--primary)] font-semibold transition-colors"
                       >
                         {branch.phone}
                       </a>
@@ -496,7 +496,7 @@ export function ContactPage() {
                       <Mail className="h-5 w-5 text-[var(--primary)] flex-shrink-0" />
                       <a
                         href={`mailto:${branch.email}`}
-                        className="text-sm text-gray-900 hover:text-[var(--primary)] font-semibold transition-colors"
+                        className="text-sm text-white hover:text-[var(--primary)] font-semibold transition-colors"
                       >
                         {branch.email}
                       </a>

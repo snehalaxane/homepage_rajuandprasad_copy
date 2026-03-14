@@ -122,13 +122,12 @@ export function AlumniPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-5xl mx-auto text-center"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center justify-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
-                <a href="#home" className={`transition-colors ${intro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
+              <div className={`flex items-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+                <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
-                <span className={`transition-colors cursor-pointer ${intro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
+                <span className={`transition-colors cursor-pointer hover:text-white`}>Think Tank</span>
                 <ChevronRight className="h-4 w-4" />
                 <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Alumni</span>
               </div>
@@ -136,11 +135,11 @@ export function AlumniPage() {
               {/* Title & Subtitle - Respecting the enabled flag */}
               {intro?.enabled !== false && (
                 <>
-                  <h1 className={`text-4xl lg:text-5xl xl:text-6xl font-bold mb-8 leading-tight ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+                  <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                     {intro?.title || 'Our Alumni Students are spread across Industry Segments.'}
                   </h1>
 
-                  <div className={`space-y-4 text-lg leading-relaxed max-w-4xl mx-auto whitespace-pre-wrap ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+                  <div className={`space-y-4 text-lg max-w-2xl whitespace-pre-wrap ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                     {intro?.subtitle ? (
                       <p>{intro.subtitle}</p>
                     ) : (
@@ -219,7 +218,7 @@ export function AlumniPage() {
 
               {/* Results Count */}
               <div className="mt-4 pt-4">
-                <p className="text-sm text-[var(--secondary)] font-semibold">
+                <p className="text-sm text-white font-semibold">
                   Showing {filteredAlumni.length} of {alumniData.length} alumni
                 </p>
               </div>

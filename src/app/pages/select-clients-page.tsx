@@ -132,31 +132,30 @@ export function SelectClientsPage() {
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
           >
             {/* Breadcrumb */}
-            <div className="flex items-center justify-center gap-2 text-sm text-white mb-6">
+            <div className={`flex items-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-white font-medium">Select Clients</span>
+              <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Select Clients</span>
             </div>
 
-            <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-gray-900'}`}>
+            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
               {intro?.title ? (
                 intro.title.split(' ').map((word, i, arr) => (
-                  <span key={i} className={i === Math.floor(arr.length / 2) ? "text-white" : ""}>{word} </span>
+                  <span key={i} className={i === Math.floor(arr.length / 2) && intro?.backgroundImage ? "text-white" : ""}>{word} </span>
                 ))
               ) : (
-                <>Select <span className="text-[var(--primary)]">Clients</span></>
+                <>Select <span className={intro?.backgroundImage ? "text-white" : "text-[var(--primary)]"}>Clients</span></>
               )}
             </h1>
 
-            <p className={`text-xl leading-relaxed max-w-2xl mx-auto ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+            <p className={`text-lg max-w-2xl ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
               {intro?.subtitle || 'Serving clients across diverse industries with trust and commitment.'}
             </p>
           </motion.div>
@@ -209,7 +208,7 @@ export function SelectClientsPage() {
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Client <span className="text-[var(--primary)]">Categories</span>
             </h2>
-            <p className="text-lg text-[var(--secondary)] max-w-2xl mx-auto">
+            <p className="text-lg text-white max-w-2xl mx-auto">
               Explore our diverse client base across specialized sectors
             </p>
           </motion.div>
@@ -280,9 +279,9 @@ export function SelectClientsPage() {
                         style={{ backgroundColor: currentCategory.color || 'var(--primary)' }}
                       >
                         {/* Grid & Pattern Effect */}
-                        <div 
-                          className="absolute inset-0 pointer-events-none" 
-                          style={{ 
+                        <div
+                          className="absolute inset-0 pointer-events-none"
+                          style={{
                             backgroundImage: `
                               linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
                               linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
@@ -290,9 +289,9 @@ export function SelectClientsPage() {
                             `,
                             backgroundSize: '40px 40px, 40px 40px, 10px 10px',
                             maskImage: 'linear-gradient(to bottom, black, transparent)'
-                          }} 
+                          }}
                         />
-                        
+
                         <div className="relative z-10 flex items-center gap-4 mb-3">
                           <div className="w-16 h-16 bg-background/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
                             {(() => {

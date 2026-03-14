@@ -161,25 +161,24 @@ export function HistoryPage() {
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center justify-center gap-2 text-sm mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            <div className={`flex items-center gap-2 text-sm mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-white font-medium">History</span>
+              <span className={introData?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>History</span>
             </div>
 
-            <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${introData?.backgroundImage ? 'text-white' : 'text-gray-900'}`}>
-              <span className="text-white">{introData?.title || 'History'}</span>
+            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${introData?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+              <span className={introData?.backgroundImage ? 'text-white' : ''}>{introData?.title || 'History'}</span>
             </h1>
 
-            <p className={`text-xl leading-relaxed max-w-2xl mx-auto ${introData?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+            <p className={`text-lg max-w-2xl ${introData?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
               {introData?.description || 'A legacy built on trust, growth and professional excellence.'}
             </p>
           </motion.div>
@@ -269,7 +268,7 @@ export function HistoryPage() {
                 <h3 className="text-3xl font-bold text-gray-900 mb-2">
                   Branch <span className="text-[var(--primary)]">Timeline</span>
                 </h3>
-                <p className="text-[var(--secondary)]">Our expansion journey across India</p>
+                <p className="text-white">Our expansion journey across India</p>
               </div>
 
               {/* Timeline */}

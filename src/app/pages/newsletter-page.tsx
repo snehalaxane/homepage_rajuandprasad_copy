@@ -140,10 +140,10 @@ export function NewsletterPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-background rounded-3xl shadow-2xl  overflow-hidden"
+              className="bg-white rounded-3xl shadow-2xl  overflow-hidden"
             >
               {/* Table Header Controls */}
-              <div className="p-6 border-b border-gray-100 bg-background">
+              <div className="p-6 border-b border-gray-900 bg-white">
                 <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
                   {/* Search Bar */}
                   <div className="relative flex-1 max-w-md">
@@ -156,7 +156,7 @@ export function NewsletterPage() {
                         setSearchQuery(e.target.value);
                         setCurrentPage(1);
                       }}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border-1 border-gray-100 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border-1 border-gray-400 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
                     />
                   </div>
 
@@ -208,7 +208,7 @@ export function NewsletterPage() {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.05 }}
-                        className={`border-b border-gray-100 hover:bg-gradient-to-r hover:from-[var(--primary)]/5 hover:to-blue-50/30 transition-all ${index % 2 === 0 ? 'bg-background' : 'bg-background/50'
+                        className={`border-b border-gray-100 hover:bg-gradient-to-r hover:from-[var(--primary)]/5 hover:to-blue-50/30 transition-all ${index % 2 === 0 ? 'bg-white' : 'bg-white/50'
                           }`}
                       >
                         <td className="px-6 py-5 font-semibold text-[var(--primary)]">
@@ -248,7 +248,7 @@ export function NewsletterPage() {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="p-6 border-t border-gray-100 bg-background">
+                <div className="p-6 border-t border-gray-100 bg-white">
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-[var(--secondary)]">
                       Showing {startIndex + 1} to {Math.min(endIndex, filteredData.length)} of {filteredData.length} entries

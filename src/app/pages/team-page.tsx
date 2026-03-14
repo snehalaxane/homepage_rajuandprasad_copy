@@ -160,96 +160,29 @@ export function TeamPage() {
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="flex justify-center items-center">
-            {/* Left: Page Title */}
-            <motion.div
-              className="text-center max-w-2xl"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              {/* Breadcrumb */}
-              <div className="flex items-center justify-center gap-2 text-sm text-white mb-6">
-                <a href="#home" className="hover:text-white transition-colors">
-                  Home
-                </a>
-                <ChevronRight className="h-4 w-4" />
-                <span className="text-white font-medium">The Team</span>
-              </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Breadcrumb */}
+            <div className={`flex items-center gap-2 text-sm mb-6 ${intro.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              <a href="#home" className="hover:text-white transition-colors">
+                Home
+              </a>
+              <ChevronRight className="h-4 w-4" />
+              <span className={intro.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>The Team</span>
+            </div>
 
-              <h1 className={`text-5xl lg:text-6xl font-bold mb-4 ${intro.backgroundImage ? 'text-white' : 'text-gray-900'}`}>
-                {intro.title.split(' ').length > 1 ? (
-                  <>
-                    {intro.title.split(' ').slice(0, -1).join(' ')} <span className="text-white">{intro.title.split(' ').slice(-1)}</span>
-                  </>
-                ) : (
-                  <span className="text-white">{intro.title}</span>
-                )}
-              </h1>
+            {/* Title */}
+            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+              {intro.title || 'The Team'}
+            </h1>
 
-              <p className={`text-lg leading-relaxed ${intro.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
-                {intro.description}
-              </p>
-            </motion.div>
-
-            {/* Right: Decorative Illustration */}
-            {/* <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="hidden lg:flex justify-center items-center"
-            >
-              <div className="relative w-full max-w-md aspect-square">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/10 to-[rgba(var(--primary-rgb),0.05)] rounded-full blur-3xl" />
-                <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-200/50">
-                  <div className="grid grid-cols-2 gap-4">
-                    {gridPartners.length > 0 ? (
-                      <AnimatePresence mode="popLayout">
-                        {gridPartners.map((member, i) => (
-                          <motion.div
-                            key={`${member._id}-${i}`}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.8 }}
-                            transition={{
-                              duration: 0.5,
-                              delay: i * 0.1,
-                              type: 'spring',
-                              stiffness: 100
-                            }}
-                            className="aspect-square relative overflow-hidden rounded-2xl group border border-gray-100 shadow-sm"
-                          >
-                            {member.photo ? (
-                              <img
-                                src={resolveImageUrl(member.photo)}
-                                alt={member.name}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                              />
-                            ) : (
-                              <div className="w-full h-full bg-gradient-to-br from-[var(--primary)]/20 to-blue-100" />
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-                              <p className="text-white text-[10px] font-bold leading-tight">{member.name}</p>
-                            </div>
-                          </motion.div>
-                        ))}
-                      </AnimatePresence>
-                    ) : (
-                      [1, 2, 3, 4].map((i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.4 + i * 0.1, type: 'spring' }}
-                          className="aspect-square bg-gradient-to-br from-[var(--primary)]/20 to-blue-100 rounded-2xl"
-                        />
-                      ))
-                    )}
-                  </div>
-                </div>
-              </div>
-            </motion.div> */}
-          </div>
+            <p className={`text-lg max-w-2xl ${intro.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+              {intro.description}
+            </p>
+          </motion.div>
         </div>
       </section>
 

@@ -196,19 +196,18 @@ export function GalleryPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="max-w-4xl mx-auto text-center"
             >
-              <div className={`flex items-center justify-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-white'}`}>
-                <a href="#home" className={`transition-colors ${intro?.backgroundImage ? 'hover:text-white' : 'hover:text-white'}`}>Home</a>
+              <div className={`flex items-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+                <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Gallery</span>
               </div>
 
-              <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+              <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {intro.heading}
               </h1>
 
-              <p className={`text-lg lg:text-xl leading-relaxed max-w-3xl mx-auto ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+              <p className={`text-lg max-w-2xl ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {intro.subheading}
               </p>
             </motion.div>
@@ -280,7 +279,7 @@ export function GalleryPage() {
                         {image.title || 'Untitled Image'}
                       </h3> */}
                       <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1 text-xs text-[var(--secondary)]">
+                        <span className="inline-flex items-center gap-1 text-xs text-white">
                           <Calendar className="h-3 w-3" />
                           {image.year}
                         </span>
@@ -318,11 +317,11 @@ export function GalleryPage() {
               <div className="grid sm:grid-cols-2 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
                 <div className="text-center py-4 sm:py-0">
                   <div className="text-4xl font-bold text-[var(--primary)] mb-2">{galleryImages.length}</div>
-                  <div className="text-sm text-[var(--secondary)] font-semibold">Total Images</div>
+                  <div className="text-sm text-white font-semibold">Total Images</div>
                 </div>
                 <div className="text-center py-4 sm:py-0">
                   <div className="text-4xl font-bold text-[var(--primary)] mb-2">{categories.length - 1}</div>
-                  <div className="text-sm text-[var(--secondary)] font-semibold">Categories</div>
+                  <div className="text-sm text-white font-semibold">Categories</div>
                 </div>
                 {/* <div className="text-center py-4 sm:py-0">
                   <div className="text-4xl font-bold text-[var(--primary)] mb-2">
