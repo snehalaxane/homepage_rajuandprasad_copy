@@ -465,7 +465,7 @@ export function TeamPage() {
 
               {/* Partner Counter */}
               <div className="text-center">
-                <p className="text-sm text-[var(--secondary)] mb-2">Partner</p>
+                {/* <p className="text-sm text-[var(--secondary)] mb-2">Partner</p> */}
                 <p className="text-2xl font-bold text-[var(--primary)]">
                   {partners.length > 0 ? currentPartnerIndex + 1 : 0} / {partners.length}
                 </p>
