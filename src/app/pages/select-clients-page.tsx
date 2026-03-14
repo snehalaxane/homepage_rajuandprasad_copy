@@ -317,7 +317,7 @@ export function SelectClientsPage() {
                               initial={{ opacity: 0, scale: 0.95 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.3, delay: index * 0.03 }}
-                              className="group flex items-start gap-4 p-4 rounded-xl bg-gray-50/50 hover:bg-background transition-all hover:shadow-md border border-transparent hover:border-gray-100"
+                              className="group flex items-start gap-4 p-4 rounded-xl bg-[#4a4a4a] hover:bg-[#3a3a3a] transition-all hover:shadow-md border border-transparent"
                               onMouseEnter={(e) => {
                                 const checkCircle = e.currentTarget.querySelector('.check-circle') as HTMLElement;
                                 if (checkCircle) {
@@ -337,7 +337,7 @@ export function SelectClientsPage() {
                                 className="check-circle mt-1.5 w-2 h-2 rounded-full flex-shrink-0 transition-all duration-300"
                                 style={{ backgroundColor: `${currentCategory.color}66` }}
                               />
-                              <span className="text-gray-900 font-medium leading-snug">
+                              <span className="text-white font-medium leading-snug">
                                 {item.name}
                               </span>
                             </motion.div>
@@ -362,24 +362,24 @@ export function SelectClientsPage() {
             >
               <div className="grid md:grid-cols-3 gap-6">
                 {(intro?.stats || []).filter(s => s.enabled).map((stat, idx) => (
-                  <div key={idx} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                    <p className="text-5xl font-bold text-[var(--primary)] mb-2">{stat.value}</p>
-                    <p className="text-[var(--secondary)] font-medium">{stat.label}</p>
+                  <div key={idx} className="bg-[#4a4a4a] rounded-2xl p-8 shadow-lg border border-transparent text-center hover:shadow-xl transition-shadow">
+                    <p className="text-5xl font-bold text-white mb-2">{stat.value}</p>
+                    <p className="text-white font-medium">{stat.label}</p>
                   </div>
                 ))}
                 {!intro && (
                   <>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                      <p className="text-5xl font-bold text-[var(--primary)] mb-2">7</p>
-                      <p className="text-[var(--secondary)] font-medium">Industry Sectors</p>
+                    <div className="bg-[#4a4a4a] rounded-2xl p-8 shadow-lg border border-transparent text-center hover:shadow-xl transition-shadow">
+                      <p className="text-5xl font-bold text-white mb-2">7</p>
+                      <p className="text-white font-medium">Industry Sectors</p>
                     </div>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                      <p className="text-5xl font-bold text-[var(--primary)] mb-2">76+</p>
-                      <p className="text-[var(--secondary)] font-medium">Service Categories</p>
+                    <div className="bg-[#4a4a4a] rounded-2xl p-8 shadow-lg border border-transparent text-center hover:shadow-xl transition-shadow">
+                      <p className="text-5xl font-bold text-white mb-2">76+</p>
+                      <p className="text-white font-medium">Service Categories</p>
                     </div>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
-                      <p className="text-5xl font-bold text-[var(--primary)] mb-2">46+</p>
-                      <p className="text-[var(--secondary)] font-medium">Years of Trust</p>
+                    <div className="bg-[#4a4a4a] rounded-2xl p-8 shadow-lg border border-transparent text-center hover:shadow-xl transition-shadow">
+                      <p className="text-5xl font-bold text-white mb-2">46+</p>
+                      <p className="text-white font-medium">Years of Trust</p>
                     </div>
                   </>
                 )}
