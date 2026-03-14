@@ -317,11 +317,11 @@ export function ModernHeroSection() {
             >
               <motion.span
                 animate={{
-                  opacity: [1, 0.6, 1],
-                  filter: ["brightness(1)", "brightness(1.5)", "brightness(1)"],
+                  opacity: [1, 0, 1],
                 }}
                 transition={{
-                  duration: 4,
+                  duration: 10,
+                  times: [0, 0.4, 1], // fade out faster, fade in slower
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
