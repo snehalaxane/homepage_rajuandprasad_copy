@@ -533,7 +533,7 @@ export function ContactPage() {
               <h3 className="text-2xl font-bold text-[var(--primary)] mb-4">
                 Have Questions?
               </h3>
-              <p className="text-lg text-[var(--secondary)] mb-8">
+              <p className="text-lg text-white mb-8">
                 Our team is here to help. Reach out to us for any queries related to our services, career opportunities, or general information about Raju & Prasad.
               </p>
               <div className="flex flex-wrap justify-center gap-4">

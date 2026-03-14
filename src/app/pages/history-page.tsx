@@ -198,7 +198,7 @@ export function HistoryPage() {
               className="lg:sticky lg:top-32"
             >
               <div className="mb-8">
-                <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-4">
+                <span className="px-4 py-2 bg-[var(--primary)] text-white rounded-full text-sm font-semibold inline-block mb-4">
                   Since {journey?.sinceYear || '1979'}
                 </span>
                 <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
