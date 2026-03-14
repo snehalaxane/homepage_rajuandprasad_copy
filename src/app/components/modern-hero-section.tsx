@@ -131,7 +131,7 @@ export function ModernHeroSection() {
 
 
       {/* Background decoration - Fixed color #7A7876 */}
-      <div className="absolute inset-0" style={{ backgroundColor: '#7A7876' }}>
+      <div className="absolute inset-0" style={{ backgroundColor: '#808080' }}>
         {/* Subtle Grid Pattern */}
         {/* <div
           className="absolute inset-0 opacity-[0.06]"
