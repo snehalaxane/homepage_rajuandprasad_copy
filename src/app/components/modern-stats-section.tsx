@@ -143,8 +143,9 @@ export function ModernStatsSection() {
                     }}
                     transition={{
                       type: "spring",
-                      stiffness: 260,
-                      damping: 26
+                      stiffness: 80,
+                      damping: 20,
+                      mass: 0.8
                     }}
                     className="absolute cursor-pointer select-none"
                     style={{ width: cardW, height: cardH }}

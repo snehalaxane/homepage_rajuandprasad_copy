@@ -55,6 +55,15 @@ const iconMap: Record<string, any> = {
   ClipboardList
 };
 
+const SERVICE_COLORS = [
+  { main: '#1e3a8a', gradient: 'linear-gradient(to bottom right, #1e40af, #3b82f6)' }, // Blue
+  { main: '#064e3b', gradient: 'linear-gradient(to bottom right, #065f46, #10b981)' }, // Emerald
+  { main: '#4c1d95', gradient: 'linear-gradient(to bottom right, #5b21b6, #8b5cf6)' }, // Violet
+  { main: '#7f1d1d', gradient: 'linear-gradient(to bottom right, #991b1b, #ef4444)' }, // Red
+  { main: '#78350f', gradient: 'linear-gradient(to bottom right, #92400e, #f59e0b)' }, // Amber
+  { main: '#0f766e', gradient: 'linear-gradient(to bottom right, #0f766e, #14b8a6)' }, // Teal
+];
+
 export function ServicesPage() {
   const [activeService, setActiveService] = useState<string | null>(null);
   const [services, setServices] = useState<any[]>([]);
@@ -113,7 +122,11 @@ export function ServicesPage() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [services.length]); // Re-run if services list is updated
 
-  const currentService = services.find((cat) => cat._id === activeService);
+  const currentServiceIndex = services.findIndex((cat) => cat._id === activeService);
+  const currentService = currentServiceIndex !== -1 ? services[currentServiceIndex] : null;
+  const currentServiceColor = currentServiceIndex !== -1 
+    ? SERVICE_COLORS[currentServiceIndex % SERVICE_COLORS.length] 
+    : SERVICE_COLORS[0];
 
   if (loading) {
     return (
@@ -236,6 +249,7 @@ export function ServicesPage() {
                     {services.map((service, index) => {
                       const Icon = iconMap[service.icon] || FileCheck;
                       const isActive = activeService === service._id;
+                      const serviceColor = SERVICE_COLORS[index % SERVICE_COLORS.length];
 
                       return (
                         <motion.button
@@ -246,9 +260,10 @@ export function ServicesPage() {
                           transition={{ duration: 0.4, delay: index * 0.1 }}
                           onClick={() => setActiveService(service._id)}
                           className={`w-full text-left p-4 rounded-2xl mb-3 transition-all duration-300 group relative overflow-hidden ${isActive
-                            ? 'bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/30'
+                            ? 'text-white'
                             : 'bg-gray-50 text-gray-700 hover:bg-gray-100 hover:shadow-md'
                             }`}
+                          style={isActive ? { background: serviceColor.gradient, boxShadow: `0 10px 15px -3px ${serviceColor.main}40` } : {}}
                         >
                           {isActive && (
                             <motion.div
@@ -304,7 +319,10 @@ export function ServicesPage() {
                       className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
                     >
                       {/* Service Header */}
-                      <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 p-8 text-white overflow-hidden">
+                      <div 
+                        className="relative p-8 text-white overflow-hidden transition-all duration-500"
+                        style={{ background: currentServiceColor.gradient }}
+                      >
                         {/* Grid & Pattern Effect */}
                         <div 
                           className="absolute inset-0 pointer-events-none" 
@@ -330,7 +348,7 @@ export function ServicesPage() {
                               })()
                             )}
                           </div>
-                          <h2 className="text-3xl font-bold">{currentService.title || currentService.name}</h2>
+                          <h2 className="text-3xl font-bold font-sans tracking-tight">{currentService.title || currentService.name}</h2>
                         </div>
                       </div>
 
@@ -356,14 +374,14 @@ export function ServicesPage() {
                                     <SectionIcon className="h-5 w-5 text-[var(--primary)] group-hover:text-white transition-colors" />
                                   )}
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors pt-1">
+                                <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors pt-1 font-sans">
                                   {section.heading}
                                 </h3>
                               </div>
 
                               {/* Section Content */}
-                              <div className="pl-13">
-                                <p className="text-[var(--secondary)] leading-relaxed whitespace-pre-line">
+                              <div className="pl-[52px]">
+                                <p className="text-base text-gray-600 leading-relaxed whitespace-pre-line font-sans font-normal">
                                   {section.content}
                                 </p>
                               </div>
