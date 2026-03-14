@@ -571,7 +571,7 @@ export function CareersPage() {
       <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
-          className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+          className="relative overflow-hidden w-full aspect-[1920/375] bg-cover bg-center bg-no-repeat flex items-center" style={{
             backgroundImage: careerIntro?.backgroundImage ? `url(${resolveImageUrl(careerIntro.backgroundImage)})` : 'none',
             backgroundColor: !careerIntro?.backgroundImage ? 'transparent' : 'inherit'
           }}

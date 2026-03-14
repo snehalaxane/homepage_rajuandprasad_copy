@@ -140,7 +140,7 @@ export function HistoryPage() {
     <div className="min-h-screen bg-background">
       {/* Page Header */}
       <section
-        className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+        className="relative overflow-hidden w-full aspect-[1920/375] bg-cover bg-center bg-no-repeat flex items-center" style={{
           backgroundImage: introData?.backgroundImage ? `url(${resolveImageUrl(introData.backgroundImage)})` : 'none',
           backgroundColor: !introData?.backgroundImage ? 'transparent' : 'inherit'
         }}
@@ -451,7 +451,7 @@ export function HistoryPage() {
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Want to work with a <span className="text-[var(--primary)]">trusted CA firm?</span>
             </h2>
-            <p className="text-lg text-[var(--secondary)] mb-8">
+            <p className="text-lg text-white mb-8">
               Experience the legacy of {journey?.yearsOfService || '46+'} years of professional excellence
             </p>
 

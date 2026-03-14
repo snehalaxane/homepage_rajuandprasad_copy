@@ -124,8 +124,8 @@ export function ServicesPage() {
 
   const currentServiceIndex = services.findIndex((cat) => cat._id === activeService);
   const currentService = currentServiceIndex !== -1 ? services[currentServiceIndex] : null;
-  const currentServiceColor = currentServiceIndex !== -1 
-    ? SERVICE_COLORS[currentServiceIndex % SERVICE_COLORS.length] 
+  const currentServiceColor = currentServiceIndex !== -1
+    ? SERVICE_COLORS[currentServiceIndex % SERVICE_COLORS.length]
     : SERVICE_COLORS[0];
 
   if (loading) {
@@ -154,7 +154,7 @@ export function ServicesPage() {
 
       {/* Page Header */}
       <section
-        className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center"
+        className="relative overflow-hidden w-full aspect-[1920/375]  bg-cover bg-center bg-no-repeat flex items-center"
         style={{
           backgroundImage: introData?.backgroundImage ? `url(${resolveImageUrl(introData.backgroundImage)})` : 'none',
           backgroundColor: !introData?.backgroundImage ? 'transparent' : 'inherit'
@@ -319,14 +319,14 @@ export function ServicesPage() {
                       className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
                     >
                       {/* Service Header */}
-                      <div 
+                      <div
                         className="relative p-8 text-white overflow-hidden transition-all duration-500"
                         style={{ background: currentServiceColor.gradient }}
                       >
                         {/* Grid & Pattern Effect */}
-                        <div 
-                          className="absolute inset-0 pointer-events-none" 
-                          style={{ 
+                        <div
+                          className="absolute inset-0 pointer-events-none"
+                          style={{
                             backgroundImage: `
                               linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
                               linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
@@ -334,9 +334,9 @@ export function ServicesPage() {
                             `,
                             backgroundSize: '40px 40px, 40px 40px, 10px 10px',
                             maskImage: 'linear-gradient(to bottom, black, transparent)'
-                          }} 
+                          }}
                         />
-                        
+
                         <div className="relative z-10 flex items-center gap-4 mb-3">
                           <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden">
                             {currentService.icon?.startsWith('data:') ? (

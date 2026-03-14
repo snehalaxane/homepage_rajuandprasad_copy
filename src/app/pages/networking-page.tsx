@@ -212,7 +212,7 @@ export function NetworkingPage() {
 
       {/* Page Header */}
       <section
-        className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+        className="relative overflow-hidden w-full aspect-[1920/375] bg-cover bg-center bg-no-repeat flex items-center" style={{
           backgroundImage: domesticContent?.backgroundImage ? `url(${resolveImageUrl(domesticContent.backgroundImage)})` : 'none',
           backgroundColor: !domesticContent?.backgroundImage ? 'transparent' : 'inherit'
         }}

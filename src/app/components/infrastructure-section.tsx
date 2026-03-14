@@ -152,7 +152,7 @@ export default function InfrastructureSection() {
                   <div className="w-4 h-1 bg-[#F5C542]"></div>
                 </div>
                 <h3 className="text-3xl font-bold mb-4" style={{ color: 'var(--primary)' }}>{infra.newsletterTitle}</h3>
-                <p className="text-lg text-gray-700 mb-10">{infra.newsletterSubtitle}</p>
+                <p className="text-lg text-white mb-10">{infra.newsletterSubtitle}</p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>

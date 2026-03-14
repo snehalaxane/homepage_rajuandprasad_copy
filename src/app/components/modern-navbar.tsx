@@ -171,10 +171,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
       {/* Top Header Row - Scrolls with page */}
       {activePage !== 'home' && (
         <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="relative left-0 right-0 z-[101] bg-[#888888] border-b hidden xl:block transition-all duration-500"
+          className="relative left-0 right-0 z-[100] bg-[#888888] border-b hidden xl:block transition-all duration-500"
         >
           <div className="container mx-auto px-6 h-24 flex items-center justify-between">
             {/* Left - Logo */}
@@ -227,10 +224,7 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
 
       {/* Navigation Row - Sticky Top */}
       <motion.nav
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`sticky top-0 left-0 right-0 z-[100] transition-all duration-500 ${isScrolled ? 'shadow-[0_8px_30px_rgba(0,0,0,0.3)]' : 'shadow-[0_8px_30px_rgba(0,0,0,0.2)]'}`}
+        className="sticky top-0 left-0 right-0 z-[110] transition-all duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
         style={{ backgroundColor: 'var(--primary)' }}
       >
         <div className="container mx-auto px-6 relative z-10">
@@ -250,9 +244,20 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
             <div className="hidden xl:flex items-center justify-center flex-1">
               <div className="flex items-center gap-1">
                 {navItems.map((item) => {
-                  // Dynamic isActive check
-                  const cleanHref = (item.href || '').replace(/^#/, '');
-                  const isActive = activePage === cleanHref || (activePage === 'home' && (cleanHref === 'home' || cleanHref === ''));
+                  // Robust isActive check
+                  const normalize = (path: string) => path.replace(/^[/#]+/, '');
+                  const cleanHref = normalize(item.href || '');
+                  const currentActive = normalize(activePage);
+
+                  const isAnyChildActive = item.dropdown?.some(dropdownItem => {
+                    const dropdownCleanHref = normalize(dropdownItem.href || '');
+                    return currentActive.startsWith(dropdownCleanHref);
+                  });
+                  
+                  const isActive = currentActive === cleanHref || 
+                                 (currentActive === 'home' && (cleanHref === 'home' || cleanHref === '')) ||
+                                 currentActive.startsWith(cleanHref + '/') ||
+                                 isAnyChildActive;
 
                   if (item.dropdown) {
                     return (
@@ -263,18 +268,20 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                         onMouseLeave={() => setOpenDropdown(null)}
                       >
                         <button
-                          className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
-                            ? 'bg-white/10'
-                            : 'hover:bg-white/5'
+                          className={`relative text-[15px] font-semibold tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap flex items-center gap-1 text-white ${isActive
+                            ? 'text-white'
+                            : 'hover:text-white/80'
                             }`}
                         >
                           {item.label}
                           <ChevronDown className={`h-4 w-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
-                          {/* Underline Animation - White accent */}
+                          {/* Underline Animation */}
                           <motion.span
-                            className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white rounded-full ${isActive ? 'w-[60%]' : 'w-0'}`}
-                            whileHover={{ width: '60%' }}
-                            transition={{ duration: 0.2 }}
+                            className="absolute bottom-0.5 left-0 h-1 bg-white rounded-full z-20"
+                            initial={false}
+                            animate={{ width: isActive ? '100%' : '0%' }}
+                            whileHover={{ width: '100%' }}
+                            transition={{ duration: 0.3 }}
                           />
                         </button>
 
@@ -329,17 +336,19 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                         e.preventDefault();
                         handleNavClick(item.href);
                       }}
-                      className={`relative text-[15px] font-normal tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap text-white ${isActive
-                        ? 'bg-white/10'
-                        : 'hover:bg-white/5'
+                      className={`relative text-[15px] font-semibold tracking-wide transition-all duration-200 px-3 py-2 rounded-lg group whitespace-nowrap text-white ${isActive
+                        ? 'text-white'
+                        : 'hover:text-white/80'
                         }`}
                     >
                       {item.label}
-                      {/* Underline Animation - White accent */}
+                      {/* Underline Animation */}
                       <motion.span
-                        className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white rounded-full ${isActive ? 'w-[60%]' : 'w-0'}`}
-                        whileHover={{ width: '60%' }}
-                        transition={{ duration: 0.2 }}
+                        className="absolute bottom-0.5 left-0 h-1 bg-white rounded-full z-20"
+                        initial={false}
+                        animate={{ width: isActive ? '100%' : '0%' }}
+                        whileHover={{ width: '100%' }}
+                        transition={{ duration: 0.3 }}
                       />
                     </a>
                   );

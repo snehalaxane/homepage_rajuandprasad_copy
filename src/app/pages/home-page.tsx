@@ -15,9 +15,7 @@ export function HomePage({ activePage }: HomePageProps) {
   return (
     <>
       <ModernHeroSection />
-      <div className="relative z-50">
-        <ModernNavbar activePage={activePage} />
-      </div>
+      <ModernNavbar activePage={activePage} />
       <NewsTicker />
       <ModernStatsSection />
       <ModernServicesSection />

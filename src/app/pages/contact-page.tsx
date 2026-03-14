@@ -169,7 +169,7 @@ export function ContactPage() {
       <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
-          className="relative overflow-hidden w-full aspect-[1920/375] border-b border-gray-100 bg-cover bg-center bg-no-repeat flex items-center" style={{
+          className="relative overflow-hidden w-full aspect-[1920/375] bg-cover bg-center bg-no-repeat flex items-center" style={{
             backgroundImage: settings?.backgroundImage ? `url(${resolveImageUrl(settings.backgroundImage)})` : 'none',
             backgroundColor: !settings?.backgroundImage ? 'transparent' : 'inherit'
           }}
