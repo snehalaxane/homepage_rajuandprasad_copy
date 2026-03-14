@@ -319,7 +319,7 @@ export function TeamPage() {
           </motion.div>
 
           {/* Partner Card */}
-          <div className="max-w-6xl mx-auto mb-9">
+          <div className="max-w-5xl mx-auto mb-9">
             {loading ? (
               <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-gray-100 shadow-xl">
                 <Loader2 className="w-12 h-12 text-[var(--primary)] animate-spin mb-4" />
@@ -344,20 +344,20 @@ export function TeamPage() {
                   }}
                   className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow"
                 >
-                  <div className="grid lg:grid-cols-5 gap-0">
+                  <div className="grid lg:grid-cols-6 gap-0">
                     {/* Left: Profile Photo */}
-                    <div className="lg:col-span-2 relative overflow-hidden bg-gray-50/50 flex items-center justify-center">
-                      <div className="h-full w-full max-h-[380px] relative p-4">
+                    <div className="lg:col-span-2 relative overflow-hidden bg-gray-50/50 flex items-start justify-start">
+                      <div className="h-full w-full max-h-[380px] relative">
                         <img
                           src={resolveImageUrl(currentPartner.photo)}
                           alt={currentPartner.name}
-                          className="w-full h-full object-contain"
+                          className="w-full h-full object-contain object-left-top"
                         />
                       </div>
                     </div>
 
                     {/* Right: Partner Info */}
-                    <div className="lg:col-span-3 p-6 lg:p-8 flex flex-col justify-center">
+                    <div className="lg:col-span-4 p-5 lg:p-6 flex flex-col justify-center">
                       {/* Location Tag */}
                       <div className="flex items-center gap-2 mb-3">
                         <div className="px-3 py-1 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-xs font-semibold flex items-center gap-2">
@@ -373,7 +373,7 @@ export function TeamPage() {
                       <p className="text-lg font-semibold text-[var(--primary)] mb-4">{currentPartner.designation}</p>
 
                       {/* Description */}
-                      <p className="text-base text-[var(--secondary)] leading-relaxed mb-4 line-clamp-4">
+                      <p className="text-base text-[var(--secondary)] leading-relaxed mb-4 w-full">
                         {currentPartner.bio}
                       </p>
 

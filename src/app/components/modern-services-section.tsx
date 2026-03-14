@@ -127,12 +127,12 @@ export function ModernServicesSection() {
                 className="group relative flex items-center h-full"
               >
                 {/* Circular Contact/Image */}
-                <div className="absolute -top-12 md:top-1/2 md:-translate-y-1/2 left-1/2 md:left-0 -translate-x-1/2 w-28 h-28 md:w-36 md:h-36 rounded-full border-[6px] border-background bg-white shadow-xl overflow-hidden z-20 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-6 flex-shrink-0 flex items-center justify-center p-3">
+                <div className="absolute -top-12 md:top-1/2 md:-translate-y-1/2 left-1/2 md:left-0 -translate-x-1/2 w-28 h-28 md:w-36 md:h-36 rounded-full border-[6px] border-background bg-white shadow-xl overflow-hidden z-20 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-6 flex-shrink-0 flex items-center justify-center overflow-hidden flex items-center justify-center">
                   {service.icon?.startsWith('data:') || (service.icon && service.icon.includes('/')) ? (
                     <img
                       src={service.icon.startsWith('/') && !service.icon.startsWith('data:') ? `${API_BASE_URL}${service.icon}` : service.icon}
                       alt={service.name}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gray-50 bg-gradient-to-br from-white to-gray-100 p-4">
