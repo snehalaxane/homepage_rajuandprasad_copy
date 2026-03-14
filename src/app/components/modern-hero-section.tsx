@@ -133,7 +133,7 @@ export function ModernHeroSection() {
       {/* Background decoration - Fixed color #7A7876 */}
       <div className="absolute inset-0" style={{ backgroundColor: '#808080' }}>
         {/* Subtle Grid Pattern */}
-        {/* <div
+        <div
           className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage: `
@@ -142,7 +142,7 @@ export function ModernHeroSection() {
             `,
             backgroundSize: '60px 60px'
           }}
-        /> */}
+        />
 
         {/* Abstract Wave Shapes - Lighter grey tones for depth */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">

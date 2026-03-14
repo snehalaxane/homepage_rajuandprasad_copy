@@ -187,7 +187,7 @@ export function BlogPage() {
                       <div className="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-xs font-bold uppercase">
                         {selectedPost.author.charAt(0)}
                       </div>
-                      <span className="font-medium"> {selectedPost.author}</span>
+                      <span className="font-medium text-white"> {selectedPost.author}</span>
                     </div>
                   )}
                   <span className="px-4 py-1.5 bg-[var(--primary)] text-white text-sm font-semibold rounded-full shadow-lg shadow-[var(--primary)]/20">
