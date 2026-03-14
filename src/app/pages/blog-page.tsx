@@ -148,7 +148,7 @@ export function BlogPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-sm mb-4 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              <div className={`flex items-center gap-2 text-sm mb-4 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
                 <a href="#home" className={`transition-colors ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={`transition-colors cursor-pointer ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
@@ -157,7 +157,7 @@ export function BlogPage() {
                   <>
                     <a href="#blog" className="hover:text-[var(--primary)] transition-colors">Our Blog</a>
                     <ChevronRight className="h-4 w-4" />
-                    <span className="text-[var(--primary)] font-semibold line-clamp-1">{selectedPost.title}</span>
+                    <span className="text-white font-semibold line-clamp-1">{selectedPost.title}</span>
                   </>
                 ) : (
                   <span className={(intro?.backgroundImage && !selectedPost) ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Our Blog</span>
@@ -172,7 +172,7 @@ export function BlogPage() {
               {/* Subtitle / Meta */}
               {selectedPost ? (
                 <div className="flex flex-wrap items-center gap-6">
-                  <div className="flex items-center gap-2 text-[var(--secondary)]">
+                  <div className="flex items-center gap-2 text-white">
                     <Calendar className="h-5 w-5 text-[var(--primary)]" />
                     <span className="font-medium">
                       {new Date(selectedPost.publishDate).toLocaleDateString('en-US', {
@@ -183,7 +183,7 @@ export function BlogPage() {
                     </span>
                   </div>
                   {selectedPost.author && (
-                    <div className="flex items-center gap-2 text-[var(--secondary)]">
+                    <div className="flex items-center gap-2 text-white">
                       <div className="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-xs font-bold uppercase">
                         {selectedPost.author.charAt(0)}
                       </div>
