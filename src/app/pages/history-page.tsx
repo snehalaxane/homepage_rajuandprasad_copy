@@ -159,30 +159,6 @@ export function HistoryPage() {
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-sm mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
-              <a href="#home" className="hover:text-white transition-colors">
-                Home
-              </a>
-              <ChevronRight className="h-4 w-4" />
-              <span className={introData?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>History</span>
-            </div>
-
-            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${introData?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
-              <span className={introData?.backgroundImage ? 'text-white' : ''}>{introData?.title || 'History'}</span>
-            </h1>
-
-            <p className={`text-lg max-w-2xl ${introData?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
-              {introData?.description || 'A legacy built on trust, growth and professional excellence.'}
-            </p>
-          </motion.div>
-        </div>
       </section>
 
       {/* History + Timeline Section */}
@@ -232,29 +208,7 @@ export function HistoryPage() {
                 </div>
               </div>
 
-              {/* Stats Cards */}
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
-                >
-                  <p className="text-4xl font-bold text-[var(--primary)] mb-2">{journey?.yearsOfService || '46+'}</p>
-                  <p className="text-sm text-[var(--secondary)] font-medium">Years of Service</p>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
-                >
-                  <p className="text-4xl font-bold text-[var(--primary)] mb-2">{journey?.activeLocations || '7'}</p>
-                  <p className="text-sm text-[var(--secondary)] font-medium">Active Locations</p>
-                </motion.div>
-              </div>
+
             </motion.div>
 
             {/* Right Side: Timeline */}
@@ -265,10 +219,10 @@ export function HistoryPage() {
               transition={{ duration: 0.6 }}
             >
               <div className="mb-8">
-                <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                <h3 className="text-3xl font-bold text-gray-900 mb-2 ml-20">
                   Branch <span className="text-[var(--primary)]">Timeline</span>
                 </h3>
-                <p className="text-white">Our expansion journey across India</p>
+                <p className="text-white ml-20">Our expansion journey across India</p>
               </div>
 
               {/* Timeline */}
@@ -428,7 +382,7 @@ export function HistoryPage() {
                   </h2>
 
                   {/* Mission Content */}
-                  <p className="text-xl lg:text-2xl text-white/90 leading-relaxed font-light">
+                  <p className="text-xl lg:text-2xl text-white/90 leading-relaxed font-bold italic">
                     {mission?.content || 'Our Mission is to provide value added and proactive advice to the clients in various sectors with professional ethics and good client relationship.'}
                   </p>
                 </div>
@@ -438,46 +392,7 @@ export function HistoryPage() {
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Want to work with a <span className="text-[var(--primary)]">trusted CA firm?</span>
-            </h2>
-            <p className="text-lg text-white mb-8">
-              Experience the legacy of {journey?.yearsOfService || '46+'} years of professional excellence
-            </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] text-white rounded-full hover:bg-[#002855] transition-all shadow-lg shadow-[var(--primary)]/30 hover:shadow-xl font-semibold"
-              >
-                Contact Us
-                <ArrowRight className="h-5 w-5" />
-              </motion.a>
-
-              <motion.a
-                href="#services"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white border-2 border-[var(--primary)] text-[var(--primary)] rounded-full hover:bg-[var(--primary)] hover:text-white transition-all shadow-lg font-semibold"
-              >
-                Explore Services
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       <ScrollToTop />
     </div>

@@ -181,21 +181,21 @@ export function ServicesPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-sm mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            {/* <div className={`flex items-center gap-2 text-sm mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="/" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
               <span className={introData?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Services</span>
-            </div>
+            </div> */}
 
-            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${introData?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+            {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${introData?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
               <span className={introData?.backgroundImage ? 'text-white' : ''}>{introData?.title || 'Services'}</span>
-            </h1>
+            </h1> */}
 
-            <p className={`text-lg max-w-2xl border-t border-[var(--primary)]/10 pt-6 ${introData?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+            {/* <p className={`text-lg max-w-2xl border-t border-[var(--primary)]/10 pt-6 ${introData?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
               {introData?.subtitle || 'We deliver professional services with commitment, competence and clarity.'}
-            </p>
+            </p> */}
           </motion.div>
         </div>
       </section>
@@ -419,13 +419,13 @@ export function ServicesPage() {
               transition={{ duration: 0.6 }}
               className="max-w-4xl mx-auto"
             >
-              <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden text-center">
-                <div className="absolute inset-0 opacity-10">
+              {/* <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden text-center"> */}
+              {/* <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
                   <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
-                </div>
+                </div> */}
 
-                <div className="relative z-10">
+              {/* <div className="relative z-10">
                   <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
                     {introData?.ctaTitle || 'Need professional advisory services?'}
                   </h2>
@@ -452,9 +452,9 @@ export function ServicesPage() {
                     >
                       Meet Our Team
                     </motion.a>
-                  </div>
-                </div>
-              </div>
+                  </div> */}
+              {/* </div> */}
+              {/* </div> */}
             </motion.div>
           </div>
         </section>

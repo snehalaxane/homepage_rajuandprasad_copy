@@ -124,22 +124,22 @@ export function AlumniPage() {
               transition={{ duration: 0.6 }}
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              {/* <div className={`flex items-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
                 <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={`transition-colors cursor-pointer hover:text-white`}>Think Tank</span>
                 <ChevronRight className="h-4 w-4" />
                 <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Alumni</span>
-              </div>
+              </div> */}
 
               {/* Title & Subtitle - Respecting the enabled flag */}
               {intro?.enabled !== false && (
                 <>
-                  <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+                  {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                     {intro?.title || 'Our Alumni Students are spread across Industry Segments.'}
-                  </h1>
+                  </h1> */}
 
-                  <div className={`space-y-4 text-lg max-w-2xl whitespace-pre-wrap ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+                  {/* <div className={`space-y-4 text-lg max-w-2xl whitespace-pre-wrap ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                     {intro?.subtitle ? (
                       <p>{intro.subtitle}</p>
                     ) : (
@@ -152,7 +152,7 @@ export function AlumniPage() {
                         </p>
                       </>
                     )}
-                  </div>
+                  </div> */}
                 </>
               )}
             </motion.div>
@@ -163,15 +163,15 @@ export function AlumniPage() {
         <section className="py-16">
           <div className="container mx-auto px-6">
             {/* Filter Bar */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-background rounded-2xl shadow-xl p-6 mb-12"
-            >
-              <div className="flex flex-col lg:flex-row gap-4 items-center">
-                {/* Search */}
-                <div className="relative flex-1 w-full">
+            > */}
+            <div className="flex flex-col lg:flex-row gap-4 items-center">
+              {/* Search */}
+              {/* <div className="relative flex-1 w-full">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
                   <input
                     type="text"
@@ -180,10 +180,10 @@ export function AlumniPage() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 bg-white"
                   />
-                </div>
+                </div> */}
 
-                {/* Industry Filter */}
-                <div className="relative w-full lg:w-auto min-w-[200px]">
+              {/* Industry Filter */}
+              {/* <div className="relative w-full lg:w-auto min-w-[200px]">
                   <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)] pointer-events-none" />
                   <select
                     value={selectedIndustry}
@@ -199,10 +199,10 @@ export function AlumniPage() {
                     ))}
                     <option value="All">All Industries</option>
                   </select>
-                </div>
+                </div> */}
 
-                {/* Sort Order */}
-                <div className="relative w-full lg:w-auto min-w-[180px]">
+              {/* Sort Order */}
+              {/* <div className="relative w-full lg:w-auto min-w-[180px]">
                   <ArrowUpDown className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)] pointer-events-none" />
                   <select
                     value={sortOrder}
@@ -213,16 +213,16 @@ export function AlumniPage() {
                     <option value="Z-A">Z - A</option>
                     <option value="Recent">Recently Added</option>
                   </select>
-                </div>
-              </div>
+                </div> */}
+            </div>
 
-              {/* Results Count */}
-              <div className="mt-4 pt-4">
+            {/* Results Count */}
+            {/* <div className="mt-4 pt-4">
                 <p className="text-sm text-white font-semibold">
                   Showing {filteredAlumni.length} of {alumniData.length} alumni
                 </p>
-              </div>
-            </motion.div>
+              </div> */}
+            {/* </motion.div> */}
 
             {/* Alumni Grid */}
             <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">

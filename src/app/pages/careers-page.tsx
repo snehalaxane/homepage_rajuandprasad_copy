@@ -585,63 +585,54 @@ export function CareersPage() {
             <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
           )}
 
-          <div className="container mx-auto px-6 relative z-10">
-            <motion.div
+          {/* <div className="container mx-auto px-6 relative z-10"> */}
+          {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="max-w-4xl"
-            >
-              {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-sm mb-4 ${careerIntro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            > */}
+          {/* Breadcrumb */}
+          {/* <div className={`flex items-center gap-2 text-sm mb-4 ${careerIntro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
                 <a href="#home" className={`transition-colors ${careerIntro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={careerIntro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Careers</span>
-              </div>
+              </div> */}
 
-              {/* Title */}
-              <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${careerIntro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+          {/* Title */}
+          {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${careerIntro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {careerIntro?.title || 'Careers'}
-              </h1>
+              </h1> */}
 
-              {/* Subtitle */}
-              <p className={`text-lg lg:text-xl leading-relaxed ${careerIntro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+          {/* Subtitle */}
+          {/* <p className={`text-lg lg:text-xl leading-relaxed ${careerIntro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {careerIntro?.subtitle || 'Join a team built on professionalism, growth, and integrity.'}
-              </p>
-            </motion.div>
-          </div>
+              </p> */}
+          {/* </motion.div> */}
+          {/* </div> */}
         </section>
 
         {/* Intro Content Block */}
         <section className="py-12">
-          <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-4xl mx-auto"
-            >
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 lg:p-12">
-                <div className="border-l-4 border-[var(--primary)] pl-6">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
-                    Build Your Career with Raju & Prasad
-                  </h2>
-                  <div className="space-y-4 text-base lg:text-lg text-[var(--secondary)] leading-relaxed">
-                    {careerIntro?.description ? (
-                      careerIntro.description.split('\n').map((para, idx) => (
-                        para.trim() && <p key={idx}>{para}</p>
-                      ))
-                    ) : (
-                      <>
-                        <p>Raju and Prasad is one of the leading firms of Chartered Accountants in India with a legacy spanning over 46 years.</p>
-                        <p>We believe our people are our greatest asset...</p>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+          {/* <div className="container mx-auto px-6"> */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="max-w-6xl mx-auto px-6"
+          >
+
+            <div className="space-y-6 text-base lg:text-lg text-white leading-relaxed text-justify">
+              {careerIntro?.description ? (
+                careerIntro.description.split('\n').map((para, idx) => (
+                  para.trim() && <p key={idx}>{para}</p>
+                ))
+              ) : (
+                <>
+                </>
+              )}
+            </div>
+          </motion.div>
         </section>
 
         {/* Career Openings Section */}

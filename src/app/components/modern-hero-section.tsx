@@ -297,7 +297,7 @@ export function ModernHeroSection() {
               {[
                 { url: hero?.imageUrl, alt: "Primary" }
               ].map((img, idx) => img.url && (
-                <div key={idx} className="relative group max-w-[240px] md:max-w-[350px] mx-auto lg:mx-0 mb-2">
+                <div key={idx} className="relative group max-w-[350px] md:max-w-[500px] lg:max-w-[600px] mx-auto lg:mx-0 lg:-ml-23 mb-2">
                   <img
                     src={img.url.startsWith('http') ? img.url : `${API_BASE_URL}/${img.url}`}
                     alt={img.alt}
@@ -332,7 +332,7 @@ export function ModernHeroSection() {
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
@@ -352,7 +352,7 @@ export function ModernHeroSection() {
               >
                 {hero?.ctas?.[1]?.text}
               </Button>
-            </motion.div>
+            </motion.div> */}
 
             {/* Trust Indicators */}
             <motion.div
@@ -363,15 +363,15 @@ export function ModernHeroSection() {
             >
               <div className="grid grid-cols-3 gap-2 sm:gap-8 text-center lg:text-left w-full mx-auto lg:mx-0">
                 <div>
-                  <p className="text-xl md:text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat1 || "").split(" ")[0]}</p>
+                  <p className="text-xl md:text-3xl font-bold text-[#002855] drop-shadow-lg">{(hero?.stat1 || "").split(" ")[0]}</p>
                   <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat1 || "").split(" ").slice(1).join(" ")}</p>
                 </div>
                 <div>
-                  <p className="text-xl md:text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat2 || "").split(" ")[0]}</p>
+                  <p className="text-xl md:text-3xl font-bold text-[#002855] drop-shadow-lg">{(hero?.stat2 || "").split(" ")[0]}</p>
                   <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat2 || "").split(" ").slice(1).join(" ")}</p>
                 </div>
                 <div>
-                  <p className="text-xl md:text-3xl font-bold text-white drop-shadow-lg">{(hero?.stat3 || "").split(" ")[0]}</p>
+                  <p className="text-xl md:text-3xl font-bold text-[#002855] drop-shadow-lg">{(hero?.stat3 || "").split(" ")[0]}</p>
                   <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat3 || "").split(" ").slice(1).join(" ")}</p>
                 </div>
               </div>

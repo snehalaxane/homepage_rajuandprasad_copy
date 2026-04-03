@@ -135,3 +135,14 @@ html, body {
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out forwards;
 }
+
+/* Global Background Grid Pattern - Applied to all gray sections */
+.bg-background, 
+[class*="bg-[#808080]"],
+[class*="bg-[#D1D5DB]"],
+section.bg-background {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px) !important;
+  background-size: 60px 60px !important;
+}

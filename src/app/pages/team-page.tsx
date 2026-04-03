@@ -31,8 +31,6 @@ export function TeamPage() {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [loading, setLoading] = useState(true);
   const [intro, setIntro] = useState({
-    title: 'The Team',
-    description: 'Meet our experienced & dedicated Chartered Accountant professionals',
     backgroundImage: '',
     accentText: ''
   });
@@ -60,8 +58,6 @@ export function TeamPage() {
         if (res.ok) {
           const data = await res.json();
           setIntro({
-            title: data.title || 'The Team',
-            description: data.description || 'Meet our experienced & dedicated Chartered Accountant professionals',
             backgroundImage: data.backgroundImage || '',
             accentText: data.accentText || ''
           });
@@ -166,22 +162,18 @@ export function TeamPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-sm mb-6 ${intro.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
-              <a href="#home" className="hover:text-white transition-colors">
+            {/* <div className={`flex items-center gap-2 text-sm mb-6 ${intro.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}> */}
+            {/* <a href="#home" className="hover:text-white transition-colors">
                 Home
-              </a>
-              <ChevronRight className="h-4 w-4" />
+              </a> */}
+            {/* <ChevronRight className="h-4 w-4" />
               <span className={intro.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>The Team</span>
-            </div>
+            </div> */}
 
             {/* Title */}
-            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
-              {intro.title || 'The Team'}
-            </h1>
 
-            <p className={`text-lg max-w-2xl ${intro.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
-              {intro.description}
-            </p>
+
+
           </motion.div>
         </div>
       </section>

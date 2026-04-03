@@ -233,21 +233,21 @@ export function NetworkingPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-sm mb-6 ${domesticContent?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            {/* <div className={`flex items-center gap-2 text-sm mb-6 ${domesticContent?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
               <span className={domesticContent?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Networking</span>
-            </div>
+            </div> */}
 
             {/* Title */}
-            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${domesticContent?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+            {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${domesticContent?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
               {domesticContent?.pageTitle || 'Networking'}
-            </h1>
-            <p className={`text-lg max-w-2xl ${domesticContent?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+            </h1> */}
+            {/* <p className={`text-lg max-w-2xl ${domesticContent?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
               {domesticContent?.pageSubtitle || 'Connect with us to expand professional collaboration across India.'}
-            </p>
+            </p> */}
           </motion.div>
         </div>
       </section>

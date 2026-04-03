@@ -81,9 +81,6 @@ export function SelectClientsPage() {
           const data = await sectorsRes.json();
           const activeSectors = data.filter((s: Sector) => s.enabled);
           setSectors(activeSectors);
-          if (activeSectors.length > 0) {
-            setActiveCategoryId(activeSectors[0]._id);
-          }
         }
       } catch (error) {
         console.error("Error fetching select clients data:", error);
@@ -130,36 +127,7 @@ export function SelectClientsPage() {
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-sm mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
-              <a href="#home" className="hover:text-white transition-colors">
-                Home
-              </a>
-              <ChevronRight className="h-4 w-4" />
-              <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Select Clients</span>
-            </div>
 
-            <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
-              {intro?.title ? (
-                intro.title.split(' ').map((word, i, arr) => (
-                  <span key={i} className={i === Math.floor(arr.length / 2) && intro?.backgroundImage ? "text-white" : ""}>{word} </span>
-                ))
-              ) : (
-                <>Select <span className={intro?.backgroundImage ? "text-white" : "text-[var(--primary)]"}>Clients</span></>
-              )}
-            </h1>
-
-            <p className={`text-lg max-w-2xl ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
-              {intro?.subtitle || 'Serving clients across diverse industries with trust and commitment.'}
-            </p>
-          </motion.div>
-        </div>
       </section>
 
       {/* Intro Content */}
@@ -182,7 +150,7 @@ export function SelectClientsPage() {
                     {intro?.introDescription1 || "The Firm represents a diversified portfolio of clients across various sectors including Industrial, Service, Public Sector Undertakings, Banking & Insurance, Social Sector, High Net-worth Individuals (HNI), and Non-Resident Indians (NRI)."}
                   </p>
                   <p className="text-lg text-white leading-relaxed">
-                    {intro?.introDescription2 || "Our expertise spans multiple industries and we take pride in delivering customized solutions to meet the unique needs of each client segment."}
+                    {intro?.introDescription2}
                   </p>
                 </div>
               </div>
@@ -214,140 +182,129 @@ export function SelectClientsPage() {
           </motion.div>
 
           {sectors.length > 0 && (
-            <div className="max-w-7xl mx-auto">
-              {/* Category Tabs */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex flex-wrap justify-center gap-3 mb-12"
-              >
-                {sectors.map((category, index) => {
-                  const Icon = iconMap[category.icon] || Factory;
-                  const isActive = activeCategoryId === category._id;
-                  const activeItemsCount = category.industries.filter(i => i.enabled).length;
+            <div className="max-w-7xl mx-auto py-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-                  return (
-                    <motion.button
-                      key={category._id}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setActiveCategoryId(category._id)}
-                      className={`flex items-center gap-3 px-6 py-3 rounded-full font-semibold transition-all border-2 ${isActive
-                        ? 'text-black shadow-lg'
-                        : 'bg-background text-gray-700 border-gray-100 hover:border-gray-300 shadow-md'
-                        }`}
-                      style={{
-                        backgroundColor: isActive ? `${category.color}1A` : 'white',
-                        borderColor: isActive ? (category.color || 'var(--primary)') : undefined,
-                      }}
-                    >
-                      <div
-                        className="w-2 h-2 rounded-full transition-transform duration-300"
-                        style={{ backgroundColor: category.color || 'var(--primary)', transform: isActive ? 'scale(1.5)' : 'scale(1)' }}
-                      />
-                      <span className="hidden sm:inline">{category.name}</span>
-                      <span className="inline sm:hidden">{category.name.split(' ')[0]}</span>
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${isActive ? 'bg-black/10 text-black' : 'bg-gray-100 text-gray-600'
-                        }`}>
-                        {activeItemsCount}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </motion.div>
-
-              {/* Category Content */}
-              <AnimatePresence mode="wait">
-                {currentCategory && (
-                  <motion.div
-                    key={currentCategory._id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <div className="bg-background rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                      {/* Category Header */}
-                      <div
-                        className="relative p-8 text-white transition-colors duration-500 overflow-hidden"
-                        style={{ backgroundColor: currentCategory.color || 'var(--primary)' }}
-                      >
-                        {/* Grid & Pattern Effect */}
-                        <div
-                          className="absolute inset-0 pointer-events-none"
-                          style={{
-                            backgroundImage: `
-                              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                              linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
-                            `,
-                            backgroundSize: '40px 40px, 40px 40px, 10px 10px',
-                            maskImage: 'linear-gradient(to bottom, black, transparent)'
-                          }}
-                        />
-
-                        <div className="relative z-10 flex items-center gap-4 mb-3">
-                          <div className="w-16 h-16 bg-background/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                            {(() => {
-                              const Icon = iconMap[currentCategory.icon] || Factory;
-                              return <Icon className="h-8 w-8" />;
-                            })()}
-                          </div>
-                          <div>
-                            <h3 className="text-3xl font-bold">{currentCategory.name}</h3>
-                            <p className="text-white/80 mt-1">
-                              {currentCategory.industries.filter(i => i.enabled).length} specialized areas
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Category Items Grid */}
-                      <div className="p-8 lg:p-12">
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {currentCategory.industries.filter(i => i.enabled).map((item, index) => (
-                            <motion.div
-                              key={index}
-                              initial={{ opacity: 0, scale: 0.95 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ duration: 0.3, delay: index * 0.03 }}
-                              className="group flex items-start gap-4 p-4 rounded-xl bg-[#4a4a4a] hover:bg-[#3a3a3a] transition-all hover:shadow-md border border-transparent"
-                              onMouseEnter={(e) => {
-                                const checkCircle = e.currentTarget.querySelector('.check-circle') as HTMLElement;
-                                if (checkCircle) {
-                                  checkCircle.style.backgroundColor = currentCategory.color;
-                                  checkCircle.style.transform = 'scale(1.1)';
-                                }
-                              }}
-                              onMouseLeave={(e) => {
-                                const checkCircle = e.currentTarget.querySelector('.check-circle') as HTMLElement;
-                                if (checkCircle) {
-                                  checkCircle.style.backgroundColor = `${currentCategory.color}66`;
-                                  checkCircle.style.transform = 'scale(1)';
-                                }
-                              }}
-                            >
-                              <div
-                                className="check-circle mt-1.5 w-2 h-2 rounded-full flex-shrink-0 transition-all duration-300"
-                                style={{ backgroundColor: `${currentCategory.color}66` }}
-                              />
-                              <span className="text-white font-medium leading-snug">
-                                {item.name}
-                              </span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
+                {/* Left Side: Radial Infographic */}
+                <div className="relative h-[500px] flex items-center justify-center hidden lg:flex sticky top-24 self-start">
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    {/* Central Hub */}
+                    <div className="w-48 h-48 rounded-full bg-[#1F1F1F] border-4 border-gray-700 shadow-2xl flex items-center justify-center z-20">
+                      <span className="text-white text-xl font-bold">Our Clients</span>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+
+                    {/* Orbiting Sector Bubbles */}
+                    {sectors.map((sector, index) => {
+                      const total = sectors.length;
+                      const angle = (index * (360 / total) - 90) * (Math.PI / 180);
+                      const radius = 220;
+                      const x = Math.cos(angle) * radius;
+                      const y = Math.sin(angle) * radius;
+
+                      return (
+                        <div key={sector._id} className="absolute transition-all duration-500" style={{ transform: `translate(${x}px, ${y}px)` }}>
+                          {/* Radial Arrow pointing from center to bubble */}
+                          <div
+                            className="absolute bg-white transition-opacity duration-300 pointer-events-none"
+                            style={{
+                              width: '40px',
+                              height: '2px',
+                              top: '50%',
+                              left: '50%',
+                              transformOrigin: '0% 50%',
+                              transform: `rotate(${angle * (180 / Math.PI) + 180}deg) translate(90px, 0)`,
+                              opacity: 0.6
+                            }}
+                          >
+                            {/* Arrow Head */}
+                            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-[8px] border-l-white" />
+                          </div>
+
+                          <motion.button
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ scale: 1.1 }}
+                            onClick={() => setActiveCategoryId(activeCategoryId === sector._id ? null : sector._id)}
+                            className="w-32 h-32 rounded-full border-2 border-white flex items-center justify-center text-center p-4 shadow-xl z-30 transition-transform"
+                            style={{
+                              backgroundColor: sector.color || 'var(--primary)',
+                              boxShadow: activeCategoryId === sector._id ? `0 0 30px ${sector.color}` : undefined
+                            }}
+                          >
+                            <span className="text-white text-xs font-bold leading-tight">{sector.name}</span>
+                          </motion.button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Right Side: Accordion System */}
+                <div className="flex flex-col gap-4">
+                  {sectors.map((sector, index) => {
+                    const isExpanded = activeCategoryId === sector._id;
+                    const activeIndustries = sector.industries.filter(i => i.enabled);
+
+                    return (
+                      <div key={sector._id} className="flex flex-col">
+                        <button
+                          onClick={() => setActiveCategoryId(isExpanded ? null : sector._id)}
+                          className={`group relative flex items-center gap-4 bg-[#F2F3F5] hover:bg-[#E8E9EB] transition-all rounded-r-lg overflow-hidden h-[60px]`}
+                        >
+                          {/* Left Color Bar */}
+                          <div
+                            className="w-3 h-full shrink-0"
+                            style={{ backgroundColor: sector.color || 'var(--primary)' }}
+                          />
+
+                          {/* Expansion Icon Container */}
+                          <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+                            <div className={`transition-transform duration-300 ${isExpanded ? 'rotate-90' : ''}`}>
+                              {isExpanded ? (
+                                <div className="w-3.5 h-[2px] bg-gray-500" />
+                              ) : (
+                                <div className="relative w-3.5 h-3.5 flex items-center justify-center">
+                                  <div className="absolute w-3.5 h-[2.5px] bg-gray-500 rounded-full" />
+                                  <div className="absolute w-[2.5px] h-3.5 bg-gray-500 rounded-full" />
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Sector Name */}
+                          <span className="text-gray-900 font-bold text-lg text-left flex-1">
+                            {sector.name}
+                          </span>
+                        </button>
+
+                        {/* Industries Sub-list */}
+                        <AnimatePresence>
+                          {isExpanded && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="bg-[#F8F9FA] mx-0 border-l-4 border-dashed border-gray-200"
+                            >
+                              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-3 pl-12">
+                                {activeIndustries.map((industry, idx) => (
+                                  <div key={idx} className="flex items-center gap-3 group">
+                                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: sector.color }} />
+                                    <span className="text-gray-700 text-base font-medium group-hover:text-black transition-colors">{industry.name}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </div>
             </div>
           )}
 
@@ -360,7 +317,7 @@ export function SelectClientsPage() {
               transition={{ duration: 0.6 }}
               className="max-w-5xl mx-auto mt-16"
             >
-              <div className="grid md:grid-cols-3 gap-6">
+              {/* <div className="grid md:grid-cols-3 gap-6">
                 {(intro?.stats || []).filter(s => s.enabled).map((stat, idx) => (
                   <div key={idx} className="bg-[#4a4a4a] rounded-2xl p-8 shadow-lg border border-transparent text-center hover:shadow-xl transition-shadow">
                     <p className="text-5xl font-bold text-white mb-2">{stat.value}</p>
@@ -369,7 +326,7 @@ export function SelectClientsPage() {
                 ))}
                 {!intro && (
                   <>
-                    <div className="bg-[#4a4a4a] rounded-2xl p-8 shadow-lg border border-transparent text-center hover:shadow-xl transition-shadow">
+                    <div className="bg-[#4a4a4a] rounded-2xl p-8 shadow-lg border border-transparent text-center hover:shadow-l transition-shadow">
                       <p className="text-5xl font-bold text-white mb-2">7</p>
                       <p className="text-white font-medium">Industry Sectors</p>
                     </div>
@@ -383,62 +340,12 @@ export function SelectClientsPage() {
                     </div>
                   </>
                 )}
-              </div>
+              </div> */}
             </motion.div>
           )}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="relative bg-gradient-to-br from-[var(--primary)] to-blue-600 rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden text-center">
-              {/* Decorative Background */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
-              </div>
-
-              <div className="relative z-10">
-                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-                  Ready to join our prestigious client base?
-                </h2>
-                <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                  Let our experienced team provide tailored solutions for your business needs
-                </p>
-
-                <div className="flex flex-wrap items-center justify-center gap-4">
-                  <motion.a
-                    href="#contact"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[var(--primary)] rounded-full hover:bg-gray-100 transition-all shadow-lg font-semibold"
-                  >
-                    Get Started Today
-                    <ChevronRight className="h-5 w-5" />
-                  </motion.a>
-
-                  <motion.a
-                    href="#services"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white rounded-full hover:bg-white/20 transition-all font-semibold"
-                  >
-                    View Our Services
-                  </motion.a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       <ScrollToTop />
     </div>

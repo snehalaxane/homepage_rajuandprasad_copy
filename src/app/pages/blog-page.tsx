@@ -148,7 +148,7 @@ export function BlogPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-sm mb-4 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
+              {/* <div className={`flex items-center gap-2 text-sm mb-4 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
                 <a href="#home" className={`transition-colors ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={`transition-colors cursor-pointer ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
@@ -162,12 +162,12 @@ export function BlogPage() {
                 ) : (
                   <span className={(intro?.backgroundImage && !selectedPost) ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Our Blog</span>
                 )}
-              </div>
+              </div> */}
 
               {/* Title */}
-              <h1 className={`text-4xl lg:text-6xl font-bold mb-6 leading-tight ${(intro?.backgroundImage && !selectedPost) ? 'text-white' : 'text-[var(--primary)]'}`}>
+              {/* <h1 className={`text-4xl lg:text-6xl font-bold mb-6 leading-tight ${(intro?.backgroundImage && !selectedPost) ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {selectedPost ? selectedPost.title : (intro?.title || 'Our Blog')}
-              </h1>
+              </h1> */}
 
               {/* Subtitle / Meta */}
               {selectedPost ? (
@@ -196,7 +196,7 @@ export function BlogPage() {
                 </div>
               ) : (
                 <p className={`text-lg lg:text-xl leading-relaxed max-w-2xl ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
-                  {intro?.subtitle || 'Insights, updates and articles on tax, audit and regulatory changes.'}
+                  {/* {intro?.subtitle || 'Insights, updates and articles on tax, audit and regulatory changes.'} */}
                 </p>
               )}
             </motion.div>

@@ -131,7 +131,13 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: #808080;
+    color: var(--foreground);
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-attachment: fixed;
   }
 
   html {

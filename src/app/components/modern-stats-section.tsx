@@ -18,8 +18,8 @@ interface StatItem {
 interface AboutResponse {
   _id: string;
   enabled: boolean;
-  title: string;
-  description: string;
+  // title: string;
+  // description: string;
   stats: StatItem[];
 }
 
@@ -92,7 +92,7 @@ export function ModernStatsSection() {
 
         {/* Header Section */}
         <div className="text-center mb-2">
-          <motion.span
+          {/* <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -100,13 +100,13 @@ export function ModernStatsSection() {
             style={{ backgroundColor: 'rgba(var(--primary-rgb, 0, 40, 85), 0.1)', color: 'var(--primary)', border: '1px solid var(--primary)' }}
           >
             Our Expertise
-          </motion.span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[var(--primary)]">
+          </motion.span> */}
+          {/* <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-[var(--primary)]">
             {statsData.title}
-          </h2>
-          <p className="text-white max-w-2xl mx-auto text-lg leading-relaxed">
+          </h2> */}
+          {/* <p className="text-white max-w-2xl mx-auto text-lg leading-relaxed">
             {statsData.description}
-          </p>
+          </p> */}
         </div>
 
         {/* The "Depth" Carousel */}

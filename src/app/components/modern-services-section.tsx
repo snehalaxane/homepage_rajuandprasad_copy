@@ -91,7 +91,7 @@ export function ModernServicesSection() {
   */
 
   return (
-    <section id="services" className="py-16 bg-background relative overflow-hidden">
+    <section id="services" className="py-8 bg-background relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px] -z-0" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px] -z-0" />
@@ -169,14 +169,14 @@ export function ModernServicesSection() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-center mt-24"
           >
-            <Button
+            {/* <Button
               onClick={() => window.location.hash = '#services'}
               className="click-btn text-white px-10 py-4 text-lg rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
               style={{ backgroundColor: 'var(--primary)' }}
             >
               <span>Explore All Solutions</span>
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            </Button> */}
           </motion.div>
         )}
       </div>
