@@ -56,12 +56,12 @@ const iconMap: Record<string, any> = {
 };
 
 const SERVICE_COLORS = [
-  { main: '#1e3a8a', gradient: 'linear-gradient(to bottom right, #1e40af, #3b82f6)' }, // Blue
-  { main: '#064e3b', gradient: 'linear-gradient(to bottom right, #065f46, #10b981)' }, // Emerald
-  { main: '#4c1d95', gradient: 'linear-gradient(to bottom right, #5b21b6, #8b5cf6)' }, // Violet
-  { main: '#7f1d1d', gradient: 'linear-gradient(to bottom right, #991b1b, #ef4444)' }, // Red
-  { main: '#78350f', gradient: 'linear-gradient(to bottom right, #92400e, #f59e0b)' }, // Amber
-  { main: '#0f766e', gradient: 'linear-gradient(to bottom right, #0f766e, #14b8a6)' }, // Teal
+  { gradient: '#C9CBD8' },
+  { gradient: '#EAB676' },
+  { gradient: '#D4F04A' },
+  { gradient: '#25B8C6' },
+  { gradient: '#E3A1A1' },
+  { gradient: '#BCA8D3' }
 ];
 
 export function ServicesPage() {
@@ -181,13 +181,13 @@ export function ServicesPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            {/* <div className={`flex items-center gap-2 text-sm mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            <div className={`flex items-center gap-2 text-m mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="/" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
               <span className={introData?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Services</span>
-            </div> */}
+            </div>
 
             {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${introData?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
               <span className={introData?.backgroundImage ? 'text-white' : ''}>{introData?.title || 'Services'}</span>
@@ -228,180 +228,178 @@ export function ServicesPage() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-12 gap-8">
-              {/* Left Panel - Service Categories */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="lg:col-span-4"
-              >
-                <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden sticky top-32">
-                  <div className="p-6 bg-gradient-to-br from-[var(--primary)] to-blue-600 text-white">
-                    <h3 className="text-2xl font-bold">Service Categories</h3>
-                    <p className="text-white/80 text-sm mt-2">
-                      Select a category to view details
-                    </p>
-                  </div>
+            <div className="sticky top-28">
+              <div className="grid lg:grid-cols-12 gap-8">
+                {/* Left Panel - Service Categories */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="lg:col-span-4"
+                >
+                  <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                    <div className="p-6 bg-gradient-to-br from-[var(--primary)] to-blue-600 text-white">
+                      <h3 className="text-2xl font-bold">Service Categories</h3>
+                      <p className="text-white/80 text-sm mt-2">
+                        Select a category to view details
+                      </p>
+                    </div>
 
-                  <div className="p-4">
-                    {services.map((service, index) => {
-                      const Icon = iconMap[service.icon] || FileCheck;
-                      const isActive = activeService === service._id;
-                      const serviceColor = SERVICE_COLORS[index % SERVICE_COLORS.length];
+                    <div className="p-4">
+                      {services.map((service, index) => {
+                        const Icon = iconMap[service.icon] || FileCheck;
+                        const isActive = activeService === service._id;
+                        const serviceColor = SERVICE_COLORS[index % SERVICE_COLORS.length];
 
-                      return (
-                        <motion.button
-                          key={service._id}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: index * 0.1 }}
-                          onClick={() => setActiveService(service._id)}
-                          className={`w-full text-left p-4 rounded-2xl mb-3 transition-all duration-300 group relative overflow-hidden ${isActive
-                            ? 'text-white'
-                            : 'bg-gray-50 text-gray-700 hover:bg-gray-100 hover:shadow-md'
-                            }`}
-                          style={isActive ? { background: serviceColor.gradient, boxShadow: `0 10px 15px -3px ${serviceColor.main}40` } : {}}
-                        >
-                          {isActive && (
-                            <motion.div
-                              layoutId="activeService"
-                              className="absolute left-0 top-0 bottom-0 w-1 bg-white rounded-r-full"
-                              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                            />
-                          )}
+                        return (
+                          <motion.button
+                            key={service._id}
+                            onClick={() => setActiveService(service._id)}
+                            className={`w-full text-left p-4 mb-2 text-black transition-all duration-300 group relative overflow-hidden`}
+                            style={{
+                              background: isActive ? '#ffffff' : serviceColor.gradient,
+                              boxShadow: isActive ? '0 4px 10px rgba(0,0,0,0.1)' : 'none'
+                            }}
+                          >
+                            {isActive && (
+                              <motion.div
+                                layoutId="activeService"
+                                className="absolute left-0 top-0 bottom-0 w-1 bg-white rounded-r-full"
+                                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                              />
+                            )}
 
-                          <div className="flex items-start gap-3 relative z-10">
-                            <div
-                              className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors overflow-hidden ${isActive
-                                ? 'bg-white/20 text-white'
-                                : 'bg-white text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-white'
-                                }`}
-                            >
-                              {service.icon?.startsWith('data:') ? (
-                                <img src={service.icon} alt="icon" className={`w-full h-full object-contain p-2 ${isActive ? 'invert' : 'group-hover:invert'}`} />
-                              ) : (
-                                <Icon className="h-5 w-5" />
-                              )}
-                            </div>
-                            <div className="flex-1">
-                              <p
-                                className={`font-semibold text-sm leading-snug ${isActive ? 'text-white' : 'text-gray-900'
+                            <div className="flex items-start gap-3 relative z-10">
+                              <div
+                                className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors overflow-hidden ${isActive
+                                  ? 'bg-blue-600 text-blue-900'
+                                  : 'bg-white text-black group-hover:bg-[var(--primary)] group-hover:text-white'
                                   }`}
                               >
-                                {service.name}
-                              </p>
+                                {service.icon?.startsWith('data:') ? (
+                                  <img src={service.icon} alt="icon" className={`w-full h-full object-contain p-2 ${isActive ? 'invert' : 'group-hover:invert'}`} />
+                                ) : (
+                                  <Icon className="h-5 w-5" />
+                                )}
+                              </div>
+                              <div className="flex-1">
+                                <p
+                                  className={`font-semibold text-sm leading-snug ${isActive ? 'text-blue-900' : 'text-black'
+                                    }`}
+                                >
+                                  {service.name}
+                                </p>
+                              </div>
+                              <ChevronRight
+                                className={`h-5 w-5 flex-shrink-0 transition-transform ${isActive ? 'text-white translate-x-1' : 'text-gray-400'
+                                  }`}
+                              />
                             </div>
-                            <ChevronRight
-                              className={`h-5 w-5 flex-shrink-0 transition-transform ${isActive ? 'text-white translate-x-1' : 'text-gray-400'
-                                }`}
-                            />
-                          </div>
-                        </motion.button>
-                      );
-                    })}
+                          </motion.button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
 
-              {/* Right Panel - Service Details */}
-              <div className="lg:col-span-8">
-                <AnimatePresence mode="wait">
-                  {currentService && (
-                    <motion.div
-                      key={currentService._id}
-                      initial={{ opacity: 0, x: 30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -30 }}
-                      transition={{ duration: 0.4 }}
-                      className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
-                    >
-                      {/* Service Header */}
-                      <div
-                        className="relative p-8 text-white overflow-hidden transition-all duration-500"
-                        style={{ background: currentServiceColor.gradient }}
+                {/* Right Panel - Service Details */}
+                <div className="lg:col-span-8">
+                  <AnimatePresence mode="wait">
+                    {currentService && (
+                      <motion.div
+                        key={currentService._id}
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -30 }}
+                        transition={{ duration: 0.4 }}
+                        className="overflow-hidden"
                       >
-                        {/* Grid & Pattern Effect */}
+                        {/* Service Header */}
                         <div
-                          className="absolute inset-0 pointer-events-none"
-                          style={{
-                            backgroundImage: `
-                              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                              linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
-                            `,
-                            backgroundSize: '40px 40px, 40px 40px, 10px 10px',
-                            maskImage: 'linear-gradient(to bottom, black, transparent)'
-                          }}
-                        />
+                          className="relative p-2 mb-4 text-white overflow-hidden transition-all duration-500"
+                          style={{ background: "transparent" }}
+                        >
+                          {/* Grid & Pattern Effect */}
+                          <div
+                            className="absolute inset-0 pointer-events-none"
+                          // style={{
+                          //   backgroundImage: `
+                          //     linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
+                          //     linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                          //     linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
+                          //   `,
+                          //   backgroundSize: '40px 40px, 40px 40px, 10px 10px',
+                          //   maskImage: 'linear-gradient(to bottom, black, transparent)'
+                          // }}
+                          />
 
-                        <div className="relative z-10 flex items-center gap-4 mb-3">
-                          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden">
+                          <div className="relative z-10 flex items-center gap-4">
+                            {/* <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden">
                             {currentService.icon?.startsWith('data:') ? (
-                              <img src={currentService.icon} alt="icon" className="w-full h-full object-contain p-3 invert" />
+                              <img src={currentService.icon} alt="icon" className="w-full h-full object-contain p-2 invert" />
                             ) : (
                               (() => {
                                 const Icon = iconMap[currentService.icon] || FileCheck;
                                 return <Icon className="h-8 w-8" />;
                               })()
                             )}
+                          </div> */}
+                            <h2 className="text-3xl  pl-2 font-bold font-sans tracking-tight text-[var(--primary)]">{currentService.title || currentService.name}</h2>
                           </div>
-                          <h2 className="text-3xl font-bold font-sans tracking-tight">{currentService.title || currentService.name}</h2>
                         </div>
-                      </div>
 
-                      {/* Service Content */}
-                      <div className="p-8 lg:p-10 space-y-8">
-                        {currentService.subServices?.filter((s: any) => s.enabled !== false).map((section: any, index: number) => {
-                          const SectionIcon = iconMap[section.icon] || CheckCircle2;
+                        {/* Service Content */}
+                        <div className="px-2 lg:px-2 py-1 space-y-4">
+                          {currentService.subServices?.filter((s: any) => s.enabled !== false).map((section: any, index: number) => {
+                            const SectionIcon = iconMap[section.icon] || CheckCircle2;
 
-                          return (
-                            <motion.div
-                              key={index}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.4, delay: index * 0.1 }}
-                              className="group"
-                            >
-                              {/* Section Heading */}
-                              <div className="flex items-start gap-3 mb-4">
-                                <div className="w-10 h-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--primary)] group-hover:scale-110 transition-all overflow-hidden">
+                            return (
+                              <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: index * 0.1 }}
+                                className="group"
+                              >
+                                {/* Section Heading */}
+                                <div className="flex items-start gap-3 mb-2">
+                                  {/* <div className="w-10 h-10 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--primary)] group-hover:scale-110 transition-all overflow-hidden">
                                   {section.icon?.startsWith('data:') ? (
                                     <img src={section.icon} alt="icon" className="w-full h-full object-contain p-2 text-[var(--primary)] group-hover:invert transition-all" />
                                   ) : (
                                     <SectionIcon className="h-5 w-5 text-[var(--primary)] group-hover:text-white transition-colors" />
                                   )}
+                                </div> */}
+                                  <h3 className="text-2xl pl-2 font-bold text-white group-hover:text-[var(--primary)] transition-colors pt-1 font-sans">
+                                    {section.heading}
+                                  </h3>
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors pt-1 font-sans">
-                                  {section.heading}
-                                </h3>
-                              </div>
 
-                              {/* Section Content */}
-                              <div className="pl-[52px]">
-                                <p className="text-base text-gray-600 leading-relaxed whitespace-pre-line font-sans font-normal">
-                                  {section.content}
-                                </p>
-                              </div>
+                                {/* Section Content */}
+                                <div className="">
+                                  <p className="text-lg pl-2 font-sans text-white leading-relaxed whitespace-pre-line">
+                                    {section.content}
+                                  </p>
+                                </div>
 
-                              {/* Divider */}
-                              {index < currentService.subServices.length - 1 && (
-                                <div className="mt-8 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
-                              )}
-                            </motion.div>
-                          );
-                        })}
-                        {(!currentService.subServices || currentService.subServices.length === 0) && (
-                          <div className="text-center py-20 opacity-30 italic">
-                            No detailed sections available for this category.
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                                {/* Divider */}
+                                {index < currentService.subServices.length - 1 && (
+                                  <div className="mt-8 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+                                )}
+                              </motion.div>
+                            );
+                          })}
+                          {(!currentService.subServices || currentService.subServices.length === 0) && (
+                            <div className="text-center py-20 opacity-30 italic">
+                              No detailed sections available for this category.
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
           </div>

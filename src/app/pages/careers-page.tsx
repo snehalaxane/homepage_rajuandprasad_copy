@@ -585,31 +585,31 @@ export function CareersPage() {
             <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
           )}
 
-          {/* <div className="container mx-auto px-6 relative z-10"> */}
-          {/* <motion.div
+          <div className="container mx-auto px-6 relative z-10">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="max-w-4xl"
-            > */}
-          {/* Breadcrumb */}
-          {/* <div className={`flex items-center gap-2 text-sm mb-4 ${careerIntro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            >
+              {/* Breadcrumb */}
+              <div className={`flex items-center gap-2 text-m mb-4 ${careerIntro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
                 <a href="#home" className={`transition-colors ${careerIntro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={careerIntro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Careers</span>
-              </div> */}
+              </div>
 
-          {/* Title */}
-          {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${careerIntro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+              {/* Title */}
+              {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${careerIntro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {careerIntro?.title || 'Careers'}
               </h1> */}
 
-          {/* Subtitle */}
-          {/* <p className={`text-lg lg:text-xl leading-relaxed ${careerIntro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+              {/* Subtitle */}
+              {/* <p className={`text-lg lg:text-xl leading-relaxed ${careerIntro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {careerIntro?.subtitle || 'Join a team built on professionalism, growth, and integrity.'}
               </p> */}
-          {/* </motion.div> */}
-          {/* </div> */}
+            </motion.div>
+          </div>
         </section>
 
         {/* Intro Content Block */}
@@ -622,7 +622,7 @@ export function CareersPage() {
             className="max-w-6xl mx-auto px-6"
           >
 
-            <div className="space-y-6 text-base lg:text-lg text-white leading-relaxed text-justify">
+            <div className="space-y-6 text-lg text-white leading-relaxed text-justify">
               {careerIntro?.description ? (
                 careerIntro.description.split('\n').map((para, idx) => (
                   para.trim() && <p key={idx}>{para}</p>
@@ -715,7 +715,7 @@ export function CareersPage() {
                           <Briefcase className="h-6 w-6 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className={`text-2xl lg:text-2xl font-bold mb-2 transition-colors ${expandedId === opening._id ? 'text-[var(--primary)]' : 'text-gray-900'}`}>
+                          <h3 className={`text-2xl lg:text-xl font-bold mb-2 transition-colors ${expandedId === opening._id ? 'text-[var(--primary)]' : 'text-gray-900'}`}>
                             {opening.role}
                           </h3>
                           {opening.shortDescription && (
@@ -724,18 +724,18 @@ export function CareersPage() {
                             </p>
                           )}
                           <div className="flex flex-wrap gap-4 mt-4">
-                            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
+                            {/* <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
                               <MapPin className="h-4 w-4" />
                               {opening.location}
-                            </span>
-                            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
+                            </span> */}
+                            {/* <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
                               <Clock className="h-4 w-4" />
                               {opening.experience}
-                            </span>
-                            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
+                            </span> */}
+                            {/* <span className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--primary)]/80">
                               <Users className="h-4 w-4" />
                               {opening.employmentType}
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                       </div>
@@ -765,17 +765,17 @@ export function CareersPage() {
                             {/* Left Side - Job Details */}
                             <div className="lg:col-span-2 space-y-6">
                               {/* Description */}
-                              <div>
+                              {/* <div>
                                 <h4 className="text-lg font-bold text-gray-900 mb-3">
                                   About the Role
                                 </h4>
                                 <p className="text-[var(--secondary)] leading-relaxed">
                                   {opening.description}
                                 </p>
-                              </div>
+                              </div> */}
 
                               {/* Requirements */}
-                              {opening.requirements && (
+                              {/* {opening.requirements && (
                                 <div>
                                   <h4 className="text-lg font-bold text-gray-900 mb-3">
                                     Requirements
@@ -791,7 +791,7 @@ export function CareersPage() {
                                     ))}
                                   </ul>
                                 </div>
-                              )}
+                              )} */}
 
                               {/* Responsibilities */}
                               {opening.responsibilities && (

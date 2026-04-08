@@ -359,21 +359,11 @@ export function ModernHeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="mt-2 pt-2 border-t border-white/30"
+              className="mt-4 pt-4 border-t border-white/30 w-full flex justify-center"
             >
-              <div className="grid grid-cols-3 gap-2 sm:gap-8 text-center lg:text-left w-full mx-auto lg:mx-0">
-                <div>
-                  <p className="text-xl md:text-3xl font-bold text-[#002855] drop-shadow-lg">{(hero?.stat1 || "").split(" ")[0]}</p>
-                  <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat1 || "").split(" ").slice(1).join(" ")}</p>
-                </div>
-                <div>
-                  <p className="text-xl md:text-3xl font-bold text-[#002855] drop-shadow-lg">{(hero?.stat2 || "").split(" ")[0]}</p>
-                  <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat2 || "").split(" ").slice(1).join(" ")}</p>
-                </div>
-                <div>
-                  <p className="text-xl md:text-3xl font-bold text-[#002855] drop-shadow-lg">{(hero?.stat3 || "").split(" ")[0]}</p>
-                  <p className="text-[10px] md:text-sm text-white/90 font-semibold uppercase tracking-wider">{(hero?.stat3 || "").split(" ").slice(1).join(" ")}</p>
-                </div>
+              <div className="flex items-baseline gap-3">
+                <span className="text-2xl md:text-5xl font-bold text-white/90  drop-shadow-xl">{(hero?.stat3 || "").split(" ")[0]}</span>
+                <span className="text-sm md:text-5xl text-[#002855]  font-bold uppercase tracking-widest">{(hero?.stat3 || "").split(" ").slice(1).join(" ")}</span>
               </div>
             </motion.div>
           </div>

@@ -154,6 +154,31 @@ export function HistoryPage() {
           <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
         )}
 
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl"
+          >
+            {/* Breadcrumb */}
+            <div className={`flex items-center gap-2 text-m mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
+              <ChevronRight className="h-4 w-4" />
+              <span className={introData?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>History</span>
+            </div>
+            {/* Title */}
+            {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+                {intro?.title || 'Newsletter'}
+              </h1> */}
+
+            {/* Subtitle */}
+            {/* <p className={`text-lg lg:text-xl leading-relaxed ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+                {intro?.subtitle || 'Subscribe to our Newsletter to get latest news and important updates on tax and regulatory laws in India on your email.'}
+              </p> */}
+          </motion.div>
+        </div>
+
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
@@ -174,11 +199,11 @@ export function HistoryPage() {
               className="lg:sticky lg:top-32"
             >
               <div className="mb-8">
-                <span className="px-4 py-2 bg-[var(--primary)] text-white rounded-full text-sm font-semibold inline-block mb-4">
+                {/* <span className="px-4 py-2 bg-[var(--primary)] text-white rounded-full text-sm font-semibold inline-block mb-4">
                   Since {journey?.sinceYear || '1979'}
-                </span>
-                <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                  {journey?.title || 'Our Journey Since 1979'}
+                </span> */}
+                <h2 className="text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-6 ml-5">
+                  {journey?.title}
                 </h2>
               </div>
 
@@ -305,7 +330,7 @@ export function HistoryPage() {
                               <h4 className={`text-xl font-bold transition-colors ${item._id === highlightedId ? 'text-white' : 'text-gray-900 group-hover:text-[var(--primary)]'}`}>
                                 {item.title}
                               </h4>
-                              <span
+                              {/* <span
                                 className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${item._id === highlightedId
                                   ? 'bg-white/20 text-white border border-white/30'
                                   : status === 'established'
@@ -316,7 +341,7 @@ export function HistoryPage() {
                                   }`}
                               >
                                 {item.tag || (status === 'established' ? 'Founded' : status === 'active' ? 'Active' : 'Closed')}
-                              </span>
+                              </span> */}
                             </div>
                             <p className={`text-sm mb-2 transition-colors ${item._id === highlightedId ? 'text-blue-100' : 'text-black'}`}>
                               {item.subtitle}
@@ -348,41 +373,35 @@ export function HistoryPage() {
 
       {/* Our Mission Section */}
       {mission?.enabled !== false && (
-        <section className="py-20 bg-background">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-5xl mx-auto"
+              className="max-w-4xl mx-auto text-center"
             >
-              <div className="relative bg-gradient-to-br from-[var(--primary)] to-[var(--primary)] rounded-3xl p-12 lg:p-16 shadow-2xl shadow-[var(--primary)]/20 overflow-hidden">
-                {/* Decorative Background */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-                  <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2" />
-                </div>
+              <div className="relative">
+                {/* Quote Icon */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', duration: 0.6 }}
+                  className="mb-6 flex justify-center"
+                >
+                  <Quote className="h-16 w-16 text-[var(--primary)]/20" />
+                </motion.div>
 
-                <div className="relative z-10">
-                  {/* Quote Icon */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: 'spring', duration: 0.6 }}
-                    className="mb-6"
-                  >
-                    <Quote className="h-16 w-16 text-white/30" />
-                  </motion.div>
+                {/* Title */}
+                <h2 className="text-3xl lg:text-5xl font-bold text-[var(--primary)] mb-8">
+                  {mission?.title || 'Our Mission'}
+                </h2>
 
-                  {/* Title */}
-                  <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-                    {mission?.title || 'Our Mission'}
-                  </h2>
-
-                  {/* Mission Content */}
-                  <p className="text-xl lg:text-2xl text-white/90 leading-relaxed font-bold italic">
+                {/* Mission Content */}
+                <div className="relative">
+                  <p className="text-xl lg:text-3xl text-gray-700 leading-relaxed font-medium italic">
                     {mission?.content || 'Our Mission is to provide value added and proactive advice to the clients in various sectors with professional ethics and good client relationship.'}
                   </p>
                 </div>

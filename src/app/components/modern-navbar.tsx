@@ -187,11 +187,13 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
 
             {/* Center - Hero Badge Image */}
             <div className="flex justify-center items-center h-full">
-              <img
-                src="/src/assets/hero-badge.png" // Replace with your actual static image path
-                alt="Highlight"
-                className="h-29 w-auto object-contain"
-              />
+              {hero?.imageUrl && (
+                <img
+                  src={hero.imageUrl.startsWith('http') ? hero.imageUrl : `${API_BASE_URL}/${hero.imageUrl}`}
+                  alt="Highlight"
+                  className="h-29 w-auto object-contain"
+                />
+              )}
             </div>
 
             {/* Right - Important Links & Socials */}
@@ -286,11 +288,11 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
                         <AnimatePresence>
                           {openDropdown === item.label && (
                             <motion.div
-                              initial={{ opacity: 0, y: (activePage === 'home' && !isScrolled) ? 10 : -10 }}
+                              initial={{ opacity: 0, y: activePage === 'home' ? 10 : -10 }}
                               animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: (activePage === 'home' && !isScrolled) ? 10 : -10 }}
+                              exit={{ opacity: 0, y: activePage === 'home' ? 10 : -10 }}
                               transition={{ duration: 0.2 }}
-                              className={`absolute ${(activePage === 'home' && !isScrolled) ? 'bottom-full mb-2' : 'top-full mt-2'} right-0 w-40 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50`}
+                              className={`absolute ${activePage === 'home' ? 'bottom-full mb-2' : 'top-full mt-2'} right-0 w-40 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.25)] border border-white/12 overflow-hidden z-50`}
                               style={{ backgroundColor: 'var(--primary)' }}
                             >
                               {item.dropdown.map((dropdownItem, index) => {

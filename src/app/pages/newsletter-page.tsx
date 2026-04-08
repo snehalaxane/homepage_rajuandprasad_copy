@@ -39,7 +39,7 @@ export function NewsletterPage() {
   const [newsletters, setNewsletters] = useState<Newsletter[]>([]);
   const [intro, setIntro] = useState<NewsletterIntro | null>(null);
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 5;
+  const itemsPerPage = 15;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,33 +104,32 @@ export function NewsletterPage() {
             <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
           )}
 
-          {/* <div className="container mx-auto px-6 relative z-10">
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="max-w-4xl"
-            > */}
-          {/* Breadcrumb */}
-          {/* <div className={`flex items-center gap-2 text-sm mb-4 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
-                <a href="#home" className="hover:text-white transition-colors">
-                  Home
-                </a>
+            >
+              {/* Breadcrumb */}
+              <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+                <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
+                <ChevronRight className="h-4 w-4" />
+                <span className={`transition-colors cursor-pointer hover:text-white`}>Think Tank</span>
                 <ChevronRight className="h-4 w-4" />
                 <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Newsletter</span>
-              </div> */}
-
-          {/* Title */}
-          {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+              </div>
+              {/* Title */}
+              {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {intro?.title || 'Newsletter'}
               </h1> */}
 
-          {/* Subtitle */}
-          {/* <p className={`text-lg lg:text-xl leading-relaxed ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+              {/* Subtitle */}
+              {/* <p className={`text-lg lg:text-xl leading-relaxed ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {intro?.subtitle || 'Subscribe to our Newsletter to get latest news and important updates on tax and regulatory laws in India on your email.'}
               </p> */}
-          {/* </motion.div>
-          </div> */}
+            </motion.div>
+          </div>
         </section>
 
         {/* Newsletter List Section */}
@@ -140,7 +139,7 @@ export function NewsletterPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-3xl shadow-2xl  overflow-hidden"
+              className="bg-white/20 rounded-3xl shadow-2xl  overflow-hidden"
             >
               {/* Table Header Controls */}
               <div className="p-6 border-b border-gray-900 bg-white">
@@ -168,7 +167,7 @@ export function NewsletterPage() {
                         setSelectedYear(e.target.value);
                         setCurrentPage(1);
                       }}
-                      className="appearance-none px-6 py-3 pr-12 rounded-xl border-1 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-background cursor-pointer"
+                      className="appearance-none px-6 py-3 pr-12 rounded-xl border-1 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-white cursor-pointer"
                     >
                       {availableYears.map(year => (
                         <option key={year} value={year}>{year}</option>

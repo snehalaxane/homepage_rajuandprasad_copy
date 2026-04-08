@@ -233,13 +233,13 @@ export function NetworkingPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            {/* <div className={`flex items-center gap-2 text-sm mb-6 ${domesticContent?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            <div className={`flex items-center gap-2 text-m mb-6 ${domesticContent?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
               <span className={domesticContent?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Networking</span>
-            </div> */}
+            </div>
 
             {/* Title */}
             {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${domesticContent?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
@@ -278,7 +278,7 @@ export function NetworkingPage() {
                       {domesticContent?.title || 'Domestic Networking'}
                     </h2>
                   </div>
-                  <p className="text-white leading-relaxed text-base whitespace-pre-line">
+                  <p className="text-white leading-relaxed text-lg  font-medium whitespace-pre-line">
                     {domesticContent?.description || 'Connect with us to expand professional collaboration across India.'}
                   </p>
                 </motion.div>
@@ -316,7 +316,7 @@ export function NetworkingPage() {
                         <div className="p-1 rounded-lg shadow-sm group-hover:shadow-md transition-all">
                           <Icon className="h-5 w-5 text-[var(--primary)]" />
                         </div>
-                        <span className="text-white font-medium group-hover:text-[var(--primary)] transition-colors">
+                        <span className="text-white text-lg  font-medium group-hover:text-[var(--primary)] transition-colors">
                           {associate.name}
                         </span>
                       </motion.div>

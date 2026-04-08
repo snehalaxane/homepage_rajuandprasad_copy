@@ -122,6 +122,31 @@ export function SelectClientsPage() {
           <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
         )}
 
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl"
+          >
+            {/* Breadcrumb */}
+            <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
+              <ChevronRight className="h-4 w-4" />
+              <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Select Clients</span>
+            </div>
+            {/* Title */}
+            {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+                {intro?.title || 'Newsletter'}
+              </h1> */}
+
+            {/* Subtitle */}
+            {/* <p className={`text-lg lg:text-xl leading-relaxed ${intro?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+                {intro?.subtitle || 'Subscribe to our Newsletter to get latest news and important updates on tax and regulatory laws in India on your email.'}
+              </p> */}
+          </motion.div>
+        </div>
+
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />
           <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-[var(--primary)]/5 rounded-full blur-3xl" />

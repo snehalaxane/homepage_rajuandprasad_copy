@@ -121,7 +121,7 @@ export function ModernTeamSection() {
                 className="w-[240px] flex-shrink-0 group relative"
               >
                 {/* Premium Card Design */}
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-[var(--secondary)]/20 hover:border-[var(--primary)]/40 transition-all duration-300 h-full flex flex-col">
+                <div className="rounded-2xl overflow-hidden transition-all duration-300 h-full flex flex-col">
                   {/* Image Container with Grey Overlay */}
                   <div className="relative aspect-[4/5] overflow-hidden bg-[var(--secondary)]/5">
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--secondary)]/20 via-transparent to-transparent z-10" />
@@ -139,7 +139,7 @@ export function ModernTeamSection() {
                   </div>
 
                   {/* Member Details */}
-                  <div className="p-4 bg-[#F9FAFB] flex-grow flex flex-col justify-between">
+                  <div className="p-4 flex-grow flex flex-col justify-between">
                     <div>
                       <h3 className="text-xl font-extrabold text-[#111111] mb-1 group-hover:text-[var(--primary)] transition-colors duration-300">
                         {member.name}

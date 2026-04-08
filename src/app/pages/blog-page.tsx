@@ -127,16 +127,16 @@ export function BlogPage() {
         {/* Page Header */}
         <section
           className="relative overflow-hidden w-full aspect-[1920/375] bg-cover bg-center bg-no-repeat flex items-center" style={{
-            backgroundImage: (intro?.backgroundImage && !selectedPost) ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
-            backgroundColor: (!intro?.backgroundImage || selectedPost) ? 'transparent' : 'inherit'
+            backgroundImage: intro?.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
+            backgroundColor: !intro?.backgroundImage ? 'transparent' : 'inherit'
           }}
         >
-          {(!intro?.backgroundImage || !!selectedPost) && (
+          {!intro?.backgroundImage && (
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20" />
           )}
 
           {/* Overlay if there is a background image to ensure text readability */}
-          {(intro?.backgroundImage && !selectedPost) && (
+          {intro?.backgroundImage && (
             <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
           )}
 
@@ -148,7 +148,7 @@ export function BlogPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              {/* <div className={`flex items-center gap-2 text-sm mb-4 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
+              <div className={`flex items-center gap-2 text-m mb-4 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
                 <a href="#home" className={`transition-colors ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={`transition-colors cursor-pointer ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
@@ -162,7 +162,7 @@ export function BlogPage() {
                 ) : (
                   <span className={(intro?.backgroundImage && !selectedPost) ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Our Blog</span>
                 )}
-              </div> */}
+              </div>
 
               {/* Title */}
               {/* <h1 className={`text-4xl lg:text-6xl font-bold mb-6 leading-tight ${(intro?.backgroundImage && !selectedPost) ? 'text-white' : 'text-[var(--primary)]'}`}>
@@ -231,11 +231,11 @@ export function BlogPage() {
 
                       {/* Featured Image */}
                       {selectedPost.featuredImage && (
-                        <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-[#f5f6fa] flex items-center justify-center">
+                        <div className="relative h-80 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 flex items-center justify-center">
                           <img
                             src={resolveImageUrl(selectedPost.featuredImage)}
                             alt={selectedPost.title}
-                            className="object-contain max-h-[400px] max-w-full mx-auto"
+                            className="w-full h-full object-fill"
                           />
                         </div>
                       )}
@@ -243,9 +243,9 @@ export function BlogPage() {
                       {/* Post Content */}
                       <div className="bg-background rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-12">
                         <div
-                          className="prose prose-lg max-w-none text-gray-700 leading-relaxed
-                            prose-headings:text-[var(--primary)] prose-headings:font-bold
-                            prose-p:mb-6 prose-strong:text-gray-900
+                          className="prose prose-lg max-w-none text-white leading-relaxed
+                            prose-headings:text-white prose-headings:font-bold
+                            prose-p:mb-6 prose-strong:text-white
                             prose-ul:list-disc prose-ul:pl-6 prose-li:mb-2"
                           dangerouslySetInnerHTML={{ __html: selectedPost.content }}
                         />
@@ -287,7 +287,7 @@ export function BlogPage() {
                         <div className="flex flex-col md:flex-row gap-4">
                           {/* Search */}
                           <div className="relative flex-1">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/70" />
                             <input
                               type="text"
                               placeholder="Search articles..."
@@ -296,7 +296,7 @@ export function BlogPage() {
                                 setSearchQuery(e.target.value);
                                 setCurrentPage(1);
                               }}
-                              className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900"
+                              className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-[var(--primary)]/20 focus:border-[var(--primary)] focus:outline-none transition-all text-white bg-[var(--primary)] placeholder:text-white/60"
                             />
                           </div>
 
@@ -307,7 +307,7 @@ export function BlogPage() {
                               setSelectedCategory(e.target.value);
                               setCurrentPage(1);
                             }}
-                            className="px-6 py-3 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 font-semibold bg-background cursor-pointer"
+                            className="px-6 py-3 rounded-xl border-2 border-[var(--primary)]/20 focus:border-[var(--primary)] focus:outline-none transition-all text-white font-semibold bg-[var(--primary)] cursor-pointer"
                           >
                             {categories.map(category => (
                               <option key={category} value={category}>{category}</option>
@@ -326,11 +326,11 @@ export function BlogPage() {
                           className="bg-background rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
                         >
                           {post.featuredImage && (
-                            <div className="relative h-64 overflow-hidden bg-[#f5f6fa] flex items-center justify-center">
+                            <div className="relative h-64 overflow-hidden flex items-center justify-center">
                               <img
                                 src={resolveImageUrl(post.featuredImage)}
                                 alt={post.title}
-                                className="object-contain max-h-64 max-w-full mx-auto transition-transform duration-500 group-hover:scale-105"
+                                className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-105"
                               />
                             </div>
                           )}
@@ -353,7 +353,7 @@ export function BlogPage() {
                             </div>
 
                             {/* Title */}
-                            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-4 group-hover:text-[var(--primary)] transition-colors">
+                            <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-[var(--primary)] transition-colors">
                               {post.title}
                             </h2>
 

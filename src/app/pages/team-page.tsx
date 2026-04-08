@@ -162,13 +162,13 @@ export function TeamPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            {/* <div className={`flex items-center gap-2 text-sm mb-6 ${intro.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}> */}
-            {/* <a href="#home" className="hover:text-white transition-colors">
+            <div className={`flex items-center gap-2 text-m mb-6 ${intro.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              <a href="#home" className="hover:text-white transition-colors">
                 Home
-              </a> */}
-            {/* <ChevronRight className="h-4 w-4" />
+              </a>
+              <ChevronRight className="h-4 w-4" />
               <span className={intro.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>The Team</span>
-            </div> */}
+            </div>
 
             {/* Title */}
 
@@ -196,24 +196,9 @@ export function TeamPage() {
               <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)]/60" />
 
               <p className="text-lg text-white leading-relaxed pl-6">
-                {intro.accentText || (
-                  <>
-                    The Firm has a blend of professionals with experience in the fields of
-                    <span className="text-gray-700 font-medium"> Auditing</span>,
-                    <span className="text-gray-700 font-medium"> Taxation</span>,
-                    <span className="text-gray-700 font-medium"> Project Consultancy</span>,
-                    <span className="text-gray-700 font-medium"> Management Services</span>,
-                    <span className="text-gray-700 font-medium"> Enterprise Restructuring</span>,
-                    <span className="text-gray-700 font-medium"> Industry</span>,
-                    <span className="text-gray-700 font-medium"> Banking</span>,
-                    <span className="text-gray-700 font-medium"> Securities</span>,
-                    <span className="text-gray-700 font-medium"> Secretarial Services</span>,
-                    <span className="text-gray-700 font-medium"> Computer Aided Auditing Techniques</span>,
-                    <span className="text-gray-700 font-medium"> Systems Design</span>,
-                    <span className="text-gray-700 font-medium"> Implementation</span> and
-                    <span className="text-gray-700 font-medium"> Information Systems Audit</span>.
-                  </>
-                )}
+                {intro.accentText
+
+                }
               </p>
 
             </div>
@@ -267,22 +252,22 @@ export function TeamPage() {
                     x: { type: 'spring', stiffness: 300, damping: 30 },
                     opacity: { duration: 0.2 },
                   }}
-                  className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-shadow"
+                  className="overflow-hidden"
                 >
-                  <div className="grid lg:grid-cols-6 gap-0">
+                  <div className="grid lg:grid-cols-12 gap-0">
                     {/* Left: Profile Photo */}
-                    <div className="lg:col-span-2 relative overflow-hidden bg-gray-50/50 flex items-start justify-start">
-                      <div className="h-full w-full max-h-[380px] relative">
+                    <div className="lg:col-span-3 relative flex items-start justify-start">
+                      <div className="w-full max-w-[250px] aspect-[3/4] overflow-hidden rounded-[40px] shadow-sm">
                         <img
                           src={resolveImageUrl(currentPartner.photo)}
                           alt={currentPartner.name}
-                          className="w-full h-full object-contain object-left-top"
+                          className="w-full h-full object-cover object-top"
                         />
                       </div>
                     </div>
 
                     {/* Right: Partner Info */}
-                    <div className="lg:col-span-4 p-5 lg:p-6 flex flex-col justify-center">
+                    <div className="lg:col-span-9 py-3 lg:py-4 pl-8 flex flex-col justify-center">
                       {/* Location Tag */}
                       <div className="flex items-center gap-2 mb-3">
                         <div className="px-3 py-1 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-xs font-semibold flex items-center gap-2">
@@ -298,7 +283,7 @@ export function TeamPage() {
                       <p className="text-lg font-semibold text-[var(--primary)] mb-4">{currentPartner.designation}</p>
 
                       {/* Description */}
-                      <p className="text-base text-[var(--secondary)] leading-relaxed mb-4 w-full">
+                      <p className="text-base text-white leading-relaxed mb-4 w-full">
                         {currentPartner.bio}
                       </p>
 
@@ -391,9 +376,9 @@ export function TeamPage() {
               {/* Partner Counter */}
               <div className="text-center">
                 {/* <p className="text-sm text-[var(--secondary)] mb-2">Partner</p> */}
-                <p className="text-2xl font-bold text-[var(--primary)]">
+                {/* <p className="text-2xl font-bold text-[var(--primary)]">
                   {partners.length > 0 ? currentPartnerIndex + 1 : 0} / {partners.length}
-                </p>
+                </p> */}
               </div>
 
               {/* Next Button */}

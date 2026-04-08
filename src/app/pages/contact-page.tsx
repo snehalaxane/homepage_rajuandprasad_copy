@@ -191,21 +191,21 @@ export function ContactPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-sm mb-4 ${settings?.backgroundImage ? 'text-gray-300' : 'text-white'}`}>
+              <div className={`flex items-center gap-2 text-m mb-4 ${settings?.backgroundImage ? 'text-gray-300' : 'text-white'}`}>
                 <a href="/" className={`transition-colors ${settings?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={settings?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Contact</span>
               </div>
 
               {/* Dynamic Title */}
-              <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${settings?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
+              {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${settings?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {settings?.pageTitle || 'Contact Us'}
-              </h1>
+              </h1> */}
 
               {/* Dynamic Subtitle */}
-              <p className={`text-lg leading-relaxed ${settings?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
+              {/* <p className={`text-lg leading-relaxed ${settings?.backgroundImage ? 'text-gray-200' : 'text-[var(--secondary)]'}`}>
                 {settings?.pageSubtitle || "Send us your request and we'll get back to you at the earliest."}
-              </p>
+              </p> */}
             </motion.div>
           </div>
         </section>
@@ -223,13 +223,13 @@ export function ContactPage() {
                 {/* Call Now */}
                 <a
                   href={`tel:${settings?.callNow}`}
-                  className="bg-white rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
+                  className="bg-[#808080] rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
                 >
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Phone className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[var(--secondary)] mb-1">Call Now</p>
+                    <p className="text-sm font-semibold text-white mb-1">Call Now</p>
                     <p className="text-lg font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors">
                       {settings?.callNow || '+91 40 2331 6023'}
                     </p>
@@ -239,13 +239,13 @@ export function ContactPage() {
                 {/* Email Us */}
                 <a
                   href={`mailto:${settings?.emailUs}`}
-                  className="bg-white rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
+                  className="bg-[#808080] rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
                 >
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Mail className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[var(--secondary)] mb-1">Email Us</p>
+                    <p className="text-sm font-semibold text-white mb-1">Email Us</p>
                     <p className="text-lg font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors">
                       {settings?.emailUs || 'info@rajuandprasad.com'}
                     </p>
@@ -522,7 +522,7 @@ export function ContactPage() {
         </section>
 
         {/* Additional Info Section */}
-        <section className="py-16 bg-background border-t border-gray-200">
+        {/* <section className="py-16 bg-background border-t border-gray-200">
           <div className="container mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -552,7 +552,7 @@ export function ContactPage() {
               </div>
             </motion.div>
           </div>
-        </section>
+        </section> */}
       </main>
 
       {/* OTP Verification Modal */}
