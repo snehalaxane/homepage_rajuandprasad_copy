@@ -232,7 +232,7 @@ export function BlogPage() {
 
                       {/* Featured Image */}
                       {selectedPost.featuredImage && (
-                        <div className="relative h-48 md:h-80 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 flex items-center justify-center">
+                        <div className="relative w-full aspect-[2.5/1] rounded-3xl overflow-hidden shadow-2xl border border-gray-100 flex items-center justify-center">
                           <img
                             src={resolveImageUrl(selectedPost.featuredImage)}
                             alt={selectedPost.title}
@@ -327,7 +327,7 @@ export function BlogPage() {
                           className="bg-background rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
                         >
                           {post.featuredImage && (
-                            <div className="relative h-48 md:h-64 overflow-hidden flex items-center justify-center">
+                            <div className="relative w-full aspect-[2.5/1] overflow-hidden flex items-center justify-center">
                               <img
                                 src={resolveImageUrl(post.featuredImage)}
                                 alt={post.title}

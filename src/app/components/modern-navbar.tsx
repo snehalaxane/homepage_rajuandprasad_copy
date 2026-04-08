@@ -88,11 +88,13 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      // Trigger point depends on whether the top header row is present
+      const threshold = activePage === 'home' ? 800 : 96; 
+      setIsScrolled(window.scrollY > threshold);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activePage]);
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
@@ -167,11 +169,11 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
   }
 
   return (
-    <>
+    <div className="z-[110] relative">
       {/* Top Header Row - Scrolls with page */}
       {activePage !== 'home' && (
-        <motion.div
-          className="relative left-0 right-0 z-[100] bg-[#888888] border-b hidden xl:block transition-all duration-500"
+        <div
+          className="relative left-0 right-0 bg-[#888888] border-b hidden xl:block transition-all duration-500"
         >
           <div className="container mx-auto px-6 h-24 flex items-center justify-between">
             {/* Left - Logo */}
@@ -219,12 +221,19 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
 
-      {/* Navigation Row - Sticky Top */}
+      {/* Placeholder to prevent layout jump when navbar becomes fixed */}
+      {isScrolled && <div className="h-16 w-full hidden xl:block" />}
+
+      {/* Navigation Row - Fixed on scroll */}
       <motion.nav
-        className="sticky top-0 left-0 right-0 z-[110] transition-all duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
+        className={`w-full z-[110] transition-all duration-300 ${
+          isScrolled 
+            ? 'fixed top-0 left-0 right-0 shadow-[0_8px_30px_rgba(0,0,0,0.3)] backdrop-blur-md' 
+            : 'relative shadow-lg'
+        }`}
         style={{ backgroundColor: 'var(--primary)' }}
       >
         <div className="container mx-auto px-6 relative z-10">
@@ -462,6 +471,6 @@ export function ModernNavbar({ activePage = 'home' }: NavbarProps) {
           )}
         </AnimatePresence>
       </motion.nav>
-    </>
+    </div>
   );
 }

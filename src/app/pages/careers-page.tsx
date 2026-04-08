@@ -644,14 +644,14 @@ export function CareersPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-center mb-12"
+                className="text-center"
               >
-                <h2 className="text-3xl lg:text-4xl font-bold text-[var(--primary)] mb-4">
+                {/* <h2 className="text-3xl lg:text-4xl font-bold text-[var(--primary)] mb-4">
                   Current Openings
                 </h2>
                 <p className="text-lg text-white">
                   Explore opportunities to join our growing team
-                </p>
+                </p> */}
               </motion.div>
 
               {/* Search and Filter */}
@@ -693,7 +693,7 @@ export function CareersPage() {
               </motion.div>
 
               {/* Accordion Items */}
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {filteredOpenings.map((opening, index) => (
                   <motion.div
                     key={opening._id}
@@ -708,7 +708,7 @@ export function CareersPage() {
                     {/* Accordion Header */}
                     <button
                       onClick={() => setExpandedId(expandedId === opening._id ? null : opening._id)}
-                      className="w-full px-8 py-10 flex items-center justify-between gap-6 hover:bg-gray-50/50 transition-colors group"
+                      className="w-full px-4 py-4 flex items-center justify-between gap-6 hover:bg-gray-50/50 transition-colors group"
                     >
                       <div className="flex items-center gap-6 flex-1 text-left">
                         <div className={`w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${expandedId === opening._id ? 'bg-[var(--primary)] scale-110' : 'bg-[#002855] group-hover:scale-105'}`}>
@@ -761,9 +761,9 @@ export function CareersPage() {
                           transition={{ duration: 0.3 }}
                           className="border-t border-gray-100"
                         >
-                          <div className="p-8 grid lg:grid-cols-3 gap-8">
+                          <div className="p-4 grid lg:grid-cols-3 gap-4">
                             {/* Left Side - Job Details */}
-                            <div className="lg:col-span-2 space-y-6">
+                            <div className="lg:col-span-3 space-y-2">
                               {/* Description */}
                               {/* <div>
                                 <h4 className="text-lg font-bold text-gray-900 mb-3">
@@ -813,33 +813,36 @@ export function CareersPage() {
                               )}
                             </div>
 
-                            {/* Right Side - Sticky CTA Card */}
-                            <div className="lg:col-span-1">
-                              <div className="sticky top-24 bg-gray-50/50 rounded-2xl border border-blue-200 p-6 space-y-3">
-                                <h4 className="text-xl font-bold text-gray-900">
-                                  Ready to Apply?
-                                </h4>
-                                <p className="text-base text-[var(--secondary)] leading-relaxed">
-                                  Join our team and be part of our legacy of excellence.
-                                </p>
+                            <div className="lg:col-span-3">
+                              <div className="bg-gray-50/50 rounded-2xl border border-blue-100 p-6 sm:p-8">
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                  <div className="space-y-2">
+                                    <h4 className="text-xl sm:text-xl font-bold text-gray-900">
+                                      Ready to Apply?
+                                    </h4>
+                                    <p className="text-base text-[var(--secondary)] leading-relaxed">
+                                      Join our team and be part of our legacy of excellence.
+                                    </p>
+                                  </div>
 
-                                <Button
-                                  onClick={() => handleApply(opening.role)}
-                                  className="w-full bg-[var(--primary)] hover:bg-[#002855] text-white shadow-lg hover:shadow-xl transition-all h-10 rounded-xl"
-                                >
-                                  <Briefcase className="mr-2 h-4 w-4" />
-                                  Apply for Job
-                                </Button>
+                                  <Button
+                                    onClick={() => handleApply(opening.role)}
+                                    className="w-full md:w-auto bg-[var(--primary)] hover:bg-[#002855] text-white shadow-lg hover:shadow-xl transition-all h-12 px-8 rounded-xl font-bold text-lg"
+                                  >
+                                    <Briefcase className="mr-2 h-5 w-5" />
+                                    Apply for Job
+                                  </Button>
+                                </div>
 
-                                <div className="pt-4 border-t border-gray-200">
-                                  <p className="text-xs text-[var(--secondary)] mb-2 font-semibold">
+                                <div className="mt-8 pt-4 border-t border-gray-200 flex flex-col sm:flex-row sm:items-center gap-3">
+                                  <p className="text-sm text-[var(--secondary)] font-semibold">
                                     Or send your resume to:
                                   </p>
                                   <a
                                     href="mailto:info@rajuprasad.com"
-                                    className="flex items-center gap-2 text-sm font-semibold text-[var(--primary)] hover:text-[#002855] transition-colors"
+                                    className="flex items-center gap-2 text-base font-bold text-[var(--primary)] hover:text-[#033aa8] transition-colors"
                                   >
-                                    <Mail className="h-4 w-4" />
+                                    <Mail className="h-5 w-5" />
                                     info@rajuprasad.com
                                   </a>
                                 </div>
