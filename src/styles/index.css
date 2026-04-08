@@ -5,6 +5,7 @@
 /* Smooth scrolling */
 html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */

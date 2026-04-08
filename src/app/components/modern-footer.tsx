@@ -91,7 +91,7 @@ export function ModernFooter() {
       <div className="relative z-10">
         {/* Main Footer Content */}
         <div className="container mx-auto px-6 py-16">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {/* About Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}

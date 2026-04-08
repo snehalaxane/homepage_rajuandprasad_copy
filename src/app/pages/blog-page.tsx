@@ -126,9 +126,10 @@ export function BlogPage() {
       <main className="min-h-screen bg-background">
         {/* Page Header */}
         <section
-          className="relative overflow-hidden w-full aspect-[1920/375] bg-cover bg-center bg-no-repeat flex items-center" style={{
+          className="relative overflow-hidden w-full bg-cover bg-center bg-no-repeat flex items-center h-[180px] sm:h-[220px] md:h-[280px] lg:h-[375px]" style={{
             backgroundImage: intro?.backgroundImage ? `url(${resolveImageUrl(intro.backgroundImage)})` : 'none',
-            backgroundColor: !intro?.backgroundImage ? 'transparent' : 'inherit'
+            backgroundColor: !intro?.backgroundImage ? 'transparent' : 'inherit',
+
           }}
         >
           {!intro?.backgroundImage && (
@@ -148,19 +149,19 @@ export function BlogPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-m mb-4 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
-                <a href="#home" className={`transition-colors ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
-                <ChevronRight className="h-4 w-4" />
-                <span className={`transition-colors cursor-pointer ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
-                <ChevronRight className="h-4 w-4" />
+              <div className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm mb-6 sm:mb-8 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
+                <a href="#home" className={`whitespace-nowrap transition-colors ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
+                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+                <span className={`whitespace-nowrap transition-colors cursor-pointer ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
+                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 {selectedPost ? (
                   <>
-                    <a href="#blog" className="hover:text-[var(--primary)] transition-colors">Our Blog</a>
-                    <ChevronRight className="h-4 w-4" />
+                    <a href="#blog" className="whitespace-nowrap hover:text-[var(--primary)] transition-colors">Our Blog</a>
+                    <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                     <span className="text-white font-semibold line-clamp-1">{selectedPost.title}</span>
                   </>
                 ) : (
-                  <span className={(intro?.backgroundImage && !selectedPost) ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Our Blog</span>
+                  <span className={(intro?.backgroundImage && !selectedPost) ? 'text-white font-semibold whitespace-nowrap' : 'text-[var(--primary)] font-semibold whitespace-nowrap'}>Our Blog</span>
                 )}
               </div>
 
@@ -171,10 +172,10 @@ export function BlogPage() {
 
               {/* Subtitle / Meta */}
               {selectedPost ? (
-                <div className="flex flex-wrap items-center gap-6">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-6">
                   <div className="flex items-center gap-2 text-white">
-                    <Calendar className="h-5 w-5 text-[var(--primary)]" />
-                    <span className="font-medium">
+                    <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-[var(--primary)]" />
+                    <span className="text-xs sm:text-sm font-medium">
                       {new Date(selectedPost.publishDate).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
@@ -184,13 +185,13 @@ export function BlogPage() {
                   </div>
                   {selectedPost.author && (
                     <div className="flex items-center gap-2 text-white">
-                      <div className="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-xs font-bold uppercase">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[var(--primary)] flex items-center justify-center text-white text-[10px] sm:text-xs font-bold uppercase overflow-hidden">
                         {selectedPost.author.charAt(0)}
                       </div>
-                      <span className="font-medium text-white"> {selectedPost.author}</span>
+                      <span className="text-xs sm:text-sm font-medium text-white"> {selectedPost.author}</span>
                     </div>
                   )}
-                  <span className="px-4 py-1.5 bg-[var(--primary)] text-white text-sm font-semibold rounded-full shadow-lg shadow-[var(--primary)]/20">
+                  <span className="px-3 py-1 sm:px-4 sm:py-1.5 bg-[var(--primary)] text-white text-[10px] sm:text-xs font-bold rounded-full shadow-lg shadow-[var(--primary)]/20">
                     {selectedPost.category}
                   </span>
                 </div>
@@ -206,9 +207,9 @@ export function BlogPage() {
         {/* Blog Content Section */}
         <section className="py-16">
           <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
               {/* Left Side - Blog Posts */}
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-2 order-1">
                 {/* Blog Posts List or Detail */}
                 <AnimatePresence mode="wait">
                   {selectedPost ? (
@@ -231,19 +232,19 @@ export function BlogPage() {
 
                       {/* Featured Image */}
                       {selectedPost.featuredImage && (
-                        <div className="relative h-80 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 flex items-center justify-center">
+                        <div className="relative h-48 md:h-80 rounded-3xl overflow-hidden shadow-2xl border border-gray-100 flex items-center justify-center">
                           <img
                             src={resolveImageUrl(selectedPost.featuredImage)}
                             alt={selectedPost.title}
-                            className="w-full h-full object-fill"
+                            className="w-full h-full object-cover"
                           />
                         </div>
                       )}
 
                       {/* Post Content */}
-                      <div className="bg-background rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-12">
+                      <div className="bg-background rounded-2xl md:rounded-3xl shadow-xl border border-gray-100 p-5 md:p-8 lg:p-12">
                         <div
-                          className="prose prose-lg max-w-none text-white leading-relaxed
+                          className="prose prose-sm sm:prose-base md:prose-lg max-w-none text-white leading-relaxed
                             prose-headings:text-white prose-headings:font-bold
                             prose-p:mb-6 prose-strong:text-white
                             prose-ul:list-disc prose-ul:pl-6 prose-li:mb-2"
@@ -282,9 +283,9 @@ export function BlogPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="bg-background rounded-2xl shadow-lg  p-6 mb-8"
+                        className="bg-background rounded-2xl shadow-lg p-5 sm:p-6 mb-8"
                       >
-                        <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex flex-col sm:flex-row gap-4">
                           {/* Search */}
                           <div className="relative flex-1">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/70" />
@@ -296,7 +297,7 @@ export function BlogPage() {
                                 setSearchQuery(e.target.value);
                                 setCurrentPage(1);
                               }}
-                              className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-[var(--primary)]/20 focus:border-[var(--primary)] focus:outline-none transition-all text-white bg-[var(--primary)] placeholder:text-white/60"
+                              className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-[var(--primary)]/20 focus:border-[var(--primary)] focus:outline-none transition-all text-white bg-[var(--primary)] placeholder:text-white/60 text-sm sm:text-base"
                             />
                           </div>
 
@@ -307,7 +308,7 @@ export function BlogPage() {
                               setSelectedCategory(e.target.value);
                               setCurrentPage(1);
                             }}
-                            className="px-6 py-3 rounded-xl border-2 border-[var(--primary)]/20 focus:border-[var(--primary)] focus:outline-none transition-all text-white font-semibold bg-[var(--primary)] cursor-pointer"
+                            className="w-full sm:w-auto px-6 py-3 rounded-xl border-2 border-[var(--primary)]/20 focus:border-[var(--primary)] focus:outline-none transition-all text-white font-semibold bg-[var(--primary)] cursor-pointer text-sm sm:text-base"
                           >
                             {categories.map(category => (
                               <option key={category} value={category}>{category}</option>
@@ -326,20 +327,20 @@ export function BlogPage() {
                           className="bg-background rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 overflow-hidden transition-all group"
                         >
                           {post.featuredImage && (
-                            <div className="relative h-64 overflow-hidden flex items-center justify-center">
+                            <div className="relative h-48 md:h-64 overflow-hidden flex items-center justify-center">
                               <img
                                 src={resolveImageUrl(post.featuredImage)}
                                 alt={post.title}
-                                className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-105"
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                               />
                             </div>
                           )}
-                          <div className="p-8">
+                          <div className="p-4 md:p-8">
                             {/* Date Pill */}
-                            <div className="flex items-center gap-2 mb-4">
-                              <div className="flex items-center gap-2 px-4 py-2 bg-[var(--primary)]/5 rounded-full">
-                                <Calendar className="h-4 w-4 text-[var(--primary)]" />
-                                <span className="text-sm font-semibold text-[var(--primary)]">
+                            <div className="flex flex-wrap items-center gap-3 mb-4">
+                              <div className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[var(--primary)]/5 rounded-full">
+                                <Calendar className="h-3 w-3 sm:h-4 sm:w-4 text-[var(--primary)]" />
+                                <span className="text-xs sm:text-sm font-semibold text-[var(--primary)]">
                                   {new Date(post.publishDate).toLocaleDateString('en-US', {
                                     year: 'numeric',
                                     month: 'long',
@@ -348,13 +349,12 @@ export function BlogPage() {
                                 </span>
                               </div>
                               {post.author && (
-                                <span className="text-sm text-white">By {post.author}</span>
+                                <span className="text-xs sm:text-sm text-white/80 font-medium">By {post.author}</span>
                               )}
                             </div>
 
                             {/* Title */}
-                            <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-[var(--primary)] transition-colors">
-                              {post.title}
+                            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl">                              {post.title}
                             </h2>
 
                             {/* Excerpt */}
@@ -399,7 +399,7 @@ export function BlogPage() {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ duration: 0.5, delay: 0.4 }}
-                          className="flex items-center justify-center gap-2 mt-12"
+                          className="flex flex-wrap items-center justify-center gap-2 mt-12"
                         >
                           <Button
                             variant="outline"
@@ -446,7 +446,7 @@ export function BlogPage() {
               </div>
 
               {/* Right Sidebar - Think Tank Links */}
-              <div className="lg:col-span-1">
+              <div className="lg:col-span-1 order-2">
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}

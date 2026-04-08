@@ -28,6 +28,21 @@ export function ModernStatsSection() {
   const [statsData, setStatsData] = useState<AboutResponse | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    console.log("isMobile:", isMobile);
+  }, [isMobile]);
+
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -110,9 +125,8 @@ export function ModernStatsSection() {
         </div>
 
         {/* The "Depth" Carousel */}
-        <div className="relative h-[450px] flex items-center justify-center">
-          <div className="relative w-full max-w-6xl flex items-center justify-center">
-
+        <div className="relative h-[260px] md:h-[450px] flex items-center justify-center">
+          <div className="relative w-full max-w-full md:max-w-6xl flex items-center justify-center">
             <AnimatePresence initial={false}>
               {validStats.map((stat, i) => {
                 let offset = i - activeSlide;
@@ -125,10 +139,10 @@ export function ModernStatsSection() {
                 const isVisible = Math.abs(offset) <= 1;
 
                 // Responsive sizing
-                const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-                const cardW = isMobile ? window.innerWidth * 0.75 : DEFAULT_CARD_W;
-                const cardH = isMobile ? 220 : DEFAULT_CARD_H;
-                const gap = isMobile ? window.innerWidth * 0.2 : GAP;
+                // const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+                const cardW = isMobile ? 320 : DEFAULT_CARD_W;
+                const cardH = isMobile ? 240 : DEFAULT_CARD_H;
+                const gap = isMobile ? 120 : GAP;
 
                 return (
                   <motion.div
@@ -151,38 +165,32 @@ export function ModernStatsSection() {
                     style={{ width: cardW, height: cardH }}
                     onClick={() => setActiveSlide(i)}
                   >
+                    {/* Single unified layout: full-image card with text overlay */}
                     <div className="relative w-full h-full group">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-[1.5rem] md:rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                       {stat.image ? (
                         <img
                           src={stat.image}
                           alt="Stats Graphic"
-                          className="w-full h-full object-cover rounded-[2rem] relative z-10"
+                          className="w-full h-full object-cover rounded-[1.5rem] md:rounded-[2rem] relative z-10"
                           draggable={false}
                         />
                       ) : (
-                        <div className="w-full h-full rounded-[2rem] bg-gradient-to-br from-[#16181D] to-[#2B2F36] border border-white/10 shadow-2xl relative z-10 flex items-center justify-center">
+                        <div className="w-full h-full rounded-[1.5rem] md:rounded-[2rem] bg-gradient-to-br from-[#16181D] to-[#2B2F36] border border-white/10 shadow-2xl relative z-10 flex items-center justify-center">
                           <span className="text-gray-500 italic">No Graphics</span>
                         </div>
                       )}
-                      {/* Premium Letter-by-Letter Animated Caption */}
                       <motion.div
                         animate={{ opacity: isActive ? 1 : 0 }}
-                        transition={{
-                          duration: 1.2,
-                          ease: "easeInOut",
-                          delay: isActive ? 0.7 : 0
-                        }}
-                        className="absolute inset-0 z-50 flex items-center justify-center px-6 pointer-events-none"
+                        transition={{ duration: 1.2, ease: "easeInOut", delay: isActive ? 0.7 : 0 }}
+                        className="absolute bottom-0 left-0 right-0 z-50 p-3 md:p-6"
                       >
-                        <p className="text-white text-xxl md:text-5xl font-bold tracking-tight text-center uppercase drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] whitespace-nowrap">
+                        <p className="text-white text-xs sm:text-sm md:text-3xl lg:text-5xl font-semibold text-left leading-snug max-w-full drop-shadow-lg">
                           {stat.text}
                         </p>
                       </motion.div>
-
                       {!isActive && (
-                        <div className="absolute inset-0 bg-black/40 z-20 rounded-[2rem] transition-opacity" />
+                        <div className="absolute inset-0 bg-black/40 z-20 rounded-[1.5rem] md:rounded-[2rem] transition-opacity" />
                       )}
                     </div>
                   </motion.div>

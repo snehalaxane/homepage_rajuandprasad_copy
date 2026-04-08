@@ -124,10 +124,10 @@ export function ModernServicesSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative flex items-center h-full"
+                className="group relative flex items-center h-full ml-10 md:ml-0"
               >
-                {/* Circular Contact/Image */}
-                <div className="absolute -top-12 md:top-1/2 md:-translate-y-1/2 left-1/2 md:left-0 -translate-x-1/2 w-28 h-28 md:w-36 md:h-36 rounded-full border-[6px] border-background bg-white shadow-xl overflow-hidden z-20 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-6 flex-shrink-0 flex items-center justify-center overflow-hidden flex items-center justify-center">
+                {/* Circular Image - Left side on ALL screen sizes */}
+                <div className="absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2 w-25 h-25 md:w-36 md:h-36 rounded-full border-[6px] border-background bg-white shadow-xl overflow-hidden z-20 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-6 flex-shrink-0 flex items-center justify-center">
                   {service.icon?.startsWith('data:') || (service.icon && service.icon.includes('/')) ? (
                     <img
                       src={service.icon.startsWith('/') && !service.icon.startsWith('data:') ? `${API_BASE_URL}${service.icon}` : service.icon}
@@ -141,8 +141,8 @@ export function ModernServicesSection() {
                   )}
                 </div>
 
-                {/* Content Box */}
-                <div className="bg-[#E5E7EB] rounded-2xl py-5 pr-8 md:pl-24 w-full min-h-[110px] md:min-h-[120px] flex flex-col justify-center shadow-lg transition-all duration-300 group-hover:bg-white group-hover:shadow-2xl border border-transparent group-hover:border-[var(--primary)]/20 relative overflow-hidden">
+                {/* Content Box - left padding on ALL sizes to make room for image */}
+                <div className="bg-[#E5E7EB] rounded-2xl py-5 pr-8 pl-14 md:pl-24 w-full min-h-[90px] md:min-h-[120px] flex flex-col justify-center shadow-lg transition-all duration-300 group-hover:bg-white group-hover:shadow-2xl border border-transparent group-hover:border-[var(--primary)]/20 relative overflow-hidden">
                   {/* Subtle Decorative Gradient on hover */}
                   <div className="absolute top-0 right-0 w-32 h-32 opacity-0 group-hover:opacity-100 transition-opacity rounded-full blur-3xl -z-0" style={{ backgroundColor: 'var(--primary)', opacity: 0.05 }} />
 
