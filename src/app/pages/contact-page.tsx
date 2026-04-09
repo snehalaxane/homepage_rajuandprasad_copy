@@ -223,13 +223,13 @@ export function ContactPage() {
                 {/* Call Now */}
                 <a
                   href={`tel:${settings?.callNow}`}
-                  className="bg-[#808080] rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
+                  className="bg-[#ffffff] rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
                 >
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Phone className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-white mb-1">Call Now</p>
+                    <p className="text-sm font-semibold text-[var(--primary)] mb-1">Call Now</p>
                     <p className="text-lg font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors">
                       {settings?.callNow || '+91 40 2331 6023'}
                     </p>
@@ -239,13 +239,13 @@ export function ContactPage() {
                 {/* Email Us */}
                 <a
                   href={`mailto:${settings?.emailUs}`}
-                  className="bg-[#808080] rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
+                  className="bg-[#ffffff] rounded-2xl border-2 border-gray-200 hover:border-[var(--primary)] p-6 flex items-center gap-4 transition-all hover:shadow-lg group"
                 >
                   <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#033aa8] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Mail className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-white mb-1">Email Us</p>
+                    <p className="text-sm font-semibold text-[var(--primary)] mb-1">Email Us</p>
                     <p className="text-lg font-bold text-gray-900 group-hover:text-[var(--primary)] transition-colors">
                       {settings?.emailUs || 'info@rajuandprasad.com'}
                     </p>
