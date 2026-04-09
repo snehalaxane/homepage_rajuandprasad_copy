@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { useState, useEffect } from "react";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -23,9 +22,9 @@ export function NewsTicker() {
         fetchNews();
     }, []);
 
-    const newsText = newsItems.length > 0
+    const content = newsItems.length > 0
         ? newsItems.map(i => i.content).join(' \u00A0\u00A0\u00A0 • \u00A0\u00A0\u00A0 ')
-        : "Welcome to Raju and Prasad Chartered Accountants. Stay tuned for expert financial insights and updates.";
+        : "Welcome to Raju and Prasad Chartered Accountants. Stay tuned for expert financial insights.";
 
     if (isLoading && newsItems.length === 0) return (
         <div className="bg-white border-b-2 h-10 flex items-center px-4" style={{ borderColor: 'var(--primary)' }}>
@@ -36,35 +35,45 @@ export function NewsTicker() {
     );
 
     return (
-        <div className="bg-white border-b-2 overflow-hidden flex h-10 items-center shadow-sm relative z-40" style={{ borderColor: 'var(--primary)' }}>
-            {/* News Label with Chevron Shape */}
-            <div className="relative text-white pl-8 pr-4 h-full flex items-center font-bold z-20 shrink-0" style={{ backgroundColor: 'var(--primary)' }}>
-                NEWS
-                <div
-                    className="absolute top-0 right-[-16px] h-0 w-0 border-y-[20px] border-y-transparent border-l-[16px] z-10"
-                    style={{ borderLeftColor: 'var(--primary)' }}
-                />
-            </div>
+        <>
+            <style>
+                {`
+                @keyframes scroll {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                .ticker-content {
+                    display: flex;
+                    width: max-content;
+                    animation: scroll 30s linear infinite;
+                }
+                .ticker-content:hover {
+                    animation-play-state: paused;
+                }
+                `}
+            </style>
 
-            {/* Scrolling Text Container */}
-            <div className="flex-1 overflow-hidden relative h-full flex items-center ml-4">
-                <motion.div
-                    initial={{ x: 0 }}
-                    animate={{ x: "-33.33%" }} // move only 1/3 because 3 copies
-                    transition={{
-                        duration: newsText.length / 6,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                    className="flex whitespace-nowrap mx-6 text-lg lg:text-xl font-semibold font-semibold"
-                    style={{ color: 'var(--primary)' }}
-                >
-                    <span className="mx-6">{newsText}</span>
-                    <span className="mx-6">{newsText}</span>
-                    <span className="mx-6">{newsText}</span>
-                    <span className="mx-6">{newsText}</span>
-                </motion.div>
+            <div className="bg-white border-b-2 overflow-hidden flex h-10 items-center shadow-sm relative z-40" style={{ borderColor: 'var(--primary)' }}>
+                {/* News Label */}
+                <div className="relative text-white pl-8 pr-4 h-full flex items-center font-bold z-20 shrink-0" style={{ backgroundColor: 'var(--primary)' }}>
+                    NEWS
+                    <div className="absolute top-0 right-[-16px] h-0 w-0 border-y-[20px] border-y-transparent border-l-[16px] z-10"
+                        style={{ borderLeftColor: 'var(--primary)' }} />
+                </div>
+
+                {/* The Ticker Area */}
+                <div className="flex-1 overflow-hidden h-full flex items-center">
+                    <div className="ticker-content">
+                        {/* Two identical spans. Span 2 follows Span 1 immediately. */}
+                        <span className="whitespace-nowrap font-semibold text-sm lg:text-base uppercase tracking-wider flex items-center" style={{ color: 'var(--primary)' }}>
+                            {content} <span className="mx-10">•</span>
+                        </span>
+                        <span className="whitespace-nowrap font-semibold text-sm lg:text-base uppercase tracking-wider flex items-center" style={{ color: 'var(--primary)' }}>
+                            {content} <span className="mx-10">•</span>
+                        </span>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
