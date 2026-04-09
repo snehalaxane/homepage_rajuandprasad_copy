@@ -196,9 +196,7 @@ export function TeamPage() {
               <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)]/60" />
 
               <p className="text-lg text-white leading-relaxed pl-6">
-                {intro.accentText
-
-                }
+                {intro.accentText}
               </p>
 
             </div>

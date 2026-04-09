@@ -613,7 +613,7 @@ export function CareersPage() {
         </section>
 
         {/* Intro Content Block */}
-        <section className="py-12">
+        <section className="py-10">
           {/* <div className="container mx-auto px-6"> */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -655,14 +655,14 @@ export function CareersPage() {
               </motion.div>
 
               {/* Search and Filter */}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="bg-white rounded-2xl shadow-xl p-6 mb-8"
-              >
-                <div className="flex flex-col md:flex-row gap-6 items-center">
-                  {/* Search */}
+              > */}
+              {/* <div className="flex flex-col md:flex-row gap-6 items-center">
+                  Search 
                   <div className="relative flex-1 w-full">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--secondary)]" />
                     <input
@@ -676,7 +676,7 @@ export function CareersPage() {
                 </div>
 
                 {/* Filter Chips */}
-                <div className="flex flex-wrap gap-2 mt-4">
+              {/* <div className="flex flex-wrap gap-2 mt-4">
                   {categories.map(category => (
                     <button
                       key={category}
@@ -689,8 +689,8 @@ export function CareersPage() {
                       {category}
                     </button>
                   ))}
-                </div>
-              </motion.div>
+                </div> */}
+              {/* </motion.div> */}
 
               {/* Accordion Items */}
               <div className="space-y-2">

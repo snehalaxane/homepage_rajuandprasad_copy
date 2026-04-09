@@ -339,7 +339,7 @@ export function NetworkingPage() {
               transition={{ duration: 0.6 }}
               className="lg:sticky lg:top-32 h-fit"
             >
-              <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+              <div className="bg-[#808080] rounded-3xl p-8 shadow-xl border border-none">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
                     <FileText className="h-6 w-6 text-[var(--primary)]" />
@@ -349,7 +349,7 @@ export function NetworkingPage() {
                   </h2>
                 </div>
 
-                <p className="text-xs text-red-500 font-semibold mb-6 uppercase tracking-wide">
+                <p className="text-xs text-red-900 font-semibold mb-6 uppercase tracking-wide">
                   All fields are mandatory
                 </p>
 
@@ -364,7 +364,7 @@ export function NetworkingPage() {
                       required
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-blue-900 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -378,7 +378,7 @@ export function NetworkingPage() {
                       type="text"
                       value={formData.organisation}
                       onChange={(e) => setFormData({ ...formData, organisation: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-blue-900 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter your organisation"
                     />
                   </div>
@@ -393,7 +393,7 @@ export function NetworkingPage() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-blue-900 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -409,7 +409,7 @@ export function NetworkingPage() {
                       value={formData.mobile}
                       onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
                       maxLength={10}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
+                      className="w-full px-4 py-3 rounded-xl border border-blue-900 focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 outline-none transition-all text-gray-800"
                       placeholder="Enter 10-digit mobile number"
                     />
                   </div>
@@ -437,7 +437,7 @@ export function NetworkingPage() {
                         </span>
                       </label>
                     </div>
-                    <p className="text-xs text-[var(--secondary)] mt-2">
+                    <p className="text-xs text-white mt-2">
                       Supported formats: PDF, DOC, DOCX
                     </p>
                   </div>
