@@ -500,11 +500,11 @@ export function CareersPage() {
             setJobCategories(data);
 
             // Auto-expand first opening
-            const firstCat = data.find((c: any) => c.enabled !== false);
-            if (firstCat && firstCat.jobs?.length > 0) {
-              const firstJob = firstCat.jobs.find((j: any) => j.enabled !== false);
-              if (firstJob) setExpandedId(firstJob._id);
-            }
+            // const firstCat = data.find((c: any) => c.enabled !== false);
+            // if (firstCat && firstCat.jobs?.length > 0) {
+            //   const firstJob = firstCat.jobs.find((j: any) => j.enabled !== false);
+            //   if (firstJob) setExpandedId(firstJob._id);
+            // }
           } else {
             console.error('Expected array of jobs but got:', data);
             setJobCategories([]);

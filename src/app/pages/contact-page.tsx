@@ -273,15 +273,15 @@ export function ContactPage() {
                   {/* GRID PATTERN BACKGROUND */}
                   <div
                     className="absolute inset-0 pointer-events-none"
-                    style={{
-                      backgroundImage: `
-        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
-        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
-      `,
-                      backgroundSize: '40px 40px, 40px 40px, 10px 10px',
-                      maskImage: 'linear-gradient(to bottom, black, transparent)'
-                    }}
+                  //               style={{
+                  //                 backgroundImage: `
+                  //   linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
+                  //   linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                  //   linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 75%, transparent)
+                  // `,
+                  //                 backgroundSize: '40px 40px, 40px 40px, 10px 10px',
+                  //                 maskImage: 'linear-gradient(to bottom, black, transparent)'
+                  //               }}
                   />
 
                   {/* HEADER CONTENT */}
