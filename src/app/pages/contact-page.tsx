@@ -265,7 +265,7 @@ export function ContactPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="max-w-4xl mx-auto"
             >
-              <div className="bg-background rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+              <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
                 {/* Form Header */}
                 {/* Form Header */}
                 <div className="relative bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-8 py-8 overflow-hidden">
@@ -287,10 +287,10 @@ export function ContactPage() {
                   {/* HEADER CONTENT */}
                   <div className="relative z-10">
                     <h2 className="text-3xl font-bold text-white mb-2">
-                      {settings?.heading || 'Get in Touch'}
+                      {settings?.heading}
                     </h2>
                     <p className="text-white/80">
-                      {settings?.subheading || 'Please share your query. Our team will respond soon.'}
+                      {settings?.subheading}
                     </p>
                   </div>
 
@@ -307,7 +307,7 @@ export function ContactPage() {
 
                       return (
                         <div key={field._id} className={field.label.toLowerCase().includes('message') ? 'md:col-span-2' : ''}>
-                          <label className="block text-sm font-semibold text-gray-900 mb-2">
+                          <label className="block text-sm font-semibold text-[var(--primary)] mb-2">
                             {field.label} {field.required && '*'}
                           </label>
                           <div className="relative">
@@ -326,7 +326,7 @@ export function ContactPage() {
                               pattern={field.fieldType === 'tel' ? '[0-9]{10}' : undefined}
                               inputMode={field.fieldType === 'tel' ? 'numeric' : undefined}
                               maxLength={field.fieldType === 'tel' ? 10 : undefined}
-                              className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 bg-background"
+                              className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-[var(--primary)] focus:outline-none transition-all text-gray-900 bg-white"
                               placeholder={field.placeholder || `Enter ${field.label}`}
                             />
                           </div>

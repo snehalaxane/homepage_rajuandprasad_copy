@@ -278,7 +278,7 @@ export function NetworkingPage() {
                       {domesticContent?.title || 'Domestic Networking'}
                     </h2>
                   </div>
-                  <p className="text-white leading-relaxed text-lg  font-medium whitespace-pre-line">
+                  <p className="text-white leading-relaxed text-lg  whitespace-pre-line">
                     {domesticContent?.description || 'Connect with us to expand professional collaboration across India.'}
                   </p>
                 </motion.div>
@@ -339,7 +339,7 @@ export function NetworkingPage() {
               transition={{ duration: 0.6 }}
               className="lg:sticky lg:top-32 h-fit"
             >
-              <div className="bg-[#808080] rounded-3xl p-8 shadow-xl border border-none">
+              <div className="bg-white rounded-3xl p-8 shadow-xl border border-none">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
                     <FileText className="h-6 w-6 text-[var(--primary)]" />
@@ -437,7 +437,7 @@ export function NetworkingPage() {
                         </span>
                       </label>
                     </div>
-                    <p className="text-xs text-white mt-2">
+                    <p className="text-xs text-gray-600 mt-2">
                       Supported formats: PDF, DOC, DOCX
                     </p>
                   </div>
