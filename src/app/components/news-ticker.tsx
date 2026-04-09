@@ -49,16 +49,20 @@ export function NewsTicker() {
             {/* Scrolling Text Container */}
             <div className="flex-1 overflow-hidden relative h-full flex items-center ml-4">
                 <motion.div
-                    animate={{ x: ['100%', '-100%'] }}
+                    initial={{ x: 0 }}
+                    animate={{ x: "-33.33%" }} // move only 1/3 because 3 copies
                     transition={{
-                        duration: newsText.length / 5, // Dynamic duration based on length
+                        duration: newsText.length / 6,
                         repeat: Infinity,
                         ease: "linear"
                     }}
-                    className="whitespace-nowrap font-semibold text-sm lg:text-base uppercase tracking-wider"
+                    className="flex whitespace-nowrap mx-6 text-lg lg:text-xl font-semibold font-semibold"
                     style={{ color: 'var(--primary)' }}
                 >
-                    {newsText}
+                    <span className="mx-6">{newsText}</span>
+                    <span className="mx-6">{newsText}</span>
+                    <span className="mx-6">{newsText}</span>
+                    <span className="mx-6">{newsText}</span>
                 </motion.div>
             </div>
         </div>
