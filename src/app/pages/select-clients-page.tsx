@@ -172,7 +172,7 @@ export function SelectClientsPage() {
 
                 <div className="pl-6">
                   <p className="text-lg text-white leading-relaxed mb-4">
-                    {intro?.introDescription1 || "The Firm represents a diversified portfolio of clients across various sectors including Industrial, Service, Public Sector Undertakings, Banking & Insurance, Social Sector, High Net-worth Individuals (HNI), and Non-Resident Indians (NRI)."}
+                    {intro?.introDescription1}
                   </p>
                   <p className="text-lg text-white leading-relaxed">
                     {intro?.introDescription2}
@@ -195,8 +195,8 @@ export function SelectClientsPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <span className="px-4 py-2 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-4">
-              {intro?.introTitle || 'Our Portfolio'}
+            <span className="px-4 py-2 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-4">
+              {intro?.introTitle}
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Client <span className="text-[var(--primary)]">Categories</span>

@@ -270,16 +270,16 @@ export function NetworkingPage() {
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 bg-[var(--primary)]/10 rounded-xl">
                       {(() => {
-                        const Icon = iconMap[domesticContent?.icon] || Network;
+                        const Icon = iconMap[domesticContent?.icon];
                         return <Icon className="h-6 w-6 text-[var(--primary)]" />;
                       })()}
                     </div>
                     <h2 className="text-2xl font-bold text-[var(--primary)]">
-                      {domesticContent?.title || 'Domestic Networking'}
+                      {domesticContent?.title}
                     </h2>
                   </div>
                   <p className="text-white leading-relaxed text-lg  whitespace-pre-line">
-                    {domesticContent?.description || 'Connect with us to expand professional collaboration across India.'}
+                    {domesticContent?.description}
                   </p>
                 </motion.div>
               )}

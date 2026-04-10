@@ -396,13 +396,13 @@ export function HistoryPage() {
 
                 {/* Title */}
                 <h2 className="text-3xl lg:text-5xl font-bold text-[var(--primary)] mb-8">
-                  {mission?.title || 'Our Mission'}
+                  {mission?.title}
                 </h2>
 
                 {/* Mission Content */}
                 <div className="relative">
                   <p className="text-xl lg:text-3xl text-gray-700 leading-relaxed font-medium italic">
-                    {mission?.content || 'Our Mission is to provide value added and proactive advice to the clients in various sectors with professional ethics and good client relationship.'}
+                    {mission?.content}
                   </p>
                 </div>
               </div>

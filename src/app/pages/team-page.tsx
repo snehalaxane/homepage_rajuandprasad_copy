@@ -359,9 +359,9 @@ export function TeamPage() {
 
           {/* Navigation Controls */}
           <div className="max-w-6xl mx-auto">
-            <div className="flex items-center justify-between mb-2">
-              {/* Previous Button */}
-              <motion.button
+            {/* <div className="flex items-center justify-between mb-2"> */}
+            {/* Previous Button */}
+            {/* <motion.button
                 whileHover={{ scale: 1.05, x: -5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handlePrevious}
@@ -369,18 +369,18 @@ export function TeamPage() {
               >
                 <ChevronLeft className="h-5 w-5" />
                 <span className="font-semibold">Previous Partner</span>
-              </motion.button>
+              </motion.button> */}
 
-              {/* Partner Counter */}
-              <div className="text-center">
-                {/* <p className="text-sm text-[var(--secondary)] mb-2">Partner</p> */}
-                {/* <p className="text-2xl font-bold text-[var(--primary)]">
+            {/* Partner Counter */}
+            {/* <div className="text-center"> */}
+            {/* <p className="text-sm text-[var(--secondary)] mb-2">Partner</p> */}
+            {/* <p className="text-2xl font-bold text-[var(--primary)]">
                   {partners.length > 0 ? currentPartnerIndex + 1 : 0} / {partners.length}
                 </p> */}
-              </div>
+            {/* </div> */}
 
-              {/* Next Button */}
-              <motion.button
+            {/* Next Button */}
+            {/* <motion.button
                 whileHover={{ scale: 1.05, x: 5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleNext}
@@ -388,8 +388,8 @@ export function TeamPage() {
               >
                 <span className="font-semibold">Next Partner</span>
                 <ChevronRight className="h-5 w-5" />
-              </motion.button>
-            </div>
+              </motion.button> */}
+            {/* </div> */}
 
             {/* Partner Selector Pills */}
             <div className="flex flex-wrap justify-center gap-3">

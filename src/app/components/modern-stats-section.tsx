@@ -40,7 +40,7 @@ export function ModernStatsSection() {
   }, []);
 
   useEffect(() => {
-    console.log("isMobile:", isMobile);
+    // console.log("isMobile:", isMobile);
   }, [isMobile]);
 
 

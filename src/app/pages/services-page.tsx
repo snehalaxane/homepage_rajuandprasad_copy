@@ -352,7 +352,7 @@ export function ServicesPage() {
                         {/* Service Content */}
                         <div className="px-2 lg:px-2 py-1 space-y-4">
                           {currentService.subServices?.filter((s: any) => s.enabled !== false).map((section: any, index: number) => {
-                            const SectionIcon = iconMap[section.icon] || CheckCircle2;
+                            const SectionIcon = iconMap[section.icon];
 
                             return (
                               <motion.div
