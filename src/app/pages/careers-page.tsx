@@ -593,11 +593,11 @@ export function CareersPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-m mb-4 ${careerIntro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              {/* <div className={`flex items-center gap-2 text-m mb-4 ${careerIntro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
                 <a href="#home" className={`transition-colors ${careerIntro?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={careerIntro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Careers</span>
-              </div>
+              </div> */}
 
               {/* Title */}
               {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${careerIntro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
@@ -611,6 +611,22 @@ export function CareersPage() {
             </motion.div>
           </div>
         </section>
+        <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+          <div className="container mx-auto px-6 py-4">
+
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-m text-white">
+              <a href="/" className="hover:text-white">Home</a>
+              {/* <span className="text-black text-xl">›</span> */}
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Careers</span>
+            </div>
+
+          </div>
+
+          {/* White bottom line */}
+          <div className="w-full h-[2px] bg-white"></div>
+        </div>
 
         {/* Intro Content Block */}
         <section className="py-10">
@@ -619,10 +635,10 @@ export function CareersPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-6xl mx-auto px-6"
+            className="max-w-7xl mx-auto px-6"
           >
 
-            <div className="space-y-6 text-lg text-white leading-relaxed text-justify">
+            <div className="space-y-6 text-xl font-semibold text-white leading-relaxed text-justify">
               {careerIntro?.description ? (
                 careerIntro.description.split('\n').map((para, idx) => (
                   para.trim() && <p key={idx}>{para}</p>
@@ -634,6 +650,8 @@ export function CareersPage() {
             </div>
           </motion.div>
         </section>
+
+
 
         {/* Career Openings Section */}
         <section className="py-12 pb-16">
@@ -772,6 +790,10 @@ export function CareersPage() {
                                 <p className="text-[var(--secondary)] leading-relaxed">
                                   {opening.description}
                                 </p>
+
+
+
+
                               </div> */}
 
                               {/* Requirements */}

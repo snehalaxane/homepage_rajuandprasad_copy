@@ -15,6 +15,7 @@ import { GalleryPage } from './pages/gallery-page';
 import { ContactPage } from './pages/contact-page';
 import { LegalPage } from './pages/legal-page';
 import axios from 'axios';
+import { SEO } from './components/seo';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
@@ -99,6 +100,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO pageName={currentPage} />
       {/* Conditionally render navbar globally ONLY if not on home page */}
       {!isHomePage && <ModernNavbar activePage={currentPage} />}
 

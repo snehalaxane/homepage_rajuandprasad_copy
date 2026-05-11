@@ -90,40 +90,41 @@ export function ModernFooter() {
 
       <div className="relative z-10">
         {/* Main Footer Content */}
-        <div className="container mx-auto px-6 py-16">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        <div className="container mx-auto px-6 py-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-10 md:gap-12">
             {/* About Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="lg:col-span-4 lg:pr-6"
             >
               <div className="mb-6">
                 <img
                   src={generalSettings?.logoUrl ? `${API_BASE_URL}${generalSettings.logoUrl}` : "figma:asset/c4cd0f731adca963ac419fbf6c2297a5d87d3404.png"}
-                  alt={generalSettings?.siteTitle || "Raju & Prasad"}
-                  className="h-12 w-auto brightness-0 invert object-contain"
+                  alt={generalSettings?.siteTitle}
+                  className="h-16 w-auto brightness-0 invert object-contain"
                 />
               </div>
-              <p className="text-[var(--secondary)] leading-relaxed mb-6">
-                {footerContent?.description || 'Raju and Prasad is one of the firms of Chartered Accountants in Hyderabad with experienced & dedicated Chartered Accountant Professionals.'}
+              <p className="text-white text-xl text-justify leading-relaxed mb-8">
+                {footerContent?.description}
               </p>
               {/* Social Links */}
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 {footerContent?.socialMedia && Object.entries(footerContent.socialMedia).map(([key, url]: [string, any]) => {
                   if (!url) return null;
-                  const Icon = iconMap[key.toLowerCase()] || Facebook;
+                  const Icon = iconMap[key.toLowerCase()];
                   return (
                     <a
                       key={key}
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-[var(--secondary)]/20 hover:bg-[var(--primary)] flex items-center justify-center transition-all hover:scale-110"
+                      className="w-10 h-10 rounded-full bg-[var(--primary)] hover:bg-[var(--primary)] flex items-center justify-center transition-all hover:scale-110"
                       aria-label={key}
                     >
-                      <Icon className="h-5 w-5 text-[var(--secondary)] hover:text-white transition-colors" />
+                      <Icon className="h-5 w-5 text-white hover:text-white transition-colors" />
                     </a>
                   );
                 })}
@@ -136,16 +137,17 @@ export function ModernFooter() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-2"
             >
-              <h3 className="text-xl font-bold mb-6 text-white text-uppercase tracking-wider">Quick Links</h3>
+              <h3 className="text-xl font-bold mb-6 text-white tracking-wider relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-[#0099ff]">QUICK LINKS</h3>
               <ul className="space-y-3">
                 {quickLinks.map((link) => (
                   <li key={link._id}>
                     <a
                       href={link.url}
-                      className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors inline-flex items-center group"
+                      className="text-white hover:text-[#0099ff] transition-colors inline-flex items-center group"
                     >
-                      <span className="w-0 group-hover:w-2 h-0.5 bg-[var(--primary)] mr-0 group-hover:mr-2 transition-all duration-300" />
+                      <span className="w-0 group-hover:w-2 h-0.5 bg-[var(--primary)] mr-0 group-hover:mr-2 hover:[#0099ff] transition-all duration-300" />
                       {link.title}
                     </a>
                   </li>
@@ -161,14 +163,15 @@ export function ModernFooter() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 + (idx * 0.1) }}
+                className="lg:col-span-2"
               >
-                <h3 className="text-xl font-bold mb-6 text-white text-uppercase tracking-wider">{section.title}</h3>
+                <h3 className="text-xl font-bold mb-6 text-white uppercase tracking-wider relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-[#0099ff]">{section.title}</h3>
                 <ul className="space-y-3">
                   {section.links.map((link: any, lIdx: number) => (
                     <li key={lIdx}>
                       <a
                         href={link.href}
-                        className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors inline-flex items-center group"
+                        className="text-white hover:text-[var(--primary)] transition-colors inline-flex items-center group"
                       >
                         <span className="w-0 group-hover:w-2 h-0.5 bg-[var(--primary)] mr-0 group-hover:mr-2 transition-all duration-300" />
                         {link.label}
@@ -179,33 +182,73 @@ export function ModernFooter() {
               </motion.div>
             ))}
 
+            {/* Your Search For Section (SEO Optimized) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="lg:col-span-3"
+            >
+              <h3 className="text-xl font-bold mb-6 text-white tracking-wider relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-[#0099ff]">
+                YOUR SEARCH FOR
+              </h3>
+              <nav aria-label="Footer Search Links" itemScope itemType="http://schema.org/SiteNavigationElement">
+                <ul className="space-y-4">
+                  {[
+                    { title: "Chartered Accountants in Hyderabad" },
+                    { title: "Tax Consultants in Hyderabad" },
+                    { title: "Chartered Accountants in India" },
+                    { title: "Chartered Accountants in Mumbai" },
+                    { title: "Chartered Accountants in Bangalore" }
+                  ].map((link, idx) => (
+                    <li key={idx} itemProp="name">
+                      <a
+
+                        itemProp="url"
+
+                        className="text-gray-300 hover:text-[#0099ff] transition-colors text-base font-medium"
+                      >
+                        {link.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </motion.div>
+
             {/* Contact Column */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              className="lg:col-span-3"
             >
-              <h3 className="text-xl font-bold mb-6 text-white text-uppercase tracking-wider">{footerContact?.sectionTitle || 'Contact Us'}</h3>
+              <h3 className="text-xl font-bold mb-6 text-white tracking-wider relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-12 after:h-0.5 after:bg-[#0099ff]">{footerContact?.sectionTitle}</h3>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-[var(--secondary)] mt-0.5 flex-shrink-0" />
-                  <span className="text-[var(--secondary)] text-sm whitespace-pre-line">
-                    {footerContact?.address || 'Hyderabad, India'}
-                  </span>
+                  <MapPin className="h-5 w-5 text-white mt-2 flex-shrink-0" />
+
+                  <div className="text-white text-lg">
+                    <p className="font-semibold tracking-wide mb-1 font-poppins">Head Office</p>
+                    <span className="whitespace-pre-line text-justify">
+                      {footerContact?.address}
+                    </span>
+                  </div>
                 </li>
                 {footerContact?.phone && (
                   <li className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-[var(--secondary)] flex-shrink-0" />
-                    <a href={`tel:${footerContact.phone.replace(/\s/g, '')}`} className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors text-sm">
+                    <Phone className="h-5 w-5 text-white flex-shrink-0" />
+                    <a href={`tel:${footerContact.phone.replace(/\s/g, '')}`} className="text-white hover:text-[#0099ff] transition-colors text-lg">
                       {footerContact.phone}
                     </a>
                   </li>
                 )}
                 {footerContact?.email && (
                   <li className="flex items-center gap-3">
-                    <Mail className="h-5 w-5 text-[var(--secondary)] flex-shrink-0" />
-                    <a href={`mailto:${footerContact.email}`} className="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors text-sm">
+                    <Mail className="h-5 w-5 text-white flex-shrink-0" />
+                    <a href={`mailto:${footerContact.email}`} className="text-white hover:text-[#0099ff] transition-colors text-lg">
                       {footerContact.email}
                     </a>
                   </li>
@@ -219,15 +262,15 @@ export function ModernFooter() {
         <div className="border-t border-[var(--secondary)]/20">
           <div className="container mx-auto px-6 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-[var(--secondary)] text-sm text-center md:text-left">
-                {footerContent?.copyright || 'Raju & Prasad'}.
+              <p className="text-white text-sm text-center md:text-left">
+                {footerContent?.copyright}.
               </p>
               <div className="flex flex-wrap justify-center gap-6">
                 {legalPages.map((page) => (
                   <a
                     key={page._id}
                     href={`#${page.pageSlug.startsWith('/') ? page.pageSlug.slice(1) : page.pageSlug}`}
-                    className="text-[var(--secondary)] hover:text-[var(--primary)] text-sm transition-colors"
+                    className="text-white hover:text-[#0099ff] text-sm transition-colors"
                   >
                     {page.pageTitle}
                   </a>

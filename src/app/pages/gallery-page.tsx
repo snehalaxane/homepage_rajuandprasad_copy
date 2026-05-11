@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronRight, X, Image as ImageIcon, Calendar, MapPin } from 'lucide-react';
 import { ScrollToTop } from '../components/scroll-to-top';
@@ -155,9 +155,21 @@ export function GalleryPage() {
 
   const categories = ['All', ...Array.from(new Set(galleryImages.map(img => img.category))).sort()];
 
-  const filteredImages = selectedCategory === 'All'
-    ? galleryImages
-    : galleryImages.filter(img => img.category === selectedCategory);
+  // Sort and filter images
+  const filteredImages = useMemo(() => {
+    const filtered = selectedCategory === 'All'
+      ? galleryImages
+      : galleryImages.filter(img => img.category === selectedCategory);
+
+    return [...filtered].sort((a, b) => {
+      const yearA = parseInt(a.year) || 0;
+      const yearB = parseInt(b.year) || 0;
+      // Sort by year descending (latest first)
+      if (yearB !== yearA) return yearB - yearA;
+      // Then by order ascending within the same year
+      return (a.order || 0) - (b.order || 0);
+    });
+  }, [galleryImages, selectedCategory]);
 
   const handleNext = () => {
     if (!selectedImage) return;
@@ -197,11 +209,11 @@ export function GalleryPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              {/* <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
                 <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Gallery</span>
-              </div>
+              </div> */}
 
               {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {intro.heading}
@@ -213,6 +225,24 @@ export function GalleryPage() {
             </motion.div>
           </div>
         </section>
+
+        <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+          <div className="container mx-auto px-6 py-4">
+
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-m text-white">
+              <a href="/" className="hover:text-white">Home</a>
+              {/* <span className="text-black text-xl">›</span> */}
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Gallery</span>
+            </div>
+
+          </div>
+
+          {/* White bottom line */}
+          <div className="w-full h-[2px] bg-white"></div>
+        </div>
+
 
         <section className="py-16">
           <div className="container mx-auto px-6">
@@ -241,7 +271,7 @@ export function GalleryPage() {
               ))}
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {filteredImages.map((image, index) => {
                 const imageUrl = image.url.startsWith('http')
                   ? image.url
@@ -250,43 +280,46 @@ export function GalleryPage() {
                 return (
                   <motion.div
                     key={image._id}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: index * 0.05 }}
                     onClick={() => setSelectedImage(image)}
-                    className="group relative bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+                    className="group relative bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100"
                   >
                     <div className="relative aspect-square overflow-hidden">
                       <img
                         src={imageUrl}
                         alt={image.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         onError={(e) => { e.currentTarget.src = "https://placehold.co/400?text=Image+Not+Found"; }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
                           <div className="flex items-center justify-center">
-                            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                              <ImageIcon className="h-6 w-6 text-white" />
+                            <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <ImageIcon className="h-7 w-7 text-white" />
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-4">
-                      {/* <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[var(--primary)] transition-colors">
-                        {image.title || 'Untitled Image'}
-                      </h3> */}
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="inline-flex items-center gap-1 text-xs text-white">
-                          <Calendar className="h-3 w-3" />
+                    <div className="p-5">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
+                          <Calendar className="h-4 w-4 text-[var(--primary)]" />
                           {image.year}
-                        </span>
-                        <span className="px-2 py-1 bg-[var(--primary)]/5 text-[var(--primary)] text-xs font-semibold rounded-full">
+                        </div>
+                        <span className="px-3 py-1 bg-[var(--primary)]/10 text-[var(--primary)] text-xs font-bold rounded-full uppercase tracking-wider">
                           {image.category}
                         </span>
                       </div>
+                      {image.title && (
+                        <h3 className="mt-3 font-semibold text-gray-800 line-clamp-1 group-hover:text-[var(--primary)] transition-colors">
+                          {image.title}
+                        </h3>
+                      )}
                     </div>
                     <div className="absolute inset-0 border-2 border-[var(--primary)] opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
                   </motion.div>

@@ -162,13 +162,13 @@ export function TeamPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-m mb-6 ${intro.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            {/* <div className={`flex items-center gap-2 text-m mb-6 ${intro.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
               <span className={intro.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>The Team</span>
-            </div>
+            </div> */}
 
             {/* Title */}
 
@@ -177,6 +177,24 @@ export function TeamPage() {
           </motion.div>
         </div>
       </section>
+
+      <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+        <div className="container mx-auto px-6 py-4">
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-m text-white">
+            <a href="/" className="hover:text-white">Home</a>
+            {/* <span className="text-black text-xl">›</span> */}
+            <span className="text-black text-2xl">›</span>
+            <span className="text-white font-semibold">The Team</span>
+          </div>
+
+        </div>
+
+        {/* White bottom line */}
+        <div className="w-full h-[2px] bg-white"></div>
+      </div>
+
 
       {/* Intro Content Section */}
 
@@ -188,17 +206,16 @@ export function TeamPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-5xl mx-auto"
+            className="max-w-7xl mx-auto"
           >
-            <div className="relative bg-background rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
 
-              {/* Accent line */}
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)]/60" />
 
-              <p className="text-lg text-white leading-relaxed pl-6">
+            {/* Accent line */}
+            <div className="text-xl font-semibold text-white leading-relaxed space-y-6 text-justify">
+
+              <p className="whitespace-pre-wrap">
                 {intro.accentText}
               </p>
-
             </div>
           </motion.div>
         </div>
@@ -208,7 +225,7 @@ export function TeamPage() {
 
 
       {/* Our Partners Section */}
-      <section className="py-5 bg-background">
+      <section className="py-5 bg-background mt-7">
         <div className="container mx-auto px-4">
           {/* Section Title */}
           <motion.div
@@ -218,9 +235,9 @@ export function TeamPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <span className="px-1 py-1 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-1">
+            {/* <span className="px-1 py-1 bg-[var(--primary)]/10 text-[var(--primary)] rounded-full text-sm font-semibold inline-block mb-1">
               Leadership
-            </span>
+            </span> */}
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
               Our <span className="text-[var(--primary)]">Partners</span>
             </h2>

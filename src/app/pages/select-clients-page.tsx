@@ -130,11 +130,11 @@ export function SelectClientsPage() {
             className="max-w-4xl"
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            {/* <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
               <ChevronRight className="h-4 w-4" />
               <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Select Clients</span>
-            </div>
+            </div> */}
             {/* Title */}
             {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {intro?.title || 'Newsletter'}
@@ -155,6 +155,24 @@ export function SelectClientsPage() {
 
       </section>
 
+      <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+        <div className="container mx-auto px-6 py-4">
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-m text-white">
+            <a href="/" className="hover:text-white">Home</a>
+            {/* <span className="text-black text-xl">›</span> */}
+            <span className="text-black text-2xl">›</span>
+            <span className="text-white font-semibold">Select Clients</span>
+          </div>
+
+        </div>
+
+        {/* White bottom line */}
+        <div className="w-full h-[2px] bg-white"></div>
+      </div>
+
+
       {/* Intro Content */}
       {intro?.introEnabled !== false && (
         <section className="py-16 bg-background">
@@ -164,21 +182,21 @@ export function SelectClientsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-5xl mx-auto"
+              className="max-w-7xl mx-auto"
             >
-              <div className="relative bg-background rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
-                {/* Accent line */}
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
 
-                <div className="pl-6">
-                  <p className="text-lg text-white leading-relaxed mb-4">
-                    {intro?.introDescription1}
-                  </p>
-                  <p className="text-lg text-white leading-relaxed">
-                    {intro?.introDescription2}
-                  </p>
-                </div>
+              {/* Accent line */}
+              <div className="absolute left-0 top-0 bottom-0" />
+
+              <div className="pl-6">
+                <p className="text-xl font-semibold text-white leading-relaxed text-justify">
+                  {intro?.introDescription1}
+                </p>
+                <p className="text-xl font-semibold text-white leading-relaxed text-justify">
+                  {intro?.introDescription2}
+                </p>
               </div>
+
             </motion.div>
           </div>
         </section>
@@ -215,7 +233,7 @@ export function SelectClientsPage() {
                   <div className="relative w-full h-full flex items-center justify-center">
                     {/* Central Hub */}
                     <div className="w-48 h-48 rounded-full bg-[#1F1F1F] border-4 border-gray-700 shadow-2xl flex items-center justify-center z-20">
-                      <span className="text-white text-xl font-bold">Our Clients</span>
+                      <span className="text-white text-2xl font-bold">Our Clients</span>
                     </div>
 
                     {/* Orbiting Sector Bubbles */}
@@ -251,13 +269,13 @@ export function SelectClientsPage() {
                             transition={{ delay: index * 0.1 }}
                             whileHover={{ scale: 1.1 }}
                             onClick={() => setActiveCategoryId(activeCategoryId === sector._id ? null : sector._id)}
-                            className="w-32 h-32 rounded-full border-2 border-white flex items-center justify-center text-center p-4 shadow-xl z-30 transition-transform"
+                            className="w-40 h-40 rounded-full border-2 border-white flex items-center justify-center text-center p-4 shadow-xl z-30 transition-transform"
                             style={{
                               backgroundColor: sector.color || 'var(--primary)',
                               boxShadow: activeCategoryId === sector._id ? `0 0 30px ${sector.color}` : undefined
                             }}
                           >
-                            <span className="text-white text-xs font-bold leading-tight">{sector.name}</span>
+                            <span className="text-white text-lg leading-tight">{sector.name}</span>
                           </motion.button>
                         </div>
                       );

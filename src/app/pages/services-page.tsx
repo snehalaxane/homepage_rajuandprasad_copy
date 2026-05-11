@@ -181,13 +181,13 @@ export function ServicesPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-m mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            {/* <div className={`flex items-center gap-2 text-m mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="/" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
               <span className={introData?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Services</span>
-            </div>
+            </div> */}
 
             {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${introData?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
               <span className={introData?.backgroundImage ? 'text-white' : ''}>{introData?.title || 'Services'}</span>
@@ -200,6 +200,24 @@ export function ServicesPage() {
         </div>
       </section>
 
+      <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+        <div className="container mx-auto px-6 py-4">
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-m text-white">
+            <a href="/" className="hover:text-white">Home</a>
+            {/* <span className="text-black text-xl">›</span> */}
+            <span className="text-black text-2xl">›</span>
+            <span className="text-white font-semibold">Services</span>
+          </div>
+
+        </div>
+
+        {/* White bottom line */}
+        <div className="w-full h-[2px] bg-white"></div>
+      </div>
+
+
       {/* Intro Text Block */}
       {introData?.introEnabled !== false && (
         <section className="py-16 bg-background">
@@ -209,12 +227,11 @@ export function ServicesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="max-w-5xl mx-auto"
+              className="max-w-7xl mx-auto"
             >
-              <div className="relative bg-background rounded-3xl p-10 shadow-lg border border-gray-100 overflow-hidden">
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[var(--primary)] to-blue-400" />
+              <div className="overflow-hidden">
                 <div className="pl-6">
-                  <p className="text-lg text-white leading-relaxed">
+                  <p className="text-xl font-semibold text-white leading-relaxed text-justify">
                     {introData?.introDescription || 'Loading description...'}
                   </p>
                 </div>

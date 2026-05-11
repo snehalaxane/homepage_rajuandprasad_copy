@@ -233,13 +233,13 @@ export function NetworkingPage() {
             transition={{ duration: 0.6 }}
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-m mb-6 ${domesticContent?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            {/* <div className={`flex items-center gap-2 text-m mb-6 ${domesticContent?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className="hover:text-white transition-colors">
                 Home
               </a>
               <ChevronRight className="h-4 w-4" />
               <span className={domesticContent?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Networking</span>
-            </div>
+            </div> */}
 
             {/* Title */}
             {/* <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${domesticContent?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
@@ -251,6 +251,24 @@ export function NetworkingPage() {
           </motion.div>
         </div>
       </section>
+
+      <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+        <div className="container mx-auto px-6 py-4">
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-m text-white">
+            <a href="/" className="hover:text-white">Home</a>
+            {/* <span className="text-black text-xl">›</span> */}
+            <span className="text-black text-2xl">›</span>
+            <span className="text-white font-semibold">Networking</span>
+          </div>
+
+        </div>
+
+        {/* White bottom line */}
+        <div className="w-full h-[2px] bg-white"></div>
+      </div>
+
 
       {/* Main Content Section */}
       <section className="py-16 bg-background">

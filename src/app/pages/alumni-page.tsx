@@ -124,11 +124,11 @@ export function AlumniPage() {
               transition={{ duration: 0.6 }}
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              {/* <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
                 <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Alumni</span>
-              </div>
+              </div> */}
 
               {/* Title & Subtitle - Respecting the enabled flag */}
               {intro?.enabled !== false && (
@@ -157,6 +157,24 @@ export function AlumniPage() {
           </div>
         </section>
 
+        <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+          <div className="container mx-auto px-6 py-4">
+
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-m text-white">
+              <a href="/" className="hover:text-white">Home</a>
+              {/* <span className="text-black text-xl">›</span> */}
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Alumni</span>
+            </div>
+
+          </div>
+
+          {/* White bottom line */}
+          <div className="w-full h-[2px] bg-white"></div>
+        </div>
+
+
         {/* Alumni Section */}
         <section className="py-12">
           <div className="container mx-auto px-6">
@@ -180,13 +198,14 @@ export function AlumniPage() {
                   {intro?.title}
                 </h2>
 
-                <div className="text-lg  text-white leading-relaxed space-y-4 text-justify">                  {intro?.subtitle ? (
-                  <div className="whitespace-pre-wrap">{intro.subtitle}</div>
-                ) : (
-                  <>
+                <div className="text-xl font-semibold text-white leading-relaxed space-y-4 text-justify">
+                  {intro?.subtitle ? (
+                    <div className="whitespace-pre-wrap">{intro.subtitle}</div>
+                  ) : (
+                    <>
 
-                  </>
-                )}
+                    </>
+                  )}
                 </div>
               </motion.div>
             )}

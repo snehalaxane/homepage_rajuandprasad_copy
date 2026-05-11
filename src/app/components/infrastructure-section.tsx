@@ -61,8 +61,8 @@ export default function InfrastructureSection() {
   return (
     <>
       {/* Infrastructure Header Section - Black BG */}
-      <section className="pt-6 pb-6 mb-20 bg-[#022683] relative overflow-hidden">
-        <div className="container mx-auto px-4 max-w-6xl relative z-10">
+      <section className="pt-6 pb-6 mb-6 bg-[#022683] relative overflow-hidden">
+        <div className="container mx-auto px-4 max-w-8xl relative z-10">
           <div className="text-center text-white">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -72,13 +72,13 @@ export default function InfrastructureSection() {
             >
               {infra.title}
             </motion.h2>
-            <div className="w-16 h-1 mx-auto mb-8 rounded-full" style={{ backgroundColor: 'var(--primary)' }}></div>
+            <div className="w-16 h-1 mx-auto mb-4 rounded-full" style={{ backgroundColor: 'var(--primary)' }}></div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-lg w-full opacity-90 leading-relaxed font-medium"
+              className="text-xl w-full opacity-90 leading-relaxed "
             >
               {infra.description}
             </motion.p>

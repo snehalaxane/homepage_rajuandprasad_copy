@@ -149,7 +149,7 @@ export function BlogPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm mb-6 sm:mb-8 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
+              {/* <div className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm mb-6 sm:mb-8 ${(intro?.backgroundImage && !selectedPost) ? 'text-gray-300' : 'text-white'}`}>
                 <a href="#home" className={`whitespace-nowrap transition-colors ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span className={`whitespace-nowrap transition-colors cursor-pointer ${(intro?.backgroundImage && !selectedPost) ? 'hover:text-white' : 'hover:text-[var(--primary)]'}`}>Think Tank</span>
@@ -163,7 +163,7 @@ export function BlogPage() {
                 ) : (
                   <span className={(intro?.backgroundImage && !selectedPost) ? 'text-white font-semibold whitespace-nowrap' : 'text-[var(--primary)] font-semibold whitespace-nowrap'}>Our Blog</span>
                 )}
-              </div>
+              </div> */}
 
               {/* Title */}
               {/* <h1 className={`text-4xl lg:text-6xl font-bold mb-6 leading-tight ${(intro?.backgroundImage && !selectedPost) ? 'text-white' : 'text-[var(--primary)]'}`}>
@@ -203,6 +203,26 @@ export function BlogPage() {
             </motion.div>
           </div>
         </section>
+
+        <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+          <div className="container mx-auto px-6 py-4">
+
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-m text-white">
+              <a href="/" className="hover:text-white">Home</a>
+              {/* <span className="text-black text-xl">›</span> */}
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Think Tank</span>
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Our Blog</span>
+            </div>
+
+          </div>
+
+          {/* White bottom line */}
+          <div className="w-full h-[2px] bg-white"></div>
+        </div>
+
 
         {/* Blog Content Section */}
         <section className="py-16">
@@ -354,11 +374,11 @@ export function BlogPage() {
                             </div>
 
                             {/* Title */}
-                            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl">                              {post.title}
+                            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-4">                              {post.title}
                             </h2>
 
                             {/* Excerpt */}
-                            <p className="text-white leading-relaxed mb-6 line-clamp-2">
+                            <p className="text-white text-lg leading-relaxed mb-6 line-clamp-2">
                               {post.shortDescription}
                             </p>
 

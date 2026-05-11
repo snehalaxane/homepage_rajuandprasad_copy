@@ -42,7 +42,7 @@ export function Footer() {
             <h3 className="text-2xl font-bold mb-4 text-white">
               About
             </h3>
-            <p className="text-gray-400 leading-relaxed mb-6">
+            <p className="text-white leading-relaxed mb-6">
               Raju and Prasad is one of the firms of Chartered Accountants in Hyderabad with experienced & dedicated Chartered Accountant Professionals. The firm has been handling variety of assignments in various sectors. The partners of the firm have experience in specific areas. The firm was established in the year 1979 in Hyderabad and has its branches in Mumbai, Bangalore, Thane, Chennai, Tirupati and Vijayawada.
             </p>
             <div className="space-y-3">

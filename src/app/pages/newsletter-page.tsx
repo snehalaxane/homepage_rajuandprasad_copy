@@ -112,13 +112,13 @@ export function NewsletterPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+              {/* <div className={`flex items-center gap-2 text-m mb-6 ${intro?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
                 <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={`transition-colors cursor-pointer hover:text-white`}>Think Tank</span>
                 <ChevronRight className="h-4 w-4" />
                 <span className={intro?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Newsletter</span>
-              </div>
+              </div> */}
               {/* Title */}
               {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {intro?.title || 'Newsletter'}
@@ -131,6 +131,26 @@ export function NewsletterPage() {
             </motion.div>
           </div>
         </section>
+
+        <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+          <div className="container mx-auto px-6 py-4">
+
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-m text-white">
+              <a href="/" className="hover:text-white">Home</a>
+              {/* <span className="text-black text-xl">›</span> */}
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Think Tank</span>
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Newsletter</span>
+            </div>
+
+          </div>
+
+          {/* White bottom line */}
+          <div className="w-full h-[2px] bg-white"></div>
+        </div>
+
 
         {/* Newsletter List Section */}
         <section className="py-16">

@@ -191,11 +191,11 @@ export function ContactPage() {
               className="max-w-4xl"
             >
               {/* Breadcrumb */}
-              <div className={`flex items-center gap-2 text-m mb-4 ${settings?.backgroundImage ? 'text-gray-300' : 'text-white'}`}>
+              {/* <div className={`flex items-center gap-2 text-m mb-4 ${settings?.backgroundImage ? 'text-gray-300' : 'text-white'}`}>
                 <a href="/" className={`transition-colors ${settings?.backgroundImage ? 'text-gray-300 hover:text-white' : 'hover:text-[var(--primary)]'}`}>Home</a>
                 <ChevronRight className="h-4 w-4" />
                 <span className={settings?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>Contact</span>
-              </div>
+              </div> */}
 
               {/* Dynamic Title */}
               {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${settings?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
@@ -209,6 +209,23 @@ export function ContactPage() {
             </motion.div>
           </div>
         </section>
+
+        <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+          <div className="container mx-auto px-6 py-4">
+
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-m text-white">
+              <a href="/" className="hover:text-white">Home</a>
+              {/* <span className="text-black text-xl">›</span> */}
+              <span className="text-black text-2xl">›</span>
+              <span className="text-white font-semibold">Contact</span>
+            </div>
+
+          </div>
+
+          {/* White bottom line */}
+          <div className="w-full h-[2px] bg-white"></div>
+        </div>
 
         {/* Quick Contact CTAs */}
         <section className="py-8">

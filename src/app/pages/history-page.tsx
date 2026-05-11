@@ -162,11 +162,11 @@ export function HistoryPage() {
             className="max-w-4xl"
           >
             {/* Breadcrumb */}
-            <div className={`flex items-center gap-2 text-m mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
+            {/* <div className={`flex items-center gap-2 text-m mb-6 ${introData?.backgroundImage ? 'text-gray-300' : 'text-[var(--secondary)]'}`}>
               <a href="#home" className={`transition-colors hover:text-white`}>Home</a>
               <ChevronRight className="h-4 w-4" />
               <span className={introData?.backgroundImage ? 'text-white font-semibold' : 'text-[var(--primary)] font-semibold'}>History</span>
-            </div>
+            </div> */}
             {/* Title */}
             {/* <h1 className={`text-5xl lg:text-6xl font-bold mb-6 ${intro?.backgroundImage ? 'text-white' : 'text-[var(--primary)]'}`}>
                 {intro?.title || 'Newsletter'}
@@ -185,6 +185,23 @@ export function HistoryPage() {
         </div>
 
       </section>
+
+      <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+        <div className="container mx-auto px-6 py-4">
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-m text-white">
+            <a href="/" className="hover:text-white">Home</a>
+            {/* <span className="text-black text-xl">›</span> */}
+            <span className="text-black text-2xl">›</span>
+            <span className="text-white font-semibold">History</span>
+          </div>
+
+        </div>
+
+        {/* White bottom line */}
+        <div className="w-full h-[2px] bg-white"></div>
+      </div>
 
       {/* History + Timeline Section */}
       <section className="py-20 bg-background">
@@ -214,7 +231,7 @@ export function HistoryPage() {
                     {journey?.description ? (
                       journey.description.split('\n').map((para, index) => (
                         para.trim() && (
-                          <p key={index} className="text-lg text-white leading-relaxed">
+                          <p key={index} className="text-xl text-white leading-relaxed">
                             {para}
                           </p>
                         )
@@ -233,7 +250,37 @@ export function HistoryPage() {
                 </div>
               </div>
 
+              {mission?.enabled !== false && (
+                <div className="mt-20">
 
+                  {/* Title OUTSIDE (same as journey) */}
+                  <div className="mb-6">
+                    <h2 className="text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-6 ml-5">
+                      {mission?.title}
+                    </h2>
+                  </div>
+
+                  {/* Card */}
+                  <div className="bg-background rounded-3xl p-8 shadow-lg border border-gray-100">
+                    <div className="relative">
+
+                      {/* Left vertical line */}
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--primary)] to-[var(--primary)]/60 rounded-full" />
+
+                      <div className="pl-6 space-y-4">
+                        {mission?.content?.split('\n').map((para, i) => (
+                          para.trim() && (
+                            <p key={i} className="text-xl text-white leading-relaxed ">
+                              {para}
+                            </p>
+                          )
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              )}
             </motion.div>
 
             {/* Right Side: Timeline */}
@@ -370,49 +417,6 @@ export function HistoryPage() {
           </div>
         </div>
       </section>
-
-      {/* Our Mission Section */}
-      {mission?.enabled !== false && (
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-4xl mx-auto text-center"
-            >
-              <div className="relative">
-                {/* Quote Icon */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: 'spring', duration: 0.6 }}
-                  className="mb-6 flex justify-center"
-                >
-                  <Quote className="h-16 w-16 text-[var(--primary)]/20" />
-                </motion.div>
-
-                {/* Title */}
-                <h2 className="text-3xl lg:text-5xl font-bold text-[var(--primary)] mb-8">
-                  {mission?.title}
-                </h2>
-
-                {/* Mission Content */}
-                <div className="relative">
-                  <p className="text-xl lg:text-3xl text-gray-700 leading-relaxed font-medium italic">
-                    {mission?.content}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-
-
       <ScrollToTop />
     </div>
   );

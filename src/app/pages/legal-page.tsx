@@ -85,7 +85,7 @@ export function LegalPage({ slug }: LegalPageProps) {
         <>
             <main className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-blue-50/20">
                 {/* Page Header */}
-                <section className="pt-32 pb-12 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
+                <section className="pt-12 pb-12 bg-gradient-to-r from-[var(--primary)]/5 to-blue-50/20 border-b border-gray-100">
                     <div className="container mx-auto px-6">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -94,11 +94,11 @@ export function LegalPage({ slug }: LegalPageProps) {
                             className="max-w-4xl"
                         >
                             {/* Breadcrumb */}
-                            <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
+                            {/* <div className="flex items-center gap-2 text-sm text-[var(--secondary)] mb-4">
                                 <a href="#home" className="hover:text-[var(--primary)] transition-colors">Home</a>
                                 <ChevronRight className="h-4 w-4" />
                                 <span className="text-[var(--primary)] font-semibold">{pageData.pageTitle}</span>
-                            </div>
+                            </div> */}
 
                             {/* Title */}
                             <h1 className="text-4xl lg:text-5xl font-bold text-[var(--primary)] mb-6 leading-tight">
@@ -115,6 +115,23 @@ export function LegalPage({ slug }: LegalPageProps) {
                         </motion.div>
                     </div>
                 </section>
+
+                <div className="w-full bg-background border-t-4 border-[var(--primary)]">
+                    <div className="container mx-auto px-6 py-4">
+
+                        {/* Breadcrumb */}
+                        <div className="flex items-center gap-2 text-m text-white">
+                            <a href="/" className="hover:text-white">Home</a>
+                            {/* <span className="text-black text-xl">›</span> */}
+                            <span className="text-black text-2xl">›</span>
+                            <span className="text-white font-semibold">{pageData.pageTitle}</span>
+                        </div>
+
+                    </div>
+
+                    {/* White bottom line */}
+                    <div className="w-full h-[2px] bg-white"></div>
+                </div>
 
                 {/* Content Section */}
                 <section className="py-16">

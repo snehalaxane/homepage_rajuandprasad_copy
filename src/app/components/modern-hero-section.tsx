@@ -313,7 +313,7 @@ export function ModernHeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-base md:text-xl text-white/90 leading-relaxed mb-4 max-w-xl drop-shadow-lg text-center lg:text-left mx-auto lg:mx-0"
+              className="text-base md:text-2xl text-white/90 leading-relaxed mb-4 max-w-xl drop-shadow-lg text-center lg:text-left mx-auto lg:mx-0"
             >
               <motion.span
                 animate={{
