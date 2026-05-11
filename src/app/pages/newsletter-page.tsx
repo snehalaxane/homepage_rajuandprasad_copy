@@ -247,7 +247,7 @@ export function NewsletterPage() {
                             <Button
                               variant="outline"
                               size="sm"
-                              className="border-2 border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white group transition-all"
+                              className="bg-transparent text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white group transition-all"
                               asChild
                             >
                               <a href={`${API_BASE_URL}/${item.pdfFile}`} target="_blank" rel="noopener noreferrer">

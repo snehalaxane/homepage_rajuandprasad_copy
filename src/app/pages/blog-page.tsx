@@ -473,7 +473,7 @@ export function BlogPage() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="sticky top-24"
                 >
-                  <div className="bg-background rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                  <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                     {/* Sidebar Header */}
                     <div className="bg-gradient-to-r from-[var(--primary)] to-[#033aa8] px-6 py-6">
                       <h3 className="text-xl font-bold text-white">Think Tank Links</h3>
